@@ -1,0 +1,281 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "portal": {
+      "projectType": "application",
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "tsConfig": "tsconfig.app.json",
+            "polyfills": "src/polyfills.ts",
+            "assets": [
+              "src/assets",
+              "src/favicon.ico"
+            ],
+            "styles": [
+              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+              "node_modules/quill/dist/quill.snow.css",
+              "src/styles.less"
+            ],
+            "scripts": [
+              "node_modules/ajv/dist/ajv.bundle.js",
+              "node_modules/qrious/dist/qrious.min.js",
+              "node_modules/quill/dist/quill.min.js",
+              "node_modules/perfect-scrollbar/dist/perfect-scrollbar.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
+            "hmr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hmr.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "portal:build",
+            "proxyConfig": "proxy.conf.js",
+            "port": 3000
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "portal:build:production"
+            },
+            "hmr": {
+              "browserTarget": "portal:build:hmr",
+              "hmr": true
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "portal:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "karmaConfig": "karma.conf.js",
+            "tsConfig": "tsconfig.spec.json",
+            "scripts": [
+              "node_modules/ajv/dist/ajv.bundle.js",
+              "node_modules/qrious/dist/qrious.min.js",
+              "node_modules/quill/dist/quill.min.js",
+              "node_modules/perfect-scrollbar/dist/perfect-scrollbar.js"
+            ],
+            "styles": [],
+            "assets": [
+              "src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "portal:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "portal:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "planet": {
+      "root": "packages/planet",
+      "sourceRoot": "packages/planet/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "packages/planet/tsconfig.lib.json",
+            "project": "packages/planet/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/planet/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "packages/planet/src/test.ts",
+            "tsConfig": "packages/planet/tsconfig.spec.json",
+            "karmaConfig": "packages/planet/karma.conf.js",
+            "codeCoverage": true
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["packages/planet/tsconfig.lib.json", "packages/planet/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "app3": {
+      "root": "apps/app3",
+      "sourceRoot": "apps/app3",
+      "projectType": "application",
+      "prefix": "app3",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "customWebpackConfig": {
+              "path": "./apps/app3/extra-webpack.config.js",
+              "mergeStrategies": {
+                "module.rules": "prepend"
+              },
+              "replaceDuplicatePlugins": true
+            },
+            "outputPath": "dist/app3",
+            "index": "apps/app3/index.html",
+            "main": "apps/app3/main.ts",
+            "tsConfig": "apps/app3/tsconfig.app.json",
+            "assets": [ "apps/app3/assets"],
+            "styles": ["apps/app3/styles.less"],
+            "scripts": [],
+            "aot": true,
+            "vendorChunk": false
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/app3/environments/environment.ts",
+                  "with": "apps/app3/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "app3:build",
+            "port": 3001,
+            "vendorChunk": false
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "app3:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "app3:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/app3/test.ts",
+            "polyfills": "apps/app3/polyfills.ts",
+            "tsConfig": "apps/app3/tsconfig.spec.json",
+            "karmaConfig": "apps/app3/karma.conf.js",
+            "styles": ["apps/app3/styles.less"],
+            "scripts": [],
+            "assets": [ "apps/app3/assets"]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/app3/tsconfig.app.json", "apps/app3/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "portal"
+}
