@@ -6,6 +6,7 @@ import { _HttpClient } from '@co/common';
 @Component({
   selector: 'app-ec-trade1',
   templateUrl: './list.component.html',
+  styleUrls: ['./list.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ECTradeComponent1 {
