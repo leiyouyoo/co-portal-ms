@@ -6,7 +6,8 @@ import { CoDocumentComponent } from '../co-document/co-document.component';
   styleUrls: ['./order-list.component.less'],
 })
 export class OrderListComponent implements OnInit {
-  listOfData: Person[] = [
+  isVisible = false;
+  listOfData = [
     {
       key: '1',
       name: 'John Brown',
@@ -29,4 +30,7 @@ export class OrderListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+  showModal(): void {
+    this.isVisible = true;
+  }
 }
