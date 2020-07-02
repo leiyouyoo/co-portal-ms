@@ -1,29 +1,18 @@
 <ng-template #sideTpl>
-  <nz-sider
-    [nzTrigger]="null"
-    [nzCollapsible]="true"
-    [nzCollapsed]="isMobile ? false : pro.collapsed"
-    [nzWidth]="pro.width"
-    [nzCollapsedWidth]="pro.widthInCollapsed"
-    class="alain-pro__sider"
-    style="max-width: 200px;"
-    [ngClass]="{ 'alain-pro__sider-fixed': pro.fixSiderbar }"
-  >
+  <nz-sider [nzTrigger]="null" [nzCollapsible]="true" [nzCollapsed]="isMobile ? false : pro.collapsed"
+    [nzWidth]="pro.width" [nzCollapsedWidth]="pro.widthInCollapsed" class="alain-pro__sider" style="max-width: 200px;"
+    [ngClass]="{ 'alain-pro__sider-fixed': pro.fixSiderbar }">
     <div class="alain-pro__sider-header">
       <!--Logo-->
       <layout-pro-logo [showType]="pro.collapsed" class="alain-pro__sider-logo"></layout-pro-logo>
 
       <!--头像区域-->
       <div class="alain-pro__sider-avatar">
-        <nz-avatar
-          [nzSrc]="
+        <nz-avatar [nzSrc]="
             userInfo?.profilePictureId
               ? imgUrl + '/Storage/File/GetDownLoadFile?fileId=' + userInfo?.profilePictureId + '&Handler=image'
               : '/assets/images/avatar.png'
-          "
-          nzSize="large"
-          class="user-avatar"
-        ></nz-avatar>
+          " nzSize="large" class="user-avatar"></nz-avatar>
         <div class="user-desc">
           <h3>{{ user.session.user.name }} <i nz-icon nztype="down"></i></h3>
           <p>
@@ -71,8 +60,7 @@
             <i nz-icon nzType="logout" nzTheme="outline" style="color: #e55354;"></i>
             <span class="title" style="color: #e55354;">
               {{ 'Sign Out' | translate }}
-            </span></a
-          >
+            </span></a>
         </li>
       </ul>
     </div>
@@ -85,15 +73,8 @@
 
 <div class="ant-layout ant-layout-has-sider">
   <ng-container *ngIf="pro.menu === 'side' || isMobile">
-    <nz-drawer
-      *ngIf="isMobile"
-      [nzWidth]="pro.width"
-      nzWrapClassName="alain-pro__drawer"
-      [nzVisible]="!pro.collapsed"
-      [nzClosable]="false"
-      nzPlacement="left"
-      (nzOnClose)="pro.setCollapsed(true)"
-    >
+    <nz-drawer *ngIf="isMobile" [nzWidth]="pro.width" nzWrapClassName="alain-pro__drawer" [nzVisible]="!pro.collapsed"
+      [nzClosable]="false" nzPlacement="left" (nzOnClose)="pro.setCollapsed(true)">
       <ng-template [ngTemplateOutlet]="sideTpl"></ng-template>
     </nz-drawer>
     <ng-container *ngIf="!isMobile">
@@ -102,11 +83,13 @@
   </ng-container>
   <div class="ant-layout alain-pro__main" [ngStyle]="getLayoutStyle">
     <!-- <layout-pro-header></layout-pro-header> -->
-    <div class="ant-layout-content alain-pro__body" [class.alain-pro__fetching]="isFetching" [ngStyle]="getContentStyle">
+    <div class="ant-layout-content alain-pro__body" [class.alain-pro__fetching]="isFetching"
+      [ngStyle]="getContentStyle">
       <div class="alain-pro__header-item alain-pro__header-trigger" (click)="pro.setCollapsed()">
         <i nz-icon nzType="menu-{{ pro.collapsed ? 'unfold' : 'fold' }}" class="alain-pro__header-item-icon"></i>
       </div>
       <nz-spin class="alain-pro__fetching-icon" nzSpinning></nz-spin>
+
       <reuse-tab #reuseTab [tabBarExtraContent]="headerWidgets" tabType="card"></reuse-tab>
       <router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
 
