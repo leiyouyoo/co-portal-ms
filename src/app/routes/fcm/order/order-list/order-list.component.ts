@@ -6,7 +6,8 @@ import {FormBuilder, FormGroup} from "@angular/forms";
   styleUrls: ['./order-list.component.less'],
 })
 export class OrderListComponent implements OnInit {
-  listOfData: any[] = [
+  isVisible = false;
+  listOfData = [
     {
       key: '1',
       name: 'John Brown',
@@ -56,5 +57,8 @@ export class OrderListComponent implements OnInit {
     console.log(this.validateForm.value.creatDate);
     this.closeBooking();
     this.loading = false;
+  }
+  showModal(): void {
+    this.isVisible = true;
   }
 }
