@@ -5,7 +5,7 @@
         <button nz-button [nzType]="'primary'"><span>新增订单</span></button>
         <button nz-button nzType="default">生成入仓单</button>
         <button nz-button nzType="default">生成唛头</button>
-        <button nz-button nzType="default">确认入仓</button>
+        <button nz-button nzType="default" (click)="showBooking()">确认入仓</button>
         <button nz-button nzType="default">导出</button>
         <button nz-button nzType="default">刷新</button>
       </div>
@@ -36,3 +36,32 @@
     <nz-tab nzTitle="已受理"> </nz-tab>
   </nz-tabset>
 </div>
+
+<nz-modal
+        [(nzVisible)]="openBookings"
+        nzTitle="{{ 'creat booking space' | translate }}"
+        (nzOnCancel)="openBookings = false"
+        [nzFooter]="footer"
+>
+  <div class="booking-time-box" style="text-align: center;height: 100px;padding-top: 30px">
+    <form  nz-form [formGroup]="validateForm" nzLayout="vertical" style="margin: 0 0 0 24px;">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please select date!">
+          {{ 'booking space date' | translate }} <span style="color:#ff4500;margin-right:20px">*</span>
+          <nz-date-picker
+                  formControlName="creatDate"
+                  nzPlaceHolder="{{ 'Please select' | translate }}">
+          </nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+  <ng-template #footer>
+    <button nz-button [nzType]="'default'" (click)="openBookings=false" style="width: 150px;">
+      {{ 'cancle' | translate }}
+    </button>
+    <button nz-button [nzType]="'primary'" (click)="handleOk()" style="width: 150px;" [nzLoading]="loading">
+      {{ 'Submit' | translate }}
+    </button>
+  </ng-template>
+</nz-modal>
