@@ -12,8 +12,8 @@
   </li>
   <nz-divider></nz-divider>
   <li class="alain-pro__menu-item">
-    <a nz-popover #submenu [nzPopoverContent]="contentTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
-      nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop" (click)="onShowSubmenu()">
+    <a nz-popover [nzPopoverContent]="contentTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
+      nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop">
       <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i>
       <span *ngIf="!pro.onlyIcon" class="alain-pro__menu-item-title-text">
         常用功能1
@@ -21,10 +21,11 @@
       <!-- <i nz-icon nzType="right" class="alain-pro__menu-item-arrow"></i> -->
     </a>
   </li>
+
   <nz-divider></nz-divider>
   <li class="alain-pro__menu-item">
-    <a nz-popover #submenu [nzPopoverContent]="contentTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
-      nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop" (click)="onShowSubmenu()">
+    <a nz-popover [nzPopoverContent]="contentTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
+      nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop">
       <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i>
       <span *ngIf="!pro.onlyIcon" class="alain-pro__menu-item-title-text">
         常用功能2

@@ -40,7 +40,7 @@ import { LayoutProFooterComponent } from './components/footer/footer.component';
 import { LayoutProHeaderComponent } from './components/header/header.component';
 import { LayoutProLogoComponent } from './components/logo/logo.component';
 import { LayoutProMenuComponent } from './components/menu/menu.component';
-import { CoSubmenuDirective, CoSubmenuComponent } from './components/menu/submenu.directive';
+import { CoPopoverDirective, CoPopoverComponent } from './components/menu/submenu.directive';
 import { LayoutProComponent } from './pro.component';
 
 export const PRO_COMPONENTS = [
@@ -49,8 +49,8 @@ export const PRO_COMPONENTS = [
   LayoutProLogoComponent,
   LayoutProHeaderComponent,
   LayoutProFooterComponent,
-  CoSubmenuComponent,
-  CoSubmenuDirective,
+  CoPopoverComponent,
+  CoPopoverDirective,
   ...PRO_ENTRYCOMPONENTS,
   ...PRO_WIDGETS,
 ];
