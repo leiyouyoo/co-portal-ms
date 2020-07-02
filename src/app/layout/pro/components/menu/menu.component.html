@@ -85,13 +85,13 @@
   <div>
     <nz-divider></nz-divider>
     <li class="alain-pro__menu-item">
-      <a nz-popover #submenu [nzPopoverContent]="FcmTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
-        nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop" [routerLink]="">
+      <a nz-popover #submenu [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
+        nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop" [routerLink]="['/fcm/order']">
         <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i>
         <span class="alain-pro__menu-item-title-text">
-          Fcm
+          订单管理
         </span>
-        <i nz-icon nzType="right" class="alain-pro__menu-item-arrow"></i>
+        <!-- <i nz-icon nzType="right" class="alain-pro__menu-item-arrow"></i> -->
       </a>
     </li>
 
@@ -105,14 +105,6 @@
   </div>
 </ng-template>
 
-<ng-template #FcmTemplate>
-  <div style="height: 800px;">
-    <a [routerLink]="['/fcm/order']">
-      <i nz-icon nzType="check"></i>
-      订单管理
-    </a>
-  </div>
-</ng-template>
 
 
 
