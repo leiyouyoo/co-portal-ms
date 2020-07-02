@@ -81,6 +81,7 @@ ul.menu li {
   &:first-child {
     margin-left: 6px;
   }
+
   i.anticon-down {
     height: 64px;
     line-height: 64px;
@@ -141,6 +142,7 @@ a {
 
 .dropdown-ul {
   flex-direction: column;
+
   .active {
     .menu-icon {
       background: #fff;
@@ -153,12 +155,15 @@ a {
       padding: 0 8px;
       background: rgba(255, 255, 255, 0.2);
       color: #1890ff;
+
       &:not(.child-menu-a) {
         border-bottom: 3px solid #1890ff;
       }
+
       display: inline-flex;
     }
   }
+
   li {
     background: transparent;
 
@@ -170,16 +175,20 @@ a {
 
 a:not(.sunMenuTile):hover {
   height: 100%;
+
   &:not(.child-menu-a) {
     border-bottom: 3px solid #1890ff;
     margin: 0 8px;
     padding: 0 8px;
   }
+
   &.child-menu-a {
     color: #1890ff;
   }
+
   display: inline-flex;
 }
+
 .drawer-menu-button {
   width: 40px;
   min-width: 40px;
@@ -201,4 +210,10 @@ a:not(.sunMenuTile):hover {
 
 .bg-menu {
   background: #0a1f43;
+}
+
+
+.alain-pro__menu-level1 {
+  height: 100%;
+  background-color: #fff;
 }

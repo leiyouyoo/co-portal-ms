@@ -1,7 +1,7 @@
 <!--底部栏-->
 <ul class="alain-pro__menu-wrap" #menu1>
   <li class="alain-pro__menu-item alain-pro__menu-item-active">
-    <a co-submenu #submenu [nzPopoverContent]="contentTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
+    <a co-popover #submenu [nzPopoverContent]="contentTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
       nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop">
       <!-- <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i> -->
       <span *ngIf="!pro.onlyIcon" class="alain-pro__menu-item-title-text">
