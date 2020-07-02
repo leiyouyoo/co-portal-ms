@@ -16,7 +16,7 @@ export class ListPopoverComponent implements OnInit {
   }
   @Input() active = false;
   get showPickUp(): boolean {
-    return this._showPickUp && this.shipment.freightMethodType === FreightMethodType.Ocean;
+    return this._showPickUp && this.shipment.freightMethodType === 1;
   }
   exceptionMessage = '';
   isDanger = false; //异常
@@ -73,8 +73,3 @@ export enum ShipmentBusinessEventType {
   Bill = 8,
 }
 
-export declare enum FreightMethodType {
-  Unknown = 0,
-  Ocean = 1,
-  Air = 2
-}
