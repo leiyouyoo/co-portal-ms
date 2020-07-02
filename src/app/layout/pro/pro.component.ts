@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
 import { ReuseTabService } from '@co/cbc';
-import { ScrollService } from '@co/common';
+import { ScrollService, _HttpClient } from '@co/common';
 import { updateHostClass } from '@co/core';
 import { environment } from '@env/environment';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -24,7 +24,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { BrandService } from './pro.service';
-import { ProSettingDrawerComponent } from './setting-drawer/setting-drawer.component';
+import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 
 @Component({
   selector: 'layout-pro',
@@ -34,7 +34,11 @@ import { ProSettingDrawerComponent } from './setting-drawer/setting-drawer.compo
 })
 export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
+
   private queryCls: string;
+  imgUrl = environment.SERVER_URL;
+  user: any;
+  userInfo: any;
   @ViewChild('settingHost', { read: ViewContainerRef, static: false }) private settingHost: ViewContainerRef;
 
   isFetching = false;
@@ -72,10 +76,10 @@ export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
     msg: NzMessageService,
     scroll: ScrollService,
     reuseTabSrv: ReuseTabService,
-    private resolver: ComponentFactoryResolver,
-    private el: ElementRef,
     private renderer: Renderer2,
     public pro: BrandService,
+    public httpClient: _HttpClient,
+    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
     @Inject(DOCUMENT) private doc: any, // private cdr: ChangeDetectorRef
   ) {
     // scroll to top in change page
@@ -152,6 +156,9 @@ export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
     pro.notify.pipe(takeUntil(unsubscribe$)).subscribe(() => {
       this.setClass();
     });
+
+    this.user = JSON.parse(window.localStorage.getItem('ICPUserMsg'));
+    this.getUserHead();
   }
 
   ngOnDestroy() {
@@ -165,5 +172,17 @@ export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
       `alain-pro__dark`,
       `alain-pro__light`,
     );
+  }
+
+  getUserHead() {
+    this.httpClient.get('SSO/User/GetUserDetail', this.user.id).subscribe((res: any) => {
+      debugger;
+      this.userInfo = res ? res : {};
+    });
+  }
+
+  logout() {
+    this.tokenService.clear();
+    window.location.href = '/#/passport/login';
   }
 }

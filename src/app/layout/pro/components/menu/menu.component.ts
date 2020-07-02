@@ -8,6 +8,17 @@ import { NzPopoverComponent } from 'ng-zorro-antd/popover';
 
 import { BrandService } from '../../pro.service';
 
+const urlFactory = (items: Menu[]) => {
+  const urlMatcher = new RegExp(`^${location.pathname}#`);
+  items.forEach((o) => {
+    o._url = (o.url || '').replace(urlMatcher, '');
+    o._isExternalUrl = !urlMatcher.test(o.url);
+    if (o.items && o.items.length) {
+      urlFactory(o.items);
+    }
+  });
+};
+
 @Component({
   selector: '[layout-pro-menu]',
   templateUrl: './menu.component.html',
@@ -25,35 +36,30 @@ export class LayoutProMenuComponent implements OnInit, OnDestroy {
   @Input() mode = 'inline';
   @ViewChild('submenu', { static: false }) submenu!: NzPopoverComponent;
 
-
-  constructor(private menuSrv: MenuService, private router: Router, public pro: BrandService, private cdr: ChangeDetectorRef) { }
+  constructor(private menuSrv: MenuService, private router: Router, public pro: BrandService, private cdr: ChangeDetectorRef) {}
 
   private cd() {
     this.cdr.markForCheck();
   }
 
   private genMenus(data: Menu[]) {
-    const res: Menu[] = [];
-    // ingores category menus
-    const ingoreCategores = data.reduce((prev, cur) => prev.concat(cur.children), []);
-    this.menuSrv.visit(ingoreCategores, (item, parent) => {
-      if (!item._aclResult) {
-        if (this.disabledAcl) {
-          item.disabled = true;
-        } else {
-          item._hidden = true;
-        }
-      }
-      if (item._hidden === true) {
-        return;
-      }
-      if (parent === null) {
-        res.push(item);
-      }
-    });
-    this.menus = res;
+    this.menus = this.getMenu();
+    debugger;
+    // this.openStatus();
+  }
 
-    this.openStatus();
+  private getMenu() {
+    try {
+      const menu = ((JSON.parse(window.localStorage.getItem('ICPUserMsg')) as any).nav.menus.MainMenu.items || []) as Menu[];
+      if (menu && menu.length) {
+        menu.sort((a, b) => a.order - b.order);
+        urlFactory(menu);
+        return menu;
+      }
+    } catch (e) {
+      console.error(e);
+      return [];
+    }
   }
 
   private openStatus() {
@@ -83,9 +89,8 @@ export class LayoutProMenuComponent implements OnInit, OnDestroy {
     this.cd();
   }
 
-
   openChange(item: Menu, statue: boolean) {
-    debugger
+    debugger;
     const sb = this.submenu;
     const data = item._parent ? item._parent.children : this.menus;
     if (data && data.length <= 1) {
