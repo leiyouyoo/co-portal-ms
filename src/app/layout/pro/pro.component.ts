@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
 import { ReuseTabService } from '@co/cbc';
-import { ScrollService } from '@co/common';
+import { ScrollService, _HttpClient } from '@co/common';
 import { updateHostClass } from '@co/core';
 import { environment } from '@env/environment';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -76,6 +76,7 @@ export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
     private el: ElementRef,
     private renderer: Renderer2,
     public pro: BrandService,
+    public httpClient: _HttpClient,
     @Inject(DOCUMENT) private doc: any, // private cdr: ChangeDetectorRef
   ) {
     // scroll to top in change page

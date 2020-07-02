@@ -1,42 +1,21 @@
 <ng-template #sideTpl>
-  <nz-sider [nzTrigger]="null" [nzCollapsible]="true" [nzCollapsed]="isMobile ? false : pro.collapsed"
-    [nzWidth]="pro.width" [nzCollapsedWidth]="pro.widthInCollapsed" class="alain-pro__sider"
-    [ngClass]="{ 'alain-pro__sider-fixed': pro.fixSiderbar }">
-
+  <nz-sider
+    [nzTrigger]="null"
+    [nzCollapsible]="true"
+    [nzCollapsed]="isMobile ? false : pro.collapsed"
+    [nzWidth]="pro.width"
+    [nzCollapsedWidth]="pro.widthInCollapsed"
+    class="alain-pro__sider"
+    [ngClass]="{ 'alain-pro__sider-fixed': pro.fixSiderbar }"
+  >
     <div class="alain-pro__sider-header">
       <!--Logo-->
       <layout-pro-logo class="alain-pro__sider-logo"></layout-pro-logo>
-
-      <!--头像区域-->
-      <div class="alain-pro__sider-avatar">
-        <nz-avatar nzIcon="user" nzSize="large" class="user-avatar"></nz-avatar>
-        <div class="user-desc">
-          <h3>admin <i nz-icon nzType="down"></i></h3>
-          <p>
-            it@cityocean.com
-            <!-- <i nz-icon nzType="down"></i> -->
-          </p>
-        </div>
-      </div>
-
-      <!--搜索栏-->
-      <div class="alain-pro__sider-search">
-        <nz-input-group [nzSuffix]="suffixIconSearch" nzSize="small">
-          <input type="text" nz-input placeholder="快捷键搜索" />
-        </nz-input-group>
-        <ng-template #suffixIconSearch>
-          <i nz-icon nzType="search"></i>
-        </ng-template>
-      </div>
-
     </div>
 
-
-    <!--菜单导航区域-->
     <div class="alain-pro__sider-main">
       <div class="alain-pro__sider-wrap" layout-pro-menu></div>
     </div>
-
 
     <!--底部栏-->
     <div class="alain-pro__sider-footer">
@@ -57,9 +36,12 @@
           </nz-dropdown-menu>
         </li>
         <li>
-          <a nz-button nzSize="small" nzType="link"> <i nz-icon nzIconfont="iconsetting"></i> <span class="title">
+          <a nz-button nzSize="small" nzType="link">
+            <i nz-icon nzIconfont="iconsetting"></i>
+            <span class="title">
               设置
-            </span></a>
+            </span></a
+          >
         </li>
       </ul>
     </div>
@@ -72,33 +54,28 @@
 
 <div class="ant-layout ant-layout-has-sider">
   <ng-container *ngIf="pro.menu === 'side' || isMobile">
-    <nz-drawer *ngIf="isMobile" [nzWidth]="pro.width" nzWrapClassName="alain-pro__drawer" [nzVisible]="!pro.collapsed"
-      [nzClosable]="false" nzPlacement="left" (nzOnClose)="pro.setCollapsed(true)">
+    <nz-drawer
+      *ngIf="isMobile"
+      [nzWidth]="pro.width"
+      nzWrapClassName="alain-pro__drawer"
+      [nzVisible]="!pro.collapsed"
+      [nzClosable]="false"
+      nzPlacement="left"
+      (nzOnClose)="pro.setCollapsed(true)"
+    >
       <ng-template [ngTemplateOutlet]="sideTpl"></ng-template>
     </nz-drawer>
     <ng-container *ngIf="!isMobile">
       <ng-template [ngTemplateOutlet]="sideTpl"></ng-template>
     </ng-container>
   </ng-container>
+
   <div class="ant-layout alain-pro__main" [ngStyle]="getLayoutStyle">
     <!-- <layout-pro-header></layout-pro-header> -->
-    <div class="ant-layout-content alain-pro__body" [class.alain-pro__fetching]="isFetching"
-      [ngStyle]="getContentStyle">
-      <div class="alain-pro__header-item alain-pro__header-trigger" (click)="pro.setCollapsed()">
-        <i nz-icon nzType="menu-{{ pro.collapsed ? 'unfold' : 'fold' }}" class="alain-pro__header-item-icon"></i>
-      </div>
-      <nz-spin class="alain-pro__fetching-icon" nzSpinning></nz-spin>
-
-      <reuse-tab #reuseTab [tabBarExtraContent]="headerWidgets" tabType="card">
-      </reuse-tab>
-      <router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
+    <div class="ant-layout-content alain-pro__body" [class.alain-pro__fetching]="isFetching" [ngStyle]="getContentStyle">
+      <app-header></app-header>
+      <router-outlet></router-outlet>
       <div id="app-host-container" class="thy-layout"></div>
     </div>
-
-    <!-- <layout-pro-footer class="ant-layout-footer alain-pro__footer"></layout-pro-footer> -->
   </div>
 </div>
-
-<!-- <ng-template #settingHost></ng-template> -->
-<!-- <quick-chat></quick-chat> -->
-<!-- <layout-theme-btn></layout-theme-btn> -->
