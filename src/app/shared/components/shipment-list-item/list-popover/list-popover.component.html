@@ -1,0 +1,80 @@
+<i
+  #popover="nzPopover"
+  nz-popover
+  [nzOverlayClassName]="isShowEventPopover() ? 'empty-class' : 'display-none'"
+  [nzPopoverTitle]="'yantian'"
+  [nzPopoverContent]="timeTemplate"
+  [class]="className + ' list-icon'"
+  (click)="popover.component.hide()"
+  [ngClass]="{ active: active, 'highlight-icon-current-danger': isDanger, 'cursor-default': !isShowEventPopover() }"
+></i>
+<ng-template #pickUpOrDelivery>
+  {{ pickupCount }}/{{ totalContainer }} {{ ([0, 2].includes(location) ? 'Picked Up' : 'Delivered') | translate }}
+</ng-template>
+
+<!--时间-->
+<ng-template #timeTemplate>
+  <div style="width: 320px;font-size: 12px;margin-bottom: 12px;">
+    <nz-list class="shipment-attr-list">
+      <ng-container *ngIf="location === 1">
+        <nz-list-item *ngIf="shipment?.routeDetails?.cyCutOffTime">
+          <div nz-row nzType="flex" nzJustify="space-between">
+            <div>{{ 'CY Cut-Off Date' | translate }}</div>
+            <div>{{ shipment?.routeDetails?.cyCutOffTime | date: 'yyyy-MM-dd' }}</div>
+          </div>
+        </nz-list-item>
+        <nz-list-item *ngIf="shipment?.routeDetails?.siCutOffDate">
+          <div nz-row nzType="flex" nzJustify="space-between">
+            <div>{{ 'S/I Cut-Off Date' | translate }}</div>
+            <div>{{ shipment?.routeDetails?.siCutOffDate | date: 'yyyy-MM-dd' }}</div>
+          </div>
+        </nz-list-item>
+        <nz-list-item *ngIf="shipment?.routeDetails?.vgmCutOffDate">
+          <div nz-row nzType="flex" nzJustify="space-between">
+            <div>{{ 'VGM Cut-Off Date' | translate }}</div>
+            <div>{{ shipment?.routeDetails?.vgmCutOffDate | date: 'yyyy-MM-dd' }}</div>
+          </div>
+        </nz-list-item>
+      </ng-container>
+      <ng-container *ngIf="location === 2">
+        <nz-list-item *ngIf="shipment?.routeDetails?.availableDate">
+          <div nz-row nzType="flex" nzJustify="space-between">
+            <div>{{ 'Available Date' | translate }}</div>
+            <div>{{ shipment?.routeDetails?.availableDate | date: 'yyyy-MM-dd' }}</div>
+          </div>
+        </nz-list-item>
+        <nz-list-item *ngIf="shipment?.routeDetails?.lastFreeDate">
+          <div nz-row nzType="flex" nzJustify="space-between">
+            <div>{{ 'Last Free Date' | translate }}</div>
+            <div>{{ shipment?.routeDetails?.lastFreeDate | date: 'yyyy-MM-dd' }}</div>
+          </div>
+        </nz-list-item>
+      </ng-container>
+    </nz-list>
+    <nz-timeline *ngIf="eventList?.length" class="shipment-list-item-popover-timeline">
+      <nz-timeline-item *ngFor="let item of eventList">
+        <div nz-row nzType="flex" nzJustify="space-between">
+          <div>
+            {{ item.subject }}
+            <span *ngIf="item.businessEventType === ShipmentBusinessEventType.ShipmentContainer">
+              ({{ item.containerActivityCount }}/{{ item.containerTotalCount }})</span
+            >
+          </div>
+          <div>{{ item.happenTime | date: 'yyyy-MM-dd' }}</div>
+        </div>
+      </nz-timeline-item>
+    </nz-timeline>
+  </div>
+  <div style="color: red;" class="danger" *ngIf="isDanger">
+    <div nz-row nzType="flex" nzJustify="space-between" style="color: red;">
+      <div class="d-flex align-items-center">
+        <i nz-icon nzType="warning" nzTheme="outline" style="padding-bottom: 1px;margin-right: 2px;"></i>
+        <span>{{ shipment._exceptionEvent.happenTime | date: 'yyyy-MM-dd' }}</span>
+      </div>
+      <div>{{ exceptionMessage }}</div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end" *ngIf="showPickUp">
+    <ng-template [ngTemplateOutlet]="pickUpOrDelivery"></ng-template>
+  </div>
+</ng-template>

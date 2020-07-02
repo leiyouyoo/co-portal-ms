@@ -14,8 +14,10 @@ import { SHARED_ZORRO_MODULES } from './shared-zorro.module';
 // #region third libs
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CountdownModule } from 'ngx-countdown';
+import { DragulaModule } from 'ng2-dragula';
 
-const THIRDMODULES = [CountdownModule, DragDropModule];
+
+const THIRDMODULES = [CountdownModule, DragDropModule, DragulaModule.forRoot()];
 // #endregion
 
 // #region your componets & directives
@@ -32,6 +34,11 @@ import { MouseFocusDirective } from './components/mouse-focus/mouse-focus.direct
 import { QUICK_CHAT_COMPONENTS } from './components/quick-chat';
 import { ScrollbarDirective } from './components/scrollbar/scrollbar.directive';
 import { StatusLabelComponent } from './components/status-label/status-label.component';
+import { TableHeadDragComponent } from './components/table-head-drag/table-head-drag.component';
+import { ShipmentListItemComponent } from './components/shipment-list-item/shipment-list-item.component';
+import { ListPopoverComponent } from './components/shipment-list-item/list-popover/list-popover.component';
+
+
 
 const COMPONENTS_ENTRY = [
   LangsComponent,
@@ -39,6 +46,9 @@ const COMPONENTS_ENTRY = [
   FileManagerComponent,
   StatusLabelComponent,
   AddressComponent,
+  TableHeadDragComponent,
+  ShipmentListItemComponent,
+  ListPopoverComponent,
   ...QUICK_CHAT_COMPONENTS,
 ];
 const COMPONENTS = [EditorComponent, ...COMPONENTS_ENTRY, ...PRO_SHARED_COMPONENTS];

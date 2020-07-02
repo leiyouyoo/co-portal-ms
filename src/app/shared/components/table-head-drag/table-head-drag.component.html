@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="container_head">
+        设置列表内容
+    </div>
+    <div class="container_main">
+        <div dragula="CLICKS" [(dragulaModel)]="listData">
+            <div *ngFor="let i of listData" style="cursor: pointer;">
+                <div class="container_main_item">
+                    <input type="checkbox" [(ngModel)]="i.checked">
+                    {{i.label}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container_btn">
+        <button nz-button [nzSize]="'small'" nzType="primary" style="margin-right: 5px;">保存</button>
+        <button nz-button [nzSize]="'small'" nzType="default" style="margin-right: 5px;">取消</button>
+    </div>
+</div>
