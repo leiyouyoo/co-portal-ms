@@ -4,7 +4,7 @@
     </div>
     <div class="container_main">
         <div dragula="CLICKS" [(dragulaModel)]="listData">
-            <div *ngFor="let i of listData" style="cursor: pointer;">
+            <div *ngFor="let i of listData" style="cursor: move;">
                 <div class="container_main_item">
                     <input type="checkbox" [(ngModel)]="i.checked">
                     {{i.label}}

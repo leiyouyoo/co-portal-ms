@@ -4,10 +4,12 @@ import { SharedModule } from '@shared';
 import { OrderRoutingModule } from './order-routing.module';
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { PackingListComponent } from './order-detail/component/packing-list/packing-list.component';
 
 const COMPONENTS = [
   OrderListComponent,
-  OrderDetailComponent
+  OrderDetailComponent,
+  PackingListComponent
 ];
 
 @NgModule({

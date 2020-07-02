@@ -1,9 +1,9 @@
 <section class="content">
-    <section class="number-box">
+    <section class="content_number-box">
         <span> 运单 / a176915d-0376-4d41-10fa-08d80ddc7b46 </span>
         <span> so号 / a176915d-0376-4d41-10fa-08d80ddc7b46 </span>
     </section>
-    <section class="order-detail-info">
+    <section class="content_order-detail-info">
         <div class="left-box">
             <nz-card class="car-box">
                 <shipment-list-item *ngFor="let shipment of shipmentData?.items" [shipment]="shipment">
@@ -40,7 +40,7 @@
     <nz-card>
         <nz-tabset>
             <nz-tab nzTitle="货箱清单">
-                <!-- <booking-packing-list></booking-packing-list> -->
+                <booking-packing-list></booking-packing-list>
             </nz-tab>
             <nz-tab nzTitle="文档">
 

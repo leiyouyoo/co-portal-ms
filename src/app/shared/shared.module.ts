@@ -17,7 +17,7 @@ import { CountdownModule } from 'ngx-countdown';
 import { DragulaModule } from 'ng2-dragula';
 
 
-const THIRDMODULES = [CountdownModule, DragDropModule, DragulaModule.forRoot()];
+const THIRDMODULES = [CountdownModule, DragDropModule];
 // #endregion
 
 // #region your componets & directives
@@ -64,6 +64,7 @@ const DIRECTIVES = [ImgDirective, DelayDirective, MasonryDirective, ScrollbarDir
     ReactiveFormsModule,
     CoACLModule,
     CoFormModule,
+    DragulaModule.forRoot(),
     ...SHARED_DELON_MODULES,
     ...SHARED_ZORRO_MODULES,
     // third libs
