@@ -1,1 +1,50 @@
-<p>order-detail works!</p>
+<section class="content">
+    <section class="content_number">
+        <span> 运单 / a176915d-0376-4d41-10fa-08d80ddc7b46 </span>
+        <span> so号 / a176915d-0376-4d41-10fa-08d80ddc7b46 </span>
+    </section>
+    <section class="content_info">
+        <div class="content_info_left">
+            <nz-card class="car-box">
+                <shipment-list-item *ngFor="let shipment of shipmentData?.items" [shipment]="shipment">
+                </shipment-list-item>
+            </nz-card>
+            <nz-card class="line-box">
+                <!-- 路线图 -->
+            </nz-card>
+        </div>
+        <nz-card class="content_info_right">
+            <div class="tit">基本信息</div>
+            <p>海运 FBA / 海卡（包税） / 自拼</p>
+            <p>业务员： TEST</p>
+            <p>客户：佰禾（直客）</p>
+            <p>下单日期：2019-18-45</p>
+            <p>下单人：XXX</p>
+
+            <div class="tit">运单信息</div>
+            <p>FBA号： kjsldfkjalsdfkjladksfjlakf</p>
+            <p>Reference ID: XXXXXXXXXX</p>
+            <p>快递号：XXXXXXX</p>
+            <p>柜号：</p>
+            <p>柜型：</p>
+            <p>航名/航次：XXXXXXXX</p>
+
+            <div class="tit">货物描述</div>
+            <p>燃气热水器</p>
+            <p>500CTNS /4000KG /200CBM</p>
+
+            <div class="tit">备注</div>
+            <p>箱子上贴了迈买云腾（美国站）1到26小小 的侧唛</p>
+        </nz-card>
+    </section>
+    <nz-card>
+        <nz-tabset>
+            <nz-tab nzTitle="货箱清单">
+                <booking-packing-list></booking-packing-list>
+            </nz-tab>
+            <nz-tab nzTitle="文档">
+
+            </nz-tab>
+        </nz-tabset>
+    </nz-card>
+</section>

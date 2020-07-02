@@ -6,7 +6,9 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { CoDocumentComponent } from './co-document/co-document.component';
 import { AddOrderComponent } from './add-order/add-order.component';
-const COMPONENTS = [OrderListComponent, OrderDetailComponent, CoDocumentComponent, AddOrderComponent];
+import { PackingListComponent } from './order-detail/component/packing-list/packing-list.component';
+
+const COMPONENTS = [OrderListComponent, OrderDetailComponent, PackingListComponent, CoDocumentComponent, AddOrderComponent];
 
 @NgModule({
   declarations: [...COMPONENTS],

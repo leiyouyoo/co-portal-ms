@@ -1,0 +1,238 @@
+@line-color: #e4e4e4;
+
+.iconfont {
+  // width: 48px;
+  // height: 48px;
+  // margin-left: -18px;
+  // margin-top: -20px;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  cursor: pointer;
+
+  &.cursor-default {
+    cursor: default !important;
+  }
+}
+
+.route {
+  position: relative;
+
+  .imgList {
+    img {
+      height: 30px;
+    }
+  }
+
+  .location-name {
+    width        : 100%;
+    height       : 25px;
+    padding-left : 19px;
+    text-overflow: ellipsis;
+
+    display: flex;
+
+    &>div {
+      width        : 60%;
+      white-space  : nowrap;
+      text-overflow: ellipsis;
+      text-align   : center;
+      overflow     : hidden;
+    }
+  }
+
+  .route-active::before {
+    color: gray !important;
+  }
+
+  .line-active {
+    border: 1px solid @line-color  !important;
+
+    &::before {
+      color: white !important;
+    }
+  }
+
+  .highlight-icon {
+    &::before {
+      color: rgb(26, 179, 148) !important;
+    }
+  }
+
+  .location-back-active {
+    border          : 1px solid rgb(26, 179, 148) !important;
+    background-color: white !important;
+  }
+
+  .highlight-icon-current {
+    &::before {
+      color: white !important;
+    }
+  }
+
+  .location-back-active-current {
+    background-color: rgb(26, 179, 148) !important;
+    animation       : shine 1.5s infinite;
+  }
+
+  .line-transportStart {
+    border-color: rgb(26, 179, 148) !important;
+  }
+
+  .line-transportEnd {
+    border-color: rgb(26, 179, 148) !important;
+  }
+
+  .noVertical {
+    .serveAvatar {
+      position: absolute;
+      right   : 50px;
+
+      nz-badge {
+        z-index            : 99;
+        height             : 40px;
+        width              : 40px;
+        background-color   : transparent;
+        border             : 1px solid #e4e4e4;
+        border-radius      : 50%;
+        display            : inline-block;
+        background-repeat  : round;
+        //background-image : url('../../../../../../assets/images/co-avatar.png');
+        min-width          : 40px;
+        min-height         : 40px;
+        font-size          : 12px;
+        cursor             : pointer;
+
+        span {
+          img {
+            height    : 40px;
+            width     : 40px;
+            min-width : 40px;
+            min-height: 40px;
+          }
+        }
+      }
+    }
+
+    .icon-list {
+      .line {
+        position: relative;
+        padding : 20px 0px 22px 30px;
+
+        .pointer-events {
+          pointer-events: none;
+        }
+
+        .location-back {
+          position        : absolute;
+          top             : 0;
+          display         : inline-block;
+          background-color: white;
+          height          : 40px;
+          width           : 40px;
+          border-radius   : 50%;
+          border          : 1px solid lightgray;
+          margin-left     : -32px;
+
+          min-width : 35px;
+          min-height: 35px;
+          font-size : 12px;
+        }
+
+        .route-line {
+          border: 1px dashed @line-color;
+        }
+
+        .iconfont {
+          position      : absolute;
+          top           : -2px;
+          left          : 3px;
+          pointer-events: none;
+
+          &::before {
+            position : absolute;
+            font-size: 29px;
+            color    : lightgray;
+          }
+        }
+      }
+    }
+
+    .state {
+      .title {
+        min-width: 95px;
+        color    : darkgray;
+        display  : inline-flex;
+      }
+    }
+  }
+
+  .danger {
+    .name {
+      border-bottom : 1px solid @line-color;
+      padding-bottom: 15px;
+    }
+
+    .danger {
+      color: red;
+    }
+  }
+}
+
+.highlight-icon-current-danger {
+  animation: shine-danger 1.5s infinite;
+
+  &::before {
+    color: red !important;
+  }
+}
+
+.list-icon {
+  border-radius: 50%;
+  background   : #fff;
+
+  &:before {
+    font-size: 24px;
+  }
+}
+
+.multiple-info-tag {
+  position: absolute;
+  right   : -40px;
+}
+
+@keyframes shine {
+  0% {
+    box-shadow: 0 0px 2px rgb(26, 179, 148);
+  }
+
+  100% {
+    box-shadow: 0 0px 30px rgb(26, 179, 148);
+  }
+}
+
+@keyframes shine-danger {
+  0% {
+    box-shadow: 0 0px 2px rgb(255, 51, 0);
+  }
+
+  100% {
+    box-shadow: 0 0px 30px rgb(255, 51, 0);
+  }
+}
+
+.shipment-attr-list {
+  margin-bottom: 12px;
+
+  &--border-bottom {
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  nz-list-item {
+    padding: 4px 0;
+
+    &>div {
+      width: 100%;
+    }
+  }
+}
