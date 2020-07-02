@@ -172,8 +172,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["packages/planet/tsconfig.lib.json", "packages/planet/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "packages/planet/tsconfig.lib.json",
+              "packages/planet/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -203,8 +208,12 @@
             "index": "apps/app3/index.html",
             "main": "apps/app3/main.ts",
             "tsConfig": "apps/app3/tsconfig.app.json",
-            "assets": [ "apps/app3/assets"],
-            "styles": ["apps/app3/styles.less"],
+            "assets": [
+              "apps/app3/assets"
+            ],
+            "styles": [
+              "apps/app3/styles.less"
+            ],
             "scripts": [],
             "aot": true,
             "vendorChunk": false
@@ -262,20 +271,32 @@
             "polyfills": "apps/app3/polyfills.ts",
             "tsConfig": "apps/app3/tsconfig.spec.json",
             "karmaConfig": "apps/app3/karma.conf.js",
-            "styles": ["apps/app3/styles.less"],
+            "styles": [
+              "apps/app3/styles.less"
+            ],
             "scripts": [],
-            "assets": [ "apps/app3/assets"]
+            "assets": [
+              "apps/app3/assets"
+            ]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/app3/tsconfig.app.json", "apps/app3/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "apps/app3/tsconfig.app.json",
+              "apps/app3/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "portal"
+  "defaultProject": "portal",
+  "cli": {
+    "analytics": false
+  }
 }
