@@ -11,7 +11,7 @@
   >
     <div class="alain-pro__sider-header">
       <!--Logo-->
-      <layout-pro-logo [showType]="pro.collapsed" class="alain-pro__sider-logo"></layout-pro-logo>
+      <layout-pro-logo class="alain-pro__sider-logo"></layout-pro-logo>
 
       <!--头像区域-->
       <div class="alain-pro__sider-avatar">
@@ -107,8 +107,10 @@
         <i nz-icon nzType="menu-{{ pro.collapsed ? 'unfold' : 'fold' }}" class="alain-pro__header-item-icon"></i>
       </div>
       <nz-spin class="alain-pro__fetching-icon" nzSpinning></nz-spin>
+
       <reuse-tab #reuseTab [tabBarExtraContent]="headerWidgets" tabType="card"></reuse-tab>
       <router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
+
       <div id="app-host-container" class="thy-layout"></div>
     </div>
   </div>

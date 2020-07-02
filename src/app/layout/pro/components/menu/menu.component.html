@@ -1,7 +1,7 @@
 <!--底部栏-->
 <ul class="alain-pro__menu-wrap" #menu1>
   <li class="alain-pro__menu-item alain-pro__menu-item-active">
-    <a co-submenu #submenu [nzPopoverContent]="contentTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
+    <a co-popover #submenu [nzPopoverContent]="contentTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
       nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop">
       <!-- <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i> -->
       <span *ngIf="!pro.onlyIcon" class="alain-pro__menu-item-title-text">
@@ -11,33 +11,90 @@
     </a>
   </li>
   <nz-divider></nz-divider>
-  <div *ngFor="let item of menus; let i = index">
+  <!-- <li class="alain-pro__menu-item">
+    <a
+      nz-popover
+      [nzPopoverContent]="contentTemplate"
+      [nzPopoverOrigin]="menu1"
+      nzPopoverTrigger="click"
+      nzOverlayClassName="alain-pro__menu-level1"
+      nzPopoverPlacement="rightTop"
+    >
+      <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i>
+      <span *ngIf="!pro.onlyIcon" class="alain-pro__menu-item-title-text">
+        常用功能1
+      </span>
+      <i nz-icon nzType="right" class="alain-pro__menu-item-arrow"></i>
+    </a>
+  </li> -->
+
+  <!-- <nz-divider></nz-divider>
+  <li class="alain-pro__menu-item">
+    <a
+      nz-popover
+      [nzPopoverContent]="contentTemplate"
+      [nzPopoverOrigin]="menu1"
+      nzPopoverTrigger="click"
+      nzOverlayClassName="alain-pro__menu-level1"
+      nzPopoverPlacement="rightTop"
+    >
+      <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i>
+      <span *ngIf="!pro.onlyIcon" class="alain-pro__menu-item-title-text">
+        常用功能2
+      </span>
+      <i nz-icon nzType="right" class="alain-pro__menu-item-arrow"></i>
+    </a>
+  </li> -->
+
+  <nz-divider></nz-divider>
+  <li class="alain-pro__menu-item">
+    <a routerLink="/ec/trade1">
+      <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i>
+      <span *ngIf="!pro.onlyIcon" class="alain-pro__menu-item-title-text">
+        菜单1
+      </span>
+      <i nz-icon nzType="right" class="alain-pro__menu-item-arrow"></i>
+    </a>
+  </li>
+  <nz-divider></nz-divider>
+  <li class="alain-pro__menu-item">
+    <a routerLink="/ec/trade2">
+      <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i>
+      <span *ngIf="!pro.onlyIcon" class="alain-pro__menu-item-title-text">
+        菜单2
+      </span>
+      <i nz-icon nzType="right" class="alain-pro__menu-item-arrow"></i>
+    </a>
+  </li>
+  <!-- <div *ngFor="let item of menus; let i = index">
     <li class="alain-pro__menu-item">
       <a nz-popover #submenu [nzPopoverContent]="contentTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
         nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop" (click)="onShowSubmenu()"
         [routerLink]="item._url">
-        <!-- <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i> -->
+        <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i> 
+        <i nz-icon nziconfont="iconsetting" class="alain-pro__menu-item-icon"></i>
         <span class="alain-pro__menu-item-title-text">
           {{ item.displayName }}
         </span>
-        <!-- <i nz-icon nzType="right" class="alain-pro__menu-item-arrow"></i> -->
+        <i nz-icon nzType="right" class="alain-pro__menu-item-arrow"></i>
       </a>
     </li>
     <nz-divider></nz-divider>
-  </div>
+  </div> -->
 
   <div>
+    <nz-divider></nz-divider>
     <li class="alain-pro__menu-item">
       <a nz-popover #submenu [nzPopoverContent]="FcmTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
         nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop" [routerLink]="">
-        <!-- <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i> -->
+        <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i>
         <span class="alain-pro__menu-item-title-text">
           Fcm
         </span>
-        <!-- <i nz-icon nzType="right" class="alain-pro__menu-item-arrow"></i> -->
+        <i nz-icon nzType="right" class="alain-pro__menu-item-arrow"></i>
       </a>
     </li>
-    <nz-divider></nz-divider>
+
   </div>
 
 </ul>
@@ -49,7 +106,7 @@
 </ng-template>
 
 <ng-template #FcmTemplate>
-  <div style="height: 800px;padding-top: 20px;">
+  <div style="height: 800px;">
     <a [routerLink]="['/fcm/order']">
       <i nz-icon nzType="check"></i>
       订单管理

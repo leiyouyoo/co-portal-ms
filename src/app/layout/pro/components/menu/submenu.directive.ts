@@ -1,8 +1,3 @@
-/**
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/LICENSE
- */
-
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -11,7 +6,6 @@ import {
   ComponentFactoryResolver,
   Directive,
   ElementRef,
-  ViewChild,
   Host,
   Input,
   Optional,
@@ -19,7 +13,6 @@ import {
   ViewContainerRef,
   ViewEncapsulation
 } from '@angular/core';
-import { CdkConnectedOverlay, ConnectionPositionPair } from '@angular/cdk/overlay';
 import { zoomBigMotion } from 'ng-zorro-antd/core/animation';
 import { NzNoAnimationDirective } from 'ng-zorro-antd/core/no-animation';
 import { NzTSType } from 'ng-zorro-antd/core/types';
@@ -27,20 +20,21 @@ import { NzTSType } from 'ng-zorro-antd/core/types';
 import { isTooltipEmpty, NzTooltipBaseDirective, NzToolTipComponent, NzTooltipTrigger } from 'ng-zorro-antd/tooltip';
 
 @Directive({
-  selector: '[co-submenu]',
-  exportAs: 'coSubmenu',
+  selector: '[co-popover]',
+  exportAs: 'coPopover',
   host: {
     '[class.ant-popover-open]': 'visible'
   }
 })
-export class CoSubmenuDirective extends NzTooltipBaseDirective {
+export class CoPopoverDirective extends NzTooltipBaseDirective {
+  @Input('nzPopoverTitle') specificTitle?: NzTSType;
   @Input('nzPopoverContent') specificContent?: NzTSType;
   @Input('nz-popover') directiveNameTitle?: NzTSType | null;
   @Input('nzPopoverTrigger') specificTrigger?: NzTooltipTrigger;
   @Input('nzPopoverPlacement') specificPlacement?: string;
   @Input('nzPopoverOrigin') specificOrigin?: ElementRef<HTMLElement>;
 
-  componentFactory: ComponentFactory<CoSubmenuComponent> = this.resolver.resolveComponentFactory(CoSubmenuComponent);
+  componentFactory: ComponentFactory<CoPopoverComponent> = this.resolver.resolveComponentFactory(CoPopoverComponent);
 
   constructor(
     elementRef: ElementRef,
@@ -54,8 +48,8 @@ export class CoSubmenuDirective extends NzTooltipBaseDirective {
 }
 
 @Component({
-  selector: 'co-submenu',
-  exportAs: 'coSubmenuComponent',
+  selector: 'co-popover',
+  exportAs: 'coPopoverComponent',
   animations: [zoomBigMotion],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -80,9 +74,9 @@ export class CoSubmenuDirective extends NzTooltipBaseDirective {
         [@.disabled]="noAnimation?.nzNoAnimation"
         [nzNoAnimation]="noAnimation?.nzNoAnimation"
         [@zoomBigMotion]="'active'"
-        (click)="onClick()"
       >
         <div class="ant-popover-content">
+          <div class="ant-popover-arrow"></div>
           <div class="ant-popover-inner" role="tooltip">
             <div>
               <div class="ant-popover-title" *ngIf="nzTitle">
@@ -98,29 +92,23 @@ export class CoSubmenuDirective extends NzTooltipBaseDirective {
     </ng-template>
   `
 })
-export class CoSubmenuComponent extends NzToolTipComponent {
-  _prefix = 'co-submenu-placement';
-  @ViewChild(CdkConnectedOverlay, { static: false }) overlay!: CdkConnectedOverlay;
+export class CoPopoverComponent extends NzToolTipComponent {
+  _prefix = 'co-popover-placement';
 
   constructor(cdr: ChangeDetectorRef, @Host() @Optional() public noAnimation?: NzNoAnimationDirective) {
     super(cdr, noAnimation);
   }
 
-
-  // updatePosition(): void {
-
-  //   debugger
-  //   super.updatePosition();
-  //   if (this.origin && this.overlay && this.overlay.overlayRef) {
-  //     this.overlay.overlayRef.overlayElement.style.top = "46px";
-  //     this.overlay.overlayRef.overlayElement.style.bottom = "0px";
-  //     this.overlay.overlayRef.overlayElement.style.width = "200px";
-  //   }
-  // }
-
-
-  onClick() {
-    const v = this.overlay;
-
+  protected isEmpty(): boolean {
+    return isTooltipEmpty(this.nzTitle) && isTooltipEmpty(this.nzContent);
   }
+
+  onPositionChange(position) {
+    if (this.origin && this.overlay && this.overlay.overlayRef) {
+      this.overlay.overlayRef.overlayElement.style.top = "46px";
+      this.overlay.overlayRef.overlayElement.style.bottom = "0px";
+      this.overlay.overlayRef.overlayElement.style.width = "200px";
+    }
+  }
+
 }
