@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, 
 import { groupBy, sumBy, orderBy, merge } from 'lodash';
 import { NzModalService, UploadFile, UploadXHRArgs } from 'ng-zorro-antd';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { I18nMessageService } from '@cityocean/i18n-library';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import {
   BookingLibraryService,
   cargo,
@@ -79,12 +79,13 @@ export class PackingListComponent implements OnInit {
   uploadUrl = this.environment.SERVER_URL + '/Storage/File/Upload';
   skuDuplicateMap: { [prop: string]: boolean };
   constructor(public bookingSevice: BookingLibraryService,
-    public message: I18nMessageService,
+    public message: NzMessageService,
     private fb: FormBuilder,
     private modalService: NzModalService,
     public currencySevice: CurrencySevice,
     public dataDictionarySevice: DataDictionarySevice,
     // @Inject(Environment) public environment,
+
   ) { }
 
   ngOnInit() {
