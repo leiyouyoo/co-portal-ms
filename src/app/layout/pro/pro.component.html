@@ -1,20 +1,33 @@
 <ng-template #sideTpl>
-  <nz-sider [nzTrigger]="null" [nzCollapsible]="true" [nzCollapsed]="isMobile ? false : pro.collapsed"
-    [nzWidth]="pro.width" [nzCollapsedWidth]="pro.widthInCollapsed" class="alain-pro__sider"
-    [ngClass]="{ 'alain-pro__sider-fixed': pro.fixSiderbar }">
-
+  <nz-sider
+    [nzTrigger]="null"
+    [nzCollapsible]="true"
+    [nzCollapsed]="isMobile ? false : pro.collapsed"
+    [nzWidth]="pro.width"
+    [nzCollapsedWidth]="pro.widthInCollapsed"
+    class="alain-pro__sider"
+    style="max-width: 200px;"
+    [ngClass]="{ 'alain-pro__sider-fixed': pro.fixSiderbar }"
+  >
     <div class="alain-pro__sider-header">
       <!--Logo-->
-      <layout-pro-logo class="alain-pro__sider-logo"></layout-pro-logo>
+      <layout-pro-logo [showType]="pro.collapsed" class="alain-pro__sider-logo"></layout-pro-logo>
 
       <!--头像区域-->
       <div class="alain-pro__sider-avatar">
-        <nz-avatar nzIcon="user" nzSize="large" class="user-avatar"></nz-avatar>
+        <nz-avatar
+          [nzSrc]="
+            userInfo?.profilePictureId
+              ? imgUrl + '/Storage/File/GetDownLoadFile?fileId=' + userInfo?.profilePictureId + '&Handler=image'
+              : '/assets/images/avatar.png'
+          "
+          nzSize="large"
+          class="user-avatar"
+        ></nz-avatar>
         <div class="user-desc">
-          <h3>admin <i nz-icon nzType="down"></i></h3>
+          <h3>{{ user.session.user.name }} <i nz-icon nztype="down"></i></h3>
           <p>
-            it@cityocean.com
-            <!-- <i nz-icon nzType="down"></i> -->
+            {{ user.session.user.emailAddress }}
           </p>
         </div>
       </div>
@@ -28,15 +41,12 @@
           <i nz-icon nzType="search"></i>
         </ng-template>
       </div>
-
     </div>
-
 
     <!--菜单导航区域-->
     <div class="alain-pro__sider-main">
       <div class="alain-pro__sider-wrap" layout-pro-menu></div>
     </div>
-
 
     <!--底部栏-->
     <div class="alain-pro__sider-footer">
@@ -57,9 +67,12 @@
           </nz-dropdown-menu>
         </li>
         <li>
-          <a nz-button nzSize="small" nzType="link"> <i nz-icon nzIconfont="iconsetting"></i> <span class="title">
-              设置
-            </span></a>
+          <a nz-button nzSize="small" nzType="link" (click)="logout()" style="cursor: pointer;">
+            <i nz-icon nzType="logout" nzTheme="outline" style="color: #e55354;"></i>
+            <span class="title" style="color: #e55354;">
+              {{ 'Sign Out' | translate }}
+            </span></a
+          >
         </li>
       </ul>
     </div>
@@ -72,8 +85,15 @@
 
 <div class="ant-layout ant-layout-has-sider">
   <ng-container *ngIf="pro.menu === 'side' || isMobile">
-    <nz-drawer *ngIf="isMobile" [nzWidth]="pro.width" nzWrapClassName="alain-pro__drawer" [nzVisible]="!pro.collapsed"
-      [nzClosable]="false" nzPlacement="left" (nzOnClose)="pro.setCollapsed(true)">
+    <nz-drawer
+      *ngIf="isMobile"
+      [nzWidth]="pro.width"
+      nzWrapClassName="alain-pro__drawer"
+      [nzVisible]="!pro.collapsed"
+      [nzClosable]="false"
+      nzPlacement="left"
+      (nzOnClose)="pro.setCollapsed(true)"
+    >
       <ng-template [ngTemplateOutlet]="sideTpl"></ng-template>
     </nz-drawer>
     <ng-container *ngIf="!isMobile">
@@ -82,21 +102,16 @@
   </ng-container>
   <div class="ant-layout alain-pro__main" [ngStyle]="getLayoutStyle">
     <!-- <layout-pro-header></layout-pro-header> -->
-    <div class="ant-layout-content alain-pro__body" [class.alain-pro__fetching]="isFetching"
-      [ngStyle]="getContentStyle">
+    <div class="ant-layout-content alain-pro__body" [class.alain-pro__fetching]="isFetching" [ngStyle]="getContentStyle">
       <div class="alain-pro__header-item alain-pro__header-trigger" (click)="pro.setCollapsed()">
         <i nz-icon nzType="menu-{{ pro.collapsed ? 'unfold' : 'fold' }}" class="alain-pro__header-item-icon"></i>
       </div>
       <nz-spin class="alain-pro__fetching-icon" nzSpinning></nz-spin>
-
-      <reuse-tab #reuseTab [tabBarExtraContent]="headerWidgets" tabType="card">
-      </reuse-tab>
+      <reuse-tab #reuseTab [tabBarExtraContent]="headerWidgets" tabType="card"></reuse-tab>
       <router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
 
       <div id="app-host-container" class="thy-layout"></div>
     </div>
-
-    <!-- <layout-pro-footer class="ant-layout-footer alain-pro__footer"></layout-pro-footer> -->
   </div>
 </div>
 

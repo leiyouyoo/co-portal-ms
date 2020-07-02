@@ -1,0 +1,92 @@
+<div class="login-main">
+  <div class="login-head">
+    <!-- <div [ngClass]="'active'">Login</div>
+    <div>Register</div> -->
+    <div class="login-btn" (click)="tip()">
+      {{ 'SIGN UP' | translate }}
+    </div>
+  </div>
+
+  <img src="/assets/images/small_logo.png" class="small-logo" />
+
+  <form nz-form [formGroup]="validateForm" class="login-form" autocomplete="off" [nzLayout]="'vertical'" (ngSubmit)="submitForm()">
+    <div class="ipt-item mar-top-40">
+      <div class="ipt-label d-flex justify-content-between">
+        <span>{{ 'USERNAME' | translate }}</span>
+        <div>
+          <span><i class="iconfont icon-Visitors" [title]="'Visitor Mode' | translate" (click)="visitor()"></i></span>
+          <!-- <span><i class="iconfont icon-ENPC" [title]="'Language'" (click)="onLangClick()"></i></span> -->
+        </div>
+      </div>
+      <div class="ipt-box">
+        <nz-form-item>
+          <nz-form-control [nzErrorTip]="errorTem">
+            <input
+              nz-input
+              type="text"
+              autocomplete="off"
+              formControlName="userName"
+              name="lastname_74758209201093747"
+              formControlName="userName"
+              [placeholder]="'Username' | translate"
+              (keyup)="onUsernameKeyup($event)"
+            />
+          </nz-form-control>
+        </nz-form-item>
+
+        <ng-template #errorTem>
+          <span style="padding-left: 10px;">{{ 'Please input your username' | translate }}!</span>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="ipt-item mar-top-24">
+      <p class="ipt-label">{{ 'PASSWORD' | translate }}</p>
+      <div class="ipt-box">
+        <nz-form-item>
+          <nz-form-control class="relative" [nzErrorTip]="errorTemTwo">
+            <input
+              [type]="passwordVisible ? 'text' : 'password'"
+              nz-input
+              class="input-field"
+              formControlName="password"
+              [placeholder]="'Password' | translate"
+              autocomplete="new-password"
+              (ngModelChange)="onPasswordKeyup($event)"
+            />
+            <i
+              nz-icon
+              class="password-eye-icon"
+              [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+              (click)="passwordVisible = !passwordVisible"
+            ></i>
+          </nz-form-control>
+        </nz-form-item>
+
+        <span class="error-info">{{ errorTip }}</span>
+        <!-- <i class="iconfont icon-guanbi name-check-icon name-check-icon-error" *ngIf="passMayError"></i> -->
+
+        <ng-template #errorTemTwo>
+          <span style="padding-left: 10px;">{{ 'Please input your Password' | translate }}!</span>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="ipt-bt-box">
+      <p class="infoMessage option-block">
+        <label nz-checkbox formControlName="remember">
+          <span class="remember-me">{{ 'Remember my username' | translate }}</span>
+        </label>
+        <label for=""
+          ><a (click)="forgotPasswordClick()">{{ 'Forgot password' | translate }}?</a></label
+        >
+      </p>
+    </div>
+
+    <button nz-button class="login-form-button mar-top-15 w100" [nzType]="'primary'" nzBlock [nzLoading]="loading" (click)="login()">
+      {{ 'LOGIN' | translate }}
+    </button>
+    <!-- <p *ngIf="errorTip != ''" style="color:red">{{ errorTip }}</p> -->
+    <!-- <div class="warn-box">{{ 'Or connect with socials' | translate }}</div> -->
+  </form>
+</div>

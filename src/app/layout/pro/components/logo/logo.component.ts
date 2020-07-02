@@ -1,5 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { SettingsService } from '@co/common';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'layout-pro-logo',
@@ -7,9 +6,6 @@ import { SettingsService } from '@co/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutProLogoComponent {
-  get name() {
-    return this.setting.app.name;
-  }
-
-  constructor(private setting: SettingsService) { }
+  @Input() showType: boolean;
+  constructor() {}
 }

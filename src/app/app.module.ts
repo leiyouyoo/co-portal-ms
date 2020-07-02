@@ -3,11 +3,12 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from '@env/environment';
 
 // #region default language
 // 参考：https://ng-alain.com/docs/i18n
 import { default as ngLang } from '@angular/common/locales/zh';
-import { CO_LOCALE, CO_I18N_TOKEN, zh_CN as delonLang } from '@co/common';
+import { CO_LOCALE, CO_I18N_TOKEN, zh_CN as delonLang, CoCommonModule } from '@co/common';
 import { zhCN as dateLang } from 'date-fns/locale';
 import { NZ_DATE_LOCALE, NZ_I18N, zh_CN as zorroLang } from 'ng-zorro-antd/i18n';
 const LANG = {
@@ -66,12 +67,8 @@ const FORM_MODULES = [JsonSchemaModule];
 
 // #region Http Interceptors
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { DefaultInterceptor } from '@core';
-import { SimpleInterceptor } from '@co/auth';
-const INTERCEPTOR_PROVIDES = [
-  // { provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true },
-  { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true },
-];
+
+const INTERCEPTOR_PROVIDES = [{ provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true }];
 // #endregion
 
 // #region Startup Service
@@ -98,6 +95,10 @@ import { RoutesModule } from './routes/routes.module';
 import { SharedModule } from './shared/shared.module';
 import { NgxPlanetModule } from '../../packages/planet/src/public-api';
 import { STWidgetModule } from './shared/st-widget/st-widget.module';
+import { ResponseInterceptor } from './core/net/response-interceptor.service';
+
+import { CoAuthModule } from '@co/auth';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -105,6 +106,10 @@ import { STWidgetModule } from './shared/st-widget/st-widget.module';
     BrowserAnimationsModule,
     HttpClientModule,
     GlobalConfigModule.forRoot(),
+    CoAuthModule,
+    CoCommonModule.forRoot({
+      environment,
+    }),
     CoreModule,
     SharedModule,
     LayoutModule,
@@ -118,4 +123,4 @@ import { STWidgetModule } from './shared/st-widget/st-widget.module';
   providers: [...LANG_PROVIDES, ...INTERCEPTOR_PROVIDES, ...I18NSERVICE_PROVIDES, ...APPINIT_PROVIDES, AppRootContext],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

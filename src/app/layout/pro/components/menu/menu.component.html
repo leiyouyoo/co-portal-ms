@@ -3,9 +3,9 @@
   <li class="alain-pro__menu-item alain-pro__menu-item-active">
     <a co-submenu #submenu [nzPopoverContent]="contentTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
       nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop">
-      <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i>
+      <!-- <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i> -->
       <span *ngIf="!pro.onlyIcon" class="alain-pro__menu-item-title-text">
-        菜单
+        Menu
       </span>
       <i nz-icon nzType="right" class="alain-pro__menu-item-arrow"></i>
     </a>
@@ -33,6 +33,20 @@
       <!-- <i nz-icon nzType="right" class="alain-pro__menu-item-arrow"></i> -->
     </a>
   </li>
+  <div *ngFor="let item of menus; let i = index">
+    <li class="alain-pro__menu-item">
+      <a nz-popover #submenu [nzPopoverContent]="contentTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
+        nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop" (click)="onShowSubmenu()"
+        [routerLink]="item._url">
+        <!-- <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i> -->
+        <span class="alain-pro__menu-item-title-text">
+          {{ item.displayName }}
+        </span>
+        <!-- <i nz-icon nzType="right" class="alain-pro__menu-item-arrow"></i> -->
+      </a>
+    </li>
+    <nz-divider></nz-divider>
+  </div>
 </ul>
 <ng-template #contentTemplate>
   <div style="height: 800px;">

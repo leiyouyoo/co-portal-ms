@@ -1,0 +1,58 @@
+<div class="wrapper">
+  <!-- <div style="height: 182px;">
+    <user-login-head></user-login-head>
+  </div> -->
+  <div class="reset-password">
+    <!-- <div style="display:flex;justify-content: flex-end;">
+      <a class="login-link">Account Ready</a>
+    </div> -->
+    <form nz-form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+      <!-- <div class="login-title" style="margin-bottom: 4px;">Welcome to City Ocean</div> -->
+      <img src="/assets/images/small_logo.png" class="small-logo">
+      <div class="login-sub-title sub-tit" style="margin-bottom: 19px;">
+        <i nz-icon nzType="exclamation-circle" nzTheme="fill"></i> {{'Create a password to verify your account and see your shipment'| translate}}.
+      </div>
+
+      <div class="ipt-item">
+        <p class="ipt-label">{{'New Password' | translate}}</p>
+        <div class="ipt-box marB24">
+          <nz-form-item>
+            <nz-form-control [nzErrorTip]="passwordErrorTpl" style="margin-bottom: 36px;">
+              <input type="password" name="password"  nz-input formControlName="password" class="login-input" [placeholder]="'New Password' | translate"  >
+              <ng-template #passwordErrorTpl let-control>
+                <div *ngIf="control.hasError('errorFormat')" style="text-indent: 10px;">
+                  {{'Password must be 8 characters in form of digits and english letters'|translate}}!
+                </div>
+                <div *ngIf="control.hasError('required')" style="text-indent: 10px;">
+                  {{'Please input password'|translate}}!
+                </div>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <div class="ipt-item">
+        <p class="ipt-label">{{'Confirm New Password'| translate}}</p>
+        <div class="ipt-box marB34">
+          <nz-form-item>
+            <nz-form-control [nzErrorTip]="password2ErrorTpl" style="margin-bottom: 32px;">
+              <input type="password" name="password2"  nz-input formControlName="password2" class="login-input" [placeholder]="'Confirm New Password'| translate"  >
+              <ng-template #password2ErrorTpl let-control>
+                {{log(control)}}
+                <div *ngIf="control.hasError('confirm')" style="text-indent: 10px;">
+                  {{'Password must match password confirmation'|translate}}
+                </div>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+
+
+      <button nz-button class="login-button" (click)="resetPassword()" [nzType]="'primary'" nzBlock>{{'Set Your Password'|translate}}
+      </button>
+    </form>
+  </div>
+</div>

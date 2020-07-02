@@ -104,6 +104,7 @@ export class BrandService {
 
   constructor(bm: BreakpointObserver, private settings: SettingsService) {
     // fix layout data
+
     settings.setLayout({
       theme: 'dark',
       menu: 'side',

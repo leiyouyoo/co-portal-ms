@@ -1,6 +1,6 @@
 <div nz-dropdown [nzDropdownMenu]="userMenu" nzPlacement="bottomRight" class="alain-pro__header-item">
-  <nz-avatar [nzSrc]="settings.user.avatar" nzSize="small" class="mr-sm"></nz-avatar>
-  {{ settings.user.name }}
+  <nz-avatar [nzSrc]="settings?.user?.avatar" nzSize="small" class="mr-sm"></nz-avatar>
+  {{ settings?.user?.name }}
 </div>
 <nz-dropdown-menu #userMenu="nzDropdownMenu">
   <div nz-menu class="width-sm">

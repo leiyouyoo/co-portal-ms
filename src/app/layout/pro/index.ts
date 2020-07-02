@@ -12,10 +12,8 @@ import { LayoutProWidgetNotifyComponent } from './components/notify/notify.compo
 import { LayoutProWidgetQuickComponent } from './components/quick/quick.component';
 import { LayoutProWidgetSearchComponent } from './components/search/search.component';
 import { LayoutProWidgetUserComponent } from './components/user/user.component';
-import { LayoutProHeaderWidgetComponent } from './components/widget/widget.component';
 
 const PRO_WIDGETS = [
-  LayoutProHeaderWidgetComponent,
   LayoutProWidgetNotifyComponent,
   LayoutProWidgetSearchComponent,
   LayoutProWidgetUserComponent,
