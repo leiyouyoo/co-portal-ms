@@ -1,20 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {
-  ShipmentDetail,
-  ShipmentEvent,
-  ShipmentBusinessEventType,
-  FreightMethodType,
-} from '@cityocean/basicdata-library';
-
 @Component({
   selector: 'app-list-popover',
   templateUrl: './list-popover.component.html',
   styleUrls: ['./list-popover.component.less'],
 })
 export class ListPopoverComponent implements OnInit {
-  @Input() shipment: ShipmentDetail;
+  @Input() shipment: any;
   @Input() className: string;
-  eventList: ShipmentEvent[] = [];
+  eventList: any[] = [];
   @Input() location = 0; //位置 0：起始门 1：起始港 2：目的港 3：目的门
   readonly ShipmentBusinessEventType = ShipmentBusinessEventType;
   _showPickUp = false;
@@ -30,7 +23,7 @@ export class ListPopoverComponent implements OnInit {
   @Input() totalContainer = 0;
   @Input() pickupCount = 0;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     /* 正常事件 */
@@ -70,4 +63,18 @@ export class ListPopoverComponent implements OnInit {
   onClick() {
     debugger;
   }
+}
+
+export enum ShipmentBusinessEventType {
+  Unknown = 0,
+  Shipment = 1,
+  ShipmentItem = 2,
+  ShipmentContainer = 3,
+  Bill = 8,
+}
+
+export declare enum FreightMethodType {
+  Unknown = 0,
+  Ocean = 1,
+  Air = 2
 }
