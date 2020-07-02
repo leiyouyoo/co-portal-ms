@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class AddOrderComponent implements OnInit {
   validateForm!: FormGroup;
-  isVisible = false;
+  @Input() isVisible = false;
   submitForm(): void {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
@@ -28,9 +28,6 @@ export class AddOrderComponent implements OnInit {
       fieldA: [null, [Validators.required]],
       filedB: [null, [Validators.required]],
     });
-  }
-  showModal(): void {
-    this.isVisible = true;
   }
 
   handleOk(): void {

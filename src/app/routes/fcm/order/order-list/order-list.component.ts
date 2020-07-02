@@ -1,12 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { CoDocumentComponent } from '../co-document/co-document.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AddOrderComponent } from '../add-order/add-order.component';
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.less'],
 })
 export class OrderListComponent implements OnInit {
+  @ViewChild(AddOrderComponent)
+  addOrderComponent: AddOrderComponent;
+  isAddVisible = false;
   isVisible = false;
+  date = null;
   listOfData = [
     {
       key: '1',
@@ -30,7 +34,21 @@ export class OrderListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-  showModal(): void {
-    this.isVisible = true;
+  showModal(type): void {
+    if (type === 1) {
+      this.addOrderComponent.isVisible = true;
+    } else {
+      this.isVisible = true;
+    }
+  }
+
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
   }
 }

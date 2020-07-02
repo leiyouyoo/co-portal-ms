@@ -1,4 +1,4 @@
-<nz-modal [(nzVisible)]="isVisible" nzTitle="确认入仓" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzWidth="70%">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="新增订单" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzWidth="70%">
   <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" [nzLayout]="'vertical'">
     <nz-form-item>
       <nz-form-label nzRequired nzFor="note">Note</nz-form-label>

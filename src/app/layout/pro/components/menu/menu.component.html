@@ -1,8 +1,15 @@
 <!--底部栏-->
 <ul class="alain-pro__menu-wrap" #menu1>
   <li class="alain-pro__menu-item alain-pro__menu-item-active">
-    <a co-popover #submenu [nzPopoverContent]="contentTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
-      nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop">
+    <a
+      co-popover
+      #submenu
+      [nzPopoverContent]="contentTemplate"
+      [nzPopoverOrigin]="menu1"
+      nzPopoverTrigger="click"
+      nzOverlayClassName="alain-pro__menu-level1"
+      nzPopoverPlacement="rightTop"
+    >
       <!-- <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i> -->
       <span *ngIf="!pro.onlyIcon" class="alain-pro__menu-item-title-text">
         Menu
@@ -85,18 +92,23 @@
   <div>
     <nz-divider></nz-divider>
     <li class="alain-pro__menu-item">
-      <a nz-popover #submenu [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
-        nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop" [routerLink]="['/fcm/order']">
+      <a
+        nz-popover
+        #submenu
+        [nzPopoverOrigin]="menu1"
+        nzPopoverTrigger="click"
+        nzOverlayClassName="alain-pro__menu-level1"
+        nzPopoverPlacement="rightTop"
+        [routerLink]="['/fcm/order']"
+      >
         <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i>
         <span class="alain-pro__menu-item-title-text">
-          订单管理
+          电商物流
         </span>
         <!-- <i nz-icon nzType="right" class="alain-pro__menu-item-arrow"></i> -->
       </a>
     </li>
-
   </div>
-
 </ul>
 <ng-template #contentTemplate>
   <div style="height: 800px;">
@@ -104,10 +116,6 @@
     Content
   </div>
 </ng-template>
-
-
-
-
 
 <!-- <ng-template #icon let-i>
   <ng-container *ngIf="i" [ngSwitch]="i.type">
