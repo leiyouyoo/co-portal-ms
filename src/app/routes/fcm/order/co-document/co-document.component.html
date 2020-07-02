@@ -1,0 +1,71 @@
+<div class="ducument-container">
+  <div class="action-list">
+    <nz-upload
+      nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+      [nzHeaders]="{ authorization: 'authorization-text' }"
+      (nzChange)="handleChange($event)"
+      [nzShowUploadList]="false"
+    >
+      <button nz-button nzType="primary"><i nz-icon nzType="upload"></i>上传</button>
+    </nz-upload>
+    <button nz-button nzType="default">下载</button>
+    <button nz-button nzType="default">删除</button>
+  </div>
+  <div class="table-main">
+    <nz-table class="nz-table-radius" #showfiles [nzData]="files">
+      <thead>
+        <tr>
+          <th
+            nzShowCheckbox
+            [(nzChecked)]="fileIsAllCheck"
+            [nzIndeterminate]="fileIsAllCheckMin"
+            (nzCheckedChange)="filecheckAll($event)"
+          ></th>
+          <!-- <th>{{ 'documentName' | libI18n }}</th>
+          <th>{{ 'Uploaded By' | libI18n }}</th>
+          <th>{{ 'documentUploaded' | libI18n }}</th>
+          <th>{{ 'Sharing' | libI18n }}</th>
+          <th>{{ 'Action' | libI18n }}</th> -->
+          <th>documentName</th>
+          <th>Uploaded By</th>
+          <th>documentUploaded</th>
+          <th>Sharing</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let file of showfiles.data">
+          <td nzShowCheckbox [(nzChecked)]="checkStateMap[file.id]" (nzCheckedChange)="fieldRefreshStatus()"></td>
+          <td>{{ file.name }}</td>
+          <td>{{ file.updateBy }}</td>
+          <td>{{ file.updateTime | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+          <td>
+            <span nz-popover nzPopoverTitle="Viewable By" [nzPopoverContent]="content" nzPopoverPlacement="bottomLeft">
+              <ng-template #content>
+                <nz-list [nzDataSource]="file.shareCompanies" nzSize="small" [nzRenderItem]="smallItem">
+                  <ng-template #smallItem let-item><nz-list-item [nzContent]="item"></nz-list-item></ng-template>
+                </nz-list>
+              </ng-template>
+              <i nz-icon nzType="team" nzTheme="outline"></i>
+              {{ file.shareCompanies?.length }}
+              <i *ngIf="file.shareCompanies?.length" nz-icon nzType="down" nzTheme="outline"></i>
+            </span>
+          </td>
+          <td>
+            <a href="{{ file.downFileUrl }}" download="{{ file.downFileUrl }}">
+              {{ 'Download' | translate }}
+            </a>
+            <a (click)="delete(file)" style="margin-left: 32px;">
+              <span style="color: red;">{{ 'Delete' | translate }}</span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <button nz-button [nzType]="'primary'" (click)="showModal()"><span>Show Modal</span></button>
+</div>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="确认入仓" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <nz-date-picker [(ngModel)]="date" [nzFormat]="'yyyy/MM/dd'"></nz-date-picker>
+</nz-modal>

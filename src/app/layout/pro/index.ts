@@ -18,6 +18,7 @@ const PRO_WIDGETS = [
   LayoutProWidgetSearchComponent,
   LayoutProWidgetUserComponent,
   LayoutProWidgetQuickComponent,
+  LayoutProHeaderWidgetComponent,
 ];
 
 // #endregion
@@ -59,6 +60,7 @@ export const PRO_COMPONENTS = [
 
 import { ProPageGridComponent } from './components/page-grid/page-grid.component';
 import { ProPageHeaderWrapperComponent } from './components/page-header-wrapper/page-header-wrapper.component';
+import { LayoutProHeaderWidgetComponent } from './components/widget/widget.component';
 export const PRO_SHARED_COMPONENTS = [ProPageGridComponent, ProPageHeaderWrapperComponent];
 
 // #endregion
