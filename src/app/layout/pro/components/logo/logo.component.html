@@ -1,3 +1,6 @@
-<a [routerLink]="['/']" class="d-flex align-items-center">
-  <img src="./assets/images/icon_logo.png" alt="CITYOCEAN" />
+<a [routerLink]="['/']" class="d-flex align-items-center" style="height: 100%;">
+  <img src="assets/logo.svg" alt="CITYOCEAN" *ngIf="showType; else small" />
+  <ng-template #small>
+    <img src="assets/logo_v2.png" alt="CITYOCEAN" />
+  </ng-template>
 </a>

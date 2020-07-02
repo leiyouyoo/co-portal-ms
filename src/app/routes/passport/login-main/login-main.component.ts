@@ -166,12 +166,14 @@ export class loginMainComponent implements OnInit {
 
     this.httpService.get(`/platform/Session/GetCurrentUserConfiguration`).subscribe(
       (data: any) => {
+        window.localStorage.setItem('ICPUserMsg', JSON.stringify(data));
         try {
           data.nav.menus.MainMenu.items.sort(this.sortItem);
         } catch (e) {
           console.error('菜单排序报错');
         }
-        location.href = data.nav.menus.MainMenu.items[0].url;
+        // location.href = data.nav.menus.MainMenu.items[0].url;
+        location.href = '#/dashboard';
       },
       (err) => {
         this.notification.error('Error', err || 'Get User Configuration Failed.');

@@ -21,18 +21,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
-      // {
-      //   path: 'app3',
-      //   component: EmptyComponent,
-      //   children: [
-      //     {
-      //       path: '**',
-      //       component: EmptyComponent
-      //     }
-      //   ]
-      // },
       { path: 'ec', loadChildren: () => import('./ec/ec.module').then((m) => m.ECModule) },
-      // Exception
       {
         path: 'exception',
         loadChildren: () => import('./exception/exception.module').then((m) => m.ExceptionModule),
@@ -49,7 +38,6 @@ const routes: Routes = [
       },
     ],
   },
-  // passport
   {
     path: 'passport',
     component: LayoutPassportComponent,
