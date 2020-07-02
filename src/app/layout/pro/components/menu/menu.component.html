@@ -1,15 +1,8 @@
 <!--底部栏-->
 <ul class="alain-pro__menu-wrap" #menu1>
   <li class="alain-pro__menu-item alain-pro__menu-item-active">
-    <a
-      co-submenu
-      #submenu
-      [nzPopoverContent]="contentTemplate"
-      [nzPopoverOrigin]="menu1"
-      nzPopoverTrigger="click"
-      nzOverlayClassName="alain-pro__menu-level1"
-      nzPopoverPlacement="rightTop"
-    >
+    <a co-submenu #submenu [nzPopoverContent]="contentTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
+      nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop">
       <!-- <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i> -->
       <span *ngIf="!pro.onlyIcon" class="alain-pro__menu-item-title-text">
         Menu
@@ -20,17 +13,9 @@
   <nz-divider></nz-divider>
   <div *ngFor="let item of menus; let i = index">
     <li class="alain-pro__menu-item">
-      <a
-        nz-popover
-        #submenu
-        [nzPopoverContent]="contentTemplate"
-        [nzPopoverOrigin]="menu1"
-        nzPopoverTrigger="click"
-        nzOverlayClassName="alain-pro__menu-level1"
-        nzPopoverPlacement="rightTop"
-        (click)="onShowSubmenu()"
-        [routerLink]="item._url"
-      >
+      <a nz-popover #submenu [nzPopoverContent]="contentTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
+        nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop" (click)="onShowSubmenu()"
+        [routerLink]="item._url">
         <!-- <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i> -->
         <span class="alain-pro__menu-item-title-text">
           {{ item.displayName }}
@@ -40,6 +25,21 @@
     </li>
     <nz-divider></nz-divider>
   </div>
+
+  <div>
+    <li class="alain-pro__menu-item">
+      <a nz-popover #submenu [nzPopoverContent]="FcmTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
+        nzOverlayClassName="alain-pro__menu-level1" nzPopoverPlacement="rightTop" [routerLink]="">
+        <!-- <i nz-icon nzIconfont="iconsetting" class="alain-pro__menu-item-icon"></i> -->
+        <span class="alain-pro__menu-item-title-text">
+          Fcm
+        </span>
+        <!-- <i nz-icon nzType="right" class="alain-pro__menu-item-arrow"></i> -->
+      </a>
+    </li>
+    <nz-divider></nz-divider>
+  </div>
+
 </ul>
 <ng-template #contentTemplate>
   <div style="height: 800px;">
@@ -47,6 +47,18 @@
     Content
   </div>
 </ng-template>
+
+<ng-template #FcmTemplate>
+  <div style="height: 800px;padding-top: 20px;">
+    <a [routerLink]="['/fcm/order']">
+      <i nz-icon nzType="check"></i>
+      订单管理
+    </a>
+  </div>
+</ng-template>
+
+
+
 
 <!-- <ng-template #icon let-i>
   <ng-container *ngIf="i" [ngSwitch]="i.type">
