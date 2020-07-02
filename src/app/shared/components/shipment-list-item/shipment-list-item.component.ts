@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ShipmentStatusEnum, ShipmentDetail, FreightMethodType, ShipmentEvent } from '@cityocean/basicdata-library';
 import { InputBoolean } from 'ng-zorro-antd';
 import { ImBroadcastService } from '@cityocean/im-template-library';
 
@@ -10,7 +9,7 @@ import { ImBroadcastService } from '@cityocean/im-template-library';
   styleUrls: ['./shipment-list-item.component.less'],
 })
 export class ShipmentListItemComponent implements OnInit {
-  private _shipment: ShipmentDetail;
+  private _shipment: any;
   @Input() set shipment(val) {
     this._shipment = val;
     if (val) {
@@ -60,4 +59,26 @@ export class ShipmentListItemComponent implements OnInit {
       customerserviceId: this.shipment.id,
     });
   }
+}
+
+
+export enum ShipmentStatusEnum {
+  SellerLocation,
+  OriginStopOff,
+  InTransitToDeparturePort,
+  DeparturePort,
+  InTransitToArrivalPort,
+  ArrivalPort,
+  InTransitToFinalDestination,
+  DestinationStopOff,
+  FinalDestination,
+  Canceled,
+  Completed,
+}
+
+
+export enum FreightMethodType {
+  Unknown,
+  Ocean,
+  Air,
 }
