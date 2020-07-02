@@ -8,19 +8,28 @@
   min-height: 100vh;
   overflow: hidden;
   box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
-
+  background-color: #000000B3;
 
   &-header {
     // height: 40px;
     // line-height: 40px;
-    background-color: #D8D8D8;
+    // background-color: #00000080;
     text-align: center;
   }
 
   &-search {
-    padding: 8px;
-    background-color: #000;
-    opacity: 0.7;
+    padding: 16px;
+    margin: 0px 4px;
+    color: #02010140;
+    height: 52px;
+
+    >.ant-input-affix-wrapper {
+      border-radius: 4px !important;
+    }
+
+    .ant-input {
+      font-size: 12px !important;
+    }
   }
 
   &-avatar {
@@ -28,7 +37,7 @@
     display: flex;
     flex-direction: row;
     padding-left: 8px;
-    background-color: #F0F0F0;
+    background-color: #626262;
 
     >.user-avatar {
       margin: auto;
@@ -39,13 +48,17 @@
       padding: 8px;
 
       h3 {
-        text-align: left;
+        color: #FFFFFFD9;
         margin-bottom: 0px;
+        text-align: left;
+        font-size: 14px;
       }
 
       >p {
         margin-bottom: 4px;
         text-align: left;
+        font-size: 12px;
+        color: #FFFFFFA6;
       }
     }
   }
@@ -54,6 +67,7 @@
     height: 40px;
     line-height: 40px;
     text-align: center;
+    color: #FFFFFFA6;
 
     >ul {
       display: flex;
@@ -63,8 +77,10 @@
       li {
         flex: 1;
         list-style: none;
-        // display: inline-block;
-        // width: 50%;
+
+        a {
+          color: #FFFFFFA6;
+        }
       }
     }
   }
@@ -72,7 +88,6 @@
   &-main {
     flex: 1;
     width: 100%;
-    // background-color: #D8D8D8;
   }
 
   &-logo {
@@ -82,7 +97,7 @@
     padding-left: (@menu-collapsed-width - 32px) / 4;
     overflow: hidden;
     line-height: @alain-pro-header-height;
-    background: @alain-pro-header-logo-bg;
+    background: #00000080;
     transition: all 0.3s;
 
     img {

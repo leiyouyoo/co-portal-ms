@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Menu, MenuService } from '@co/common';
 import { InputBoolean } from '@co/core';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+import { NzPopoverComponent } from 'ng-zorro-antd/popover';
 
 import { BrandService } from '../../pro.service';
 
@@ -22,6 +23,8 @@ export class LayoutProMenuComponent implements OnInit, OnDestroy {
 
   @Input() @InputBoolean() disabledAcl = false;
   @Input() mode = 'inline';
+  @ViewChild('submenu', { static: false }) submenu!: NzPopoverComponent;
+
 
   constructor(private menuSrv: MenuService, private router: Router, public pro: BrandService, private cdr: ChangeDetectorRef) { }
 
@@ -80,7 +83,10 @@ export class LayoutProMenuComponent implements OnInit, OnDestroy {
     this.cd();
   }
 
+
   openChange(item: Menu, statue: boolean) {
+    debugger
+    const sb = this.submenu;
     const data = item._parent ? item._parent.children : this.menus;
     if (data && data.length <= 1) {
       return;

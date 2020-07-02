@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OverlayModule } from '@angular/cdk/overlay';
+
 import { RouterModule } from '@angular/router';
 import { CoACLModule } from '@co/acl';
 import { CoFormModule } from '@co/form';
@@ -47,6 +49,7 @@ const DIRECTIVES = [ImgDirective, DelayDirective, MasonryDirective, ScrollbarDir
   imports: [
     CommonModule,
     FormsModule,
+    OverlayModule,
     RouterModule,
     ReactiveFormsModule,
     CoACLModule,
@@ -65,6 +68,7 @@ const DIRECTIVES = [ImgDirective, DelayDirective, MasonryDirective, ScrollbarDir
   exports: [
     CommonModule,
     FormsModule,
+    OverlayModule,
     ReactiveFormsModule,
     RouterModule,
     CoACLModule,

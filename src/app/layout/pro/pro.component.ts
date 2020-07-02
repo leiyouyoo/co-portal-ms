@@ -139,12 +139,12 @@ export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     // Setting componet for only developer
-    if (!environment.production) {
-      setTimeout(() => {
-        const settingFactory = this.resolver.resolveComponentFactory(ProSettingDrawerComponent);
-        this.settingHost.createComponent(settingFactory);
-      }, 22);
-    }
+    // if (!environment.production) {
+    //   setTimeout(() => {
+    //     const settingFactory = this.resolver.resolveComponentFactory(ProSettingDrawerComponent);
+    //     this.settingHost.createComponent(settingFactory);
+    //   }, 22);
+    // }
   }
 
   ngOnInit() {

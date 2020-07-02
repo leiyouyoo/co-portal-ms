@@ -30,7 +30,7 @@ export class BrandService {
    * @menu-collapsed-width: 80px;
    * ```
    */
-  readonly widthInCollapsed = 80;
+  readonly widthInCollapsed = 54;
 
   /**
    * Specify height of the header, If you change it, muse be synchronize change less parameter:

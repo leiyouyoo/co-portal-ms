@@ -4,12 +4,14 @@
     [ngClass]="{ 'alain-pro__sider-fixed': pro.fixSiderbar }">
 
     <div class="alain-pro__sider-header">
+      <!--Logo-->
       <layout-pro-logo class="alain-pro__sider-logo"></layout-pro-logo>
 
+      <!--头像区域-->
       <div class="alain-pro__sider-avatar">
-        <nz-avatar nzIcon="user" nzSize="large" style="background-color:#87d068;" class="user-avatar"></nz-avatar>
+        <nz-avatar nzIcon="user" nzSize="large" class="user-avatar"></nz-avatar>
         <div class="user-desc">
-          <h3>admin</h3>
+          <h3>admin <i nz-icon nzType="down"></i></h3>
           <p>
             it@cityocean.com
             <!-- <i nz-icon nzType="down"></i> -->
@@ -17,6 +19,7 @@
         </div>
       </div>
 
+      <!--搜索栏-->
       <div class="alain-pro__sider-search">
         <nz-input-group [nzSuffix]="suffixIconSearch" nzSize="small">
           <input type="text" nz-input placeholder="快捷键搜索" />
@@ -27,9 +30,15 @@
       </div>
 
     </div>
+
+
+    <!--菜单导航区域-->
     <div class="alain-pro__sider-main">
       <div class="alain-pro__sider-wrap" layout-pro-menu></div>
     </div>
+
+
+    <!--底部栏-->
     <div class="alain-pro__sider-footer">
       <ul>
         <li>
