@@ -148,6 +148,13 @@ export class OrderDetailComponent implements OnInit {
     ]
   }
 
+  listData: any = [
+    {
+      checked: true,
+      label: 111
+    }
+  ]
+
   constructor() { }
 
   ngOnInit(): void {
