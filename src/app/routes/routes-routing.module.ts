@@ -26,6 +26,7 @@ const routes: Routes = [
         path: 'exception',
         loadChildren: () => import('./exception/exception.module').then((m) => m.ExceptionModule),
       },
+      { path: 'fcm', loadChildren: () => import('./fcm/fcm.module').then((m) => m.FcmModule) },
     ],
   },
   {
@@ -68,4 +69,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class RouteRoutingModule {}
+export class RouteRoutingModule { }

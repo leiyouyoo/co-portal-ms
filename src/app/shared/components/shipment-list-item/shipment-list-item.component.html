@@ -1,0 +1,256 @@
+<div *ngIf="shipment" class="list-item shipment-list-item" (click)="goDetail()"
+  [ngClass]="{ 'list-item--simple': simple }">
+  <div *ngIf="showDetailInfo" class="list-item__wrap">
+    <div class="d-flex align-items-center">
+      <div class="shipment-status mr-12">{{ shipment.status | shipmentStatus | translate }}</div>
+    </div>
+    <div class="d-flex align-items-center">
+      <span [title]="shipment?.soNo" class="shipment-no">{{ shipment?.soNo }}</span>
+      <span [title]="shipment?.shipmentNo" class="shipment-no">{{ shipment?.shipmentNo }}</span>
+      <span class="shipment-freightType">{{ shipment?.freightTypeString }}</span>
+    </div>
+    <div *ngIf="shipment?.containerNos" class="d-flex align-items-center">
+      <div class="weight-volume">
+        <span class="weight-volume__key">{{ 'Container No' | translate }}:</span>
+        <span [title]="shipment?.containerNos" class="d-flex__value">{{ shipment?.containerNos }}</span>
+      </div>
+    </div>
+    <div class="d-flex align-items-center">
+      <div class="weight-volume">
+        <div *ngIf="
+            shipment.freightMethodType === FreightMethodType.Ocean && shipment.shipmentType === 0;
+            else weightVolume
+          " style="width: 100%;">
+          <ng-container *ngIf="getContainerString()">
+            <span class="d-flex__value">{{ getContainerString() }}</span>
+          </ng-container>
+        </div>
+        <ng-template #weightVolume>
+          <div>
+            <span class="weight-volume__key">{{ 'Total weight' | translate }}:</span>
+            <span>{{ shipment.totalWeightString }}</span>
+          </div>
+          <div>
+            <span class="weight-volume__key">{{ 'Total volume' | translate }}:</span>
+            <span>{{ shipment.totalVolumeString }}</span>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <!-- steps开始 -->
+  <div class="route-hori">
+    <div *ngIf="showDetailInfo" (click)="onCustomerServiceClick($event)" class="route-hori__customer">
+      <i class="iconfont icon-Customerservice"></i>
+    </div>
+    <div class="share-subcribe__wrap">
+      <ng-content></ng-content>
+    </div>
+    <nz-steps [nzCurrent]="nzCurrent" nzLabelPlacement="horizontal">
+      <nz-step [ngClass]="{
+          'current-steps-style': nzCurrent == 0,
+          isNotActive: !shipment?.agreement?.startsWith('door'),
+          isLocation: true
+        }" nzTitle="Seller 's Location"
+        [nzDescription]="shipment?.routeDetails?.shipperDtos?.length ? orginLocationTemplate : ''"
+        [nzIcon]="sellerLocationIconTemplate"></nz-step>
+      <nz-step style="max-width: 100px;" [nzIcon]="iconTemplate"
+        [ngClass]="{ isNotActive: !shipment?.agreement?.startsWith('door'), isLocation: true }"></nz-step>
+      <nz-step [ngClass]="{ 'current-steps-style': nzCurrent == 3 }" [nzDescription]="orginportDescriptionTemplate"
+        nzTitle="POL" [nzIcon]="polIconTemplate"></nz-step>
+      <nz-step style="max-width: 140px;" class="vessel-steps" [nzDescription]="vesselTemplate"
+        [nzIcon]="freightTypeIconTemplate"></nz-step>
+      <nz-step [ngClass]="{
+          'current-steps-style': nzCurrent == 5,
+          isNotActive: shipment?.agreement?.indexOf('-door') == -1
+        }" [nzIcon]="podIconTemplate" [nzDescription]="deliveryportDescriptionTemplate" nzTitle="POD"></nz-step>
+      <nz-step style="max-width: 100px;" [nzIcon]="iconTemplate"
+        [ngClass]="{ isNotActive: shipment?.agreement?.indexOf('-door') == -1, isLocation: true }"></nz-step>
+      <nz-step [ngClass]="{
+          'current-steps-style': nzCurrent == 7,
+          isNotActive: shipment?.agreement?.indexOf('-door') == -1,
+          isLocation: true
+        }" [nzIcon]="finalLocationIconTemplate" nzTitle="Final Destination" [nzDescription]="deliveryLocationTemplate">
+      </nz-step>
+    </nz-steps>
+
+    <!-- 拖车节点icon -->
+    <ng-template #iconTemplate>
+      <i class="iconfont icon-huoyun"></i>
+    </ng-template>
+    <!-- seller's location icon -->
+    <ng-template #sellerLocationIconTemplate>
+      <app-list-popover [showPickUp]="shipment?.agreement?.startsWith('door')"
+        [className]="'iconfont ' + (nzCurrent >= 1 ? 'icon-locationim' : 'icon-locationnew')" [shipment]="shipment"
+        [location]="0" [pickupCount]="shipment.routeDetails?.originPlacePickUpCount"
+        [totalContainer]="shipment.routeDetails?.containerCount"></app-list-popover>
+    </ng-template>
+    <!--  POL icon -->
+    <ng-template #polIconTemplate>
+      <app-list-popover [showPickUp]="shipment.status >= ShipmentStatusEnum.InTransitToDeparturePort" [className]="
+          'iconfont ' +
+          (shipment.freightMethodType === FreightMethodType.Ocean
+            ? nzCurrent >= 2
+              ? 'icon-portim'
+              : 'icon-portnew'
+            : nzCurrent >= 2
+            ? 'icon-airplane-round'
+            : 'icon-airplane')
+        " [shipment]="shipment" [location]="1" [pickupCount]="shipment.routeDetails?.originPortDeliveredCount"
+        [totalContainer]="shipment.routeDetails?.containerCount"></app-list-popover>
+    </ng-template>
+    <!--  运输方式 icon -->
+    <ng-template #freightTypeIconTemplate>
+      <i [ngClass]="{
+          'icon-chuan': shipment.freightMethodType === FreightMethodType.Ocean,
+          'icon-feiji': shipment.freightMethodType === FreightMethodType.Air
+        }" class="iconfont"></i>
+    </ng-template>
+    <!--  POD icon -->
+    <ng-template #podIconTemplate>
+      <app-list-popover [showPickUp]="shipment.status >= ShipmentStatusEnum.InTransitToArrivalPort" [className]="
+          'iconfont ' +
+          (shipment.freightMethodType === FreightMethodType.Ocean
+            ? nzCurrent >= 4
+              ? 'icon-portim'
+              : 'icon-portnew'
+            : nzCurrent >= 4
+            ? 'icon-airplane-round'
+            : 'icon-airplane')
+        " [shipment]="shipment" [location]="2" [totalContainer]="shipment.routeDetails?.containerCount"
+        [pickupCount]="shipment.routeDetails?.destinationPortPickedUpCount"></app-list-popover>
+    </ng-template>
+    <!-- Filnal location icon -->
+    <ng-template #finalLocationIconTemplate>
+      <app-list-popover [showPickUp]="shipment?.agreement?.startsWith('door')"
+        [className]="'iconfont ' + (nzCurrent >= 7 ? 'icon-locationim' : 'icon-locationnew')" [shipment]="shipment"
+        [location]="0" [pickupCount]="shipment.routeDetails?.originPlacePickUpCount"
+        [totalContainer]="shipment.routeDetails?.containerCount"></app-list-popover>
+    </ng-template>
+
+    <!--  seller's location 描述 -->
+    <ng-template #orginLocationTemplate>
+      <div class="company-name orgin-company-name" [title]="(shipment.routeDetails?.shipperDtos)[0]?.customerName">
+        {{ (shipment.routeDetails?.shipperDtos)[0]?.customerName }}
+      </div>
+      <div class="time-group orgin-location-time" *ngIf="(shipment?.routeDetails?.shipperDtos)[0].cargoReadyDate">
+        <p>
+          {{ 'Cargo Ready Date' | translate }}:{{
+            (shipment?.routeDetails?.shipperDtos)[0].cargoReadyDate | date: 'yyyy-MM-dd'
+          }}
+        </p>
+      </div>
+    </ng-template>
+    <!--  POL location 描述 -->
+    <ng-template #orginportDescriptionTemplate>
+      <div [title]="shipment?.routeDetails?.originPort?.name" class="company-name">
+        {{ shipment?.routeDetails?.originPort?.name }}
+      </div>
+      <div class="time-group">
+        <p *ngIf="
+            shipment.routeDetails?.actualTruckDeliveryOrignDate || shipment.routeDetails?.estTruckDeliveryOrignDate
+          ">
+          <span class="time-text">
+            <ng-template [ngTemplateOutlet]="originPortArrivalText"></ng-template>
+          </span>
+          {{
+            shipment.routeDetails?.actualTruckDeliveryOrignDate || shipment.routeDetails?.estTruckDeliveryOrignDate
+              | date: 'yyyy-MM-dd'
+          }}
+        </p>
+        <p
+          *ngIf="shipment.routeDetails?.actualDepatureOrginPortDate || shipment.routeDetails?.estDepatureOrginPortDate">
+          <span class="time-text">
+            <ng-template [ngTemplateOutlet]="originPortDepartureText"></ng-template>
+          </span>
+          {{
+            shipment.routeDetails?.actualDepatureOrginPortDate || shipment.routeDetails?.estDepatureOrginPortDate
+              | date: 'yyyy-MM-dd'
+          }}
+        </p>
+      </div>
+    </ng-template>
+    <!-- 船东 -->
+    <ng-template #vesselTemplate>
+      <div class="vessel-name">{{ shipment?.vessel }}</div>
+    </ng-template>
+    <!--  POD location 描述 -->
+    <ng-template #deliveryportDescriptionTemplate>
+      <div [title]="shipment?.routeDetails?.destinationPort?.name" class="company-name">
+        {{ shipment?.routeDetails?.destinationPort?.name }}
+      </div>
+      <div class="time-group">
+        <p *ngIf="
+            shipment.routeDetails?.actualArrivalDestinationPortDate ||
+            shipment.routeDetails?.estArrivalDestinationPortDate
+          ">
+          <span class="time-text">
+            <ng-template [ngTemplateOutlet]="destPortArrivalText"></ng-template>
+          </span>
+          {{
+            shipment.routeDetails?.actualArrivalDestinationPortDate ||
+              shipment.routeDetails?.estArrivalDestinationPortDate | date: 'yyyy-MM-dd'
+          }}
+        </p>
+        <p *ngIf="
+            shipment.routeDetails?.actualPickUpTruckDestinationDate ||
+            shipment.routeDetails?.estPickUpTruckDestinationDate
+          ">
+          <span class="time-text">
+            <ng-template [ngTemplateOutlet]="destPortDepartureText"></ng-template>
+          </span>
+          {{
+            shipment.routeDetails?.actualPickUpTruckDestinationDate ||
+              shipment.routeDetails?.estPickUpTruckDestinationDate | date: 'yyyy-MM-dd'
+          }}
+        </p>
+      </div>
+    </ng-template>
+    <!--  Filnal location 描述 -->
+    <ng-template #deliveryLocationTemplate>
+      <div [title]="(shipment?.routeDetails?.consigneeDtos)[0]?.customerName"
+        class="company-name delivery-company-name">
+        {{ (shipment?.routeDetails?.consigneeDtos)[0]?.customerName }}
+      </div>
+      <div *ngIf="
+          (shipment?.routeDetails?.consigneeDtos)[0] && shipment?.agreement?.indexOf('-door') > 0
+            ? (shipment?.routeDetails?.consigneeDtos)[0]?.actualTruckDeliveryDate
+              ? (shipment?.routeDetails?.consigneeDtos)[0]?.actualTruckDeliveryDate
+              : shipment?.mainESTTruckDeliveryDate
+            : null
+        " class="time-group delivery-location-time">
+        <p>
+          <ng-template [ngTemplateOutlet]="destDeliveryText"></ng-template>
+        </p>
+        <p>
+          {{
+            ((shipment?.routeDetails?.consigneeDtos)[0] && shipment?.agreement?.indexOf('-door') > 0
+              ? (shipment?.routeDetails?.consigneeDtos)[0]?.actualTruckDeliveryDate
+                ? (shipment?.routeDetails?.consigneeDtos)[0]?.actualTruckDeliveryDate
+                : shipment?.mainESTTruckDeliveryDate
+              : null
+            ) | date: 'yyyy-MM-dd'
+          }}
+        </p>
+      </div>
+    </ng-template>
+  </div>
+  <!-- steps结束 -->
+</div>
+
+<ng-template #originPortArrivalText>
+  {{ (!shipment?.routeDetails?.actualTruckDeliveryOrignDate ? 'Est.Arrival' : 'Arrived') | translate }}:
+</ng-template>
+<ng-template #originPortDepartureText>
+  {{ (!shipment?.routeDetails?.actualDepatureOrginPortDate ? 'Est.Departure' : 'Departed') | translate }}:
+</ng-template>
+<ng-template #destPortArrivalText>
+  {{ (!shipment?.routeDetails?.actualArrivalDestinationPortDate ? 'Est.Arrival' : 'Arrived') | translate }}:
+</ng-template>
+<ng-template #destPortDepartureText>
+  {{ (!shipment?.routeDetails?.actualPickUpTruckDestinationDate ? 'Est.Pick-Up' : 'Picked Up in Full') | translate }}:
+</ng-template>
+<ng-template #destDeliveryText>
+  {{ (shipment.status < ShipmentStatusEnum.DestinationStopOff ? 'Est.Delivery' : 'Delivery in Full') | translate }}:
+</ng-template>

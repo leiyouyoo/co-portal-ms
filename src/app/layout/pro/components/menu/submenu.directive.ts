@@ -102,4 +102,13 @@ export class CoPopoverComponent extends NzToolTipComponent {
   protected isEmpty(): boolean {
     return isTooltipEmpty(this.nzTitle) && isTooltipEmpty(this.nzContent);
   }
+
+  onPositionChange(position) {
+    if (this.origin && this.overlay && this.overlay.overlayRef) {
+      this.overlay.overlayRef.overlayElement.style.top = "46px";
+      this.overlay.overlayRef.overlayElement.style.bottom = "0px";
+      this.overlay.overlayRef.overlayElement.style.width = "200px";
+    }
+  }
+
 }
