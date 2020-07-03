@@ -29,7 +29,8 @@
     "test-coverage": "ng test --code-coverage --watch=false",
     "color-less": "node scripts/color-less.js",
     "theme": "node scripts/theme.js",
-    "icon": "ng g ng-alain:plugin icon"
+    "icon": "ng g ng-alain:plugin icon",
+    "update:co": "npm update @co/acl @co/auth @co/cache @co/cbc @co/chart @co/common @co/core @co/form @co/mock @co/theme"
   },
   "dependencies": {
     "@agm/core": "^1.1.0",
