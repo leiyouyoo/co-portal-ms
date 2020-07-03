@@ -21,7 +21,7 @@ import {
 export class PackingListComponent implements OnInit {
 
   environment: any = {
-    SERVER_URL: ""
+    SERVER_URL: " "
   }
 
   @ViewChild('dataOfListTbody', { static: false, read: ElementRef }) set dataOfListTbody(el: ElementRef) {
