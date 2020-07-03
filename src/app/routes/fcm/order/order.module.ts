@@ -6,12 +6,12 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { CoDocumentComponent } from './co-document/co-document.component';
 import { AddOrderComponent } from './add-order/add-order.component';
-import { PackingListComponent } from './order-detail/component/packing-list/packing-list.component';
+// import { PackingListComponent } from './order-detail/component/packing-list/packing-list.component';
 
-const COMPONENTS = [OrderListComponent, OrderDetailComponent, PackingListComponent, CoDocumentComponent, AddOrderComponent];
+const COMPONENTS = [OrderListComponent, OrderDetailComponent, CoDocumentComponent, AddOrderComponent];
 
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [SharedModule, CommonModule, OrderRoutingModule],
 })
-export class OrderModule {}
+export class OrderModule { }
