@@ -35,7 +35,7 @@ import { QUICK_CHAT_COMPONENTS } from './components/quick-chat';
 import { ScrollbarDirective } from './components/scrollbar/scrollbar.directive';
 import { StatusLabelComponent } from './components/status-label/status-label.component';
 import { TableHeadDragComponent } from './components/table-head-drag/table-head-drag.component';
-import { ShipmentListItemComponent } from './components/shipment-list-item/shipment-list-item.component';
+// import { ShipmentListItemComponent } from './components/shipment-list-item/shipment-list-item.component';
 import { ListPopoverComponent } from './components/shipment-list-item/list-popover/list-popover.component';
 
 
@@ -47,7 +47,7 @@ const COMPONENTS_ENTRY = [
   StatusLabelComponent,
   AddressComponent,
   TableHeadDragComponent,
-  ShipmentListItemComponent,
+  // ShipmentListItemComponent,
   ListPopoverComponent,
   ...QUICK_CHAT_COMPONENTS,
 ];
