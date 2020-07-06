@@ -658,7 +658,7 @@ export class PackingListComponent implements OnInit {
     formData.append('Url', this.url);
     formData.append('ApiTypes', '1');
     this.formData(formData);
-    this.cSPExcelService.analysisExcel(formData).subscribe(
+    this.cSPExcelService.analysisExcel(formData as any).subscribe(
       (res: any) => {
         //导入成功
         let list = JSON.parse(res);
