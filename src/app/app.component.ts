@@ -29,11 +29,7 @@ export class AppComponent implements OnInit {
     private titleSrv: TitleService,
     private modalSrv: NzModalService,
   ) {
-    // renderer.setAttribute(el.nativeElement, 'ng-alain-version', VERSION_CO.full);
     renderer.setAttribute(el.nativeElement, 'ng-zorro-version', VERSION_ZORRO.full);
-
-
-
   }
 
   ngOnInit() {
@@ -41,56 +37,5 @@ export class AppComponent implements OnInit {
       this.titleSrv.setTitle();
       this.modalSrv.closeAll();
     });
-
-    // this.planet.setOptions({
-    //   switchMode: SwitchModes.coexist,
-    //   errorHandler: error => {
-    //     console.log(`错误`, '加载资源失败' + JSON.stringify(error));
-    //   }
-    // });
-
-    // this.appRootContext.setName(`my name is app root context`);
-
-    // this.planet.setPortalAppData({
-    //   appRootContext: this.appRootContext
-    // });
-
-    // const appHostClass = 'thy-layout';
-    // this.planet.registerApps([
-    //   {
-    //     name: 'app3',
-    //     hostParent: '#app-host-container',
-    //     hostClass: appHostClass,
-    //     routerPathPrefix: '/app3',
-    //     selector: 'app3-root',
-    //     resourcePathPrefix: '/static/app3/',
-    //     preload: true,
-    //     switchMode: SwitchModes.coexist,
-    //     loadSerial: false,
-    //     // prettier-ignore
-    //     scripts: [
-    //       'main.js'
-    //       // 'polyfills.js'
-    //     ],
-    //     // styles: ['assets/main.css'],
-    //     manifest: 'static/app3/manifest.json',
-    //     extra: {
-    //       name: '应用3',
-    //       color: '#ffa415'
-    //     }
-    //   },
-    // ]);
-
-    // this.planet.start();
-
-    // this.globalEventDispatcher.register('openADetail').subscribe(event => {
-    //   // this.thyDialog.open(ADetailComponent);
-    // });
-
-    // this.planet.appsLoadingStart.subscribe(event => {
-    //   this.activeAppNames = event.shouldLoadApps.map(item => item.name);
-    //   console.log(`active app names: ${this.activeAppNames.join(',')}`);
-    // });
   }
-
 }

@@ -57,12 +57,11 @@
             <span class="title">
               {{ 'Language' | translate }}
             </span>
-            <!-- <i nz-icon nzType="down"></i> -->
           </a>
           <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul nz-menu nzSelectable>
-              <li nz-menu-item>简体中文</li>
-              <li nz-menu-item>English</li>
+              <li nz-menu-item (click)="change('zh-CN')">简体中文</li>
+              <li nz-menu-item (click)="change('en-US')">English</li>
             </ul>
           </nz-dropdown-menu>
         </li>

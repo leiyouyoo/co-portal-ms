@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
 import { ReuseTabService } from '@co/cbc';
-import { ScrollService, _HttpClient } from '@co/common';
+import { ScrollService, _HttpClient, SettingsService } from '@co/common';
 import { updateHostClass } from '@co/core';
 import { environment } from '@env/environment';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -79,6 +79,8 @@ export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
     private renderer: Renderer2,
     public pro: BrandService,
     public httpClient: _HttpClient,
+    // public i18n: CoI18NService,
+    public settingsService: SettingsService,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
     @Inject(DOCUMENT) private doc: any, // private cdr: ChangeDetectorRef
   ) {
@@ -149,6 +151,11 @@ export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
     //     this.settingHost.createComponent(settingFactory);
     //   }, 22);
     // }
+  }
+
+  change(lang) {
+    // this.i18n.use(lang);
+    // this.settingsService.setLayout('lang', lang);
   }
 
   ngOnInit() {
