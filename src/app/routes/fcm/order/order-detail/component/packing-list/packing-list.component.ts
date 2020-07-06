@@ -3,19 +3,9 @@ import { groupBy, sumBy, orderBy, merge } from 'lodash';
 import { NzModalService, UploadFile, UploadXHRArgs } from 'ng-zorro-antd';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-// import {
-//   BookingLibraryService,
-// } from '@cityocean/basicdata-library';
-
-
-import { ProductService } from '../../../../../../service/csp/product.service';
-import { CurrencyService } from '@co/cds/src/pub/currency.service';
-import { DataDictionaryService } from '@co/cds/src/pub/data-dictionary.service';
-import { CSPExcelService } from '@co/cds/src/storage/cspexcel.service';
-
-
-// import { InjectionToken } from '@angular/core';
-// export const Environment = new InjectionToken('');
+import { ProductService } from 'src/app/service/csp/product.service';
+import { CurrencyService, DataDictionaryService, CSPExcelService } from '@co/cds';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'booking-packing-list',
@@ -23,11 +13,6 @@ import { CSPExcelService } from '@co/cds/src/storage/cspexcel.service';
   styleUrls: ['./packing-list.component.less'],
 })
 export class PackingListComponent implements OnInit {
-
-  environment: any = {
-    SERVER_URL: " "
-  }
-
   @ViewChild('dataOfListTbody', { static: false, read: ElementRef }) set dataOfListTbody(el: ElementRef) {
     if (el) {
       console.log(el);
@@ -76,11 +61,11 @@ export class PackingListComponent implements OnInit {
   declareCurrencyInfo = 'd67186ce-8b2c-4a75-81f1-a4fe3cc12de9'; //默认币别数据(暂时)
   cargo: cargo = {};
   isSelSku: boolean = false;
-  url = this.environment.SERVER_URL + '/CSP/Booking/ClearanceInviocesUpload'; //上传
-  imgUrl = this.environment.SERVER_URL;
-  downUrl = this.environment.SERVER_URL + '/CSP/Booking/ClearanceInviocesDownload'; //下载
-  downExcelUrl = this.environment.SERVER_URL + '/Storage/Excel/DownloadExcel';
-  uploadUrl = this.environment.SERVER_URL + '/Storage/File/Upload';
+  url = environment.SERVER_URL + '/CSP/Booking/ClearanceInviocesUpload'; //上传
+  imgUrl = environment.SERVER_URL;
+  downUrl = environment.SERVER_URL + '/CSP/Booking/ClearanceInviocesDownload'; //下载
+  downExcelUrl = environment.SERVER_URL + '/Storage/Excel/DownloadExcel';
+  uploadUrl = environment.SERVER_URL + '/Storage/File/Upload';
   skuDuplicateMap: { [prop: string]: boolean };
   constructor(
     public message: NzMessageService,
@@ -89,15 +74,13 @@ export class PackingListComponent implements OnInit {
     public currencySevice: CurrencyService,
     public dataDictionarySevice: DataDictionaryService,
     public productService: ProductService,
-    public cSPExcelService:CSPExcelService
-    // @Inject(Environment) public environment,
-
+    public cSPExcelService: CSPExcelService,
   ) { }
 
   ngOnInit() {
-    this.getAllCurrency();
-    this.selUnit('003');
-    this.declareCurrency.emit(11);
+    // this.getAllCurrency();
+    // this.selUnit('003');
+    // this.declareCurrency.emit(11); 
   }
   isNoFBANO: number;
   isNoReference: number;
@@ -758,7 +741,7 @@ export class PackingListComponent implements OnInit {
     formData.append('ParametersJsonStr', JSON.stringify({ id: this.bookingId }));
     this.formData(formData);
     formData.append('Headers[24].order', '24');
-    this.cSPExcelService.cusClearanceInvoiceExportExcelAsync(formData).subscribe(
+    this.cSPExcelService.cusClearanceInvoiceExportExcelAsync(formData as any).subscribe(
       (res: any) => {
         if (res.isSuccess) {
           this.fileName = res.fileName;
@@ -791,7 +774,7 @@ export class PackingListComponent implements OnInit {
   }
   downTemplate() {
     let name = 'FBA-UpLoad-Template';
-    window.open(this.environment.SERVER_URL + '/Storage/ExcelTemplate/Get?name=' + name)
+    window.open(environment.SERVER_URL + '/Storage/ExcelTemplate/Get?name=' + name)
   }
   validateSku() {
     for (let i = 0; i < this.listOfData.length; i++) {
@@ -825,7 +808,7 @@ export class PackingListComponent implements OnInit {
   }
   downloadExcel(FileName: string, FileToken: string, FileType: string) {
     return window.open(
-      this.environment.SERVER_URL +
+      environment.SERVER_URL +
       '/Storage/Excel/DownloadExcel?FileName=' +
       FileName +
       '&&FileToken=' +

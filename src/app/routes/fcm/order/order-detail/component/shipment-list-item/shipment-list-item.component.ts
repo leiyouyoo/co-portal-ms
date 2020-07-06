@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { InputBoolean } from 'ng-zorro-antd';
-import { ImBroadcastService } from '@cityocean/im-template-library';
+// import { ImBroadcastService } from '@cityocean/im-template-library';
 
 @Component({
   selector: 'shipment-list-item',
@@ -24,7 +24,8 @@ export class ShipmentListItemComponent implements OnInit {
   readonly FreightMethodType = FreightMethodType;
   readonly ShipmentStatusEnum = ShipmentStatusEnum;
   nzCurrent = 0;
-  constructor(public router: Router, private imBroadcastService: ImBroadcastService) { }
+  // private imBroadcastService: ImBroadcastService
+  constructor(public router: Router) { }
 
   ngOnInit() { }
 
@@ -54,10 +55,10 @@ export class ShipmentListItemComponent implements OnInit {
   }
   onCustomerServiceClick(e: MouseEvent) {
     e.stopPropagation();
-    this.imBroadcastService.broadcast('shipment', {
-      customerserviceType: 'Shipment',
-      customerserviceId: this.shipment.id,
-    });
+    // this.imBroadcastService.broadcast('shipment', {
+    //   customerserviceType: 'Shipment',
+    //   customerserviceId: this.shipment.id,
+    // });
   }
 }
 
