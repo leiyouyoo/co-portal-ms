@@ -66,7 +66,7 @@
     "ajv": "^6.12.2",
     "angular-baidu-maps": "^9.1.0",
     "axios": "^0.19.2",
-    "co-cli": "0.0.35",
+    "co-cli": "0.0.39",
     "cos-js-sdk-v5": "^0.5.27",
     "cropperjs": "^1.5.7",
     "element-closest": "^3.0.2",

@@ -3431,8 +3431,14 @@ Destination location：默认显示最近一次选中的信息； */
             /* 供应商客户Id */ 
             venderCustomerId: string;
          
+            /* 供应商Id，供应商创建为null */ 
+            venderPartnerId: string;
+         
             /* 采购商客户Id */ 
             buyerCustomerId: string;
+         
+            /* 采购商Id，采购商创建为null */ 
+            buyerPartnerId: string;
          
             /* 发送人 */ 
             senderName: string;
