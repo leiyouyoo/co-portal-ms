@@ -3,9 +3,9 @@ import { groupBy, sumBy, orderBy, merge } from 'lodash';
 import { NzModalService, UploadFile, UploadXHRArgs } from 'ng-zorro-antd';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { ProductService } from '../../../../../../service/csp/product.service';
+import { ProductService } from 'src/app/service/csp/product.service';
 import { CurrencyService, DataDictionaryService, CSPExcelService } from '@co/cds';
-import { environment } from '../../../../../../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'booking-packing-list',
@@ -78,9 +78,9 @@ export class PackingListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getAllCurrency();
-    this.selUnit('003');
-    this.declareCurrency.emit(11);
+    // this.getAllCurrency();
+    // this.selUnit('003');
+    // this.declareCurrency.emit(11); 
   }
   isNoFBANO: number;
   isNoReference: number;

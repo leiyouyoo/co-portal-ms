@@ -7,12 +7,13 @@
         <div class="content_info_left">
             <nz-card class="car-box">
                 <div style="min-width: 800px;">
-                    <shipment-list-item *ngFor="let shipment of shipmentData?.items" [shipment]="shipment">
+                    <shipment-list-item *ngFor="let shipment of shipmentData?.items" [showDetailInfo]="false"
+                        [shipment]="shipment">
                     </shipment-list-item>
                 </div>
             </nz-card>
             <nz-card class="line-box">
-                <!-- 路线图 -->
+
             </nz-card>
         </div>
         <nz-card class="content_info_right">

@@ -8,8 +8,23 @@ import { CoDocumentComponent } from './co-document/co-document.component';
 import { AddOrderComponent } from './add-order/add-order.component';
 import { PackingListComponent } from './order-detail/component/packing-list/packing-list.component';
 import { OrderInfoComponent } from './order-detail/component/order-info/order-info.component';
+import { ShipmentListItemComponent } from './order-detail/component/shipment-list-item/shipment-list-item.component';
+import { ListPopoverComponent } from './order-detail/component/shipment-list-item/list-popover/list-popover.component';
+import { ShipmentStatusPipe } from './order-detail/pipe/shipment-status.pipe';
 
-const COMPONENTS = [OrderListComponent, OrderDetailComponent, CoDocumentComponent, AddOrderComponent, PackingListComponent, OrderInfoComponent];
+
+const COMPONENTS = [
+  OrderListComponent,
+  OrderDetailComponent,
+  CoDocumentComponent,
+  AddOrderComponent,
+  PackingListComponent,
+  OrderInfoComponent,
+  ShipmentListItemComponent,
+  ListPopoverComponent,
+  ShipmentStatusPipe
+];
+
 
 @NgModule({
   declarations: [...COMPONENTS],
