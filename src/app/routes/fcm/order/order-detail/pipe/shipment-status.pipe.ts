@@ -3,6 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
     name: 'shipmentStatus'
 })
+
 export class ShipmentStatusPipe implements PipeTransform {
 
     transform(value: ShipmentStatusEnum, ...args: any[]): any {
@@ -27,7 +28,6 @@ export class ShipmentStatusPipe implements PipeTransform {
     }
 
 }
-
 
 export enum ShipmentStatusEnum {
     SellerLocation,

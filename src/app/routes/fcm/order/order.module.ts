@@ -11,6 +11,7 @@ import { OrderInfoComponent } from './order-detail/component/order-info/order-in
 import { ShipmentListItemComponent } from './order-detail/component/shipment-list-item/shipment-list-item.component';
 import { ListPopoverComponent } from './order-detail/component/shipment-list-item/list-popover/list-popover.component';
 import { ShipmentStatusPipe } from './order-detail/pipe/shipment-status.pipe';
+import { EnterWarehouseModalComponent } from './order-detail/component/enter-warehouse-modal/enter-warehouse-modal.component';
 
 
 const COMPONENTS = [
@@ -22,7 +23,8 @@ const COMPONENTS = [
   OrderInfoComponent,
   ShipmentListItemComponent,
   ListPopoverComponent,
-  ShipmentStatusPipe
+  ShipmentStatusPipe,
+  EnterWarehouseModalComponent
 ];
 
 
