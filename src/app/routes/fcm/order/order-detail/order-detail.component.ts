@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { EnterWarehouseModalComponent } from './component/enter-warehouse-modal/enter-warehouse-modal.component';
 
 @Component({
   selector: 'app-order-detail',
@@ -7,23 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderDetailComponent implements OnInit {
 
+  @ViewChild(EnterWarehouseModalComponent, { static: true })
+  enterWarehouseModalComponent: EnterWarehouseModalComponent;
+
   shipmentData: any = {
-    items: [
+    "items": [
       {
         "packages": 0,
         "pieces": 0.0,
         "customerId": "32809880-4fc3-447a-b19e-decaacbe8b37",
-        "shipmentNo": "OESZGS20060007",
-        "shipmentName": "",
-        "soNo": "64645654",
+        "shipmentNo": "OESZGS20070007",
+        "shipmentName": "4445445",
+        "soNo": "1236547888",
         "shipmentType": 0,
         "freightMethodType": 1,
-        "status": 3,
-        "mainESTTruckDeliveryDate": null,
-        "vessel": "CMA CGM VELA/326",
+        "status": 4,
+        "mainESTTruckDeliveryDate": "2020-08-02T16:00:00Z",
+        "vessel": "CMA CGM TOSCA/4W",
         "vesselVoyage": {
-          "name": "CMA CGM VELA",
-          "value": "326"
+          "name": "CMA CGM TOSCA",
+          "value": "4W"
         },
         "preVessel": null,
         "preVesselVoyage": {
@@ -33,17 +37,57 @@ export class OrderDetailComponent implements OnInit {
         "transportClausesId": "bc6cf07b-9bea-4a5b-a1f3-dcbb6bb6bf15",
         "transportClausesString": "CY-CY",
         "containerTypes": [
-        ],
-        "totalWeightString": "0.0",
-        "totalVolumeString": "0.0",
+          {
+            "businessIds": [
+              "973f7660-34bf-ea11-aac7-6cb3110f8be8"],
+            "name": "20GP",
+            "value": 1
+          }],
+        "totalWeightString": "60.000 公斤",
+        "totalVolumeString": "523.000 立方米",
         "routeDetails": {
           "shipperDtos": [
-          ],
+            {
+              "customerId": "89796121-32f7-466d-898b-f212674d3571",
+              "customerName": "卖家客户叁",
+              "originAddresses": [
+              ],
+              "containerTypes": [
+                {
+                  "businessIds": [
+                    "973f7660-34bf-ea11-aac7-6cb3110f8be8"],
+                  "name": "20GP",
+                  "value": 1
+                }],
+              "deliveryWarehouses": [
+              ],
+              "containerNos": "AAAU1234567",
+              "containerTotalCount": 1,
+              "containerPickedUpCount": 1,
+              "cargoReadyDate": "2020-07-05T10:11:40.009Z"
+            }],
           "consigneeDtos": [
-          ],
-          "siCutOffDate": "2020-07-03T00:00:00Z",
+            {
+              "customerId": "32809880-4fc3-447a-b19e-decaacbe8b37",
+              "customerName": "买家客户叁",
+              "destinationAddresses": [
+              ],
+              "containerTypes": [
+                {
+                  "businessIds": [
+                    "973f7660-34bf-ea11-aac7-6cb3110f8be8"],
+                  "name": "20GP",
+                  "value": 1
+                }],
+              "containerNos": "AAAU1234567",
+              "containerTotalCount": 1,
+              "containerDeliveredCount": 0,
+              "estTruckDeliveryDate": "2020-08-02T16:00:00Z",
+              "actualTruckDeliveryDate": null
+            }],
+          "siCutOffDate": "2020-07-11T00:00:00Z",
           "vgmCutOffDate": null,
-          "cyCutOffTime": null,
+          "cyCutOffTime": "2020-07-11T00:00:00Z",
           "availableDate": null,
           "lastFreeDate": null,
           "originPort": {
@@ -58,51 +102,113 @@ export class OrderDetailComponent implements OnInit {
             "latitude": "22.556499",
             "id": "0ba7c2c9-6aa0-4558-b34a-4a238bab8888"
           },
-          "estTruckDeliveryOrignDate": null,
-          "actualTruckDeliveryOrignDate": null,
-          "estDepatureOrginPortDate": "2020-07-05T00:00:00Z",
-          "actualDepatureOrginPortDate": null,
+          "estTruckDeliveryOrignDate": "2020-07-11T00:00:00Z",
+          "actualTruckDeliveryOrignDate": "2020-07-10T16:00:00Z",
+          "estDepatureOrginPortDate": "2020-07-13T00:00:00Z",
+          "actualDepatureOrginPortDate": "2020-07-10T16:00:00Z",
           "destinationPlaceDeliveredCount": 0,
-          "containerCount": 0,
+          "containerCount": 1,
           "carrierCustomerName": "CMA CGM SHIPPING CO.,LTD.",
-          "destinationPortId": "72528faf-4006-4b47-b16f-0dc3b6ae7158",
-          "estArrivalDestinationPortDate": "2020-07-25T00:00:00Z",
+          "destinationPortId": "3eafeb6f-257c-40f6-8280-13d6a1881984",
+          "estArrivalDestinationPortDate": "2020-07-31T00:00:00Z",
           "actualArrivalDestinationPortDate": null,
-          "estPickUpTruckDestinationDate": null,
+          "estPickUpTruckDestinationDate": "2020-08-02T16:00:00Z",
           "actualPickUpTruckDestinationDate": null,
           "destinationPort": {
-            "code": "USLGB",
-            "name": "LONG BEACH,CA",
-            "fullName": "California,United States",
-            "regionId": "0509a84e-ebe8-43dc-b3a5-08324a0a440f",
-            "regionName": "California",
+            "code": "USNYC",
+            "name": "NEW YORK,NY",
+            "fullName": "New York,United States",
+            "regionId": "d1c2009c-0d6c-4e19-9c11-da64dd1698d4",
+            "regionName": "New York",
             "countryName": "United States",
             "countryId": "37f06c2d-e5f6-4a6f-bb55-9da3ec3b42a4",
-            "longitude": "-118.1937395",
-            "latitude": "33.7700504",
-            "id": "72528faf-4006-4b47-b16f-0dc3b6ae7158"
+            "longitude": "-74.0059728",
+            "latitude": "40.7127753",
+            "id": "3eafeb6f-257c-40f6-8280-13d6a1881984"
           },
           "truckCustomerName": null,
           "destinationPortPickedUpCount": 0,
-          "originPortDeliveredCount": 0,
-          "originPlacePickUpCount": 0
+          "originPortDeliveredCount": 1,
+          "originPlacePickUpCount": 1
         },
         "shipmentEventGroups": [
           {
-            "shipmentId": "5dd99d6f-f8b9-ea11-aac7-6cb3110f8be8",
-            "businessEventType": 0,
+            "shipmentId": "36105019-34bf-ea11-aac7-6cb3110f8be8",
+            "businessEventType": 3,
             "type": 0,
-            "eventCode": "SOA       ",
-            "subject": "Applied SO",
-            "description": "申请订舱",
-            "happenNode": 0,
-            "happenTime": "2020-07-01T03:30:59.433Z",
+            "eventCode": "EPU",
+            "subject": "已提空柜",
+            "description": "已提空柜:AAAU1234567",
+            "happenNode": 1,
+            "happenTime": "2020-07-06T16:00:00Z",
             "isException": false,
-            "details": "申请订舱",
+            "details": "已提空柜:AAAU1234567",
+            "address": null,
             "shipmentContainers": [
-            ],
-            "containerActivityCount": 0,
-            "containerTotalCount": 0
+              {
+                "shipmentId": "00000000-0000-0000-0000-000000000000",
+                "containerNo": "AAAU1234567",
+                "sealNo": "GDAE1235745",
+                "containerTypeId": "c4d1afb9-94e2-42fd-921e-34ef2d332553",
+                "containerTypeName": null,
+                "availableDate": null,
+                "lastFreeDate": null,
+                "id": "00000000-0000-0000-0000-000000000000"
+              }],
+            "containerActivityCount": 1,
+            "containerTotalCount": 1
+          },
+          {
+            "shipmentId": "36105019-34bf-ea11-aac7-6cb3110f8be8",
+            "businessEventType": 3,
+            "type": 0,
+            "eventCode": "GF",
+            "subject": "重柜进场",
+            "description": "重柜进场:AAAU1234567",
+            "happenNode": 2,
+            "happenTime": "2020-07-09T16:00:00Z",
+            "isException": false,
+            "details": "重柜进场:AAAU1234567",
+            "address": null,
+            "shipmentContainers": [
+              {
+                "shipmentId": "00000000-0000-0000-0000-000000000000",
+                "containerNo": "AAAU1234567",
+                "sealNo": "GDAE1235745",
+                "containerTypeId": "c4d1afb9-94e2-42fd-921e-34ef2d332553",
+                "containerTypeName": null,
+                "availableDate": null,
+                "lastFreeDate": null,
+                "id": "00000000-0000-0000-0000-000000000000"
+              }],
+            "containerActivityCount": 1,
+            "containerTotalCount": 1
+          },
+          {
+            "shipmentId": "36105019-34bf-ea11-aac7-6cb3110f8be8",
+            "businessEventType": 3,
+            "type": 0,
+            "eventCode": "LOA",
+            "subject": "已装船",
+            "description": "已装船:AAAU1234567",
+            "happenNode": 2,
+            "happenTime": "2020-07-10T16:00:00Z",
+            "isException": false,
+            "details": "已装船:AAAU1234567",
+            "address": null,
+            "shipmentContainers": [
+              {
+                "shipmentId": "00000000-0000-0000-0000-000000000000",
+                "containerNo": "AAAU1234567",
+                "sealNo": "GDAE1235745",
+                "containerTypeId": "c4d1afb9-94e2-42fd-921e-34ef2d332553",
+                "containerTypeName": null,
+                "availableDate": null,
+                "lastFreeDate": null,
+                "id": "00000000-0000-0000-0000-000000000000"
+              }],
+            "containerActivityCount": 1,
+            "containerTotalCount": 1
           }],
         "purchaseOrderIds": [
         ],
@@ -110,11 +216,11 @@ export class OrderDetailComponent implements OnInit {
         ],
         "productIds": [
         ],
-        "billOfLadingNo": "",
+        "billOfLadingNo": "SZNYCTG0007",
         "incotermsId": "d952c54f-5b36-438d-8695-4c2f9edf77d2",
-        "containerNos": "",
-        "freightTypeString": null,
-        "quantityString": "0",
+        "containerNos": "AAAU1234567",
+        "freightTypeString": "CY-CY",
+        "quantityString": "50 CTN",
         "incotermsString": "FOB",
         "specialInstructions": "",
         "portOfLoading": {
@@ -130,30 +236,22 @@ export class OrderDetailComponent implements OnInit {
           "id": "0ba7c2c9-6aa0-4558-b34a-4a238bab8888"
         },
         "portOfDischarge": {
-          "code": "USLGB",
-          "name": "LONG BEACH,CA",
-          "fullName": "California,United States",
-          "regionId": "0509a84e-ebe8-43dc-b3a5-08324a0a440f",
-          "regionName": "California",
+          "code": "USNYC",
+          "name": "NEW YORK,NY",
+          "fullName": "New York,United States",
+          "regionId": "d1c2009c-0d6c-4e19-9c11-da64dd1698d4",
+          "regionName": "New York",
           "countryName": "United States",
           "countryId": "37f06c2d-e5f6-4a6f-bb55-9da3ec3b42a4",
-          "longitude": "-118.1937395",
-          "latitude": "33.7700504",
-          "id": "72528faf-4006-4b47-b16f-0dc3b6ae7158"
+          "longitude": "-74.0059728",
+          "latitude": "40.7127753",
+          "id": "3eafeb6f-257c-40f6-8280-13d6a1881984"
         },
-        "eta": "2020-07-25T00:00:00Z",
-        "etd": "2020-07-05T00:00:00Z",
-        "id": "5dd99d6f-f8b9-ea11-aac7-6cb3110f8be8"
-      }
-    ]
+        "eta": "2020-07-31T00:00:00Z",
+        "etd": "2020-07-13T00:00:00Z",
+        "id": "36105019-34bf-ea11-aac7-6cb3110f8be8"
+      }]
   }
-
-  listData: any = [
-    {
-      checked: true,
-      label: 111
-    }
-  ]
 
   constructor() { }
 

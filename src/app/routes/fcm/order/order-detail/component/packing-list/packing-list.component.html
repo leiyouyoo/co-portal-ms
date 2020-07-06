@@ -22,12 +22,12 @@
       <div class="Customsclearanceinvioce2" (click)="downExcel()">
         <span class="iconfont icon-download"></span><a class="a-down">{{ 'Download Data' | translate }}</a>
       </div>
-      <div class="CustomsCurcy">
+      <!-- <div class="CustomsCurcy">
         <nz-select [nzPlaceHolder]="'Choose currency' | translate" [(ngModel)]="declareCurrencyInfo"
           (ngModelChange)="declareCurrency.emit($event)">
           <nz-option [nzValue]="item.id" *ngFor="let item of currencyList" [nzLabel]="item.name"></nz-option>
         </nz-select>
-      </div>
+      </div> -->
     </div>
     <div class="clearance-invioce">
       <!-- <form [formGroup]="formData"> -->
@@ -56,7 +56,7 @@
             <th style="min-width: 150px;">{{ 'Unit Price' | translate }}<span class="red"> *</span></th>
             <th style="min-width: 150px;">{{ 'Total Price' | translate }}</th>
             <th style="min-width: 150px;">{{ 'SKU Photo' | translate }}<span class="red"> *</span></th>
-            <th style="min-width: 96px;" nzRight="0px">{{ 'Action' | translate }}</th>
+            <th nzWidth="250px" nzRight="0px">{{ 'Action' | translate }}</th>
           </tr>
         </thead>
         <tbody (mouseout)="verificationForm()" [ngClass]="{ notClickn: isDisabledPack }" #dataOfListTbody>
@@ -207,10 +207,17 @@
                 {{ 'SKU Photo is required' | translate }}
               </div>
             </td>
-            <td style="min-width: 92px;" nzRight="0px">
-              <div class="editable-row-operations">
-                <button nz-button nzType="default" (click)="deleteRow(data)">{{ 'Delete' | translate }}</button>
-              </div>
+            <td nzWidth="250px" nzRight="0px" style="display: flex;">
+              <!-- <div class="editable-row-operations" style="display: flex;"> -->
+
+              <button nz-button nzType="primary" (click)="calculatinginvoice(listOfDataGROUP[i], i)"
+                [ngClass]="{ notClickn: isDisabledPack }">
+                {{ 'Edit Packing list' | translate }}
+              </button>
+
+              <button nz-button nzType="default" (click)="deleteRow(data)">{{ 'Delete' | translate }}</button>
+
+              <!-- </div> -->
             </td>
           </tr>
         </tbody>
@@ -220,10 +227,10 @@
   </div>
   <div class="packingList">
     <div *ngFor="let item of listOfDataGROUP; let i = index" style="margin-bottom: 10px;">
-      <button nz-button nzType="primary" style="margin-bottom: 10px;" (click)="calculatinginvoice(item, i)"
+      <!-- <button nz-button nzType="primary" style="margin-bottom: 10px;" (click)="calculatinginvoice(item, i)"
         [ngClass]="{ notClickn: isDisabledPack }">
         {{ 'Edit Packing list' | translate }}
-      </button>
+      </button> -->
       <div *ngIf="item.sku[0].isShow || isEdit == 'true'">
         <div style="width: 100%; min-height: 70px;">
           <div style=" min-height: 45px;" [ngClass]="{ notClickn: isDisabledPack }">
