@@ -82,7 +82,7 @@
   <div class="alain-pro__top-nav-main-right" layout-pro-header-widget></div>
 </ng-template>
 
-<div class="ant-layout ant-layout-has-sider">
+<div class="ant-layout ant-layout-has-sider" style="height: 100vh;">
   <ng-container *ngIf="pro.menu === 'side' || isMobile">
     <nz-drawer
       *ngIf="isMobile"
@@ -101,14 +101,22 @@
   </ng-container>
   <div class="ant-layout alain-pro__main" [ngStyle]="getLayoutStyle">
     <!-- <layout-pro-header></layout-pro-header> -->
-    <div class="ant-layout-content alain-pro__body" [class.alain-pro__fetching]="isFetching" [ngStyle]="getContentStyle">
+    <div
+      class="ant-layout-content alain-pro__body"
+      [class.alain-pro__fetching]="isFetching"
+      [ngStyle]="getContentStyle"
+      style="display: flex; flex-direction: column;"
+    >
       <div class="alain-pro__header-item alain-pro__header-trigger" (click)="pro.setCollapsed()">
         <i nz-icon nzType="menu-{{ pro.collapsed ? 'unfold' : 'fold' }}" class="alain-pro__header-item-icon"></i>
       </div>
       <nz-spin class="alain-pro__fetching-icon" nzSpinning></nz-spin>
 
       <reuse-tab #reuseTab [tabBarExtraContent]="headerWidgets" tabType="card"></reuse-tab>
-      <router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
+
+      <nz-content style="flex: auto; margin: 12px; padding: 12px; background: #fff; border-radius: 10px; overflow: hidden;">
+        <router-outlet></router-outlet>
+      </nz-content>
 
       <div id="app-host-container" class="thy-layout"></div>
     </div>
