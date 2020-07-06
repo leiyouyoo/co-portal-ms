@@ -1,96 +1,149 @@
-<nz-modal [(nzVisible)]="isVisible" nzTitle="确认入仓" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzWidth="70%">
-  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" [nzLayout]="'vertical'">
-    <nz-form-item>
-      <nz-form-label nzRequired nzFor="note">Note</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzErrorTip="Please input your username!">
-        <input id="note" type="text" nz-input formControlName="note" />
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label nzFor="gender" nzRequired>Gender</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzErrorTip="Please select your gender!">
-        <nz-select id="gender" formControlName="gender" nzPlaceHolder="Select a option and change input text above">
-          <nz-option nzValue="male" nzLabel="male"></nz-option>
-          <nz-option nzValue="female" nzLabel="female"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label nzFor="gender" nzRequired>Gender</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzErrorTip="Please select your gender!">
-        <nz-select id="gender" formControlName="gender" nzPlaceHolder="Select a option and change input text above">
-          <nz-option nzValue="male" nzLabel="male"></nz-option>
-          <nz-option nzValue="female" nzLabel="female"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label nzFor="gender" nzRequired>Gender</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzErrorTip="Please select your gender!">
-        <nz-select id="gender" formControlName="gender" nzPlaceHolder="Select a option and change input text above">
-          <nz-option nzValue="male" nzLabel="male"></nz-option>
-          <nz-option nzValue="female" nzLabel="female"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label nzFor="gender" nzRequired>Gender</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzErrorTip="Please select your gender!">
-        <nz-select id="gender" formControlName="gender" nzPlaceHolder="Select a option and change input text above">
-          <nz-option nzValue="male" nzLabel="male"></nz-option>
-          <nz-option nzValue="female" nzLabel="female"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label nzFor="gender" nzRequired>Gender</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzErrorTip="Please select your gender!">
-        <nz-select id="gender" formControlName="gender" nzPlaceHolder="Select a option and change input text above">
-          <nz-option nzValue="male" nzLabel="male"></nz-option>
-          <nz-option nzValue="female" nzLabel="female"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label nzFor="gender" nzRequired>Gender</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzErrorTip="Please select your gender!">
-        <nz-select id="gender" formControlName="gender" nzPlaceHolder="Select a option and change input text above">
-          <nz-option nzValue="male" nzLabel="male"></nz-option>
-          <nz-option nzValue="female" nzLabel="female"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label nzFor="gender" nzRequired>Gender</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzErrorTip="Please select your gender!">
-        <nz-select id="gender" formControlName="gender" nzPlaceHolder="Select a option and change input text above">
-          <nz-option nzValue="male" nzLabel="male"></nz-option>
-          <nz-option nzValue="female" nzLabel="female"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label nzFor="gender" nzRequired>Gender</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzErrorTip="Please select your gender!">
-        <nz-select id="gender" formControlName="gender" nzPlaceHolder="Select a option and change input text above">
-          <nz-option nzValue="male" nzLabel="male"></nz-option>
-          <nz-option nzValue="female" nzLabel="female"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label nzFor="gender" nzRequired>Gender</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzErrorTip="Please select your gender!">
-        <nz-select id="gender" formControlName="gender" nzPlaceHolder="Select a option and change input text above">
-          <nz-option nzValue="male" nzLabel="male"></nz-option>
-          <nz-option nzValue="female" nzLabel="female"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-control [nzSpan]="12" [nzOffset]="5">
-        <button nz-button nzType="primary">Submit</button>
-      </nz-form-control>
-    </nz-form-item>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="新增订单" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzWidth="70%">
+  <form class="form-style" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" [nzLayout]="'vertical'">
+    <div>
+      <nz-form-item>
+        <nz-form-label nzRequired nzFor="customer">客户</nz-form-label>
+        <nz-form-control nzErrorTip="Please input your customer!">
+          <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="transportationMode" nzRequired>业务类型</nz-form-label>
+        <nz-form-control nzErrorTip="Please select your transportationMode!">
+          <nz-select nzAllowClear id="transportationMode" formControlName="transportationMode">
+            <nz-option nzValue="male" nzLabel="male"></nz-option>
+            <nz-option nzValue="female" nzLabel="female"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div>
+      <nz-form-item>
+        <nz-form-label nzFor="contactId">联系人</nz-form-label>
+        <nz-form-control nzErrorTip="Please select your contact!">
+          <nz-select nzAllowClear id="contactId" formControlName="contactId">
+            <nz-option nzValue="male" nzLabel="male"></nz-option>
+            <nz-option nzValue="female" nzLabel="female"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="channel" nzRequired>渠道</nz-form-label>
+        <nz-form-control nzErrorTip="Please select your channel!">
+          <nz-select nzAllowClear id="channel" formControlName="channel">
+            <nz-option nzValue="male" nzLabel="male"></nz-option>
+            <nz-option nzValue="female" nzLabel="female"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div>
+      <nz-form-item>
+        <nz-form-label nzFor="serviceUserId" nzRequired>业务员</nz-form-label>
+        <nz-form-control nzErrorTip="Please select your serviceUser!">
+          <nz-select nzAllowClear id="serviceUserId" formControlName="serviceUserId">
+            <nz-option nzValue="male" nzLabel="male"></nz-option>
+            <nz-option nzValue="female" nzLabel="female"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="serviceCompanyId">操作口岸</nz-form-label>
+        <nz-form-control>
+          <nz-select nzAllowClear id="serviceCompanyId" formControlName="serviceCompanyId">
+            <nz-option nzValue="male" nzLabel="male"></nz-option>
+            <nz-option nzValue="female" nzLabel="female"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div>
+      <nz-form-item>
+        <nz-form-label nzFor="fbaPickUpMethodType">交货方式</nz-form-label>
+        <nz-form-control>
+          <nz-radio-group formControlName="fbaPickUpMethodType">
+            <label nz-radio nzValue="A">自送货</label>
+            <label nz-radio nzValue="B">由CITYOCEAN上门提货</label>
+          </nz-radio-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="gender">国家</nz-form-label>
+        <input nz-input [(ngModel)]="country" formControlName="country" />
+      </nz-form-item>
+    </div>
+    <div>
+      <nz-form-item>
+        <nz-form-label nzFor="agentCustomerId">承运人</nz-form-label>
+        <nz-form-control>
+          <nz-select nzAllowClear id="agentCustomerId" formControlName="agentCustomerId">
+            <nz-option nzValue="male" nzLabel="male"></nz-option>
+            <nz-option nzValue="female" nzLabel="female"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="destinationWarehouseId">交货仓库</nz-form-label>
+        <nz-form-control>
+          <nz-select nzAllowClear id="gender" formControlName="destinationWarehouseId">
+            <nz-option nzValue="male" nzLabel="male"></nz-option>
+            <nz-option nzValue="female" nzLabel="female"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div>
+      <nz-form-item>
+        <nz-form-label nzFor="transferNo">SO号</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="transferNo" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="deliveryDate">预估交货时间</nz-form-label>
+        <nz-form-control>
+          <datetime-range-picker></datetime-range-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div>
+      <nz-form-item>
+        <nz-form-label nzFor="commodity" nzRequired>品名</nz-form-label>
+        <nz-form-control nzErrorTip="Please input your commodity!">
+          <input nz-input formControlName="commodity" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
   </form>
+  <nz-divider></nz-divider>
+  <nz-alert nzType="success" nzMessage="Total ：件数(CTN) 24    重量(KG) 747.7    体积(CBM)4.15"></nz-alert>
+
+  <div class="address-item" *ngFor="let item of addressList; let i = index">
+    <div class="address-input">
+      <span>送货地址</span>
+      <input nz-input placeholder="Basic usage" />
+      <button nz-button nzType="primary" (click)="addAddress(i)">新增地址</button>
+      <button nz-button nzType="default" (click)="deleteAddress(i)" *ngIf="addressList.length > 1 && i > 0">删除</button>
+    </div>
+    <nz-table #sortTable [nzData]="listOfData" nzShowPagination="false" nzTableLayout="fixed">
+      <thead>
+        <tr>
+          <th *ngFor="let column of listOfColumn">{{ column.title }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of sortTable.data">
+          <td>{{ data.name }}</td>
+          <td>{{ data.chinese }}</td>
+          <td>{{ data.math }}</td>
+          <td>{{ data.english }}</td>
+          <td>{{ data.math }}</td>
+          <td>
+            <span class="iconfont icon-Delete"></span>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
 </nz-modal>
