@@ -1,13 +1,7 @@
-<i
-  #popover="nzPopover"
-  nz-popover
-  [nzOverlayClassName]="isShowEventPopover() ? 'empty-class' : 'display-none'"
-  [nzPopoverTitle]="'yantian'"
-  [nzPopoverContent]="timeTemplate"
-  [class]="className + ' list-icon'"
+<i #popover="nzPopover" nz-popover [nzOverlayClassName]="isShowEventPopover() ? 'empty-class' : 'display-none'"
+  [nzPopoverTitle]="'yantian'" [nzPopoverContent]="timeTemplate" [class]="className + ' list-icon'"
   (click)="popover.component.hide()"
-  [ngClass]="{ active: active, 'highlight-icon-current-danger': isDanger, 'cursor-default': !isShowEventPopover() }"
-></i>
+  [ngClass]="{ active: active, 'highlight-icon-current-danger': isDanger, 'cursor-default': !isShowEventPopover() }"></i>
 <ng-template #pickUpOrDelivery>
   {{ pickupCount }}/{{ totalContainer }} {{ ([0, 2].includes(location) ? 'Picked Up' : 'Delivered') | translate }}
 </ng-template>
@@ -57,8 +51,7 @@
           <div>
             {{ item.subject }}
             <span *ngIf="item.businessEventType === ShipmentBusinessEventType.ShipmentContainer">
-              ({{ item.containerActivityCount }}/{{ item.containerTotalCount }})</span
-            >
+              ({{ item.containerActivityCount }}/{{ item.containerTotalCount }})</span>
           </div>
           <div>{{ item.happenTime | date: 'yyyy-MM-dd' }}</div>
         </div>
