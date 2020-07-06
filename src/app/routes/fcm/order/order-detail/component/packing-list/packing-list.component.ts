@@ -3,13 +3,17 @@ import { groupBy, sumBy, orderBy, merge } from 'lodash';
 import { NzModalService, UploadFile, UploadXHRArgs } from 'ng-zorro-antd';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import {
-  BookingLibraryService,
-  cargo,
-  CurrencySevice,
-  DataDictionarySevice,
-  packingLists
-} from '@cityocean/basicdata-library';
+// import {
+//   BookingLibraryService,
+// } from '@cityocean/basicdata-library';
+
+
+import { ProductService } from '../../../../../../service/csp/product.service';
+import { CurrencyService } from '@co/cds/src/pub/currency.service';
+import { DataDictionaryService } from '@co/cds/src/pub/data-dictionary.service';
+import { CSPExcelService } from '@co/cds/src/storage/cspexcel.service';
+
+
 // import { InjectionToken } from '@angular/core';
 // export const Environment = new InjectionToken('');
 
@@ -78,12 +82,14 @@ export class PackingListComponent implements OnInit {
   downExcelUrl = this.environment.SERVER_URL + '/Storage/Excel/DownloadExcel';
   uploadUrl = this.environment.SERVER_URL + '/Storage/File/Upload';
   skuDuplicateMap: { [prop: string]: boolean };
-  constructor(public bookingSevice: BookingLibraryService,
+  constructor(
     public message: NzMessageService,
     private fb: FormBuilder,
     private modalService: NzModalService,
-    public currencySevice: CurrencySevice,
-    public dataDictionarySevice: DataDictionarySevice,
+    public currencySevice: CurrencyService,
+    public dataDictionarySevice: DataDictionaryService,
+    public productService: ProductService,
+    public cSPExcelService:CSPExcelService
     // @Inject(Environment) public environment,
 
   ) { }
@@ -305,12 +311,12 @@ export class PackingListComponent implements OnInit {
 
   options: Array<any> = new Array<any>();
   onInput(value: string): void {
-    this.getSkuList({ SearchText: value });
+    this.getSkuList({ searchText: value });
     this.isNoSku = -1;
   }
   //获取SKU列表
-  getSkuList(skuInput: { SearchText?: string; MaxResultCount?: number; SkipCount?: number }) {
-    this.bookingSevice.getSkuList(skuInput).subscribe((c: any) => {
+  getSkuList(skuInput: { searchText?: string; maxResultCount?: number; skipCount?: number }) {
+    this.productService.getSkuList(skuInput).subscribe((c: any) => {
       this.options = c.items;
     });
   }
@@ -335,7 +341,7 @@ export class PackingListComponent implements OnInit {
   unitList: Array<any> = new Array<any>();
   //单位下拉框
   selUnit(typeId: string) {
-    this.dataDictionarySevice.getDataDictionaryInfo(typeId, 200).subscribe(
+    this.dataDictionarySevice.getAll({ typeCode: typeId, maxResultCount: 200 }).subscribe(
       (res) => {
         this.unitList = res.items;
       },
@@ -669,7 +675,7 @@ export class PackingListComponent implements OnInit {
     formData.append('Url', this.url);
     formData.append('ApiTypes', '1');
     this.formData(formData);
-    this.bookingSevice.AnalysisExcel(formData).subscribe(
+    this.cSPExcelService.analysisExcel(formData).subscribe(
       (res: any) => {
         //导入成功
         let list = JSON.parse(res);
@@ -752,7 +758,7 @@ export class PackingListComponent implements OnInit {
     formData.append('ParametersJsonStr', JSON.stringify({ id: this.bookingId }));
     this.formData(formData);
     formData.append('Headers[24].order', '24');
-    this.bookingSevice.ExportExcel(formData).subscribe(
+    this.cSPExcelService.cusClearanceInvoiceExportExcelAsync(formData).subscribe(
       (res: any) => {
         if (res.isSuccess) {
           this.fileName = res.fileName;
@@ -828,4 +834,54 @@ export class PackingListComponent implements OnInit {
       FileType,
     );
   }
+}
+
+
+export interface cargo {
+  grossWeight?: number;
+  grossWeightUnitId?: number;
+  grossWeightUnitStr?: string;
+  netWeight?: number;
+  netWeightUnitId?: number;
+  netWeightUnitStr?: string;
+  dimensions?: string;
+  dimensionsUnitId?: number;
+  dimensionsUnitStr?: number;
+  long?: number;
+  width?: number;
+  height?: number;
+}
+
+export interface packingLists {
+  id: number;
+  packageNo?: string;
+  fbaNo?: string;
+  codeRules?: string;
+  startNo?: string;
+  endNo?: string;
+  grossWeight?: number;
+  grossWeightUnitId?: number;
+  grossWeightUnitString?: string;
+  netWeight?: number;
+  netWeightUnitId?: number;
+  netWeightUnitString?: string;
+  dimensions?: string;
+  dimensionsUnitId?: number;
+  dimensionsUnitString?: string;
+  bookingId?: number;
+  packingListItems?: Array<packingListItems>;
+  NO?: number;
+  long?: number;
+  width?: number;
+  height?: number;
+}
+
+export interface packingListItems {
+  packingListId?: number;
+  sku?: string;
+  quantities?: number;
+  id?: number;
+  commodityChineseDesc?: string;
+  remainder?: number;
+  totalQuantities: number;
 }
