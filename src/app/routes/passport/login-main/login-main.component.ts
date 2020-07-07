@@ -79,7 +79,6 @@ export class loginMainComponent implements OnInit {
   }
 
   login() {
-    debugger;
     // this.formCheck = true;
     if (!this.validateForm.valid) {
       return;
@@ -166,7 +165,6 @@ export class loginMainComponent implements OnInit {
 
     this.httpService.get(`/platform/Session/GetCurrentUserConfiguration`).subscribe(
       (data: any) => {
-        debugger;
         window.localStorage.setItem('ICPUserMsg', JSON.stringify(data));
         try {
           data.nav.menus.MainMenu.items.sort(this.sortItem);

@@ -183,7 +183,6 @@ export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getUserHead() {
     this.httpClient.get('SSO/User/GetUserDetail', this.user.id).subscribe((res: any) => {
-      debugger;
       this.userInfo = res ? res : {};
     });
   }

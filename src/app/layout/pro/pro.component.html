@@ -99,7 +99,7 @@
       <ng-template [ngTemplateOutlet]="sideTpl"></ng-template>
     </ng-container>
   </ng-container>
-  <div class="ant-layout alain-pro__main" [ngStyle]="getLayoutStyle">
+  <div class="ant-layout alain-pro__main" [ngStyle]="getLayoutStyle" style="height: 100vh;">
     <!-- <layout-pro-header></layout-pro-header> -->
     <div
       class="ant-layout-content alain-pro__body"
@@ -114,7 +114,7 @@
 
       <reuse-tab #reuseTab [tabBarExtraContent]="headerWidgets" tabType="card"></reuse-tab>
 
-      <nz-content style="flex: auto; margin: 12px; padding: 12px; background: #fff; border-radius: 10px; overflow: hidden;">
+      <nz-content style="flex: auto; margin: 12px; background: #fff; border-radius: 10px; overflow: hidden;">
         <router-outlet></router-outlet>
       </nz-content>
 

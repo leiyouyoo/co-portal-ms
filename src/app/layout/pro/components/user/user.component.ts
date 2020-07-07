@@ -9,9 +9,7 @@ import { DA_SERVICE_TOKEN, ITokenService } from '@co/auth';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutProWidgetUserComponent implements OnInit {
-  constructor(public settings: SettingsService, private router: Router, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService) {
-    debugger;
-  }
+  constructor(public settings: SettingsService, private router: Router, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService) {}
 
   ngOnInit(): void {
     // mock

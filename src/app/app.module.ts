@@ -97,6 +97,7 @@ import { NgxPlanetModule } from '../../packages/planet/src/public-api';
 import { STWidgetModule } from './shared/st-widget/st-widget.module';
 
 import { CoAuthModule } from '@co/auth';
+import { PageLayoutModule } from '@co/cbc';
 
 @NgModule({
   declarations: [AppComponent],
@@ -115,6 +116,7 @@ import { CoAuthModule } from '@co/auth';
     RoutesModule,
     STWidgetModule,
     NgxPlanetModule,
+    PageLayoutModule,
     ...I18NSERVICE_MODULES,
     ...GLOBAL_THIRD_MODULES,
     ...FORM_MODULES,

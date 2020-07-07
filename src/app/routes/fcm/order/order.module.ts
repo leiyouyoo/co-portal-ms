@@ -12,7 +12,7 @@ import { ShipmentListItemComponent } from './order-detail/component/shipment-lis
 import { ListPopoverComponent } from './order-detail/component/shipment-list-item/list-popover/list-popover.component';
 import { ShipmentStatusPipe } from './order-detail/pipe/shipment-status.pipe';
 import { EnterWarehouseModalComponent } from './order-detail/component/enter-warehouse-modal/enter-warehouse-modal.component';
-
+import { AcceptListComponent } from './order-list/accept-list/accept-list.component';
 
 const COMPONENTS = [
   OrderListComponent,
@@ -24,12 +24,12 @@ const COMPONENTS = [
   ShipmentListItemComponent,
   ListPopoverComponent,
   ShipmentStatusPipe,
-  EnterWarehouseModalComponent
+  EnterWarehouseModalComponent,
+  AcceptListComponent,
 ];
-
 
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [SharedModule, CommonModule, OrderRoutingModule],
 })
-export class OrderModule { }
+export class OrderModule {}

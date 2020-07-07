@@ -23,13 +23,11 @@ export class ListPopoverComponent implements OnInit {
   @Input() totalContainer = 0;
   @Input() pickupCount = 0;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     /* 正常事件 */
-    this.eventList = (this.shipment.shipmentEventGroups || []).filter(
-      (o) => o.isException === false && o.happenNode === this.location + 1,
-    );
+    this.eventList = (this.shipment.shipmentEventGroups || []).filter((o) => o.isException === false && o.happenNode === this.location + 1);
 
     /* 异常事件 */
     const exceptionEvent = this.shipment._exceptionEvent;
@@ -51,18 +49,12 @@ export class ListPopoverComponent implements OnInit {
       case 3:
         return false;
       case 1:
-        return !!(
-          shipment.routeDetails.siCutOffDate ||
-          shipment.routeDetails.vgmCutOffDate ||
-          shipment.routeDetails.cyCutOffTime
-        );
+        return !!(shipment.routeDetails.siCutOffDate || shipment.routeDetails.vgmCutOffDate || shipment.routeDetails.cyCutOffTime);
       case 2:
         return !!(shipment.routeDetails.availableDate || shipment.routeDetails.lastFreeDate);
     }
   }
-  onClick() {
-    debugger;
-  }
+  onClick() {}
 }
 
 export enum ShipmentBusinessEventType {
@@ -72,4 +64,3 @@ export enum ShipmentBusinessEventType {
   ShipmentContainer = 3,
   Bill = 8,
 }
-
