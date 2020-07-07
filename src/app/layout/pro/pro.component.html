@@ -35,7 +35,7 @@
       <!--搜索栏-->
       <div class="alain-pro__sider-search">
         <nz-input-group [nzSuffix]="suffixIconSearch" nzSize="small">
-          <input type="text" nz-input placeholder="快捷键搜索" />
+          <input type="text" nz-input placeholder="{{ 'Shortcut search' | translate }}" />
         </nz-input-group>
         <ng-template #suffixIconSearch>
           <i nz-icon nzType="search"></i>
@@ -112,7 +112,7 @@
       </div>
       <nz-spin class="alain-pro__fetching-icon" nzSpinning></nz-spin>
 
-      <reuse-tab #reuseTab [tabBarExtraContent]="headerWidgets" tabType="card"></reuse-tab>
+      <reuse-tab #reuseTab [tabBarExtraContent]="headerWidgets" tabType="card" class="icp-nav"></reuse-tab>
 
       <nz-content style="flex: auto; margin: 12px; background: #fff; border-radius: 10px; overflow: hidden;">
         <router-outlet></router-outlet>

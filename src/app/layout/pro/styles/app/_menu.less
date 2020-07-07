@@ -3,34 +3,34 @@
     display: block;
 
     &-wrap {
-      display: flex;
+      display       : flex;
       flex-direction: column;
-      padding-left: 0px;
+      padding-left  : 0px;
 
       .ant-divider-horizontal {
-        width: 160px;
-        min-width: 24px;
-        margin: 4px 20px;
-        background-color: #626262;
-        top: 0px;
+        width           : 160px;
+        min-width       : 24px;
+        margin          : 4px 20px;
+        background-color: rgb(0, 21, 41);
+        top             : 0px;
       }
     }
 
     &-item {
-      margin: 4px 20px;
-      padding: 8px;
-      list-style: none;
-      font-size: 12px;
-      height: 32px;
+      margin       : 4px 20px;
+      padding      : 8px;
+      list-style   : none;
+      font-size    : 12px;
+      height       : 32px;
       border-radius: 4px;
-      line-height: 16px;
+      line-height  : 16px;
 
       &-active {
         background-color: #1890FFFF;
       }
 
       >a {
-        color: #FFFFFFD9;
+        color  : #FFFFFFD9;
         display: block;
       }
 
@@ -44,7 +44,7 @@
 
 
       &-title-text {
-        display: inline-block;
+        display    : inline-block;
         margin-left: 8px;
       }
 
@@ -62,7 +62,7 @@
   &__side-nav {
     @{alain-pro-prefix}__menu {
       &-title {
-        display: flex;
+        display    : flex;
         align-items: center;
 
         &-text {
@@ -74,10 +74,10 @@
     .@{ant-prefix}-menu-inline-collapsed {
       @{alain-pro-prefix}__menu-title-badge {
         position: absolute;
-        top: 0;
-        right: -16px;
-        width: 8px;
-        height: 8px;
+        top     : 0;
+        right   : -16px;
+        width   : 8px;
+        height  : 8px;
 
         >em {
           display: none;
@@ -92,7 +92,7 @@
 @{aside-collapsed-prefix} {
 
   .ant-divider-horizontal {
-    width: 24px;
+    width : 24px;
     margin: 4px auto;
 
   }

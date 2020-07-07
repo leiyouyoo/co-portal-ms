@@ -1,13 +1,13 @@
 @sider-prefix: ~'@{alain-pro-prefix}__sider';
 
 @{sider-prefix} {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  overflow: hidden;
-  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+  position        : relative;
+  z-index         : 10;
+  width           : 100%;
+  height          : 100%;
+  min-height      : 100vh;
+  overflow        : hidden;
+  box-shadow      : 2px 0 6px rgba(0, 21, 41, 0.35);
   background-color: #000000B3;
 
   &-header {
@@ -19,9 +19,9 @@
 
   &-search {
     padding: 16px;
-    margin: 0px 4px;
-    color: #02010140;
-    height: 52px;
+    margin : 0px 4px;
+    color  : #02010140;
+    height : 52px;
 
     >.ant-input-affix-wrapper {
       border-radius: 4px !important;
@@ -33,49 +33,49 @@
   }
 
   &-avatar {
-    height: 60px;
-    display: flex;
-    flex-direction: row;
-    padding-left: 8px;
-    background-color: #626262;
+    height          : 60px;
+    display         : flex;
+    flex-direction  : row;
+    padding-left    : 8px;
+    background-color: rgb(0, 21, 41);
 
     >.user-avatar {
       margin: auto;
     }
 
     >.user-desc {
-      flex: 1;
+      flex   : 1;
       padding: 8px;
 
       h3 {
-        color: #FFFFFFD9;
+        color        : #FFFFFFD9;
         margin-bottom: 0px;
-        text-align: left;
-        font-size: 14px;
+        text-align   : left;
+        font-size    : 14px;
       }
 
       >p {
         margin-bottom: 4px;
-        text-align: left;
-        font-size: 12px;
-        color: #FFFFFFA6;
+        text-align   : left;
+        font-size    : 12px;
+        color        : #FFFFFFA6;
       }
     }
   }
 
   &-footer {
-    height: 40px;
+    height     : 40px;
     line-height: 40px;
-    text-align: center;
-    color: #FFFFFFA6;
+    text-align : center;
+    color      : #FFFFFFA6;
 
     >ul {
-      display: flex;
+      display       : flex;
       flex-direction: row;
-      padding-left: 0px;
+      padding-left  : 0px;
 
       li {
-        flex: 1;
+        flex      : 1;
         list-style: none;
 
         a {
@@ -86,47 +86,47 @@
   }
 
   &-main {
-    flex: 1;
+    flex : 1;
     width: 100%;
   }
 
   &-logo {
-    position: relative;
-    display: block;
-    height: @alain-pro-header-height;
+    position    : relative;
+    display     : block;
+    height      : @alain-pro-header-height;
     padding-left: (@menu-collapsed-width - 32px) / 4;
-    overflow: hidden;
-    line-height: @alain-pro-header-height;
-    background: #00000080;
-    transition: all 0.3s;
+    overflow    : hidden;
+    line-height : @alain-pro-header-height;
+    background  : #00000080;
+    transition  : all 0.3s;
 
     img {
-      display: inline-block;
-      height: 32px;
+      display       : inline-block;
+      height        : 32px;
       vertical-align: middle;
     }
 
     h1 {
-      display: inline-block;
-      margin: 0 0 0 12px;
-      color: white;
-      font-weight: 600;
-      font-size: @alain-pro-logo-font-size;
-      font-family: @alain-pro-logo-font-family;
+      display       : inline-block;
+      margin        : 0 0 0 12px;
+      color         : white;
+      font-weight   : 600;
+      font-size     : @alain-pro-logo-font-size;
+      font-family   : @alain-pro-logo-font-family;
       vertical-align: middle;
-      transition: all 0.3s;
+      transition    : all 0.3s;
     }
   }
 
   &-fixed {
     position: fixed;
-    top: 0;
-    left: 0;
+    top     : 0;
+    left    : 0;
 
     @{alain-pro-prefix}__side-nav-wrap {
-      height:~'calc(100vh - @{alain-pro-header-height})';
+      height        :~'calc(100vh - @{alain-pro-header-height})';
       padding-bottom: 24px;
-      overflow-y: scroll;
+      overflow-y    : scroll;
     }
   }
 }
@@ -135,13 +135,13 @@
 @{alain-pro-prefix}__drawer {
   .@{ant-prefix}-drawer {
     &-wrapper-body {
-      height: 100%;
+      height  : 100%;
       overflow: auto;
     }
 
     &-body {
-      height: 100vh;
-      padding: 0;
+      height    : 100vh;
+      padding   : 0;
       overflow-x: hidden;
     }
   }
@@ -150,9 +150,9 @@
 // 当缩进时隐藏站点名称
 @{aside-collapsed-prefix} {
   @{sider-prefix}-logo {
-    display: flex;
+    display        : flex;
     justify-content: center;
-    padding: 0;
+    padding        : 0;
 
     h1 {
       display: none;
@@ -183,7 +183,7 @@
 @{alain-pro-prefix}__light {
   @{sider-prefix} {
     background-color: @alain-pro-light-color;
-    box-shadow: @alain-pro-light-slider-shadow;
+    box-shadow      : @alain-pro-light-slider-shadow;
 
     &-logo {
       background: @alain-pro-light-color;
@@ -208,20 +208,20 @@
   @{sider-prefix}-fixed @{alain-pro-prefix}__side-nav-wrap {
     -webkit-overflow-scrolling: touch;
     // IE
-    -ms-scroll-chaining: chained;
-    -ms-content-zooming: zoom;
-    -ms-scroll-rails: none;
+    -ms-scroll-chaining       : chained;
+    -ms-content-zooming       : zoom;
+    -ms-scroll-rails          : none;
     -ms-content-zoom-limit-min: 100%;
     -ms-content-zoom-limit-max: 500%;
-    -ms-scroll-snap-type: proximity;
-    -ms-scroll-snap-points-x: snaplist(100%, 200%, 300%, 400%, 500%);
-    -ms-overflow-style: none;
+    -ms-scroll-snap-type      : proximity;
+    -ms-scroll-snap-points-x  : snaplist(100%, 200%, 300%, 400%, 500%);
+    -ms-overflow-style        : none;
     // Firefox
-    scrollbar-width: none;
+    scrollbar-width           : none;
 
     // Chrome
     &::-webkit-scrollbar {
-      width: @alain-pro-sider-scrollbar-height;
+      width : @alain-pro-sider-scrollbar-height;
       height: @alain-pro-sider-scrollbar-width;
     }
 
