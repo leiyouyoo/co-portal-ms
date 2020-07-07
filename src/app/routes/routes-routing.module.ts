@@ -21,7 +21,7 @@ const routes: Routes = [
     component: LayoutProComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent, data: { titleI18n: 'app.home', reuse: true } },
+      { path: 'dashboard', component: DashboardComponent, data: { titleI18n: 'app.home', reuse: true, icon: 'snippets' } },
       { path: 'ec', loadChildren: () => import('./ec/ec.module').then((m) => m.ECModule) },
       {
         path: 'exception',

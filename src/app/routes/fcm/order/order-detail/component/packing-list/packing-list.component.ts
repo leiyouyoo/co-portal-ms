@@ -18,7 +18,7 @@ export class PackingListComponent implements OnInit {
       (el.nativeElement as HTMLElement).removeEventListener('click', this.onTbodyClick, true);
       (el.nativeElement as HTMLElement).addEventListener('click', this.onTbodyClick, true);
     }
-  };
+  }
   @Input() bookingId: number;
   @Input() tradeType: number; //贸易类型
   @Input() isEdit: string; //是否是编辑页面
@@ -74,7 +74,7 @@ export class PackingListComponent implements OnInit {
     public dataDictionarySevice: DataDictionaryService,
     public productService: ProductService,
     public cSPExcelService: CSPExcelService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     // this.getAllCurrency();
@@ -287,7 +287,7 @@ export class PackingListComponent implements OnInit {
   currencyList: Array<any> = new Array<any>();
   getAllCurrency() {
     this.currencySevice.getAll({}).subscribe((c) => {
-      console.log(this.currencyList, "currencyList")
+      console.log(this.currencyList, 'currencyList');
       this.currencyList = c.items;
     });
   }
@@ -328,7 +328,7 @@ export class PackingListComponent implements OnInit {
       (res) => {
         this.unitList = res.items;
       },
-      (error) => { },
+      (error) => {},
     );
   }
 
@@ -339,7 +339,7 @@ export class PackingListComponent implements OnInit {
   }
   onFBANoChange(value, listOfDataItem) {
     if (this.listOfData?.length === 1) {
-      const page = this.pageList.find(o => o.fbaNo === listOfDataItem.fbaNo);
+      const page = this.pageList.find((o) => o.fbaNo === listOfDataItem.fbaNo);
       if (page) {
         page.fbaNo = value;
       }
@@ -662,14 +662,11 @@ export class PackingListComponent implements OnInit {
       file: item.file as any,
       url: this.url,
       apiTypes: 1,
-      headers: this.initHeader()
-    }
+      headers: this.initHeader(),
+    };
+    debugger;
 
-    console.log(parame, "parame")
-
-    this.cSPExcelService.analysisExcel(
-      parame
-    ).subscribe(
+    this.cSPExcelService.analysisExcel(parame).subscribe(
       (res: any) => {
         //导入成功
         let list = JSON.parse(res);
@@ -691,135 +688,48 @@ export class PackingListComponent implements OnInit {
   fileName: string = '';
   fileToken: string = '';
   fileType: string = '';
-  formData(formData: FormData) {
-    formData.append('Headers[0].propertyName', 'Sku');
-    formData.append('Headers[0].order', '0');
-    formData.append('Headers[1].propertyName', 'FbaNo');
-    formData.append('Headers[1].order', '1');
-    formData.append('Headers[2].propertyName', 'ReferenceId');
-    formData.append('Headers[2].order', '2');
-    formData.append('Headers[3].propertyName', 'CommodityEnglishDesc');
-    formData.append('Headers[3].order', '3');
-    formData.append('Headers[4].propertyName', 'CommodityChineseDesc');
-    formData.append('Headers[4].order', '4');
-    formData.append('Headers[5].propertyName', 'Brand');
-    formData.append('Headers[5].order', '5');
-    formData.append('Headers[6].propertyName', 'Material');
-    formData.append('Headers[6].order', '6');
-    formData.append('Headers[7].propertyName', 'Uses');
-    formData.append('Headers[7].order', '7');
-    formData.append('Headers[8].propertyName', 'Model');
-    formData.append('Headers[8].order', '8');
-    formData.append('Headers[9].propertyName', 'HsCode');
-    formData.append('Headers[9].order', '9');
-    formData.append('Headers[10].propertyName', 'Quantity');
-    formData.append('Headers[10].order', '10');
-    formData.append('Headers[11].propertyName', 'Unit');
-    formData.append('Headers[11].order', '11');
-    formData.append('Headers[12].propertyName', 'UnitPriceValue');
-    formData.append('Headers[12].order', '12');
-    formData.append('Headers[13].propertyName', 'TotalPriceValue');
-    formData.append('Headers[13].order', '13');
-    formData.append('Headers[14].propertyName', 'ImageId');
-    formData.append('Headers[14].order', '14');
-    formData.append('Headers[15].propertyName', 'IsContainsBattery');
-    formData.append('Headers[15].order', '15');
-    formData.append('Headers[16].propertyName', 'Asin');
-    formData.append('Headers[16].order', '16');
-    formData.append('Headers[17].propertyName', 'Ctns');
-    formData.append('Headers[17].order', '17');
-    formData.append('Headers[18].propertyName', 'QuantitiesCarton');
-    formData.append('Headers[18].order', '18');
-    formData.append('Headers[19].propertyName', 'Length');
-    formData.append('Headers[19].order', '19');
-    formData.append('Headers[20].propertyName', 'Width');
-    formData.append('Headers[20].order', '20');
-    formData.append('Headers[21].propertyName', 'Height');
-    formData.append('Headers[21].order', '21');
-    formData.append('Headers[22].propertyName', 'Cbm');
-    formData.append('Headers[22].order', '22');
-    formData.append('Headers[23].propertyName', 'GrossWeight');
-    formData.append('Headers[23].order', '23');
-    formData.append('Headers[24].propertyName', 'NetWeight');
-    formData.append('Headers[24].order', '24');
-  }
 
   initHeader() {
-    let arr = []
-    arr.push({ 'Headers[0].propertyName': 'Sku' });
-    arr.push({ 'Headers[0].order': '0' });
-    arr.push({ 'Headers[1].propertyName': 'FbaNo' });
-    arr.push({ 'Headers[1].order': '1' });
-    arr.push({ 'Headers[2].propertyName': 'ReferenceId' });
-    arr.push({ 'Headers[2].order': '2' });
-    arr.push({ 'Headers[3].propertyName': 'CommodityEnglishDesc' });
-    arr.push({ 'Headers[3].order': '3' });
-    arr.push({ 'Headers[4].propertyName': 'CommodityChineseDesc' });
-    arr.push({ 'Headers[4].order': '4' });
-    arr.push({ 'Headers[5].propertyName': 'Brand' });
-    arr.push({ 'Headers[5].order': '5' });
-    arr.push({ 'Headers[6].propertyName': 'Material' });
-    arr.push({ 'Headers[6].order': '6' });
-    arr.push({ 'Headers[7].propertyName': 'Uses' });
-    arr.push({ 'Headers[7].order': '7' });
-    arr.push({ 'Headers[8].propertyName': 'Model' });
-    arr.push({ 'Headers[8].order': '8' });
-    arr.push({ 'Headers[9].propertyName': 'HsCode' });
-    arr.push({ 'Headers[9].order': '9' });
-    arr.push({ 'Headers[10].propertyName': 'Quantity' });
-    arr.push({ 'Headers[10].order': '10' });
-    arr.push({ 'Headers[11].propertyName': 'Unit' });
-    arr.push({ 'Headers[11].order': '11' });
-    arr.push({ 'Headers[12].propertyName': 'UnitPriceValue' });
-    arr.push({ 'Headers[12].order': '12' });
-    arr.push({ 'Headers[13].propertyName': 'TotalPriceValue' });
-    arr.push({ 'Headers[13].order': '13' });
-    arr.push({ 'Headers[14].propertyName': 'ImageId' });
-    arr.push({ 'Headers[14].order': '14' });
-    arr.push({ 'Headers[15].propertyName': 'IsContainsBattery' });
-    arr.push({ 'Headers[15].order': '15' });
-    arr.push({ 'Headers[16].propertyName': 'Asin' });
-    arr.push({ 'Headers[16].order': '16' });
-    arr.push({ 'Headers[17].propertyName': 'Ctns' });
-    arr.push({ 'Headers[17].order': '17' });
-    arr.push({ 'Headers[18].propertyName': 'QuantitiesCarton' });
-    arr.push({ 'Headers[18].order': '18' });
-    arr.push({ 'Headers[19].propertyName': 'Length' });
-    arr.push({ 'Headers[19].order': '19' });
-    arr.push({ 'Headers[20].propertyName': 'Width' });
-    arr.push({ 'Headers[20].order': '20' });
-    arr.push({ 'Headers[21].propertyName': 'Height' });
-    arr.push({ 'Headers[21].order': '21' });
-    arr.push({ 'Headers[22].propertyName': 'Cbm' });
-    arr.push({ 'Headers[22].order': '22' });
-    arr.push({ 'Headers[23].propertyName': 'GrossWeight' });
-    arr.push({ 'Headers[23].order': '23' });
-    arr.push({ 'Headers[24].propertyName': 'NetWeight' });
-    arr.push({ 'Headers[24].order': '24' });
+    let arr = [];
+    arr.push({ propertyName: 'Sku', order: '0' });
+    arr.push({ propertyName: 'FbaNo', order: '1' });
+    arr.push({ propertyName: 'ReferenceId', order: '2' });
+    arr.push({ propertyName: 'CommodityEnglishDesc', order: '3' });
+    arr.push({ propertyName: 'CommodityChineseDesc', order: '4' });
+    arr.push({ propertyName: 'Brand', order: '5' });
+    arr.push({ propertyName: 'Material', order: '6' });
+    arr.push({ propertyName: 'Uses', order: '7' });
+    arr.push({ propertyName: 'Model', order: '8' });
+    arr.push({ propertyName: 'HsCode', order: '9' });
+    arr.push({ propertyName: 'Quantity', order: '10' });
+    arr.push({ propertyName: 'Unit', order: '11' });
+    arr.push({ propertyName: 'UnitPriceValue', order: '12' });
+    arr.push({ propertyName: 'TotalPriceValue', order: '13' });
+    arr.push({ propertyName: 'ImageId', order: '14' });
+    arr.push({ propertyName: 'IsContainsBattery', order: '15' });
+    arr.push({ propertyName: 'Asin', order: '16' });
+    arr.push({ propertyName: 'Ctns', order: '17' });
+    arr.push({ propertyName: 'QuantitiesCarton', order: '18' });
+    arr.push({ propertyName: 'Length', order: '19' });
+    arr.push({ propertyName: 'Width', order: '20' });
+    arr.push({ propertyName: 'Height', order: '21' });
+    arr.push({ propertyName: 'Cbm', order: '22' });
+    arr.push({ propertyName: 'GrossWeight', order: '23' });
+    arr.push({ propertyName: 'NetWeight', order: '24' });
     return arr;
   }
 
-
   downExcel() {
-    const formData = new FormData();
-    formData.append('Url', this.downUrl);
-    formData.append('ApiTypes', '1');
-    formData.append('SheetName', 'Customs clearance invioce 、 Pac');
-    formData.append('TemplateName', 'FBA-DownLoad-Template');
-    formData.append('ParametersJsonStr', JSON.stringify({ id: this.bookingId }));
-    this.formData(formData);
-    formData.append('Headers[24].order', '24');
-
     let parame = {
       url: this.downUrl,
       apiTypes: 1,
       sheetName: 'Customs clearance invioce 、 Pac',
-      templateName: "FBA-DownLoad-Template",
+      templateName: 'FBA-DownLoad-Template',
       parametersJsonStr: JSON.stringify({ id: this.bookingId }),
-      headers: this.initHeader()
-    }
+      headers: this.initHeader(),
+    };
 
-    console.log(parame, "parame")
+    console.log(parame, 'parame');
 
     this.cSPExcelService.cusClearanceInvoiceExportExcelAsync(parame).subscribe(
       (res: any) => {
@@ -842,9 +752,9 @@ export class PackingListComponent implements OnInit {
   imghandleChange({ file, fileList, type }: { [key: string]: any }, data: any) {
     if (type == 'success') {
       //文件上传成功
-      console.log(file, "file")
+      console.log(file, 'file');
       data.imageId = file.response.fileId;
-      console.log(data.imageId, "iamgeID")
+      console.log(data.imageId, 'iamgeID');
       this.picList1.push({
         uid: file.id,
         name: file.name,
@@ -856,7 +766,7 @@ export class PackingListComponent implements OnInit {
   }
   downTemplate() {
     let name = 'FBA-UpLoad-Template';
-    window.open(environment.SERVER_URL + '/Storage/ExcelTemplate/Get?name=' + name)
+    window.open(environment.SERVER_URL + '/Storage/ExcelTemplate/Get?name=' + name);
   }
   validateSku() {
     for (let i = 0; i < this.listOfData.length; i++) {
@@ -872,35 +782,26 @@ export class PackingListComponent implements OnInit {
   }
   onTbodyClick = (event) => {
     if (this.pageList?.length) {
-
       this.modalService.confirm({
         nzTitle: `<i>${'Clear packing list first'}?</i>`,
         nzCancelText: 'Cancel',
         nzIconType: 'info-circle',
         nzOkType: 'primary',
         nzOkText: 'Confirm',
-        nzOnCancel: () => {
-        },
+        nzOnCancel: () => {},
         nzOnOk: () => {
           this.pageList = [];
         },
       });
       return event.stopPropagation();
     }
-  }
+  };
   downloadExcel(FileName: string, FileToken: string, FileType: string) {
     return window.open(
-      environment.SERVER_URL +
-      '/Storage/Excel/DownloadExcel?FileName=' +
-      FileName +
-      '&&FileToken=' +
-      FileToken +
-      '&&FileType=' +
-      FileType,
+      environment.SERVER_URL + '/Storage/Excel/DownloadExcel?FileName=' + FileName + '&&FileToken=' + FileToken + '&&FileType=' + FileType,
     );
   }
 }
-
 
 export interface cargo {
   grossWeight?: number;
