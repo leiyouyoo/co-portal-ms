@@ -189,7 +189,7 @@
                 </nz-input-number>
               </div>
             </td>
-            <td style="min-width: 150px;">
+            <td style="min-width: 150px;width:200px">
               <div class="table-input">
                 <nz-upload *ngIf="!data.imageId" nzListType="picture"
                   nzFileType="image/png,image/jpeg,image/gif,image/bmp" (nzChange)="imghandleChange($event, data)"
@@ -198,6 +198,9 @@
                     <i nz-icon nzType="upload"></i><span>{{ 'Upload' | translate }}</span>
                   </button>
                 </nz-upload>
+
+                {{ data.imageId }}
+
               </div>
               <img *ngIf="data.imageId"
                 [src]="imgUrl + '/Storage/File/GetDownLoadFile?fileId=' + data.imageId + '&Handler=image'" />

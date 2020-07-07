@@ -6,7 +6,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { ProductService } from 'src/app/service/csp/product.service';
 import { CurrencyService, DataDictionaryService, CSPExcelService } from '@co/cds';
 import { environment } from 'src/environments/environment';
-
 @Component({
   selector: 'booking-packing-list',
   templateUrl: './packing-list.component.html',
@@ -79,8 +78,8 @@ export class PackingListComponent implements OnInit {
 
   ngOnInit() {
     // this.getAllCurrency();
-    // this.selUnit('003');
-    // this.declareCurrency.emit(11); 
+    this.selUnit('003');
+    this.declareCurrency.emit(11);
   }
   isNoFBANO: number;
   isNoReference: number;
@@ -288,6 +287,7 @@ export class PackingListComponent implements OnInit {
   currencyList: Array<any> = new Array<any>();
   getAllCurrency() {
     this.currencySevice.getAll({}).subscribe((c) => {
+      console.log(this.currencyList, "currencyList")
       this.currencyList = c.items;
     });
   }
@@ -652,13 +652,24 @@ export class PackingListComponent implements OnInit {
     }
   }
   customReq = (item: UploadXHRArgs) => {
-    const formData = new FormData();
-    // tslint:disable-next-line:no-any
-    formData.append('file', item.file as any);
-    formData.append('Url', this.url);
-    formData.append('ApiTypes', '1');
-    this.formData(formData);
-    this.cSPExcelService.analysisExcel(formData as any).subscribe(
+    // const formData = new FormData();
+    // formData.append('file', item.file as any);
+    // formData.append('Url', this.url);
+    // formData.append('ApiTypes', '1');
+    // this.formData(formData);
+
+    let parame = {
+      file: item.file as any,
+      url: this.url,
+      apiTypes: 1,
+      headers: this.initHeader()
+    }
+
+    console.log(parame, "parame")
+
+    this.cSPExcelService.analysisExcel(
+      parame
+    ).subscribe(
       (res: any) => {
         //导入成功
         let list = JSON.parse(res);
@@ -732,6 +743,63 @@ export class PackingListComponent implements OnInit {
     formData.append('Headers[24].propertyName', 'NetWeight');
     formData.append('Headers[24].order', '24');
   }
+
+  initHeader() {
+    let arr = []
+    arr.push({ 'Headers[0].propertyName': 'Sku' });
+    arr.push({ 'Headers[0].order': '0' });
+    arr.push({ 'Headers[1].propertyName': 'FbaNo' });
+    arr.push({ 'Headers[1].order': '1' });
+    arr.push({ 'Headers[2].propertyName': 'ReferenceId' });
+    arr.push({ 'Headers[2].order': '2' });
+    arr.push({ 'Headers[3].propertyName': 'CommodityEnglishDesc' });
+    arr.push({ 'Headers[3].order': '3' });
+    arr.push({ 'Headers[4].propertyName': 'CommodityChineseDesc' });
+    arr.push({ 'Headers[4].order': '4' });
+    arr.push({ 'Headers[5].propertyName': 'Brand' });
+    arr.push({ 'Headers[5].order': '5' });
+    arr.push({ 'Headers[6].propertyName': 'Material' });
+    arr.push({ 'Headers[6].order': '6' });
+    arr.push({ 'Headers[7].propertyName': 'Uses' });
+    arr.push({ 'Headers[7].order': '7' });
+    arr.push({ 'Headers[8].propertyName': 'Model' });
+    arr.push({ 'Headers[8].order': '8' });
+    arr.push({ 'Headers[9].propertyName': 'HsCode' });
+    arr.push({ 'Headers[9].order': '9' });
+    arr.push({ 'Headers[10].propertyName': 'Quantity' });
+    arr.push({ 'Headers[10].order': '10' });
+    arr.push({ 'Headers[11].propertyName': 'Unit' });
+    arr.push({ 'Headers[11].order': '11' });
+    arr.push({ 'Headers[12].propertyName': 'UnitPriceValue' });
+    arr.push({ 'Headers[12].order': '12' });
+    arr.push({ 'Headers[13].propertyName': 'TotalPriceValue' });
+    arr.push({ 'Headers[13].order': '13' });
+    arr.push({ 'Headers[14].propertyName': 'ImageId' });
+    arr.push({ 'Headers[14].order': '14' });
+    arr.push({ 'Headers[15].propertyName': 'IsContainsBattery' });
+    arr.push({ 'Headers[15].order': '15' });
+    arr.push({ 'Headers[16].propertyName': 'Asin' });
+    arr.push({ 'Headers[16].order': '16' });
+    arr.push({ 'Headers[17].propertyName': 'Ctns' });
+    arr.push({ 'Headers[17].order': '17' });
+    arr.push({ 'Headers[18].propertyName': 'QuantitiesCarton' });
+    arr.push({ 'Headers[18].order': '18' });
+    arr.push({ 'Headers[19].propertyName': 'Length' });
+    arr.push({ 'Headers[19].order': '19' });
+    arr.push({ 'Headers[20].propertyName': 'Width' });
+    arr.push({ 'Headers[20].order': '20' });
+    arr.push({ 'Headers[21].propertyName': 'Height' });
+    arr.push({ 'Headers[21].order': '21' });
+    arr.push({ 'Headers[22].propertyName': 'Cbm' });
+    arr.push({ 'Headers[22].order': '22' });
+    arr.push({ 'Headers[23].propertyName': 'GrossWeight' });
+    arr.push({ 'Headers[23].order': '23' });
+    arr.push({ 'Headers[24].propertyName': 'NetWeight' });
+    arr.push({ 'Headers[24].order': '24' });
+    return arr;
+  }
+
+
   downExcel() {
     const formData = new FormData();
     formData.append('Url', this.downUrl);
@@ -741,7 +809,19 @@ export class PackingListComponent implements OnInit {
     formData.append('ParametersJsonStr', JSON.stringify({ id: this.bookingId }));
     this.formData(formData);
     formData.append('Headers[24].order', '24');
-    this.cSPExcelService.cusClearanceInvoiceExportExcelAsync(formData as any).subscribe(
+
+    let parame = {
+      url: this.downUrl,
+      apiTypes: 1,
+      sheetName: 'Customs clearance invioce 、 Pac',
+      templateName: "FBA-DownLoad-Template",
+      parametersJsonStr: JSON.stringify({ id: this.bookingId }),
+      headers: this.initHeader()
+    }
+
+    console.log(parame, "parame")
+
+    this.cSPExcelService.cusClearanceInvoiceExportExcelAsync(parame).subscribe(
       (res: any) => {
         if (res.isSuccess) {
           this.fileName = res.fileName;
@@ -762,7 +842,9 @@ export class PackingListComponent implements OnInit {
   imghandleChange({ file, fileList, type }: { [key: string]: any }, data: any) {
     if (type == 'success') {
       //文件上传成功
+      console.log(file, "file")
       data.imageId = file.response.fileId;
+      console.log(data.imageId, "iamgeID")
       this.picList1.push({
         uid: file.id,
         name: file.name,
