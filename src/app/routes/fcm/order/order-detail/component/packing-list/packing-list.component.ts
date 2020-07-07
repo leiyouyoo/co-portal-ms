@@ -651,19 +651,12 @@ export class PackingListComponent implements OnInit {
     }
   }
   customReq = (item: UploadXHRArgs) => {
-    // const formData = new FormData();
-    // formData.append('file', item.file as any);
-    // formData.append('Url', this.url);
-    // formData.append('ApiTypes', '1');
-    // this.formData(formData);
-
     let parame = {
       file: item.file as any,
       url: this.url,
       apiTypes: 1,
       headers: this.initHeader(),
     };
-    debugger;
 
     this.cSPExcelService.analysisExcel(parame).subscribe(
       (res: any) => {
@@ -689,32 +682,59 @@ export class PackingListComponent implements OnInit {
   fileType: string = '';
 
   initHeader() {
-    let arr = [];
-    arr.push({ propertyName: 'Sku', order: '0' });
-    arr.push({ propertyName: 'FbaNo', order: '1' });
-    arr.push({ propertyName: 'ReferenceId', order: '2' });
-    arr.push({ propertyName: 'CommodityEnglishDesc', order: '3' });
-    arr.push({ propertyName: 'CommodityChineseDesc', order: '4' });
-    arr.push({ propertyName: 'Brand', order: '5' });
-    arr.push({ propertyName: 'Material', order: '6' });
-    arr.push({ propertyName: 'Uses', order: '7' });
-    arr.push({ propertyName: 'Model', order: '8' });
-    arr.push({ propertyName: 'HsCode', order: '9' });
-    arr.push({ propertyName: 'Quantity', order: '10' });
-    arr.push({ propertyName: 'Unit', order: '11' });
-    arr.push({ propertyName: 'UnitPriceValue', order: '12' });
-    arr.push({ propertyName: 'TotalPriceValue', order: '13' });
-    arr.push({ propertyName: 'ImageId', order: '14' });
-    arr.push({ propertyName: 'IsContainsBattery', order: '15' });
-    arr.push({ propertyName: 'Asin', order: '16' });
-    arr.push({ propertyName: 'Ctns', order: '17' });
-    arr.push({ propertyName: 'QuantitiesCarton', order: '18' });
-    arr.push({ propertyName: 'Length', order: '19' });
-    arr.push({ propertyName: 'Width', order: '20' });
-    arr.push({ propertyName: 'Height', order: '21' });
-    arr.push({ propertyName: 'Cbm', order: '22' });
-    arr.push({ propertyName: 'GrossWeight', order: '23' });
-    arr.push({ propertyName: 'NetWeight', order: '24' });
+    // let arr = [];
+    // arr.push({ propertyName: 'Sku', order: '0' });
+    // arr.push({ propertyName: 'FbaNo', order: '1' });
+    // arr.push({ propertyName: 'ReferenceId', order: '2' });
+    // arr.push({ propertyName: 'CommodityEnglishDesc', order: '3' });
+    // arr.push({ propertyName: 'CommodityChineseDesc', order: '4' });
+    // arr.push({ propertyName: 'Brand', order: '5' });
+    // arr.push({ propertyName: 'Material', order: '6' });
+    // arr.push({ propertyName: 'Uses', order: '7' });
+    // arr.push({ propertyName: 'Model', order: '8' });
+    // arr.push({ propertyName: 'HsCode', order: '9' });
+    // arr.push({ propertyName: 'Quantity', order: '10' });
+    // arr.push({ propertyName: 'Unit', order: '11' });
+    // arr.push({ propertyName: 'UnitPriceValue', order: '12' });
+    // arr.push({ propertyName: 'TotalPriceValue', order: '13' });
+    // arr.push({ propertyName: 'ImageId', order: '14' });
+    // arr.push({ propertyName: 'IsContainsBattery', order: '15' });
+    // arr.push({ propertyName: 'Asin', order: '16' });
+    // arr.push({ propertyName: 'Ctns', order: '17' });
+    // arr.push({ propertyName: 'QuantitiesCarton', order: '18' });
+    // arr.push({ propertyName: 'Length', order: '19' });
+    // arr.push({ propertyName: 'Width', order: '20' });
+    // arr.push({ propertyName: 'Height', order: '21' });
+    // arr.push({ propertyName: 'Cbm', order: '22' });
+    // arr.push({ propertyName: 'GrossWeight', order: '23' });
+    // arr.push({ propertyName: 'NetWeight', order: '24' });
+    let arr = [
+      { propertyName: 'Sku', order: '0' },
+      { propertyName: 'FbaNo', order: '1' },
+      { propertyName: 'ReferenceId', order: '2' },
+      { propertyName: 'CommodityEnglishDesc', order: '3' },
+      { propertyName: 'CommodityChineseDesc', order: '4' },
+      { propertyName: 'Brand', order: '5' },
+      { propertyName: 'Material', order: '6' },
+      { propertyName: 'Uses', order: '7' },
+      { propertyName: 'Model', order: '8' },
+      { propertyName: 'HsCode', order: '9' },
+      { propertyName: 'Quantity', order: '10' },
+      { propertyName: 'Unit', order: '11' },
+      { propertyName: 'UnitPriceValue', order: '12' },
+      { propertyName: 'TotalPriceValue', order: '13' },
+      { propertyName: 'ImageId', order: '14' },
+      { propertyName: 'IsContainsBattery', order: '15' },
+      { propertyName: 'Asin', order: '16' },
+      { propertyName: 'Ctns', order: '17' },
+      { propertyName: 'QuantitiesCarton', order: '18' },
+      { propertyName: 'Length', order: '19' },
+      { propertyName: 'Width', order: '20' },
+      { propertyName: 'Height', order: '21' },
+      { propertyName: 'Cbm', order: '22' },
+      { propertyName: 'GrossWeight', order: '23' },
+      { propertyName: 'NetWeight', order: '24' }
+    ]
     return arr;
   }
 
@@ -727,9 +747,6 @@ export class PackingListComponent implements OnInit {
       parametersJsonStr: JSON.stringify({ id: this.bookingId }),
       headers: this.initHeader(),
     };
-
-    console.log(parame, 'parame');
-
     this.cSPExcelService.cusClearanceInvoiceExportExcelAsync(parame).subscribe(
       (res: any) => {
         if (res.isSuccess) {
@@ -752,13 +769,13 @@ export class PackingListComponent implements OnInit {
     if (type == 'success') {
       //文件上传成功
       console.log(file, 'file');
-      data.imageId = file.response.fileId;
+      data.imageId = file.response.result.fileId || file.response.fileId;
       console.log(data.imageId, 'iamgeID');
       this.picList1.push({
         uid: file.id,
         name: file.name,
         status: file.status,
-        url: file.response.url,
+        url: file.response.result.url || file.response.url,
         thumbUrl: file.thumbUrl,
       });
     }
