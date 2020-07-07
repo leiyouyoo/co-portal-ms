@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AddOrderComponent } from '../add-order/add-order.component';
 import { STColumn } from '@co/cbc';
-import {FormBuilder, FormGroup} from "@angular/forms";
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
@@ -48,39 +47,11 @@ export class OrderListComponent implements OnInit {
     { title: '注册时间', type: 'date', index: 'registered' },
   ];
 
-  validateForm: FormGroup;
-  openBookings = false;
-  loading = false;
 
-  constructor( public fb : FormBuilder ) {}
+  constructor() {}
 
-  onStartChange() {
-    this.validateForm.patchValue({ creatDate: null });
-  }
-  ngOnInit() {
-    this.validateForm = this.fb.group({
-      creatDate: [null],
-    });
-  }
-  closeBooking(){
-    this.openBookings = false;
-  }
+  ngOnInit(){}
 
-  showBooking(): void {
-    this.openBookings = true;
-    this.validateForm.patchValue({ creatDate: null });
-  }
-
-  handleOk(): void {
-    this.loading = true;
-    console.log(this.validateForm.value.creatDate);
-    this.closeBooking();
-    this.loading = false;
-  }
-  showModal(): void {
-    this.isVisible = true;
-  }
-}
   showModal(type): void {
     if (type === 1) {
       this.addOrderComponent.isVisible = true;
