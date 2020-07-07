@@ -10,7 +10,7 @@ import { Planet, SwitchModes, GlobalEventDispatcher, ApplicationStatus, PlanetAp
 
 @Component({
   selector: 'app-root',
-  template: ` <router-outlet></router-outlet> `,
+  template: ` <router-outlet></router-outlet>`,
 })
 export class AppComponent implements OnInit {
   activeAppNames: string[] = [];

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AddOrderComponent } from '../add-order/add-order.component';
 import { STColumn } from '@co/cbc';
+
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
@@ -47,10 +48,9 @@ export class OrderListComponent implements OnInit {
     { title: '注册时间', type: 'date', index: 'registered' },
   ];
 
-
   constructor() {}
 
-  ngOnInit(){}
+  ngOnInit() {}
 
   showModal(type): void {
     if (type === 1) {

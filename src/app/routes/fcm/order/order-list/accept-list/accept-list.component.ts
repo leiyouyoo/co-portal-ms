@@ -15,6 +15,7 @@ export class AcceptListComponent implements OnInit {
       address: 'New York No. 1 Lake Park';
       phone: '1212';
       date: 'date';
+      aaa: 'zzzz';
     },
     {
       id: '2';
@@ -23,6 +24,7 @@ export class AcceptListComponent implements OnInit {
       address: 'New York No. 1 Lake Park';
       phone: '1212';
       date: 'date';
+      aaa: 'zzzz';
     },
     {
       id: '3';
@@ -31,15 +33,22 @@ export class AcceptListComponent implements OnInit {
       address: 'New York No. 1 Lake Park';
       phone: '1212';
       date: 'date';
+      aaa: 'zzzz';
     },
   ];
   columns: STColumn[] = [
-    { title: '编号', index: 'id', width: 80 },
-    { title: '头像', type: 'img', width: 80, index: 'picture.thumbnail' },
-    { title: '邮箱', index: 'email', width: 80 },
-    { title: '电话', index: 'phone', width: 80 },
-    { title: { text: '佣金', optional: '（单位：元）', optionalHelp: '计算公式=订单金额 * 0.6%' }, index: 'price', type: 'currency' },
-    { title: '注册时间', type: 'date', index: 'registered' },
+    { title: '业务进度', index: 'id', width: 120 },
+    { title: '操作进度', type: 'img', width: 120 },
+    { title: '承运人', index: 'email', width: 120 },
+    { title: '报关行', index: 'phone', width: 120 },
+    { title: '清关行', index: 'aaa', width: 120 },
+    { title: '代理', index: 'registered', width: 120 },
+    { title: '业务进度', index: 'id', width: 120 },
+    { title: '操作进度', type: 'img', width: 120 },
+    { title: '承运人', index: 'email', width: 120 },
+    { title: '报关行', index: 'phone', width: 120 },
+    { title: '清关行', index: 'aaa', width: 120 },
+    { title: '代理', index: 'registered', width: 120 },
   ];
   constructor() {}
 
