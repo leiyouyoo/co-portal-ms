@@ -46,9 +46,12 @@ export class OrderListComponent implements OnInit {
     { title: { text: '佣金', optional: '（单位：元）', optionalHelp: '计算公式=订单金额 * 0.6%' }, index: 'price', type: 'currency' },
     { title: '注册时间', type: 'date', index: 'registered' },
   ];
+
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(){}
+
   showModal(type): void {
     if (type === 1) {
       this.addOrderComponent.isVisible = true;
