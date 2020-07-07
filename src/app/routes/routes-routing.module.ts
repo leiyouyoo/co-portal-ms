@@ -13,7 +13,6 @@ import { UserLockComponent } from './passport/lock/lock.component';
 
 import { EmptyComponent } from 'ngx-planet';
 import { LoginComponent } from './passport/login.component';
-import { QrCodeInfoComponent } from './qr-code-info/qr-code-info.component';
 
 const routes: Routes = [
   {
@@ -61,7 +60,6 @@ const routes: Routes = [
     ],
   },
   // 单页不包裹Layout
-  { path: 'goQrcode', component: QrCodeInfoComponent },
   { path: 'callback/:type', component: CallbackComponent },
   { path: '**', component: EmptyComponent },
 ];
