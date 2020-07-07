@@ -80,8 +80,8 @@
             </td>
             <td style="min-width: 150px;">
               <div class="table-input">
-                <input nz-input [(ngModel)]="data.sku" (input)="onInput($event.target?.value)" [nzAutocomplete]="auto"
-                  (blur)="validateSku()" />
+                <!-- (input)="onInput($event.target?.value)" [nzAutocomplete]="auto" -->
+                <input nz-input [(ngModel)]="data.sku" (blur)="validateSku()" />
                 <nz-autocomplete nzBackfill #auto>
                   <nz-auto-option *ngFor="let option of options" [nzValue]="option.sku">
                     <div (click)="getSku(option, data, i)">{{ option.sku }}</div>
