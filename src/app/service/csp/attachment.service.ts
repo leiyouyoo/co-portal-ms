@@ -1,15 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { BaseApi, BaseUrl, DELETE, GET, Payload, POST, PUT } from '@co/common';
-import { EntityDto, ListResultDto, PagedResultDto } from '@co/core';
+import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
+import { ListResultDto, PagedResultDto } from '@co/core';
 
 import { TestDtoValidateInput,HttpResponseMessage,AttachmentListDto,AttachmentDto,BatchCreateAttachmentInput,CreateAttachmentInput,ShareableContactModel,AttachmentForIcpDto, } from './csp.types';
 
 @BaseUrl('/csp/Attachment')
 @Injectable({ providedIn: 'root' })
 export class AttachmentService extends BaseApi {
-
+  constructor(injector: Injector) {
+    super(injector);
+  }
+  
    
     /**
      * @param url /CSP/Attachment/TestDtoValidate

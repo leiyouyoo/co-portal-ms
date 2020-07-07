@@ -330,5 +330,19 @@
   "S/I Cut-Off Date": "补料截止时间",
   "VGM Cut-Off Date": "VGM截止日期",
   "Available Date": "可用日期",
-  "Last Free Date": "免堆期"
+  "Last Free Date": "免堆期",
+  "Putaway date is required": "入仓时间是必填",
+  "Basic Information": "基本信息",
+  "salesman" : "业务员",
+  "Customers" : "客户",
+  "Create Order Date": "下单日期",
+  "Create Order people": "下单人",
+  "Shipment info": "运单信息",
+  "FBA number": "FBA号",
+  "Express number": "快递号",
+  "Cabinet number": "柜号",
+  "Cabinet type": "柜型",
+  "Course name/voyage": "航名/航次",
+  "Goods describe": "货物描述",
+  "Remark": "备注"
 }

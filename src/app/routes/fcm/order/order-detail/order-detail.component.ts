@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { EnterWarehouseModalComponent } from './component/enter-warehouse-modal/enter-warehouse-modal.component';
 
 @Component({
   selector: 'app-order-detail',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order-detail.component.less']
 })
 export class OrderDetailComponent implements OnInit {
+
+  @ViewChild(EnterWarehouseModalComponent, { static: true })
+  enterWarehouseModalComponent: EnterWarehouseModalComponent;
 
   shipmentData: any = {
     "items": [
@@ -248,13 +252,6 @@ export class OrderDetailComponent implements OnInit {
         "id": "36105019-34bf-ea11-aac7-6cb3110f8be8"
       }]
   }
-
-  listData: any = [
-    {
-      checked: true,
-      label: 111
-    }
-  ]
 
   constructor() { }
 

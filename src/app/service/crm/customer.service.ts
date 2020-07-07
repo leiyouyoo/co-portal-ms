@@ -1,15 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { BaseApi, BaseUrl, DELETE, GET, Payload, POST, PUT } from '@co/common';
-import { EntityDto, ListResultDto, PagedResultDto } from '@co/core';
+import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
+import { ListResultDto, PagedResultDto } from '@co/core';
 
-import { CustomerDto,CustomerListDto,MergeCustomerListInput,ExternalPartnerAndCustomerDto,CreateOrUpdateCustomerInput,CustomerOutput,GetCustomerByNameInput,CheckDeleteOutput,FollowCustomerInput,AssignCustomerInput,CustomerAndPartnerListDto,CustomerAuthenticateDto,AuditCustomerInput,MergeCustomerInput, } from './crm.types';
+import { CustomerDto,CustomerListDto,MergeCustomerListInput,GetAllForUiPickerInput,ExternalPartnerAndCustomerDto,SearchCustomerOutput,CustomerOutput,CreateOrUpdateCustomerInput,GetCustomerByNameInput,CheckDeleteOutput,FollowCustomerInput,AssignCustomerInput,CustomerAndPartnerListDto,CustomerAuthenticateDto,AuditCustomerInput,MergeCustomerInput, } from './crm.types';
 
 @BaseUrl('/crm/Customer')
 @Injectable({ providedIn: 'root' })
 export class CustomerService extends BaseApi {
-
+  constructor(injector: Injector) {
+    super(injector);
+  }
+  
    
     /**
      * @param url /CRM/Customer/Get
@@ -50,6 +53,21 @@ export class CustomerService extends BaseApi {
     getAllForMerge(
         @Payload
         _req:MergeCustomerListInput
+
+    ): Observable<PagedResultDto<CustomerListDto>> {
+        return null as any
+    }
+
+ 
+    /**
+     * @param url /CRM/Customer/GetAllForUiPicker
+     * 获取客户列表
+     */
+
+    @POST('getAllForUiPicker')
+    getAllForUiPicker(
+        @Payload
+        _req:GetAllForUiPickerInput
 
     ): Observable<PagedResultDto<CustomerListDto>> {
         return null as any
@@ -172,6 +190,21 @@ export class CustomerService extends BaseApi {
         _req: {customerType?:number,name?:string,sorting?:string,maxResultCount?:number,skipCount?:number} 
 
     ): Observable<PagedResultDto<CustomerListDto>> {
+        return null as any
+    }
+
+ 
+    /**
+     * @param url /CRM/Customer/GetForwardingCompanies
+     * 分页搜索同行客户
+     */
+
+    @GET('getForwardingCompanies')
+    getForwardingCompanies(
+        @Payload
+        _req: {searchText?:string,includeDefault?:boolean,sorting?:string,maxResultCount?:number,skipCount?:number} 
+
+    ): Observable<PagedResultDto<SearchCustomerOutput>> {
         return null as any
     }
 
@@ -367,6 +400,21 @@ export class CustomerService extends BaseApi {
         _req: {customerType:number,name?:string} 
 
     ): Observable<ListResultDto<CustomerListDto>> {
+        return null as any
+    }
+
+ 
+    /**
+     * @param url /CRM/Customer/GetDepartmentCustomer
+     * 获取部门所有人员的客户
+     */
+
+    @GET('getDepartmentCustomer')
+    getDepartmentCustomer(
+        @Payload
+        _req: {name?:string,customerId?:string,sorting?:string,maxResultCount?:number,skipCount?:number} 
+
+    ): Observable<PagedResultDto<CustomerListDto>> {
         return null as any
     }
 

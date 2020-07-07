@@ -4,7 +4,7 @@ import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '@env/environment';
-
+import { ResponseInterceptor } from '@co/common';
 // #region default language
 // 参考：https://ng-alain.com/docs/i18n
 import { default as ngLang } from '@angular/common/locales/zh';
@@ -95,7 +95,6 @@ import { RoutesModule } from './routes/routes.module';
 import { SharedModule } from './shared/shared.module';
 import { NgxPlanetModule } from '../../packages/planet/src/public-api';
 import { STWidgetModule } from './shared/st-widget/st-widget.module';
-import { ResponseInterceptor } from './core/net/response-interceptor.service';
 
 import { CoAuthModule } from '@co/auth';
 

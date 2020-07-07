@@ -166,6 +166,7 @@ export class loginMainComponent implements OnInit {
 
     this.httpService.get(`/platform/Session/GetCurrentUserConfiguration`).subscribe(
       (data: any) => {
+        debugger;
         window.localStorage.setItem('ICPUserMsg', JSON.stringify(data));
         try {
           data.nav.menus.MainMenu.items.sort(this.sortItem);

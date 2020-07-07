@@ -1,15 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { BaseApi, BaseUrl, DELETE, GET, Payload, POST, PUT } from '@co/common';
-import { EntityDto, ListResultDto, PagedResultDto } from '@co/core';
+import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
+import { ListResultDto, PagedResultDto } from '@co/core';
 
 import { CustomerDto,CustomerBindCoUserDto,GetByCustomerIdsOutput,GetCustomerAndPartnerOutput,CustomerAndContactDto,CustomerListDto,BecomeCooperationInput, } from './crm.types';
 
 @BaseUrl('/crm/CustomerExternal')
 @Injectable({ providedIn: 'root' })
 export class CustomerExternalService extends BaseApi {
-
+  constructor(injector: Injector) {
+    super(injector);
+  }
+  
    
     /**
      * @param url /CRM/CustomerExternal/Get

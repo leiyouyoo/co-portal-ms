@@ -973,6 +973,33 @@
     }
  
     /**
+     *  No Remark 
+     */
+    export class GetAllForUiPickerInput {
+        
+         
+            
+            ids: any[];
+         
+            
+            searchText: string;
+         
+            
+            includeDeleted: boolean;
+         
+            
+            sorting: string;
+         
+            /* 页大小 */ 
+            maxResultCount: number;
+         
+            /* 跳过指定条数 */ 
+            skipCount: number;
+        
+        
+    }
+ 
+    /**
      * 本公司客户及绑定了客户的合作伙伴
      */
     export class ExternalPartnerAndCustomerDto {
@@ -989,6 +1016,42 @@
          
             /* 公司名 */ 
             name: string;
+        
+        
+    }
+ 
+    /**
+     * 用于搜索客户输出(一般用于下拉框)
+     */
+    export class SearchCustomerOutput {
+        
+         
+            /* 全称 */ 
+            name: string;
+         
+            /* 代码 */ 
+            code: string;
+         
+            /* 客户类型
+1 = Carrier
+2 = AirLine
+3 = Forwarding
+4 = DirectClient
+5 = Trucker
+6 = CustomsBroker
+7 = WareHouse
+8 = Storage
+9 = RailWay
+10 = Express
+11 = Terminal
+12 = Other */ 
+            customerType: number;
+         
+            /* 是否默认选中 */ 
+            isDefault: boolean;
+         
+            
+            id: string;
         
         
     }

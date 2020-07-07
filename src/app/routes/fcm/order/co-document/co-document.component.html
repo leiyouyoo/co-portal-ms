@@ -63,9 +63,4 @@
       </tbody>
     </nz-table>
   </div>
-  <button nz-button [nzType]="'primary'" (click)="showModal()"><span>Show Modal</span></button>
 </div>
-
-<nz-modal [(nzVisible)]="isVisible" nzTitle="确认入仓" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-  <nz-date-picker [(ngModel)]="date" [nzFormat]="'yyyy/MM/dd'"></nz-date-picker>
-</nz-modal>
