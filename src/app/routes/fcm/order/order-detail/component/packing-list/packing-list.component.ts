@@ -321,9 +321,22 @@ export class PackingListComponent implements OnInit {
     }
   }
   unitList: Array<any> = new Array<any>();
+
   //单位下拉框
   selUnit(typeId: string) {
-    this.dataDictionarySevice.getAll({ typeCode: typeId, maxResultCount: 200 }).subscribe(
+    this.dataDictionarySevice.getAllForUiPicker(
+      {
+        typeCodes: [typeId],
+        maxResultCount: 200,
+        includeInvalid: true,
+        typeIds: [],
+        ids: [],
+        searchText: "",
+        includeDeleted: true,
+        sorting: null,
+        skipCount: 0
+      }
+    ).subscribe(
       (res) => {
         this.unitList = res.items;
       },
