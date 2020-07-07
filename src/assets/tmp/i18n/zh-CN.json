@@ -12,6 +12,7 @@
   "menu.dashboard.workplace": "工作台",
   "menu.shortcut": "快捷菜单",
   "menu.widgets": "小部件",
+  "app.home": "首页",
   "menu.alain": "Alain",
   "menu.style": "样式",
   "menu.style.typography": "字体排印",
@@ -246,6 +247,13 @@
   "app.sys.menu.root": "添加根目录",
   "app.sys.permission.list": "权限列表",
   "app.sys.permission.root": "添加根节点",
-  "layout.pro.user.link.home": "Pro 首页",
-  "layout.pro.user.link.alain": "Alain Pro"
+  "layout.pro.user.link.home": "CITYOCEAN 首页",
+  "layout.pro.user.link.alain": "CITYOCEAN",
+  "Shortcut search": "快捷键搜索",
+  "Welcome to ICP": "欢迎来到ICP系统",
+  "Language": "切换语言",
+  "Sign Out": "注销",
+  "E-commerce": "电商物流",
+  "Menu": "菜单",
+  "CITYOCEAN": "鹏城海物流"
 }
