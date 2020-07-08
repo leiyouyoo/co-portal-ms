@@ -126,25 +126,95 @@
       </div>
     </div>
 
-    <div nz-row [nzGutter]="12">
-      <nz-form-item>
-        <nz-form-label nzFor="customer">联系人</nz-form-label>
-        <nz-form-control nzErrorTip="Please input your customer!">
-          <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
-        </nz-form-control>
-      </nz-form-item>
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label nzFor="customer">联系人</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
 
-      <nz-form-item>
-        <nz-form-label nzFor="customer">交货方式</nz-form-label>
-        <nz-form-control nzErrorTip="Please input your customer!">
-          <nz-radio-group formControlName="customerId">
-            <label nz-radio nzValue="自送货">自送货</label>
-            <label nz-radio nzValue="由CITYOCEAN上门提货">由CITYOCEAN上门提货</label>
-          </nz-radio-group>
-        </nz-form-control>
-      </nz-form-item>
+        <nz-form-item>
+          <nz-form-label nzFor="customer">交货方式</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <nz-radio-group formControlName="customerId">
+              <label nz-radio nzValue="自送货">自送货</label>
+              <label nz-radio nzValue="由CITYOCEAN上门提货">由CITYOCEAN上门提货</label>
+            </nz-radio-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="customer">交货仓库</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12" style="background-color: #f2f2f2; justify-content: center; display: flex; flex-direction: column;">
+        <nz-form-item>
+          <nz-form-label nzFor="customer">FBA运输方式</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="customer">备注</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <textarea
+              nz-input
+              placeholder="Controlled autosize"
+              formControlName="customerId"
+              [nzAutosize]="{ minRows: 3, maxRows: 5 }"
+            ></textarea>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
     </div>
 
-    <div nz-row [nzGutter]="12"></div>
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="12" style="margin-top: 24px;">
+        <nz-form-item>
+          <nz-form-label nzFor="customer">预估交货时间</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="customer">品名</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div
+        nz-col
+        [nzSpan]="12"
+        style="margin-top: 24px; background-color: #f2f2f2; justify-content: center; display: flex; flex-direction: column;"
+      >
+        <nz-form-item>
+          <nz-form-label nzFor="customer">快递号</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="customer">备注</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div style="margin: 24px 0;">
+      <nz-tag nzColor="success" style="width: 100%;">Total ：件数(CTN) 24 重量(KG) 747.7 体积(CBM)4.15</nz-tag>
+    </div>
   </form>
 </div>

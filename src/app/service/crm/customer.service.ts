@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { CustomerDto,CustomerListDto,MergeCustomerListInput,GetAllForUiPickerInput,ExternalPartnerAndCustomerDto,SearchCustomerOutput,CustomerOutput,CreateOrUpdateCustomerInput,GetCustomerByNameInput,CheckDeleteOutput,FollowCustomerInput,AssignCustomerInput,CustomerAndPartnerListDto,CustomerAuthenticateDto,AuditCustomerInput,MergeCustomerInput, } from './crm.types';
 
@@ -12,8 +12,8 @@ export class CustomerService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CRM/Customer/Get
      * 客户详情
@@ -28,7 +28,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetAll
      * 分页获取我的客户
@@ -43,7 +43,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetAllForMerge
      * 获取用于合并的客户
@@ -58,7 +58,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetAllForUiPicker
      * 获取客户列表
@@ -73,7 +73,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetMyCustomerAndPartners
      * 获取业务员的客户及合作伙伴
@@ -88,7 +88,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetShares
      * 分页获取共享客户
@@ -103,7 +103,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetShareSources
      * 分页获取共享资源库
@@ -118,7 +118,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetOwnerlessCustomer
      * 获取无主客户
@@ -133,7 +133,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetOwnerCustomers
      * 获取当前业务员拥有的所有客户(开通租户的，包含联系人集合、地点集合)
@@ -148,7 +148,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetOwnerCustomersBySalesId
      * 获取当前业务员拥有的所有客户(开通账号的)
@@ -163,7 +163,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetAllBySearch
      * 分页搜索客户
@@ -178,7 +178,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetPeerAndDirectClient
      * 分页搜索直客跟同行客户（Rate用）
@@ -193,7 +193,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetForwardingCompanies
      * 分页搜索同行客户
@@ -208,7 +208,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetCustomerPartners
      * 获取客户的合作伙伴对应的客户集合
@@ -223,7 +223,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetCustomerByName
      * 根据名称搜索客户（绑定合作伙伴搜索客户可用）
@@ -238,7 +238,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetCustomerByNameOrCode
      * 根据名称或代码搜索客户
@@ -253,7 +253,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetForUpdate
      * 获取客户用于更新
@@ -268,7 +268,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/Create
      * 创建客户
@@ -283,7 +283,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/CheckDuplicateName
      * 校验客户重复名称
@@ -298,7 +298,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/Update
      * 更新客户
@@ -313,7 +313,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/CheckDelete
      * 验证删除
@@ -328,7 +328,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/Delete
      * 删除客户
@@ -343,7 +343,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/ClaimCustomer
      * 认领客户（认领无主客户）
@@ -358,7 +358,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/FollowCustomer
      * 跟进客户（获取共享客户权限）
@@ -373,7 +373,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/TransferCustomer
      * 转让客户/指派客户
@@ -388,7 +388,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetCustomerByType
      * 根据类型获取客户（船东、航空等类型）
@@ -403,7 +403,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetDepartmentCustomer
      * 获取部门所有人员的客户
@@ -418,7 +418,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetCurrentCustomerAndPartner
      * 获取当前业务员所拥有的客户及合作伙伴(Rate创建询价用)
@@ -433,7 +433,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/GetCustomerConfigure
      * 获取客户配置
@@ -448,7 +448,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/CustomerConfigure
      * 客户配置\开通租户
@@ -463,7 +463,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/UpdateCustomerConfigure
      * 更新客户配置
@@ -478,7 +478,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/AuditCustomer
      * 提交审核客户
@@ -493,7 +493,7 @@ export class CustomerService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Customer/MergeCustomer
      * 合并客户

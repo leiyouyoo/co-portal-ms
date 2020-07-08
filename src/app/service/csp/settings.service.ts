@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { NewsAndUpdatesSettingsEditDto,SettingsEditDto, } from './csp.types';
 
@@ -12,8 +12,8 @@ export class SettingsService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CSP/Settings/GetNewsAndUpdates
      * 获取设置页 Shipment 动态设置
@@ -28,7 +28,7 @@ export class SettingsService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Settings/UpdateNewsAndUpdates
      * 保存 Shipment 动态设置
@@ -43,7 +43,7 @@ export class SettingsService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Settings/GetAll
      * 
@@ -58,7 +58,7 @@ export class SettingsService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Settings/UpdateAll
      * 

@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { BookingTemplateOutput,BookingTemplateDto,BookingTemplateCheckInputDto, } from './csp.types';
 
@@ -12,8 +12,8 @@ export class BookingTemplateService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CSP/BookingTemplate/GetDetailById
      * 根据订舱单模板Id获取详情
@@ -28,7 +28,7 @@ export class BookingTemplateService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/BookingTemplate/GetAll
      * 分页获取
@@ -43,7 +43,7 @@ export class BookingTemplateService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/BookingTemplate/Create
      * 创建
@@ -58,7 +58,7 @@ export class BookingTemplateService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/BookingTemplate/Update
      * 订舱单模板编辑
@@ -73,7 +73,7 @@ export class BookingTemplateService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/BookingTemplate/Check
      * 检验模板名称重复性问题
@@ -88,7 +88,7 @@ export class BookingTemplateService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/BookingTemplate/Delete
      * Deletes the specified input.

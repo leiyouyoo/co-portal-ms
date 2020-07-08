@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { ContactDto,ContactListDto,CheckContactEmailInput,CheckContactEmailOutput,CheckMainContact,CommonResponse,CreateOrUpdateContactInput,ResetUserPasswordInput, } from './crm.types';
 
@@ -12,8 +12,8 @@ export class ContactService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CRM/Contact/Get
      * 获取联系人详情
@@ -28,7 +28,7 @@ export class ContactService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Contact/GetByIds
      * 根据联系人id集合获取联系人集合
@@ -43,7 +43,7 @@ export class ContactService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Contact/GetAllByCustomer
      * 客户或合作伙伴的所有联系人(仅限业务员自己创建的)
@@ -58,7 +58,7 @@ export class ContactService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Contact/GetByCustomerOrPartner
      * 分页获取客户或合作伙伴的联系人
@@ -73,7 +73,7 @@ export class ContactService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Contact/GetByLocationId
      * 获取地点下的联系人
@@ -88,7 +88,7 @@ export class ContactService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Contact/GetByNameOrTel
      * 根据联系人名称或电话搜索当前登录人的
@@ -103,7 +103,7 @@ export class ContactService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Contact/CheckEmailRepeat
      * 验证email是否注册过
@@ -118,7 +118,7 @@ export class ContactService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Contact/CheckHasMainContact
      * 验证是否已有主联系人
@@ -133,7 +133,7 @@ export class ContactService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Contact/CreateForCustomer
      * 创建客户联系人(可选同步开通租户账号)
@@ -148,7 +148,7 @@ export class ContactService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Contact/CreateForPartner
      * 创建合作伙伴联系人
@@ -163,7 +163,7 @@ export class ContactService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Contact/Update
      * 更新联系人
@@ -178,7 +178,7 @@ export class ContactService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Contact/Delete
      * 删除联系人
@@ -193,7 +193,7 @@ export class ContactService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Contact/UnbindOrDeleteUser
      * 解绑/删除用户
@@ -208,7 +208,7 @@ export class ContactService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/Contact/ResetUserPassword
      * 重置密码

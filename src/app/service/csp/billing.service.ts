@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { UserIdentifier,GetBillListInput,BillOutput,BillDto,CoEntityDto,ChangeBillStatusInput,ConfirmBillsInput,ExportBillInput,ExportBillOutput,SynchronizeBillsInput,CreateOrUpdatePaymentRecordsInput,PaymentRecordDto,CreateOrUpdateChargeItemsInput,ChargeItemDto,BankAccountDto,BillingStatisticsOutput, } from './csp.types';
 
@@ -12,8 +12,8 @@ export class BillingService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CSP/Billing/CheckPermission
      * 测试 PermissionChecker
@@ -28,7 +28,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/GetBillList
      * 分页获取账单列表
@@ -43,7 +43,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/GetListByIds
      * 根据多个billingId获取对应详情
@@ -58,7 +58,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/GetBill
      * 获取账单详情
@@ -73,7 +73,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/CreateOrUpdateBills
      * 批量创建或更新账单
@@ -88,7 +88,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/CreateOrUpdateBill
      * 创建或更新账单
@@ -103,7 +103,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/DeleteBill
      * 删除账单
@@ -118,7 +118,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/ChangeBillStatus
      * 更新账单状态
@@ -133,7 +133,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/ConfirmBills
      * 确认账单
@@ -148,7 +148,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/GetBillReport
      * Get Bill Report
@@ -163,7 +163,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/ExportBill
      * 导出单个账单
@@ -178,7 +178,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/SynchronizeBills
      * 同步账单
@@ -193,7 +193,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/CreateOrUpdatePaymentRecords
      * 批量创建或更新收费记录
@@ -208,7 +208,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/CreateOrUpdatePaymentRecord
      * 创建或更新收费记录
@@ -223,7 +223,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/DeletePaymentRecords
      * 批量删除支付记录
@@ -238,7 +238,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/DeletePaymentRecord
      * 删除支付记录
@@ -253,7 +253,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/CreateOrUpdateChargeItems
      * 批量创建收费条目
@@ -268,7 +268,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/CreateOrUpdateChargeItem
      * 创建或更新收费项
@@ -283,7 +283,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/DeleteChargeItems
      * 批量删除收费条目
@@ -298,7 +298,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/DeleteChargeItem
      * 删除收费条目
@@ -313,7 +313,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/GetBankAccount
      * 获取银行账户
@@ -328,7 +328,7 @@ export class BillingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Billing/GetBillingsStatistics
      * 获取Billings统计信息

@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { TraceLogCommentListDto,CreateTraceLogCommentInput, } from './crm.types';
 
@@ -12,8 +12,8 @@ export class TraceLogCommentService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CRM/TraceLogComment/GetAll
      * 分页获取评论
@@ -28,7 +28,7 @@ export class TraceLogCommentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/TraceLogComment/Create
      * 发表日志评论
@@ -43,7 +43,7 @@ export class TraceLogCommentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/TraceLogComment/Delete
      * 删除日志评论

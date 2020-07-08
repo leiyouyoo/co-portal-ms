@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { QuoteReplyDto,CoEntityDto, } from './crm.types';
 
@@ -12,8 +12,8 @@ export class QuoteReplyService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CRM/QuoteReply/GetAllForCRM
      * 获取报价列表
@@ -28,7 +28,7 @@ export class QuoteReplyService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteReply/Create
      * CRM创建报价
@@ -43,7 +43,7 @@ export class QuoteReplyService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteReply/CheckExpiredReply
      * 检查过期报价
@@ -58,7 +58,7 @@ export class QuoteReplyService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteReply/AcceptReply
      * 接受报价
@@ -73,7 +73,7 @@ export class QuoteReplyService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteReply/ReplyBooking
      * 预定订舱（提供csp操作时，系统自动调用）
@@ -88,7 +88,7 @@ export class QuoteReplyService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteReply/RejectReply
      * 拒绝报价
@@ -103,7 +103,7 @@ export class QuoteReplyService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteReply/RequestNewReply
      * 再一次请求报价
@@ -118,7 +118,7 @@ export class QuoteReplyService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteReply/Get
      * 
@@ -133,7 +133,7 @@ export class QuoteReplyService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteReply/GetAll
      * 
@@ -148,7 +148,7 @@ export class QuoteReplyService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteReply/Update
      * 
@@ -163,7 +163,7 @@ export class QuoteReplyService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteReply/Delete
      * 

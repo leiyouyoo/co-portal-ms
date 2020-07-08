@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { QuoteEnquiryDto,QuoteEnquiryListForCRMOutput,QuoteEnquiryListForCRMInput,CustomerListModel,GetRelatedQuoteForCRMOutput,QuoteEnquiryListForCSPInput,QuoteEnquiryListForCSPOutput,Object, } from './crm.types';
 
@@ -12,8 +12,8 @@ export class QuoteEnquiryService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CRM/QuoteEnquiry/GetForCRM
      * CRM获取详情页（询报价均有返回）
@@ -28,7 +28,7 @@ export class QuoteEnquiryService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteEnquiry/GetAllForCRM
      * CRM获取询价列表
@@ -43,7 +43,7 @@ export class QuoteEnquiryService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteEnquiry/GetCRMCustomerAndUserHistorys
      * CRM获取所有客户用户历史数据(条件检索)
@@ -58,7 +58,7 @@ export class QuoteEnquiryService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteEnquiry/GetCRMCustomerBindUserHistorys
      * CRM获取客户最近5条数据联动用户
@@ -73,7 +73,7 @@ export class QuoteEnquiryService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteEnquiry/GetRelatedQuoteForCRM
      * CRM获取相关的报价（询价路线和订舱路线全匹配），用来选择报价（只有沟通中、已接受的）
@@ -88,7 +88,7 @@ export class QuoteEnquiryService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteEnquiry/Create
      * CSP创建询价 / CRM创建询报价
@@ -103,7 +103,7 @@ export class QuoteEnquiryService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteEnquiry/GetTeamUser
      * 根据询价Id获取拥有者和绑定销售
@@ -118,7 +118,7 @@ export class QuoteEnquiryService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteEnquiry/GetListByIds
      * 根据多个QuoteEnquiryId获取对应详情
@@ -133,7 +133,7 @@ export class QuoteEnquiryService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteEnquiry/GetForCSP
      * CSP获取详情页（询报价均有返回）
@@ -148,7 +148,7 @@ export class QuoteEnquiryService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteEnquiry/GetAllForCSP
      * CSP获取询价列表
@@ -163,7 +163,7 @@ export class QuoteEnquiryService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteEnquiry/GetHistorys
      * CSP获取历史包括（港口、地址、FBA地址等）
@@ -178,7 +178,7 @@ export class QuoteEnquiryService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteEnquiry/Get
      * 
@@ -193,7 +193,7 @@ export class QuoteEnquiryService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteEnquiry/GetAll
      * 
@@ -202,13 +202,13 @@ export class QuoteEnquiryService extends BaseApi {
     @GET('getAll')
     getAll(
         @Payload
-        _req: {status?:any[],freightMethodTypes?:string,location.Id?:string,location.Country?:string,location.Province?:string,location.City?:string,location.Name?:string,location.HistoryDataType?:number,ownerIds?:any[],searchKey?:string,sorting?:string,maxResultCount?:number,skipCount?:number} 
+        _req: {status?:any[],freightMethodTypes?:string,location.Id?:string,location.Country?:string,location.Province?:string,location.City?:string,location.Name?:string,location.HistoryDataType?:number,location.IsOcean?:boolean,location.IsAir?:boolean,ownerIds?:any[],searchKey?:string,sorting?:string,maxResultCount?:number,skipCount?:number} 
 
     ): Observable<PagedResultDto<QuoteEnquiryDto>> {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteEnquiry/Update
      * 
@@ -223,7 +223,7 @@ export class QuoteEnquiryService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/QuoteEnquiry/Delete
      * 

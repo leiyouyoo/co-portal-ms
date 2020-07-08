@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { CreateOrUpdateShipmentInput,ChangeShipmentInvalidStatusInput,GetPostAgentCustomerListOutput,SetShipmentPostAgentCustomerInput, } from './fcm.types';
 
@@ -12,8 +12,8 @@ export class ShipmentService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /FCM/Shipment/GetForUpdate
      * 获取用于更新
@@ -28,7 +28,7 @@ export class ShipmentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /FCM/Shipment/CreateOrUpdate
      * 创建或编辑订单
@@ -43,7 +43,7 @@ export class ShipmentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /FCM/Shipment/ChangeInvalidStatus
      * 作废或取消作废指定的 Shipment(s)
@@ -58,10 +58,10 @@ export class ShipmentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /FCM/Shipment/GetPostAgentCustomerList
-     * 获取有效的后段代理列表
+     * 获取有效的后段代理列表 TODO：CRM已有
      */
 
     @GET('getPostAgentCustomerList')
@@ -73,7 +73,7 @@ export class ShipmentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /FCM/Shipment/SetPostAgentCustomer
      * 设置 Shipment(s) 的后段代理，已分配数据不能重复分配
@@ -83,6 +83,21 @@ export class ShipmentService extends BaseApi {
     setPostAgentCustomer(
         @Payload
         _req:SetShipmentPostAgentCustomerInput
+
+    ): Observable<any> {
+        return null as any
+    }
+
+
+    /**
+     * @param url /FCM/Shipment/DeleteBooking
+     * 删除预报单
+     */
+
+    @DELETE('deleteBooking')
+    deleteBooking(
+        @Payload
+        _req: {shipmentId?:string,bookingId?:string} 
 
     ): Observable<any> {
         return null as any

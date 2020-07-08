@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { ShipmentItemDto,ShipmentItemContainerDto,OrderItemInShipmentItemContainerDto,ShipmentOrderItemInContainerDto,CoEntityDto, } from './csp.types';
 
@@ -12,8 +12,8 @@ export class ShipmentItemService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CSP/ShipmentItem/BatchCreateOrUpdate
      * 批量新建或更新提单
@@ -28,7 +28,7 @@ export class ShipmentItemService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/ShipmentItem/CreateOrUpdate
      * 新建或更新提单
@@ -43,7 +43,7 @@ export class ShipmentItemService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/ShipmentItem/Create
      * 新增提单
@@ -58,7 +58,7 @@ export class ShipmentItemService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/ShipmentItem/Update
      * Updates the specified input.
@@ -73,7 +73,7 @@ export class ShipmentItemService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/ShipmentItem/UpdatePostPortEstDate
      * 更新港后预估时间
@@ -88,7 +88,7 @@ export class ShipmentItemService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/ShipmentItem/GetAllForIcpByShipmentId
      * icp根据shipmentId获取相关的提单数据
@@ -103,7 +103,7 @@ export class ShipmentItemService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/ShipmentItem/Get
      * icp根据提单id获取指定提单
@@ -118,7 +118,7 @@ export class ShipmentItemService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/ShipmentItem/CreateOrUpdateShipmentItemContainers
      * 批量创建或更新提单箱
@@ -133,7 +133,7 @@ export class ShipmentItemService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/ShipmentItem/CreateOrUpdateShipmentItemContainer
      * 创建或更新提单箱
@@ -148,7 +148,7 @@ export class ShipmentItemService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/ShipmentItem/CreateOrderItemInContainers
      * 创建 PO Item 与提单箱关系
@@ -163,7 +163,7 @@ export class ShipmentItemService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/ShipmentItem/GetShipmentOrderItemInContainers
      * 根据 ShipmentId 返回装箱信息
@@ -178,7 +178,7 @@ export class ShipmentItemService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/ShipmentItem/Delete
      * Deletes the specified input.

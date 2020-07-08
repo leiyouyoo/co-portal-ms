@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { ContactDto,CustomerBindCoUserDto,ExternalContactListDto,GetByCustomerIdsInput,ExternalCustomerContactInput,SSOUser,ContactAndSaleOutput, } from './crm.types';
 
@@ -12,8 +12,8 @@ export class ContactExternalService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CRM/ContactExternal/Get
      * 根据联系人id获取联系人
@@ -28,7 +28,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/GetByUserId
      * 根据用户id获取联系人
@@ -43,7 +43,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/GetByUserIds
      * 根据用户id集合获取联系人
@@ -58,7 +58,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/GetUserInfoByUserIds
      * 获取SSO用户信息并带上用户所属客户信息
@@ -73,7 +73,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/GetAllPartnerContacts
      * 获取当前客户下所有合作伙伴的所有联系人
@@ -88,7 +88,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/GetRegisteredContactsByPartnerId
      * 获取合作伙伴下已开通账号的联系人
@@ -103,7 +103,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/GetByCustomerOrPartner
      * 获取客户或合作伙伴的联系人
@@ -118,7 +118,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/GetByCustomerIds
      * 根据客户id集合获取下面所有的联系人(不包含合作伙伴)
@@ -133,7 +133,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/GetByCustomerAndPartner
      * 获取客户及合作伙伴的联系人
@@ -148,7 +148,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/GetSharedList
      * 分页获取共享联系人（客户以及合作伙伴、别人分享的地点下的联系人）
@@ -163,7 +163,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/GetByLocationId
      * 获取地点下的联系人
@@ -178,7 +178,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/AddUsersToLocation
      * 创建客户联系人（用户）并赋值到地点
@@ -193,7 +193,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/CreateForCustomer
      * 创建客户联系人
@@ -208,7 +208,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/CreateForPartner
      * 创建合作伙伴联系人
@@ -223,7 +223,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/Update
      * 更新合作伙伴联系人
@@ -238,7 +238,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/Delete
      * 删除联系人
@@ -253,7 +253,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/GetBySellerIdAsync
      * 根据销售员用户Id获取联系人
@@ -268,7 +268,7 @@ export class ContactExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/ContactExternal/GetContactAndSaleByCustomerId
      * 获取客户下的联系人（包含合作伙伴的）,以及客户绑定的业务员
