@@ -7,8 +7,8 @@
     <button nz-button nzType="default">分配代理</button>
     <button nz-button nzType="default">导出</button>
     <button nz-button nzType="default">刷新</button>
-    <button nz-button nzType="default">作废</button>
-    <button nz-button nzType="default">取消作废</button>
+    <button nz-button nzType="default" (click)="isChangeStatus(true)">作废</button>
+    <button nz-button nzType="default" (click)="isChangeStatus()">取消作废</button>
     <button nz-button nzType="default" (click)="editModal = true">新增</button>
   </div>
 
