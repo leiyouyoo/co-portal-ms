@@ -12,7 +12,8 @@ import { ShipmentListItemComponent } from './order-detail/component/shipment-lis
 import { ListPopoverComponent } from './order-detail/component/shipment-list-item/list-popover/list-popover.component';
 import { ShipmentStatusPipe } from './order-detail/pipe/shipment-status.pipe';
 import { EnterWarehouseModalComponent } from './order-detail/component/enter-warehouse-modal/enter-warehouse-modal.component';
-import { AcceptListComponent } from './order-list/accept-list/accept-list.component';
+import { AcceptListComponent } from './order-list/accept/accept-list/accept-list.component';
+import { AcceptEditComponent } from './order-list/accept/accept-edit/accept-edit.component';
 
 const COMPONENTS = [
   OrderListComponent,
@@ -26,6 +27,7 @@ const COMPONENTS = [
   ShipmentStatusPipe,
   EnterWarehouseModalComponent,
   AcceptListComponent,
+  AcceptEditComponent,
 ];
 
 @NgModule({

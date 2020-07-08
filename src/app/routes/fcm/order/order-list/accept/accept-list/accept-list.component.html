@@ -9,6 +9,7 @@
     <button nz-button nzType="default">刷新</button>
     <button nz-button nzType="default">作废</button>
     <button nz-button nzType="default">取消作废</button>
+    <button nz-button nzType="default" (click)="editModal = true">新增</button>
   </div>
 
   <div class="co-page-header-search">
@@ -34,3 +35,14 @@
 <div class="co-page-content">
   <co-st #st [data]="listOfData" [columns]="columns" [showFilters]="false"></co-st>
 </div>
+
+<nz-modal
+  [nzMaskClosable]="false"
+  nzTitle="{{ 'Edit' | translate }}"
+  [(nzVisible)]="editModal"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  nzWidth="70%"
+>
+  <app-order-accept-edit></app-order-accept-edit>
+</nz-modal>

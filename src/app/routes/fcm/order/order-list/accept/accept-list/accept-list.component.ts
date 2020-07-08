@@ -50,7 +50,17 @@ export class AcceptListComponent implements OnInit {
     { title: '清关行', index: 'aaa', width: 120 },
     { title: '代理', index: 'registered', width: 120 },
   ];
+
+  editModal = false;
   constructor() {}
 
   ngOnInit(): void {}
+
+  handleCancel() {
+    this.editModal = false;
+  }
+
+  handleOk() {
+    this.editModal = false;
+  }
 }
