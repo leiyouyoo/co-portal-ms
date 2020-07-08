@@ -1,0 +1,150 @@
+<div style="height: 100%;">
+  <div>运单号：FONB20060001</div>
+  <form nzLayout="vertical" nz-form [formGroup]="validateForm" style="height: 100%; display: flex; flex-direction: column;">
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="6">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="customer">承运人</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="6">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="customer">业务员</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="customer">入仓时间</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="6">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="customer">业务类型</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="6">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="customer">渠道</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label nzFor="customer">转运单号</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="6">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="customer">出货口岸</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="6">
+        <nz-form-item>
+          <nz-form-label nzFor="customer">国家</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label nzFor="customer">SO号</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="6">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="customer">客户</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="6">
+        <nz-form-item>
+          <nz-form-label nzFor="customer"></nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="6">
+        <nz-form-item>
+          <nz-form-label nzFor="customer">报关行</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="6">
+        <nz-form-item>
+          <nz-form-label nzFor="customer">清关行</nz-form-label>
+          <nz-form-control nzErrorTip="Please input your customer!">
+            <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row [nzGutter]="12">
+      <nz-form-item>
+        <nz-form-label nzFor="customer">联系人</nz-form-label>
+        <nz-form-control nzErrorTip="Please input your customer!">
+          <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="customer">交货方式</nz-form-label>
+        <nz-form-control nzErrorTip="Please input your customer!">
+          <nz-radio-group formControlName="customerId">
+            <label nz-radio nzValue="自送货">自送货</label>
+            <label nz-radio nzValue="由CITYOCEAN上门提货">由CITYOCEAN上门提货</label>
+          </nz-radio-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-row [nzGutter]="12"></div>
+  </form>
+</div>

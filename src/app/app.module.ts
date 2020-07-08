@@ -98,7 +98,7 @@ import { STWidgetModule } from './shared/st-widget/st-widget.module';
 
 import { CoAuthModule } from '@co/auth';
 import { PageLayoutModule } from '@co/cbc';
-
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 @NgModule({
   declarations: [AppComponent],
   imports: [
