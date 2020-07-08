@@ -10,34 +10,33 @@ import { AcceptEditComponent } from '../accept-edit/accept-edit.component';
   styleUrls: ['./accept-list.component.less'],
 })
 export class AcceptListComponent implements OnInit {
-  @ViewChild('edit', { static: false }) acceptEditComponent: AcceptEditComponent;
-  listOfData: [
+  listOfData = [
     {
-      id: '1';
-      img: 'John Brown';
-      email: 32;
-      address: 'New York No. 1 Lake Park';
-      phone: '1212';
-      date: 'date';
-      aaa: 'zzzz';
+      id: '1',
+      img: 'John Brown',
+      email: 32,
+      address: 'New York No. 1 Lake Park',
+      phone: '1212',
+      date: 'date',
+      aaa: 'zzzz',
     },
     {
-      id: '2';
-      img: 'John Brown';
-      email: 32;
-      address: 'New York No. 1 Lake Park';
-      phone: '1212';
-      date: 'date';
-      aaa: 'zzzz';
+      id: '2',
+      img: 'John Brown',
+      email: 32,
+      address: 'New York No. 1 Lake Park',
+      phone: '1212',
+      date: 'date',
+      aaa: 'zzzz',
     },
     {
-      id: '3';
-      img: 'John Brown';
-      email: 32;
-      address: 'New York No. 1 Lake Park';
-      phone: '1212';
-      date: 'date';
-      aaa: 'zzzz';
+      id: '3',
+      img: 'John Brown',
+      email: 32,
+      address: 'New York No. 1 Lake Park',
+      phone: '1212',
+      date: 'date',
+      aaa: 'zzzz',
     },
   ];
   columns: STColumn[] = [

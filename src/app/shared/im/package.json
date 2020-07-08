@@ -1,0 +1,23 @@
+{
+  "name": "@co/im",
+  "version": "0.0.0-PLACEHOLDER",
+  "author": "cityocean<it@cityocean.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ng-alain/delon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ng-alain/ng-alain/issues"
+  },
+  "homepage": "https://ng-alain.com",
+  "keywords": [
+    "im",
+    "angular"
+  ],
+  "dependencies": {
+    "@co/common": "PEER-0.0.0-PLACEHOLDER",
+    "@co/core": "PEER-0.0.0-PLACEHOLDER"
+  },
+  "sideEffects": false
+}

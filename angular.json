@@ -30,7 +30,8 @@
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "node_modules/quill/dist/quill.snow.css",
               "src/styles.less",
-              "node_modules/@co/theme/default.min.css"
+              "node_modules/@co/theme/default.min.css",
+              "node_modules/cropperjs/dist/cropper.min.css"
             ],
             "scripts": [
               "node_modules/ajv/dist/ajv.bundle.js",
@@ -64,11 +65,19 @@
                 }
               ]
             },
+            "dev": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
             "hmr": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.hmr.ts"
+                  "with": "src/environments/environment.dev.ts"
                 }
               ]
             }
@@ -298,6 +307,6 @@
   },
   "defaultProject": "portal",
   "cli": {
-    "analytics": false
+    "analytics": "46af01cb-778f-4eae-82da-1faf699f61c3"
   }
 }
