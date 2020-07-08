@@ -10,7 +10,7 @@
   "homepage": "https://e.ng-alain.com/theme/pro",
   "scripts": {
     "ng": "ng",
-    "start": "npm run color-less && ng serve -o --port 6200",
+    "start": "npm run color-less && node --max_old_space_size=5120 ./node_modules/@angular/cli/bin/ng serve --port 6200",
     "hmr": "npm run color-less && ng serve -c=hmr",
     "start:ms": "concurrently \"npm run serve:portal\" \"npm run serve:app3\"",
     "//start:ms": "concurrently \"npm run serve:portal\" \"npm run serve:app3\"",
