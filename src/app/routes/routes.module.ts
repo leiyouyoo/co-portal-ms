@@ -14,7 +14,6 @@ import { LoginComponent } from './passport/login.component';
 import { ForgotPasswordComponent } from './passport/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './passport/reset-password/reset-password.component';
 import { ActivateComponent } from './passport/activate/activate.component';
-import { QrCodeInfoComponent } from './qr-code-info/qr-code-info.component';
 
 const COMPONENTS = [
   DashboardComponent,
@@ -29,7 +28,6 @@ const COMPONENTS = [
   ForgotPasswordComponent,
   ResetPasswordComponent,
   ActivateComponent,
-  QrCodeInfoComponent,
 ];
 const COMPONENTS_NOROUNT = [];
 

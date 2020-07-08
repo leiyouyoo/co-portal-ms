@@ -2,7 +2,7 @@
   [ngClass]="{ 'Customsclearance-break': tradeType != 1 }">
   <div class="CustomsclearanceinvioceInfo">
     <div>
-      {{ 'Customs clearance invoice (optional)' | translate }}
+      {{ 'Box order' | translate  }}
     </div>
     <div class="Customsclearanceinvioce" [ngClass]="{ notClickn: isDisabledPack }">
       <div class="add-clearanceinvioce">
@@ -80,8 +80,8 @@
             </td>
             <td style="min-width: 150px;">
               <div class="table-input">
-                <input nz-input [(ngModel)]="data.sku" (input)="onInput($event.target?.value)" [nzAutocomplete]="auto"
-                  (blur)="validateSku()" />
+                <!-- (input)="onInput($event.target?.value)" [nzAutocomplete]="auto" -->
+                <input nz-input [(ngModel)]="data.sku" (blur)="validateSku()" />
                 <nz-autocomplete nzBackfill #auto>
                   <nz-auto-option *ngFor="let option of options" [nzValue]="option.sku">
                     <div (click)="getSku(option, data, i)">{{ option.sku }}</div>
@@ -198,9 +198,6 @@
                     <i nz-icon nzType="upload"></i><span>{{ 'Upload' | translate }}</span>
                   </button>
                 </nz-upload>
-
-                {{ data.imageId }}
-
               </div>
               <img *ngIf="data.imageId"
                 [src]="imgUrl + '/Storage/File/GetDownLoadFile?fileId=' + data.imageId + '&Handler=image'" />

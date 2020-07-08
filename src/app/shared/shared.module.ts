@@ -35,6 +35,7 @@ import { QUICK_CHAT_COMPONENTS } from './components/quick-chat';
 import { ScrollbarDirective } from './components/scrollbar/scrollbar.directive';
 import { StatusLabelComponent } from './components/status-label/status-label.component';
 import { TableHeadDragComponent } from './components/table-head-drag/table-head-drag.component';
+import { QrCodeInfoComponent } from './components/qr-code-info/qr-code-info.component';
 
 
 
@@ -45,6 +46,7 @@ const COMPONENTS_ENTRY = [
   StatusLabelComponent,
   AddressComponent,
   TableHeadDragComponent,
+  QrCodeInfoComponent,
   ...QUICK_CHAT_COMPONENTS,
 ];
 const COMPONENTS = [EditorComponent, ...COMPONENTS_ENTRY, ...PRO_SHARED_COMPONENTS];
