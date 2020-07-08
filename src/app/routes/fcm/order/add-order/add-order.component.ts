@@ -9,9 +9,48 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class AddOrderComponent implements OnInit {
   validateForm!: FormGroup;
   @Input() isVisible = false;
-  addressList = [1]; // 地址数组
-  radioValue = 'A';
-  selectedValue;
+  addressList = [
+    {
+      address: null,
+      tableList: [
+        {
+          shipmentId: 'string',
+          totalQuantity: {
+            value: 0,
+            unit: 'string',
+          },
+          totalWeight: {
+            value: 0,
+            unit: 'string',
+          },
+          totalVolume: {
+            value: 0,
+            unit: 'string',
+          },
+          purchaseOrderNo: 'string',
+          productName: 'string',
+          productSku: 'string',
+          address: {
+            name: 'string',
+            city: 'string',
+            state: 'string',
+            country: 'string',
+            countryCode: 'string',
+            zip: 'string',
+            unlocode: 'string',
+            timezone: 'string',
+          },
+        },
+      ],
+    },
+  ]; // 地址数组
+  customerList = [];
+  cantactList = [];
+  serviceUserList = [];
+  serviceCompanyList = [];
+  destinationWarehouseList = [];
+  agentCustomerList = [];
+  channelList = [];
   country;
   commitData: {
     customerId: 'string';
@@ -131,7 +170,6 @@ export class AddOrderComponent implements OnInit {
       english: 89,
     },
   ];
-  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -157,10 +195,11 @@ export class AddOrderComponent implements OnInit {
       fbaDeliveryType: [null],
       fbaDeliveryTypeRemark: [null],
       cargoPutAwayDate: [null],
-      fbaPickUpMethodType: [null],
+      fbaPickUpMethodType: ['DeliveryGoodsByClient'],
       country: [null],
     });
   }
+  constructor(private fb: FormBuilder) {}
 
   handleOk(): void {
     console.log('Button ok clicked!');
@@ -172,7 +211,39 @@ export class AddOrderComponent implements OnInit {
     this.isVisible = false;
   }
   addAddress(index) {
-    this.addressList.push(index++);
+    this.addressList.push({
+      address: null,
+      tableList: [
+        {
+          shipmentId: 'string',
+          totalQuantity: {
+            value: 0,
+            unit: 'string',
+          },
+          totalWeight: {
+            value: 0,
+            unit: 'string',
+          },
+          totalVolume: {
+            value: 0,
+            unit: 'string',
+          },
+          purchaseOrderNo: 'string',
+          productName: 'string',
+          productSku: 'string',
+          address: {
+            name: 'string',
+            city: 'string',
+            state: 'string',
+            country: 'string',
+            countryCode: 'string',
+            zip: 'string',
+            unlocode: 'string',
+            timezone: 'string',
+          },
+        },
+      ],
+    });
   }
   deleteAddress(index) {
     if (this.addressList.length > 1) {
@@ -185,4 +256,38 @@ export class AddOrderComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
   }
+  addLine(index) {
+    this.addressList[index].tableList.push({
+      shipmentId: 'string',
+      totalQuantity: {
+        value: 0,
+        unit: 'string',
+      },
+      totalWeight: {
+        value: 0,
+        unit: 'string',
+      },
+      totalVolume: {
+        value: 0,
+        unit: 'string',
+      },
+      purchaseOrderNo: 'string',
+      productName: 'string',
+      productSku: 'string',
+      address: {
+        name: 'string',
+        city: 'string',
+        state: 'string',
+        country: 'string',
+        countryCode: 'string',
+        zip: 'string',
+        unlocode: 'string',
+        timezone: 'string',
+      },
+    });
+  }
+  deleteLine(index, childIndex) {
+    this.addressList[index].tableList.splice(childIndex, 1);
+  }
+  resetModal() {}
 }
