@@ -1,0 +1,78 @@
+<div *ngIf="userDetail && customerInfo" class="user-info-wrap">
+  <div class="user-info-group">
+    <h5>
+      法人实体信息
+      <i
+        [ngStyle]="{ transform: legalInfo ? 'rotate(180deg)' : 'rotate(0deg)' }"
+        (click)="controlShowDetail('legal')"
+        class="iconfont icon-zhankai"
+      ></i>
+    </h5>
+    <ng-container *ngIf="legalInfo">
+      <p class="user-info-content">
+        <i class="iconfont icon-qiye1"></i> <span>{{ customerInfo?.localizationShortName }}</span>
+      </p>
+      <p class="user-info-content">
+        <i class="iconfont icon-weizhi"></i>
+        <span>{{ customerInfo?.address }}</span>
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="user-info-group">
+    <h5>
+      联系方式
+      <i
+        [ngStyle]="{ transform: contactsInfo ? 'rotate(180deg)' : 'rotate(0deg)' }"
+        (click)="controlShowDetail('contacts')"
+        class="iconfont icon-zhankai"
+      ></i>
+    </h5>
+    <ng-container *ngIf="contactsInfo">
+      <p *ngIf="userDetail?.user?.phoneNumber" class="user-info-content">
+        <i class="iconfont icon-phone"></i> <span>{{ userDetail?.user?.phoneNumber }}</span>
+      </p>
+      <p *ngIf="userDetail?.user?.emailAddress" class="user-info-content">
+        <i class="iconfont icon-Email"></i> <span>{{ userDetail?.user?.emailAddress }} </span>
+      </p>
+      <p *ngIf="customerInfo?.fax" class="user-info-content">
+        <i class="iconfont icon-chuanzhen"></i> <span>{{ customerInfo?.fax }}</span>
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="user-info-group">
+    <h5>
+      客户来源
+      <i
+        [ngStyle]="{ transform: customerSourceInfo ? 'rotate(180deg)' : 'rotate(0deg)' }"
+        (click)="controlShowDetail('customerSource')"
+        class="iconfont icon-zhankai"
+      ></i>
+    </h5>
+    <ng-container *ngIf="customerSourceInfo">
+      <p *ngIf="customerInfo?.keyWord" class="user-info-content">
+        <i nz-icon nzType="file-word" nzTheme="outline"></i> <span>{{ customerInfo?.keyWord }}</span>
+      </p>
+      <p *ngIf="customerInfo?.industryDisplay" class="user-info-content">
+        <i nz-icon nzType="database" nzTheme="outline"></i> <span>{{ customerInfo?.industryDisplay }}</span>
+      </p>
+      <p *ngIf="customerType" class="user-info-content">
+        <i nz-icon nzType="usergroup-delete" nzTheme="outline"></i> <span>{{ customerType }}</span>
+      </p>
+      <p *ngIf="customerInfo?.incotermsDisplay" class="user-info-content">
+        <i nz-icon nzType="solution" nzTheme="outline"></i> <span>{{ customerInfo?.incotermsDisplay }} </span>
+      </p>
+      <nz-timeline>
+        <nz-timeline-item *ngFor="let item of customerInfo?.customerLifeCycles" nzColor="#8ACAF2">
+          <div>{{ item.status | customerLifeCycle: item.remark }}</div>
+          <div style="color:#00000065">{{ item.creationTime | date: 'yyyy-MM-dd' }}</div>
+          <p *ngIf="item.status == 0">{{ 'Founder:' | translate }} + {{ item.remark }}</p>
+        </nz-timeline-item>
+      </nz-timeline>
+      <p *ngIf="customerInfo?.description" class="user-info-content">
+        <i nz-icon nzType="team" nzTheme="outline"></i><span>{{ customerInfo?.description }}</span>
+      </p>
+    </ng-container>
+  </div>
+</div>

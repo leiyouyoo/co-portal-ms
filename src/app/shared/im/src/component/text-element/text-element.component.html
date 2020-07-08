@@ -1,0 +1,10 @@
+<ng-container *ngFor="let item of textList">
+  <span *ngIf="item.name === 'text'">{{ item.text }}</span>
+  <img *ngIf="item.name === 'img'" [src]="item.src" class="emoji-text" />
+  <img
+    *ngIf="item.name === 'picture'"
+    (click)="handlePreview(item.src)"
+    style="max-width: 100px;cursor: zoom-in;"
+    [src]="item.src"
+  />
+</ng-container>

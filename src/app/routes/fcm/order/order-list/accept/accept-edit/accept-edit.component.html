@@ -1,29 +1,74 @@
 <div style="height: 100%;">
-  <div>运单号：FONB20060001</div>
+  <div class="orderNo">{{ 'Waybill number' | translate }}：FONB20060001</div>
   <form nzLayout="vertical" nz-form [formGroup]="validateForm" style="height: 100%; display: flex; flex-direction: column;">
     <div nz-row [nzGutter]="24">
       <div nz-col [nzSpan]="6">
         <nz-form-item>
-          <nz-form-label nzRequired nzFor="customer">承运人</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
-            <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
+          <nz-form-label nzRequired nzFor="customer">{{ 'Carrier' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
+            <nz-select formControlName="customerId">
+              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            </nz-select>
           </nz-form-control>
         </nz-form-item>
       </div>
 
       <div nz-col [nzSpan]="6">
         <nz-form-item>
-          <nz-form-label nzRequired nzFor="customer">业务员</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
-            <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
+          <nz-form-label nzRequired nzFor="customer">{{ 'Salesman' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
+            <nz-select formControlName="customerId">
+              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            </nz-select>
           </nz-form-control>
         </nz-form-item>
       </div>
 
       <div nz-col [nzSpan]="12">
         <nz-form-item>
-          <nz-form-label nzRequired nzFor="customer">入仓时间</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
+          <nz-form-label nzRequired nzFor="customer">{{ 'Warehouse time' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
+            <nz-date-picker formControlName="customerId"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="6">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="customer">{{ 'Business type' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
+            <nz-select formControlName="customerId">
+              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="6">
+        <nz-form-item>
+          <nz-form-label nzRequired nzFor="customer">{{ 'Channel' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
+            <nz-select formControlName="customerId">
+              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label nzFor="customer">{{ 'Transport NO' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
             <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
           </nz-form-control>
         </nz-form-item>
@@ -33,26 +78,34 @@
     <div nz-row [nzGutter]="24">
       <div nz-col [nzSpan]="6">
         <nz-form-item>
-          <nz-form-label nzRequired nzFor="customer">业务类型</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
-            <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
+          <nz-form-label nzRequired nzFor="customer">{{ 'Port of shipment' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
+            <nz-select formControlName="customerId">
+              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            </nz-select>
           </nz-form-control>
         </nz-form-item>
       </div>
 
       <div nz-col [nzSpan]="6">
         <nz-form-item>
-          <nz-form-label nzRequired nzFor="customer">渠道</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
-            <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
+          <nz-form-label nzFor="customer">{{ 'Country' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
+            <nz-select formControlName="customerId">
+              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            </nz-select>
           </nz-form-control>
         </nz-form-item>
       </div>
 
       <div nz-col [nzSpan]="12">
         <nz-form-item>
-          <nz-form-label nzFor="customer">转运单号</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
+          <nz-form-label nzFor="customer">{{ 'SO number' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
             <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
           </nz-form-control>
         </nz-form-item>
@@ -62,38 +115,13 @@
     <div nz-row [nzGutter]="24">
       <div nz-col [nzSpan]="6">
         <nz-form-item>
-          <nz-form-label nzRequired nzFor="customer">出货口岸</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
-            <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-
-      <div nz-col [nzSpan]="6">
-        <nz-form-item>
-          <nz-form-label nzFor="customer">国家</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
-            <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-
-      <div nz-col [nzSpan]="12">
-        <nz-form-item>
-          <nz-form-label nzFor="customer">SO号</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
-            <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
-
-    <div nz-row [nzGutter]="24">
-      <div nz-col [nzSpan]="6">
-        <nz-form-item>
-          <nz-form-label nzRequired nzFor="customer">客户</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
-            <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
+          <nz-form-label nzRequired nzFor="customer">{{ 'Customer' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
+            <nz-select formControlName="customerId">
+              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            </nz-select>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -101,7 +129,7 @@
       <div nz-col [nzSpan]="6">
         <nz-form-item>
           <nz-form-label nzFor="customer"></nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
             <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
           </nz-form-control>
         </nz-form-item>
@@ -109,18 +137,26 @@
 
       <div nz-col [nzSpan]="6">
         <nz-form-item>
-          <nz-form-label nzFor="customer">报关行</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
-            <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
+          <nz-form-label nzFor="customer">{{ 'Customs broker' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
+            <nz-select formControlName="customerId">
+              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            </nz-select>
           </nz-form-control>
         </nz-form-item>
       </div>
 
       <div nz-col [nzSpan]="6">
         <nz-form-item>
-          <nz-form-label nzFor="customer">清关行</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
-            <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
+          <nz-form-label nzFor="customer">{{ 'Customs broker' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
+            <nz-select formControlName="customerId">
+              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            </nz-select>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -129,25 +165,25 @@
     <div nz-row [nzGutter]="24">
       <div nz-col [nzSpan]="12">
         <nz-form-item>
-          <nz-form-label nzFor="customer">联系人</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
+          <nz-form-label nzFor="customer">{{ 'Contact person' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
             <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
           </nz-form-control>
         </nz-form-item>
 
-        <nz-form-item>
-          <nz-form-label nzFor="customer">交货方式</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
+        <nz-form-item nzLayout="inline">
+          <nz-form-label nzFor="customer">{{ 'Delivery Method' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
             <nz-radio-group formControlName="customerId">
-              <label nz-radio nzValue="自送货">自送货</label>
-              <label nz-radio nzValue="由CITYOCEAN上门提货">由CITYOCEAN上门提货</label>
+              <label nz-radio nzValue="自送货">{{ 'Self-delivery' | translate }}</label>
+              <label nz-radio nzValue="由CITYOCEAN上门提货">{{ 'Picked up by CITYOCEAN' | translate }}</label>
             </nz-radio-group>
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
-          <nz-form-label nzFor="customer">交货仓库</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
+          <nz-form-label nzFor="customer">{{ 'Delivery warehouse' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
             <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
           </nz-form-control>
         </nz-form-item>
@@ -156,18 +192,22 @@
       <div
         nz-col
         [nzSpan]="12"
-        style="background-color: #f2f2f2; border-radius: 5px; justify-content: center; display: flex; flex-direction: column;"
+        style="background-color: #00000004; border-radius: 5px; justify-content: center; display: flex; flex-direction: column;"
       >
         <nz-form-item>
-          <nz-form-label nzFor="customer">FBA运输方式</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
-            <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
+          <nz-form-label nzFor="customer">{{ 'FBA shipping method' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
+            <nz-select formControlName="customerId">
+              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            </nz-select>
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
-          <nz-form-label nzFor="customer">备注</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
+          <nz-form-label nzFor="customer">{{ 'Remark' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
             <textarea
               nz-input
               placeholder="Controlled autosize"
@@ -182,15 +222,15 @@
     <div nz-row [nzGutter]="24">
       <div nz-col [nzSpan]="12" style="margin-top: 24px;">
         <nz-form-item>
-          <nz-form-label nzFor="customer">预估交货时间</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
-            <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
+          <nz-form-label nzFor="customer">{{ 'Estimated delivery time' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
+            <nz-range-picker formControlName="customerId"></nz-range-picker>
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
-          <nz-form-label nzFor="customer">品名</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
+          <nz-form-label nzFor="customer">{{ 'Name' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
             <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
           </nz-form-control>
         </nz-form-item>
@@ -201,7 +241,7 @@
         [nzSpan]="12"
         style="
           margin-top: 24px;
-          background-color: #f2f2f2;
+          background-color: #00000004;
           border-radius: 5px;
           justify-content: center;
           display: flex;
@@ -209,15 +249,15 @@
         "
       >
         <nz-form-item>
-          <nz-form-label nzFor="customer">快递号</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
+          <nz-form-label nzFor="customer">{{ 'Courier number' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
             <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
-          <nz-form-label nzFor="customer">备注</nz-form-label>
-          <nz-form-control nzErrorTip="Please input your customer!">
+          <nz-form-label nzFor="customer">{{ 'remark' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
             <input nz-input formControlName="customerId" placeholder="{{ 'Please enter' | translate }}" />
           </nz-form-control>
         </nz-form-item>
@@ -226,7 +266,7 @@
 
     <div nz-row [nzGutter]="24">
       <div style="padding: 24px 0; width: 100%;">
-        <nz-tag nzColor="success" style="width: 100%;">Total ：件数(CTN) 24 重量(KG) 747.7 体积(CBM)4.15</nz-tag>
+        <nz-tag nzColor="primary" style="width: 100%;">{{ 'Total' | translate }} ：件数(CTN) 24 重量(KG) 747.7 体积(CBM)4.15</nz-tag>
       </div>
 
       <div formArrayName="addressList" class="address-list">
@@ -235,14 +275,31 @@
           [nzGutter]="24"
           *ngFor="let form of $any(validateForm).controls.addressList.controls; let i = index"
           [formGroupName]="i"
+          class="address-item"
         >
           <div nz-col [nzSpan]="24">
             <nz-form-item>
-              <nz-form-label nzFor="customer">送货地址</nz-form-label>
-              <nz-form-control nzErrorTip="Please input your customer!">
+              <nz-form-label nzFor="customer" class="address-add"
+                ><h3>{{ 'Delivery address' | translate }}{{ i + 1 }}</h3>
+                <div>
+                  <button
+                    nz-button
+                    nzType="danger"
+                    (click)="removeAddressListRow(i)"
+                    *ngIf="$any(validateForm).controls.addressList.value.length > 1"
+                  >
+                    <i nz-icon nzType="delete" nzTheme="outline"></i>{{ 'Delete' | translate }}
+                  </button>
+
+                  <button nz-button nzType="primary" (click)="addAddressListRow($event)">
+                    <i nz-icon nzType="plus" nzTheme="outline"></i>{{ 'Add' | translate }}
+                  </button>
+                </div>
+              </nz-form-label>
+              <nz-form-control [nzErrorTip]="'Please enter' | translate">
                 <textarea
                   nz-input
-                  placeholder="Controlled autosize"
+                  [placeholder]="'Please enter' | translate"
                   formControlName="address"
                   [nzAutosize]="{ minRows: 3, maxRows: 5 }"
                 ></textarea>
@@ -252,60 +309,90 @@
 
           <!-- 地址中的表格 -->
           <div formArrayName="tables" nz-col [nzSpan]="24" class="table-list">
-            <div
-              class="address-tables"
-              *ngFor="let form2 of $any(validateForm).controls.addressList.controls[i].controls.tables.controls; let z = index"
-              [formGroupName]="z"
-            >
-              <nz-form-item>
-                <nz-form-label nzFor="customer" *ngIf="z === 0">FBA号</nz-form-label>
-                <nz-form-control nzErrorTip="Please input your customer!">
-                  <input nz-input formControlName="a" placeholder="{{ 'Please enter' | translate }}" />
-                </nz-form-control>
-              </nz-form-item>
-
-              <nz-form-item>
-                <nz-form-label nzFor="customer" *ngIf="z === 0">Reference ID</nz-form-label>
-                <nz-form-control nzErrorTip="Please input your customer!">
-                  <input nz-input formControlName="b" placeholder="{{ 'Please enter' | translate }}" />
-                </nz-form-control>
-              </nz-form-item>
-
-              <nz-form-item>
-                <nz-form-label nzRequired nzFor="customer" *ngIf="z === 0">件数</nz-form-label>
-                <nz-form-control nzErrorTip="Please input your customer!">
-                  <input nz-input formControlName="b" placeholder="{{ 'Please enter' | translate }}" />
-                </nz-form-control>
-              </nz-form-item>
-
-              <nz-form-item>
-                <nz-form-label nzFor="customer" *ngIf="z === 0">重量</nz-form-label>
-                <nz-form-control nzErrorTip="Please input your customer!">
-                  <input nz-input formControlName="b" placeholder="{{ 'Please enter' | translate }}" />
-                </nz-form-control>
-              </nz-form-item>
-
-              <nz-form-item>
-                <nz-form-label nzRequired nzFor="customer" *ngIf="z === 0">体积</nz-form-label>
-                <nz-form-control nzErrorTip="Please input your customer!">
-                  <input nz-input formControlName="b" placeholder="{{ 'Please enter' | translate }}" />
-                </nz-form-control>
-              </nz-form-item>
-
-              <nz-form-item>
-                <nz-form-label nzFor="customer" *ngIf="z === 0">操作</nz-form-label>
-                <nz-form-control>
-                  <div class="setting">
-                    <i
-                      nz-icon
-                      nzType="plus"
-                      nzTheme="outline"
-                      (click)="addTablesRow($any(validateForm).controls.addressList.controls[i])"
-                    ></i>
-                    <i nz-icon nzType="delete" nzTheme="outline" (click)="removeTablesRow(i, z)" *ngIf="z !== 0"></i>
-                  </div>
-                </nz-form-control>
-              </nz-form-item>
+            <nz-table #tables nzShowPagination="false" nzSize="small" [nzData]="[{}]">
+              <thead>
+                <tr>
+                  <th>
+                    <nz-form-label nzFor="customer">{{ 'FBA number' | translate }}</nz-form-label>
+                  </th>
+                  <th>
+                    <nz-form-label nzFor="customer">{{ 'Reference ID' | translate }}</nz-form-label>
+                  </th>
+                  <th>
+                    <nz-form-label nzRequired nzFor="customer">{{ 'Pieces' | translate }}</nz-form-label>
+                  </th>
+                  <th>
+                    <nz-form-label nzFor="customer">{{ 'weight' | translate }}</nz-form-label>
+                  </th>
+                  <th>
+                    <nz-form-label nzRequired nzFor="customer">{{ 'volume' | translate }}</nz-form-label>
+                  </th>
+                  <th>
+                    <nz-form-label nzFor="customer">{{ 'operating' | translate }}</nz-form-label>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let form2 of $any(validateForm).controls.addressList.controls[i].controls.tables.controls; let z = index"
+                  [formGroupName]="z"
+                >
+                  <td>
+                    <nz-form-item>
+                      <nz-form-control [nzErrorTip]="'Please enter' | translate">
+                        <input nz-input formControlName="a" placeholder="{{ 'Please enter' | translate }}" />
+                      </nz-form-control>
+                    </nz-form-item>
+                  </td>
+                  <td>
+                    <nz-form-item>
+                      <nz-form-control [nzErrorTip]="'Please enter' | translate">
+                        <input nz-input formControlName="b" placeholder="{{ 'Please enter' | translate }}" />
+                      </nz-form-control>
+                    </nz-form-item>
+                  </td>
+                  <td>
+                    <nz-form-item>
+                      <nz-form-control [nzErrorTip]="'Please enter' | translate">
+                        <input nz-input formControlName="b" placeholder="{{ 'Please enter' | translate }}" />
+                      </nz-form-control>
+                    </nz-form-item>
+                  </td>
+                  <td>
+                    <nz-form-item>
+                      <nz-form-control nzErrorTip="Please input your customer!">
+                        <input nz-input formControlName="b" placeholder="{{ 'Please enter' | translate }}" />
+                      </nz-form-control>
+                    </nz-form-item>
+                  </td>
+                  <td>
+                    <nz-form-item>
+                      <nz-form-control [nzErrorTip]="'Please enter' | translate">
+                        <input nz-input formControlName="b" placeholder="{{ 'Please enter' | translate }}" />
+                      </nz-form-control>
+                    </nz-form-item>
+                  </td>
+                  <td>
+                    <nz-form-item>
+                      <nz-form-control>
+                        <div class="setting">
+                          <i
+                            nz-icon
+                            nzType="delete"
+                            nzTheme="outline"
+                            (click)="removeTablesRow(i, z)"
+                            *ngIf="$any(validateForm).controls.addressList.controls[i].controls.tables.value.length > 1"
+                          ></i>
+                        </div>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </td>
+                </tr>
+              </tbody>
+            </nz-table>
+            <div class="table-add" (click)="addTablesRow($any(validateForm).controls.addressList.controls[i])">
+              <i nz-icon nzType="plus" nzTheme="outline"></i>
+              {{ 'Add' | translate }}
             </div>
           </div>
         </div>

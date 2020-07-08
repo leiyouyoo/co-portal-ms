@@ -1,0 +1,491 @@
+<!-- 头像裁剪 -->
+<input
+  type="file"
+  data-im-input-show
+  accept="image/jpeg,image/png"
+  #avatarUploadElement
+  (change)="avtarUpload($event)"
+  style="display: none;"
+/>
+<lib-image-cropper data-im-input-show (emitFile)="onEmitFile($event)" [showCropper]="showCropper" [file]="imageFile"></lib-image-cropper>
+<section class="im-container" #ImContainer>
+  <div (click)="onCustomerservice()" *ngIf="showCustomerservice" class="icon-Customerservice-wrap">
+    <i class="iconfont icon-Customerservice"></i>
+  </div>
+  <app-image-previewer [imgUrlList]="imgUrlList" *ngIf="showPreviewer"></app-image-previewer>
+  <div class="imInput">
+    <p class="min-window-control" data-im-input-show (click)="showImLayout()" *ngIf="!isVisible">
+      <img data-im-input-show src="assets/images/im/IM-icon.png" alt="" />
+      <span *ngIf="getTotalUnreadCount()" class="total-unread-count"></span>
+      {{ 'Message list' | translate }}
+    </p>
+    <span data-im-input-show class="small-psn-box" *ngIf="isSelectItem && selectedItem" (click)="onlyShowChat($event)">
+      <img data-im-input-show [src]="getAvtar(selectedItem)" />
+      <span data-im-input-show>{{ selectedItem?.userProfile?.nick || selectedItem?.groupProfile?.name }}</span>
+    </span>
+  </div>
+
+  <div class="chat" *ngIf="isChat">
+    <div class="chatWindow">
+      <div class="add-member-content-wrap" *ngIf="showAddMemberContent">
+        <lib-im-contacts #imContacts [fromType]="fromType" [fromAddMember]="true"></lib-im-contacts>
+        <div class="member-button-group">
+          <span>已选{{ initGroupmemberToJoin(imContacts).length }}人</span>
+          <button data-im-input-show nz-button nzSize="small" (click)="showAddMemberContent = false" nzType="default">
+            取消
+          </button>
+          <button data-im-input-show nz-button nzSize="small" (click)="addMemberConfirm(imContacts)" nzType="primary">
+            确定
+          </button>
+        </div>
+      </div>
+      <div class="header">
+        <div><img [src]="getAvtar(selectedItem)" /></div>
+        <span>{{ selectedItem?.userProfile?.nick || selectedItem?.groupProfile?.name }}</span>
+        <div
+          style="
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            color: rgba(0, 0, 0, 0.15);
+            transform: translateY(-50%);
+          "
+        >
+          <i class="iconfont icon-zuixiaohua minimization font24" (click)="closeChatDiv($event)"></i>
+          <i
+            (click)="cancleChatDiv($event)"
+            style="color: #00000025; font-size: 14px;"
+            nz-icon
+            class="ant-input-clear-icon"
+            nzTheme="fill"
+            nzType="close-circle"
+          ></i>
+        </div>
+      </div>
+
+      <div class="chat-content" #scrollMe>
+        <div class="content">
+          <div class="more" *ngIf="!allMessage && !hideTopShowMore">
+            <span (click)="getChatList(true, true)">{{ 'Show More' | translate }}</span>
+          </div>
+          <ng-container *ngFor="let chatMessage of chatMessageList">
+            <div *ngIf="chatMessage.isTimeShow || chatMessage?.type === 'TIMGroupTipElem'; else elseTemplate" class="time">
+              <ng-container *ngIf="chatMessage.isTimeShow">
+                {{ getImChatTime(chatMessage.time) }}
+              </ng-container>
+              <ng-container *ngIf="chatMessage?.type === 'TIMGroupTipElem'">
+                {{ chatMessage?.operatorName }} {{ 'Modified group information' | translate }}
+              </ng-container>
+            </div>
+            <ng-template #elseTemplate>
+              <lib-schedule-message [chatMessage]="chatMessage" *ngIf="isSchedule"></lib-schedule-message>
+              <div *ngIf="!isSchedule" class="itemGroup">
+                <div class="out-avatar" *ngIf="chatMessage.flow === 'in'">
+                  <img
+                    style="display: inline-block; width: 24px; height: 24px;"
+                    [src]="
+                      chatMessage?.fromImageUrl || chatMessage?.fromAccountImageUrl || chatMessage?.avatar || userProfile?.avatar
+                        ? formatImAvatarUrl(
+                            chatMessage?.fromImageUrl || chatMessage?.fromAccountImageUrl || chatMessage?.avatar || userProfile?.avatar
+                          )
+                        : 'assets/images/im/avatar-2.png'
+                    "
+                    alt=""
+                  />
+                  <span>{{ chatMessage.nickName || chatMessage.fromNickName || chatMessage.nick || userProfile.nick }}</span>
+                </div>
+                <div [ngClass]="{ myItems: chatMessage.flow === 'out', otherItems: chatMessage.flow === 'in' }">
+                  <span
+                    *ngIf="chatMessage?.type === 'TIMCustomElem'"
+                    [innerHTML]="chatMessage.msgBody[0].msgContent.Ext | imTranslate | async"
+                  ></span>
+                  <app-text-element *ngIf="chatMessage?.type === 'TIMTextElem'" [payload]="chatMessage.payload"></app-text-element>
+                  <app-img-element
+                    (showPreviewImg)="showPreviewImg($event)"
+                    [payload]="chatMessage.msgBody[0].msgContent.ImageInfoArray[0].URL"
+                    *ngIf="chatMessage?.type === 'TIMImageElem' && chatMessage.msgBody[0].msgContent.ImageInfoArray[0].URL"
+                  ></app-img-element>
+                  <nz-progress
+                    *ngIf="chatMessage?.type === 'TIMImageElem' && chatMessage?.process < 1"
+                    [nzPercent]="(chatMessage?.process * 100).toFixed(0)"
+                    nzSize="small"
+                    nzStatus="active"
+                  ></nz-progress>
+                  <span *ngIf="chatMessage.type === 'TIMFileElem'">
+                    <div [title]="'Click download' | translate" (click)="downlaodFile(chatMessage)" class="file-element-wrapper">
+                      <i class="icon-liantianwenjianT iconfont"></i>
+                      <div class="file-element">
+                        <span class="file-name">{{ chatMessage.msgBody[0].msgContent.FileName }}</span
+                        ><span class="file-size" *ngIf="(chatMessage?.msgBody)[0]?.msgContent?.FileSize"
+                          >{{ (chatMessage.msgBody[0].msgContent.FileSize / 1024).toFixed(2) }} Kb</span
+                        >
+                        <nz-progress
+                          *ngIf="chatMessage?.process < 1"
+                          [nzPercent]="(chatMessage?.process * 100).toFixed(0)"
+                          nzSize="small"
+                          nzStatus="active"
+                        ></nz-progress>
+                      </div>
+                    </div>
+                  </span>
+                </div>
+              </div>
+            </ng-template>
+          </ng-container>
+          <div class="more" *ngIf="!allMessage && messageId && !hideBottomShowMore">
+            <span (click)="getChatList(true, false)">{{ 'Show More' | translate }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!selectedItem.isRemindMessage && !selectedItem.disbandGroupFlage" class="footer">
+        <input type="file" accept=".jpg, .jpeg, .png, .gif" #imageUpload (change)="imageChange($event)" style="display: none;" />
+        <input type="file" #fileUploadElement (change)="fileChange($event)" style="display: none;" />
+        <textarea
+          (keydown)="checkKeyDown($event)"
+          (keyup)="checkKeyUp($event)"
+          placeholder="Type message…"
+          [(ngModel)]="inputValue"
+        ></textarea>
+        <p class="send-group">
+          <span>
+            <i
+              class="iconfont icon-biaoqin"
+              nz-popover
+              [(nzVisible)]="emojiContentVisible"
+              nzPopoverPlacement="topLeft"
+              (nzVisibleChange)="emojiComponentChange($event)"
+              nzPopoverTrigger="click"
+              [nzPopoverContent]="emojiContentTemplate"
+            ></i>
+            <i (click)="imgUpload()" class="iconfont icon-photo"></i>
+            <i (click)="fileUpload()" class="iconfont icon-wenjian"></i>
+          </span>
+          <span (click)="send()" class="send-button">{{ 'Send' | translate }}</span>
+        </p>
+      </div>
+    </div>
+    <ng-template #emojiContentTemplate>
+      <app-im-emoji (chooseEmojiEmit)="choosedEmoji($event)">Close</app-im-emoji>
+    </ng-template>
+    <div *ngIf="!isSchedule" class="detail">
+      <div class="header">
+        <i
+          data-im-input-show
+          *ngFor="let item of iconList; let i = index"
+          [class]="item.class"
+          (click)="getData(item.type, i)"
+          [ngStyle]="{ color: chooseColor(item.type, i) }"
+        ></i>
+      </div>
+      <ng-container [ngSwitch]="selectIconType">
+        <ng-container *ngSwitchCase="'groupBussiness'">
+          <lib-im-booking-detail
+            (showBussinessNo)="onShowBussinessNo($event)"
+            *ngIf="selectedItem?.bussinessType === 'booking'"
+            [id]="formatBussinessId()"
+          ></lib-im-booking-detail>
+          <lib-im-quote-detail
+            (showBussinessNo)="onShowBussinessNo($event)"
+            *ngIf="selectedItem?.bussinessType === 'quote'"
+            [id]="formatBussinessId()"
+          ></lib-im-quote-detail>
+          <lib-im-shipment-detail
+            [id]="formatBussinessId()"
+            (showBussinessNo)="onShowBussinessNo($event)"
+            *ngIf="selectedItem?.bussinessType === 'shipment'"
+          ></lib-im-shipment-detail>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'info'">
+          <ng-container *ngIf="selectedItem?.type === 'GROUP'; else elseTemplate">
+            <div class="content">
+              <div>
+                <div class="item">
+                  <span>{{ 'Group name' | translate }}：</span>
+                  <div class="edit-group-wrap">
+                    <ng-container *ngIf="editGroupName; else editGroupNameTemplate">
+                      <span>{{ groupInfo.name }}</span>
+                      <i edit-group data-im-input-show (click)="editGroupName = false" class="iconfont icon-edit1"></i>
+                    </ng-container>
+                    <ng-template #editGroupNameTemplate>
+                      <input
+                        edit-group
+                        nz-input
+                        autofocus
+                        (blur)="editGroupName = true; editGroupProfile()"
+                        [(ngModel)]="groupInfo.name"
+                        type="text"
+                      />
+                    </ng-template>
+                  </div>
+                </div>
+                <div style="flex-wrap: wrap; justify-content: flex-start;" class="item">
+                  <span style="display: flex; justify-content: space-between; width: 100%;"
+                    >{{ 'Group notification' | translate }}：<i
+                      edit-group
+                      data-im-input-show
+                      (click)="editGroupNotification = false"
+                      class="iconfont icon-edit1"
+                    ></i
+                  ></span>
+                  <div class="edit-group-wrap">
+                    <ng-container *ngIf="editGroupNotification; else editGroupNotificationTemplate">
+                      <span>{{ groupInfo.notification }}</span>
+                    </ng-container>
+                    <ng-template #editGroupNotificationTemplate>
+                      <textarea
+                        autofocus
+                        edit-group
+                        nz-input
+                        (blur)="editGroupNotification = true; editGroupProfile()"
+                        [(ngModel)]="groupInfo.notification"
+                        type="text"
+                      ></textarea>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="item group-members-item">
+                  <span>{{ 'Group members' | translate }}：</span>
+                  <div (dblclick)="chatWithPercon(item)" *ngFor="let item of membersList" class="personList">
+                    <img [src]="item?.avatar ? formatImAvatarUrl(item?.avatar) : 'assets/images/im/avatar-2.png'" />
+                    <span>{{ item.nick ? item.nick : item.userID }}</span>
+                  </div>
+                  <div class="add-member" (click)="showAddMemberContent = true">
+                    <i class="iconfont icon-plus"></i>
+                    <span>Add member</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <lib-user-info [userInfo]="selectedItem"></lib-user-info>
+          </ng-template>
+        </ng-container>
+        <ng-container *ngSwitchCase="'file'">
+          <lib-im-file-lists
+            [FromAccount]="selectedItem?.userProfile?.userID || null"
+            [GroupId]="selectedItem?.groupProfile?.groupID || null"
+          ></lib-im-file-lists>
+        </ng-container>
+        <ng-container *ngSwitchCase="'history'">
+          <lib-chat-history
+            (showChatWithMsgId)="showChatWithMsgId($event)"
+            [groupID]="selectedItem.type === 'GROUP' ? selectedItem.groupProfile.groupID : selectedItem.userProfile.userID"
+            [isC2C]="selectedItem.type === 'GROUP' ? false : true"
+          ></lib-chat-history>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="parent" *ngIf="isVisible">
+    <div class="left-content">
+      <ng-container *ngIf="currentWindowShowType === 'chat'">
+        <div class="header">
+          <!-- <span style="line-height: 2px;">{{ 'Chat' | translate }}</span> -->
+          <nz-input-group class="search-history" [nzPrefix]="suffixIconSearch" [nzSuffix]="inputClearTpl">
+            <input
+              type="text"
+              [placeholder]="'Search' | translate"
+              nz-input
+              class="check-psn-input"
+              [(ngModel)]="searchText"
+              nz-popover
+              [nzVisible]="visible"
+              [nzOverlayStyle]="{ display: !searchText ? 'none' : 'block' }"
+              nzOverlayClassName="im-globel-search"
+              nzPopoverTrigger="click"
+              nzPopoverPlacement="bottomLeft"
+              [nzPopoverContent]="contentTemplate"
+              (ngModelChange)="glogbelSearch()"
+            />
+          </nz-input-group>
+          <ng-template #contentTemplate>
+            <section class="globel-wrap">
+              <div *ngIf="globelPersonList.length" data-im-input-show class="search-person-list">
+                <label data-im-input-show for="">联系人</label>
+                <div (click)="chatWithPercon(item, true)" data-im-input-show *ngFor="let item of globelPersonList">
+                  <img
+                    data-im-input-show
+                    [src]="item.profilePictureId ? formatImAvatarUrl(item.profilePictureId) : 'assets/images/im/avatar-2.png'"
+                    alt=""
+                  />
+                  <p data-im-input-show>
+                    <span data-im-input-show class="name"
+                      ><span [innerHtml]="item.name" *ngIf="item.name"></span><span [innerHtml]="item.surname" *ngIf="item.surname"></span>
+                      <span [innerHtml]="item.cName" *ngIf="item.cName"></span>
+                    </span>
+                    <span data-im-input-show>{{ item.companyName }}</span>
+                  </p>
+                </div>
+              </div>
+              <div *ngIf="searchConversationsList.length" data-im-input-show class="search-ConversationsList">
+                <label for="">会话</label>
+                <div data-im-input-show (click)="showChat(item, true); visible = false" *ngFor="let item of searchConversationsList">
+                  <img [src]="getAvtar(item)" />
+                  <p>
+                    <span
+                      class="name"
+                      [innerHtml]="
+                        item.bussinessType === 'C2C'
+                          ? item.userProfile.nick
+                            ? item.userProfile.nick
+                            : item.userProfile.name
+                          : item.groupProfile.name
+                      "
+                    ></span>
+                    <span [innerHtml]="item?.lastMessage?.messageForShow"></span>
+                  </p>
+                </div>
+              </div>
+            </section>
+          </ng-template>
+          <ng-template #suffixIconSearch class="search">
+            <i nz-icon style="transform: translateY(3px);" nzType="search" [title]="'Search' | translate"></i>
+          </ng-template>
+          <ng-template #inputClearTpl
+            ><i
+              nz-icon
+              class="ant-input-clear-icon"
+              style="transform: translateY(3px);"
+              nzTheme="fill"
+              nzType="close-circle"
+              *ngIf="searchText"
+              (click)="clearSearch($event)"
+            ></i
+          ></ng-template>
+        </div>
+
+        <div class="parent-content">
+          <div class="content">
+            <div
+              class="items"
+              [ngClass]="{ backgroundBlue: selectedItem?.conversationID === item.conversationID }"
+              (click)="showChat(item)"
+              [tabindex]="i"
+              *ngFor="let item of conversationsList; let i = index"
+            >
+              <div
+                [ngStyle]="{
+                  color: selectedItem?.conversationID === item.conversationID ? 'rgba(0, 0, 0, 0.85)' : 'rgba(0, 0, 0, 0.25)'
+                }"
+                class="card-time"
+              >
+                {{ getHometime(item?.lastMessage?.lastTime) }}
+              </div>
+              <div class="avatar-unreadCount-wrap">
+                <img [src]="getAvtar(item)" />
+                <span *ngIf="item.unreadCount">{{ item.unreadCount <= 99 ? item.unreadCount : 99 }}</span>
+              </div>
+
+              <div class="itemsChild">
+                <div
+                  class="itemsChild1"
+                  [ngClass]="{
+                    colorWhite: selectedItem?.conversationID === item.conversationID,
+                    person: item.type === 1
+                  }"
+                >
+                  <span class="name">
+                    <ng-container *ngIf="!item.isRemindMessage; else elseTemplate">
+                      {{
+                        item.bussinessType === 'C2C'
+                          ? item.userProfile.nick
+                            ? item.userProfile.nick
+                            : item.userProfile.name
+                          : item.groupProfile.name
+                      }}
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                      {{ item.title }}
+                    </ng-template></span
+                  >
+                  <div
+                    *ngIf="item.type === 'GROUP' && item.bussinessType != 'privateGroup'"
+                    class="itemsChild2"
+                    [ngClass]="{ colorWhite: selectedItem?.conversationID === item.conversationID }"
+                  >
+                    <label [ngClass]="{ lables: true }" [class]="'lable-' + item?.bussinessType">
+                      {{ item.bussinessType }}
+                    </label>
+                  </div>
+                </div>
+                <div
+                  *ngIf="justText(item.lastMessage.messageForShow)"
+                  class="text"
+                  [innerHtml]="justText(item.lastMessage.messageForShow)"
+                  [ngClass]="{ colorWhite: selectedItem?.conversationID === item.conversationID }"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container>
+        <lib-im-contacts
+          #imContacts
+          [ngStyle]="{ display: currentWindowShowType === 'book' ? 'block' : 'none' }"
+          [fromType]="fromType"
+          (imContactsClick)="imContactsDbClick($event)"
+        ></lib-im-contacts>
+      </ng-container>
+    </div>
+    <ng-template #avatarContentTemplate>
+      <div class="edit-avtar-wrap">
+        <img
+          style="width: 76px;"
+          data-im-input-show
+          [src]="myProfile?.avatar ? formatImAvatarUrl(myProfile?.avatar) : 'assets/images/im/avatar-2.png'"
+          alt=""
+        />
+        <i
+          *ngIf="isIE()"
+          nz-popover
+          nzPopoverPlacement="bottomRight"
+          [nzPopoverContent]="'The current browser does not support, use Google or Firefox' | translate"
+          data-im-input-show
+          class="iconfont icon-edit"
+        ></i>
+        <i *ngIf="!isIE()" (click)="avtarUploadClick()" data-im-input-show class="iconfont icon-edit"></i>
+      </div>
+    </ng-template>
+    <div class="right-content">
+      <i class="iconfont icon-zuixiaohua minimization font24" (click)="closeImLayout($event)"></i>
+      <img
+        [src]="myProfile?.avatar ? formatImAvatarUrl(myProfile?.avatar) : 'assets/images/im/avatar-2.png'"
+        style="width: 24px; height: 24px;"
+        nz-popover
+        [(nzVisible)]="avatarContentVisible"
+        nzPopoverPlacement="bottomRight"
+        nzPopoverTrigger="click"
+        [nzPopoverContent]="avatarContentTemplate"
+        alt=""
+      />
+      <i
+        (click)="currentWindowShowType = 'chat'"
+        [ngClass]="{
+          selected: currentWindowShowType === 'chat',
+          'icon-xiaoximian': currentWindowShowType === 'chat',
+          'icon-xiaoxixian': currentWindowShowType === 'book'
+        }"
+        class="iconfont font24"
+      ></i>
+      <i
+        (click)="selectTXL($event)"
+        [ngClass]="{
+          selected: currentWindowShowType === 'book',
+          'icon-tongxunluxian': currentWindowShowType === 'chat',
+          'icon-tongxunlumian': currentWindowShowType === 'book'
+        }"
+        class="iconfont font24"
+      ></i>
+    </div>
+  </div>
+  <ng-template #suffixIconSearch>
+    <i data-im-input-show nz-icon nzType="search"></i>
+  </ng-template>
+</section>
