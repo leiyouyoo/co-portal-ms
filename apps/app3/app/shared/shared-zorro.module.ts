@@ -16,7 +16,6 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -56,7 +55,6 @@ export const SHARED_ZORRO_MODULES = [
   NzToolTipModule,
   NzPopoverModule,
   NzSelectModule,
-  NzIconModule,
   NzAffixModule,
   NzBadgeModule,
   NzAlertModule,

@@ -11,6 +11,14 @@ import { default as ngLang } from '@angular/common/locales/zh';
 import { CO_LOCALE, CO_I18N_TOKEN, zh_CN as delonLang, CoCommonModule } from '@co/common';
 import { zhCN as dateLang } from 'date-fns/locale';
 import { NZ_DATE_LOCALE, NZ_I18N, zh_CN as zorroLang } from 'ng-zorro-antd/i18n';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { IconDefinition } from '@ant-design/icons-angular';
+import * as AllIcons from '@ant-design/icons-angular/icons';
+const antDesignIcons = AllIcons as {
+  [key: string]: IconDefinition;
+};
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesignIcons[key]);
+
 const LANG = {
   abbr: 'zh',
   ng: ngLang,
@@ -107,6 +115,7 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
     HttpClientModule,
     GlobalConfigModule.forRoot(),
     CoAuthModule,
+    NzIconModule.forRoot(icons),
     CoCommonModule.forRoot({
       environment,
     }),

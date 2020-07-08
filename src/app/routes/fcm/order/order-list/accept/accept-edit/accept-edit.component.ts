@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 @Component({
   selector: 'app-order-accept-edit',
   templateUrl: './accept-edit.component.html',
@@ -36,6 +36,36 @@ export class AcceptEditComponent implements OnInit {
       cargoPutAwayDate: [null],
       fbaPickUpMethodType: [null],
       country: [null],
+      addressList: new FormArray([]),
     });
+    debugger;
+    this.addAddressListRow();
+  }
+
+  addAddressListRow() {
+    let row: FormGroup = this.fb.group({
+      address: ['这是我的地址', [Validators.required]],
+      tables: new FormArray([]),
+    });
+
+    this.addTablesRow(row);
+    (this.validateForm.controls.addressList as FormArray).push(row);
+  }
+
+  addTablesRow(row: FormGroup) {
+    debugger;
+    let table: FormGroup = this.fb.group({
+      a: ['123', [Validators.required]],
+      b: [null, [Validators.required]],
+      c: [null, [Validators.required]],
+      d: [null],
+      e: [null],
+    });
+
+    (row.controls.tables as FormArray).push(table);
+  }
+
+  removeTablesRow(index: number, tindex: number) {
+    this.validateForm.controls.addressList['controls'][index].controls.tables.removeAt(tindex);
   }
 }

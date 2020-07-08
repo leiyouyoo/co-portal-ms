@@ -870,3 +870,17 @@ nz-table-inner-scroll {
 .ant-btn {
     border-radius: 4px !important;
 }
+
+.ant-form-item-label>label.ant-form-item-required::before {
+    content: '' !important;
+}
+
+.ant-form-item-label>label.ant-form-item-required::after {
+    display     : inline-block !important;
+    margin-right: 4px;
+    color       : #ff4d4f;
+    font-size   : 14px;
+    font-family : SimSun, sans-serif;
+    line-height : 1;
+    content     : '*'
+}

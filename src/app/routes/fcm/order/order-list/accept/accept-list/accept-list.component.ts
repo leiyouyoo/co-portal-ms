@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { STColumn } from '@co/cbc';
+import {ShipmentService} from "../../../../../../service/fcm";
+
+
 @Component({
   selector: 'app-order-accept-list',
   templateUrl: './accept-list.component.html',
@@ -52,7 +55,7 @@ export class AcceptListComponent implements OnInit {
   ];
 
   editModal = false;
-  constructor() {}
+  constructor( private  shipmentService : ShipmentService) {}
 
   ngOnInit(): void {}
 
@@ -63,4 +66,21 @@ export class AcceptListComponent implements OnInit {
   handleOk() {
     this.editModal = false;
   }
+
+  /**
+   * 是否作废
+   * @param isTrue
+   */
+  isChangeStatus( isTrue?:boolean ){
+
+    let req ={
+      'shipmentIds':['7D48A4A3-FF11-4C9A-EA9E-08D8225DBB70' , 'AD2C9E19-F807-4D04-7D81-08D822F1207F'],
+      'isSetInvalid' : isTrue ? true : false
+    }
+    this.shipmentService.changeInvalidStatus( req ).subscribe(res =>{
+      console.log(res)
+    });
+
+  }
+
 }
