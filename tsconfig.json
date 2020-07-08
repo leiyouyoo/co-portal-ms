@@ -30,7 +30,8 @@
       ],
       "@brand": [
         "src/app/layout/pro/index"
-      ]
+      ],
+      "@im": ["src/app/shared/im/index"],
     },
     "typeRoots": [
       "node_modules/@types"

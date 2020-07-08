@@ -1,0 +1,54 @@
+<section>
+  <nz-input-group class="search-history" [nzPrefix]="suffixIconSearch" [nzSuffix]="inputClearTpl">
+    <input
+      imDebounceInput="300"
+      (debounceInput)="searchChatHistory()"
+      type="text"
+      [placeholder]="'Search' | translate"
+      nz-input
+      class="check-psn-input"
+      [(ngModel)]="searchHistoryText"
+    />
+  </nz-input-group>
+  <ng-template #suffixIconSearch class="search">
+    <i nz-icon style="transform: translateY(3px);" nzType="search" [title]="'Search' | translate"></i>
+  </ng-template>
+  <ng-template #inputClearTpl
+    ><i
+      style="transform: translateY(3px);"
+      nz-icon
+      class="ant-input-clear-icon"
+      nzTheme="fill"
+      nzType="close-circle"
+      *ngIf="searchHistoryText"
+      (click)="clearSearch()"
+    ></i
+  ></ng-template>
+  <div *ngIf="historyList.length" class="total-wrap">
+    <span>{{ pageInfo.total }}条相关记录</span>
+  </div>
+  <div class="message-list-content" *ngIf="historyList.length; else elseNoDataTemplate">
+    <p (click)="onShowChatWithMsgId(item)" *ngFor="let item of historyList">
+      <ng-container *ngIf="isC2C">
+        <span [ngStyle]="{ color: userId === item.from ? '#00000045' : '#1890FF' }"
+          >{{ item.fromNickName }} {{ getTime(item.creationTime) }}</span
+        >
+      </ng-container>
+      <ng-container *ngIf="!isC2C">
+        <span [ngStyle]="{ color: userId === item.from ? '#00000045' : '#1890FF' }">{{ item.nickName }}</span>
+      </ng-container>
+      <strong>
+        {{ item.payload.text }}
+      </strong>
+    </p>
+    <div *ngIf="historyList.length < pageInfo.total" class="more">
+      <span (click)="searchChatHistory(false)">{{ 'Show More' | translate }}</span>
+    </div>
+  </div>
+  <ng-template #elseNoDataTemplate>
+    <div class="no-date-chat">
+      <img src="assets\images\im\chat-search@3x.png" alt="" />
+      <p>{{ searchHistoryText ? 'No Data' : 'Search chat history' }}</p>
+    </div>
+  </ng-template>
+</section>

@@ -29,8 +29,13 @@
             "styles": [
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "node_modules/quill/dist/quill.snow.css",
+<<<<<<< HEAD
               "src/styles.less",
               "node_modules/@co/theme/default.min.css"
+=======
+              "node_modules/cropperjs/dist/cropper.min.css",
+              "src/styles.less"
+>>>>>>> 引入IM
             ],
             "scripts": [
               "node_modules/ajv/dist/ajv.bundle.js",
@@ -298,6 +303,12 @@
   },
   "defaultProject": "portal",
   "cli": {
+<<<<<<< HEAD
     "analytics": false
   }
 }
+=======
+    "analytics": "46af01cb-778f-4eae-82da-1faf699f61c3"
+  }
+}
+>>>>>>> 引入IM
