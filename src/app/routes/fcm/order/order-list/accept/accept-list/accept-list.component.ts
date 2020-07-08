@@ -10,6 +10,7 @@ import { AcceptEditComponent } from '../accept-edit/accept-edit.component';
   styleUrls: ['./accept-list.component.less'],
 })
 export class AcceptListComponent implements OnInit {
+  @ViewChild('edit', { static: false }) acceptEditComponent: AcceptEditComponent;
   listOfData = [
     {
       id: '1',
