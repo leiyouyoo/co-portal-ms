@@ -44,7 +44,7 @@ export class LayoutProMenuComponent implements OnInit, OnDestroy {
 
   private genMenus(data: Menu[]) {
     this.menus = this.getMenu();
-    debugger;
+
     // this.openStatus();
   }
 
@@ -90,7 +90,6 @@ export class LayoutProMenuComponent implements OnInit, OnDestroy {
   }
 
   openChange(item: Menu, statue: boolean) {
-    debugger;
     const sb = this.submenu;
     const data = item._parent ? item._parent.children : this.menus;
     if (data && data.length <= 1) {

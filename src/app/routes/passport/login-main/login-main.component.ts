@@ -79,7 +79,6 @@ export class loginMainComponent implements OnInit {
   }
 
   login() {
-    debugger;
     // this.formCheck = true;
     if (!this.validateForm.valid) {
       return;

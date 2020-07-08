@@ -62,7 +62,7 @@ export class StartupService {
             this.titleService.default = '';
             this.titleService.suffix = res.app.name;
           },
-          () => { },
+          () => {},
           () => {
             resolve(null);
           },

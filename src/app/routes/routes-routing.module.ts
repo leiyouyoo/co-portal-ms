@@ -20,13 +20,17 @@ const routes: Routes = [
     component: LayoutProComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent },
+      { path: 'dashboard', component: DashboardComponent, data: { titleI18n: 'app.home', reuse: true, icon: 'snippets' } },
       { path: 'ec', loadChildren: () => import('./ec/ec.module').then((m) => m.ECModule) },
       {
         path: 'exception',
         loadChildren: () => import('./exception/exception.module').then((m) => m.ExceptionModule),
       },
-      { path: 'fcm', loadChildren: () => import('./fcm/fcm.module').then((m) => m.FcmModule) },
+      {
+        path: 'fcm',
+        data: { titleI18n: 'E-commerce', reuse: true },
+        loadChildren: () => import('./fcm/fcm.module').then((m) => m.FcmModule),
+      },
     ],
   },
   {
@@ -69,4 +73,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class RouteRoutingModule { }
+export class RouteRoutingModule {}

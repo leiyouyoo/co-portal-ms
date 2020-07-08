@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
 import { ReuseTabService } from '@co/cbc';
-import { ScrollService, _HttpClient } from '@co/common';
+import { ScrollService, _HttpClient, SettingsService } from '@co/common';
 import { updateHostClass } from '@co/core';
 import { environment } from '@env/environment';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -25,6 +25,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { BrandService } from './pro.service';
 import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
+import { I18NService } from 'src/app/core/i18n/i18n.service';
 
 @Component({
   selector: 'layout-pro',
@@ -79,6 +80,8 @@ export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
     private renderer: Renderer2,
     public pro: BrandService,
     public httpClient: _HttpClient,
+    public i18n: I18NService,
+    public settingsService: SettingsService,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
     @Inject(DOCUMENT) private doc: any, // private cdr: ChangeDetectorRef
   ) {
@@ -151,6 +154,11 @@ export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
     // }
   }
 
+  change(lang) {
+    this.i18n.use(lang);
+    this.settingsService.setLayout('lang', lang);
+  }
+
   ngOnInit() {
     const { pro, unsubscribe$ } = this;
     pro.notify.pipe(takeUntil(unsubscribe$)).subscribe(() => {
@@ -176,7 +184,6 @@ export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getUserHead() {
     this.httpClient.get('SSO/User/GetUserDetail', this.user.id).subscribe((res: any) => {
-      debugger;
       this.userInfo = res ? res : {};
     });
   }

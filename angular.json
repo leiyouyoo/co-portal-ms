@@ -29,7 +29,8 @@
             "styles": [
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "node_modules/quill/dist/quill.snow.css",
-              "src/styles.less"
+              "src/styles.less",
+              "node_modules/@co/theme/default.min.css"
             ],
             "scripts": [
               "node_modules/ajv/dist/ajv.bundle.js",

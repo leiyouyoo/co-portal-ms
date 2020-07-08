@@ -35,7 +35,7 @@
       <!--搜索栏-->
       <div class="alain-pro__sider-search">
         <nz-input-group [nzSuffix]="suffixIconSearch" nzSize="small">
-          <input type="text" nz-input placeholder="快捷键搜索" />
+          <input type="text" nz-input placeholder="{{ 'Shortcut search' | translate }}" />
         </nz-input-group>
         <ng-template #suffixIconSearch>
           <i nz-icon nzType="search"></i>
@@ -57,12 +57,11 @@
             <span class="title">
               {{ 'Language' | translate }}
             </span>
-            <!-- <i nz-icon nzType="down"></i> -->
           </a>
           <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul nz-menu nzSelectable>
-              <li nz-menu-item>简体中文</li>
-              <li nz-menu-item>English</li>
+              <li nz-menu-item (click)="change('zh-CN')">简体中文</li>
+              <li nz-menu-item (click)="change('en-US')">English</li>
             </ul>
           </nz-dropdown-menu>
         </li>
@@ -83,7 +82,7 @@
   <div class="alain-pro__top-nav-main-right" layout-pro-header-widget></div>
 </ng-template>
 
-<div class="ant-layout ant-layout-has-sider">
+<div class="ant-layout ant-layout-has-sider" style="height: 100vh;">
   <ng-container *ngIf="pro.menu === 'side' || isMobile">
     <nz-drawer
       *ngIf="isMobile"
@@ -100,16 +99,24 @@
       <ng-template [ngTemplateOutlet]="sideTpl"></ng-template>
     </ng-container>
   </ng-container>
-  <div class="ant-layout alain-pro__main" [ngStyle]="getLayoutStyle">
+  <div class="ant-layout alain-pro__main" [ngStyle]="getLayoutStyle" style="height: 100vh;">
     <!-- <layout-pro-header></layout-pro-header> -->
-    <div class="ant-layout-content alain-pro__body" [class.alain-pro__fetching]="isFetching" [ngStyle]="getContentStyle">
+    <div
+      class="ant-layout-content alain-pro__body"
+      [class.alain-pro__fetching]="isFetching"
+      [ngStyle]="getContentStyle"
+      style="display: flex; flex-direction: column;"
+    >
       <div class="alain-pro__header-item alain-pro__header-trigger" (click)="pro.setCollapsed()">
         <i nz-icon nzType="menu-{{ pro.collapsed ? 'unfold' : 'fold' }}" class="alain-pro__header-item-icon"></i>
       </div>
       <nz-spin class="alain-pro__fetching-icon" nzSpinning></nz-spin>
 
-      <reuse-tab #reuseTab [tabBarExtraContent]="headerWidgets" tabType="card"></reuse-tab>
-      <router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
+      <reuse-tab #reuseTab [tabBarExtraContent]="headerWidgets" tabType="card" class="icp-nav"></reuse-tab>
+
+      <nz-content style="flex: auto; margin: 12px; background: #fff; border-radius: 10px; overflow: hidden;">
+        <router-outlet></router-outlet>
+      </nz-content>
 
       <div id="app-host-container" class="thy-layout"></div>
     </div>

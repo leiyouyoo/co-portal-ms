@@ -1,17 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AddOrderComponent } from '../add-order/add-order.component';
+
 import { STColumn } from '@co/cbc';
 @Component({
-  selector: 'app-order-list',
-  templateUrl: './order-list.component.html',
-  styleUrls: ['./order-list.component.less'],
+  selector: 'app-order-accept-list',
+  templateUrl: './accept-list.component.html',
+  styleUrls: ['./accept-list.component.less'],
 })
-export class OrderListComponent implements OnInit {
-  @ViewChild(AddOrderComponent)
-  addOrderComponent: AddOrderComponent;
-  isAddVisible = false;
-  isVisible = false;
-  date = null;
+export class AcceptListComponent implements OnInit {
   listOfData: [
     {
       id: '1';
@@ -46,27 +41,7 @@ export class OrderListComponent implements OnInit {
     { title: { text: '佣金', optional: '（单位：元）', optionalHelp: '计算公式=订单金额 * 0.6%' }, index: 'price', type: 'currency' },
     { title: '注册时间', type: 'date', index: 'registered' },
   ];
-
-
   constructor() {}
 
-  ngOnInit(){}
-
-  showModal(type): void {
-    if (type === 1) {
-      this.addOrderComponent.isVisible = true;
-    } else {
-      this.isVisible = true;
-    }
-  }
-
-  handleOk(): void {
-    console.log('Button ok clicked!');
-    this.isVisible = false;
-  }
-
-  handleCancel(): void {
-    console.log('Button cancel clicked!');
-    this.isVisible = false;
-  }
+  ngOnInit(): void {}
 }

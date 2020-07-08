@@ -4,14 +4,7 @@ import ngEn from '@angular/common/locales/en';
 import ngZh from '@angular/common/locales/zh';
 import ngZhTw from '@angular/common/locales/zh-Hant';
 import { Injectable } from '@angular/core';
-import {
-  CoI18NService,
-  CoLocaleService,
-  en_US as delonEnUS,
-  SettingsService,
-  zh_CN as delonZhCn,
-  zh_TW as delonZhTw,
-} from '@co/common';
+import { CoI18NService, CoLocaleService, en_US as delonEnUS, SettingsService, zh_CN as delonZhCn, zh_TW as delonZhTw } from '@co/common';
 import { TranslateService } from '@ngx-translate/core';
 import { enUS as dfEn, zhCN as dfZhCn, zhTW as dfZhTw } from 'date-fns/locale';
 import { en_US as zorroEnUS, NzI18nService, zh_CN as zorroZhCN, zh_TW as zorroZhTW } from 'ng-zorro-antd/i18n';
@@ -36,14 +29,6 @@ const LANGS: { [key: string]: LangData } = {
     date: dfZhCn,
     delon: delonZhCn,
     abbr: '🇨🇳',
-  },
-  'zh-TW': {
-    text: '繁体中文',
-    ng: ngZhTw,
-    zorro: zorroZhTW,
-    date: dfZhTw,
-    delon: delonZhTw,
-    abbr: '🇭🇰',
   },
   'en-US': {
     text: 'English',

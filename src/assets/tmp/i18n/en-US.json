@@ -221,6 +221,7 @@
   "menu.file": "File",
   "menu.file.docx": "Docx",
   "menu.file.xlsx": "Xlsx",
+  "app.home": "Home",
   "menu.file.pdf": "Pdf",
   "menu.system": "System",
   "menu.system.file-manager": "File Manager",
@@ -246,6 +247,13 @@
   "app.sys.menu.root": "Add Root Menu",
   "app.sys.permission.list": "Permission List",
   "app.sys.permission.root": "Add Root Node",
-  "layout.pro.user.link.home": "Pro Home",
-  "layout.pro.user.link.alain": "Alain"
+  "layout.pro.user.link.home": "CITYOCEAN Home",
+  "layout.pro.user.link.alain": "CITYOCEAN",
+  "Shortcut search": "Shortcut search",
+  "Welcome to ICP": "Welcome to ICP",
+  "Language": "Language",
+  "Sign Out": "Sign Out",
+  "E-commerce": "E-commerce",
+  "Menu": "Menu",
+  "CITYOCEAN": "CITYOCEAN"
 }
