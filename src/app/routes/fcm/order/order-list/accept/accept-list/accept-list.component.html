@@ -1,48 +1,50 @@
-<div class="co-page-header">
-  <div class="co-page-header-buttons">
-    <button nz-button [nzType]="'primary'">申请订舱</button>
-    <button nz-button nzType="default">生成交仓单</button>
-    <button nz-button nzType="default">生成唛头</button>
-    <button nz-button nzType="default">填写进度</button>
-    <button nz-button nzType="default">分配代理</button>
-    <button nz-button nzType="default">导出</button>
-    <button nz-button nzType="default">刷新</button>
-    <button nz-button nzType="default" (click)="isChangeStatus(true)">作废</button>
-    <button nz-button nzType="default" (click)="isChangeStatus()">取消作废</button>
-    <button nz-button nzType="default" (click)="editModal = true">新增</button>
-  </div>
-
-  <div class="co-page-header-search">
-    <div class="co-page-header-search-left">
-      <nz-space>
-        <nz-space-item>
-          <input nz-input placeholder="搜索运单号/SO号/柜号/提单号/客户名称" />
-        </nz-space-item>
-        <nz-space-item>
-          <nz-range-picker></nz-range-picker>
-        </nz-space-item>
-      </nz-space>
+<div class="co-page">
+  <div class="co-page-header">
+    <div class="co-page-header-buttons">
+      <button nz-button [nzType]="'primary'">申请订舱</button>
+      <button nz-button nzType="default">生成交仓单</button>
+      <button nz-button nzType="default">生成唛头</button>
+      <button nz-button nzType="default">填写进度</button>
+      <button nz-button nzType="default">分配代理</button>
+      <button nz-button nzType="default">导出</button>
+      <button nz-button nzType="default">刷新</button>
+      <button nz-button nzType="default" (click)="isChangeStatus(true)">作废</button>
+      <button nz-button nzType="default" (click)="isChangeStatus()">取消作废</button>
+      <button nz-button nzType="default" (click)="editModal = true">新增</button>
     </div>
 
-    <div class="co-page-header-search-right">
-      <button nz-button [nzType]="'primary'">搜索</button>
-      <button nz-button [nzType]="'default'">重置</button>
-      <button nz-button [nzType]="'link'">高级搜索<i nz-icon nzType="down"></i></button>
+    <div class="co-page-header-search">
+      <div class="co-page-header-search-left">
+        <nz-space>
+          <nz-space-item>
+            <input nz-input placeholder="搜索运单号/SO号/柜号/提单号/客户名称" />
+          </nz-space-item>
+          <nz-space-item>
+            <nz-range-picker></nz-range-picker>
+          </nz-space-item>
+        </nz-space>
+      </div>
+
+      <div class="co-page-header-search-right">
+        <button nz-button [nzType]="'primary'">搜索</button>
+        <button nz-button [nzType]="'default'">重置</button>
+        <button nz-button [nzType]="'link'">高级搜索<i nz-icon nzType="down"></i></button>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="co-page-content">
-  <co-st #st [data]="listOfData" [columns]="columns" [showFilters]="false"></co-st>
-</div>
+  <div class="co-page-content">
+    <co-st #st [data]="listOfData" [columns]="columns" [showFilters]="false"></co-st>
+  </div>
 
-<nz-modal
-  [nzMaskClosable]="false"
-  nzTitle="{{ 'Edit' | translate }}"
-  [(nzVisible)]="editModal"
-  (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleOk()"
-  nzWidth="70%"
->
-  <app-order-accept-edit #edit></app-order-accept-edit>
-</nz-modal>
+  <nz-modal
+    [nzMaskClosable]="false"
+    nzTitle="{{ 'Edit' | translate }}"
+    [(nzVisible)]="editModal"
+    (nzOnCancel)="handleCancel()"
+    (nzOnOk)="handleOk()"
+    nzWidth="70%"
+  >
+    <app-order-accept-edit #edit></app-order-accept-edit>
+  </nz-modal>
+</div>

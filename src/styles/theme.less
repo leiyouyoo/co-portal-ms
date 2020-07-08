@@ -913,3 +913,22 @@ nz-table-inner-scroll {
 .ant-btn {
     border-radius: 4px !important;
 }
+
+
+app-order-list nz-tabset {
+
+    height        : 100%;
+    display       : flex !important;
+    flex-direction: column;
+
+
+    .ant-tabs-content {
+        flex    : 1;
+        overflow: hidden;
+
+        .ant-tabs-tabpane-active {
+            overflow: hidden;
+            height  : 100%;
+        }
+    }
+}
