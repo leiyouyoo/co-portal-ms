@@ -13,30 +13,33 @@ export class OrderListComponent implements OnInit {
   isAddVisible = false;
   isVisible = false;
   date = null;
-  listOfData: [
+  listOfData = [
     {
-      id: '1';
-      img: 'John Brown';
-      email: 32;
-      address: 'New York No. 1 Lake Park';
-      phone: '1212';
-      date: 'date';
+      id: '1',
+      img: 'John Brown',
+      email: 32,
+      address: 'New York No. 1 Lake Park',
+      phone: '1212',
+      date: 'date',
+      aaa: 'zzzz',
     },
     {
-      id: '2';
-      img: 'John Brown';
-      email: 32;
-      address: 'New York No. 1 Lake Park';
-      phone: '1212';
-      date: 'date';
+      id: '2',
+      img: 'John Brown',
+      email: 32,
+      address: 'New York No. 1 Lake Park',
+      phone: '1212',
+      date: 'date',
+      aaa: 'zzzz',
     },
     {
-      id: '3';
-      img: 'John Brown';
-      email: 32;
-      address: 'New York No. 1 Lake Park';
-      phone: '1212';
-      date: 'date';
+      id: '3',
+      img: 'John Brown',
+      email: 32,
+      address: 'New York No. 1 Lake Park',
+      phone: '1212',
+      date: 'date',
+      aaa: 'zzzz',
     },
   ];
   columns: STColumn[] = [
