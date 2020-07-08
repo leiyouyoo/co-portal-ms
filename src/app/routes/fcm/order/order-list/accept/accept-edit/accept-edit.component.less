@@ -1,0 +1,50 @@
+@import '~@co/theme/index';
+
+:host {
+    ::ng-deep {
+        nz-tag {
+            margin: 0 !important;
+        }
+
+        .address-tables {
+            display        : flex;
+            justify-content: space-between;
+
+            nz-form-item {
+                flex        : auto;
+                margin-right: 12px;
+
+                &:last-child {
+                    text-align: right;
+
+                    nz-form-label {
+                        text-align: right;
+                    }
+                }
+            }
+        }
+
+        .address-list {
+            padding      : 12px;
+            background   : #f2f2f2;
+            border-radius: 5px;
+            width        : 100%;
+        }
+
+        .table-list {
+            padding-top: 8px;
+        }
+
+        .setting i {
+            margin: 0 5px;
+            cursor: pointer;
+
+            &:last-child {
+                color: #e55354;
+            }
+        }
+
+
+
+    }
+}

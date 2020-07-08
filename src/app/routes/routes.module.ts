@@ -13,7 +13,6 @@ import { LoginHeadComponent } from './passport/login-head/login-head.component';
 import { LoginComponent } from './passport/login.component';
 import { ForgotPasswordComponent } from './passport/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './passport/reset-password/reset-password.component';
-import { ActivateComponent } from './passport/activate/activate.component';
 
 const COMPONENTS = [
   DashboardComponent,
@@ -27,7 +26,6 @@ const COMPONENTS = [
   loginMainComponent,
   ForgotPasswordComponent,
   ResetPasswordComponent,
-  ActivateComponent,
 ];
 const COMPONENTS_NOROUNT = [];
 
