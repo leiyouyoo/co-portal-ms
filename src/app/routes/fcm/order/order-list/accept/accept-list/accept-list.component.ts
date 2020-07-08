@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { STColumn } from '@co/cbc';
-import {ShipmentService} from "../../../../../../service/fcm";
-
+import { ShipmentService, ChangeShipmentInvalidStatusInput } from '../../../../../../service/fcm';
+import { AcceptEditComponent } from '../accept-edit/accept-edit.component';
 
 @Component({
   selector: 'app-order-accept-list',
@@ -10,6 +10,7 @@ import {ShipmentService} from "../../../../../../service/fcm";
   styleUrls: ['./accept-list.component.less'],
 })
 export class AcceptListComponent implements OnInit {
+  @ViewChild('edit', { static: false }) acceptEditComponent: AcceptEditComponent;
   listOfData: [
     {
       id: '1';
@@ -55,7 +56,7 @@ export class AcceptListComponent implements OnInit {
   ];
 
   editModal = false;
-  constructor( private  shipmentService : ShipmentService) {}
+  constructor(private shipmentService: ShipmentService) {}
 
   ngOnInit(): void {}
 
@@ -64,6 +65,9 @@ export class AcceptListComponent implements OnInit {
   }
 
   handleOk() {
+    if (!this.acceptEditComponent.validate()) {
+      return;
+    }
     this.editModal = false;
   }
 
@@ -71,16 +75,13 @@ export class AcceptListComponent implements OnInit {
    * 是否作废
    * @param isTrue
    */
-  isChangeStatus( isTrue?:boolean ){
-
-    let req ={
-      'shipmentIds':['7D48A4A3-FF11-4C9A-EA9E-08D8225DBB70' , 'AD2C9E19-F807-4D04-7D81-08D822F1207F'],
-      'isSetInvalid' : isTrue ? true : false
-    }
-    this.shipmentService.changeInvalidStatus( req ).subscribe(res =>{
-      console.log(res)
+  isChangeStatus(isTrue?: boolean) {
+    let req: ChangeShipmentInvalidStatusInput = {
+      shipmentIds: ['7D48A4A3-FF11-4C9A-EA9E-08D8225DBB70', 'AD2C9E19-F807-4D04-7D81-08D822F1207F'],
+      isSetInvalid: isTrue ? true : false,
+    };
+    this.shipmentService.changeInvalidStatus(req).subscribe((res) => {
+      console.log(res);
     });
-
   }
-
 }

@@ -16,10 +16,10 @@
     <div class="co-page-header-search-left">
       <nz-space>
         <nz-space-item>
-          <input nz-input placeholder="搜索运单号/SO号/柜号/提单号/客户名称" [(ngModel)]="value" />
+          <input nz-input placeholder="搜索运单号/SO号/柜号/提单号/客户名称" />
         </nz-space-item>
         <nz-space-item>
-          <nz-range-picker [(ngModel)]="dateRange" (ngModelChange)="onChange($event)"></nz-range-picker>
+          <nz-range-picker></nz-range-picker>
         </nz-space-item>
       </nz-space>
     </div>
@@ -44,5 +44,5 @@
   (nzOnOk)="handleOk()"
   nzWidth="70%"
 >
-  <app-order-accept-edit></app-order-accept-edit>
+  <app-order-accept-edit #edit></app-order-accept-edit>
 </nz-modal>
