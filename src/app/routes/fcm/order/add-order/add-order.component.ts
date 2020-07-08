@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { CustomerService } from '../../../../service/crm/customer.service';
+import { CompanyConfigureService } from '../../../../service/platform/company-configure.service';
+import { LocationExternalService } from '../../../../service/crm/location-external.service';
+import { CommodityService } from '../../../../service/pub/commodity.service';
 @Component({
   selector: 'app-add-order',
   templateUrl: './add-order.component.html',
@@ -47,10 +50,23 @@ export class AddOrderComponent implements OnInit {
   customerList = [];
   cantactList = [];
   serviceUserList = [];
+  addressItemList = [];
+  commodityList = [];
+  transportationModeList = [
+    { name: '海运', id: 1 },
+    { name: '空运', id: 2 },
+  ];
   serviceCompanyList = [];
   destinationWarehouseList = [];
   agentCustomerList = [];
-  channelList = [];
+  customerFilter: any = {
+    scope: CustomerService.Department,
+  };
+  channelList = [
+    { name: '海卡', id: 1 },
+    { name: '海卡（包税）', id: 2 },
+  ];
+  portReq = { isOcean: false, regionIds: [], isPaged: false, maxResultCount: 1000 };
   country;
   commitData: {
     customerId: 'string';
@@ -172,6 +188,8 @@ export class AddOrderComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.getCustomerList();
+    this.getAgentCustomerList();
     this.validateForm = this.fb.group({
       formLayout: ['horizontal'],
       customerId: [null, [Validators.required]],
@@ -195,12 +213,72 @@ export class AddOrderComponent implements OnInit {
       fbaDeliveryType: [null],
       fbaDeliveryTypeRemark: [null],
       cargoPutAwayDate: [null],
-      fbaPickUpMethodType: ['DeliveryGoodsByClient'],
+      fbaPickUpMethodType: [1],
       country: [null],
     });
   }
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private customerService: CustomerService,
+    private locationExternalService: LocationExternalService,
+    private companyConfigureService: CompanyConfigureService,
+    private commodityService: CommodityService,
+  ) {}
+  getCustomerList(name = null, id = null) {
+    this.customerService.getDepartmentCustomer({ name: name, customerId: id }).subscribe((res) => {
+      this.customerList = res.items;
+    });
+  }
+  // 获取承运人
+  getAgentCustomerList(name = null, id = null) {
+    this.customerService
+      .getForwardingCompanies({
+        searchText: name,
+        // IsOwnDepartment: true,
+        maxResultCount: 1000,
+        skipCount: 0,
+      })
+      .subscribe((res) => {
+        this.agentCustomerList = res.items;
+      });
+  }
+  // 获取联系人
+  getContactList(id) {
+    this.locationExternalService.getLocationByCustomer({ customerId: id }).subscribe((res) => {
+      this.cantactList = res.items;
+    });
+  }
 
+  // 获取口岸
+  getByPlaceOrLocation(id) {
+    let obj = { isActive: true, placeId: id, locationId: null };
+    this.companyConfigureService.getByPlaceOrLocation(obj).subscribe((res) => {
+      this.serviceCompanyList = res.items;
+    });
+  }
+  // 获取地址
+  getCustomerLocationAndFBALocations(id) {
+    this.locationExternalService.getCustomerLocationAndFBALocations({ customerId: id }).subscribe((res) => {
+      this.addressItemList = res.items;
+    });
+  }
+  // 品名选择器
+  getAllForUiPicker(text) {
+    this.commodityService
+      .getAllForUiPicker({
+        searchText: text,
+        maxResultCount: 1000,
+        skipCount: 0,
+        includeChildren: false,
+        includeInvalid: false,
+        ids: null,
+        includeDeleted: false,
+        sorting: '',
+      })
+      .subscribe((res) => {
+        this.addressItemList = res.items;
+      });
+  }
   handleOk(): void {
     console.log('Button ok clicked!');
     this.isVisible = false;

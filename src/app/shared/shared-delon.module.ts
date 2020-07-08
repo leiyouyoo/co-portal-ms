@@ -1,7 +1,14 @@
 import { FullContentModule, PageHeaderModule } from '@co/cbc';
 import { CoCommonModule } from '@co/common';
 import { NoticeIconModule } from '@co/cbc/basic/notice-icon';
-import { ReuseTabModule, CoSTModule, DatetimeRangePickerModule, CustomerPickerModule } from '@co/cbc';
+import {
+  ReuseTabModule,
+  CoSTModule,
+  DatetimeRangePickerModule,
+  CustomerPickerModule,
+  ProductPickerModule,
+  PortPickerModule,
+} from '@co/cbc';
 import { G2BarModule } from '@co/chart/bar';
 import { G2CardModule } from '@co/chart/card';
 import { G2GaugeModule } from '@co/chart/gauge';
@@ -42,4 +49,6 @@ export const SHARED_DELON_MODULES = [
   CoSTModule,
   DatetimeRangePickerModule,
   CustomerPickerModule,
+  ProductPickerModule,
+  PortPickerModule,
 ];

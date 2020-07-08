@@ -4,18 +4,18 @@
       <nz-form-item>
         <nz-form-label nzRequired nzFor="customer">客户</nz-form-label>
         <nz-form-control nzErrorTip="Please input your customer!">
-          <nz-select nzAllowClear id="customer" formControlName="customerId">
+          <!-- <nz-select nzAllowClear id="customer" formControlName="customerId">
             <nz-option *ngFor="let item of customerList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
-          </nz-select>
-          <!-- Customer/GetDepartmentCustomer -->
-          <!-- <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker> -->
+          </nz-select> -->
+
+          <co-customer-picker style="width: 100%;" formControlName="customerId" [coFilter]="customerFilter"> </co-customer-picker>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label nzFor="transportationMode" nzRequired>业务类型</nz-form-label>
         <nz-form-control nzErrorTip="Please select your transportationMode!">
           <nz-select nzAllowClear id="transportationMode" formControlName="transportationMode">
-            <nz-option *ngFor="let item of channelList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+            <nz-option *ngFor="let item of transportationModeList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -52,7 +52,7 @@
         <nz-form-label nzFor="serviceCompanyId">操作口岸</nz-form-label>
         <nz-form-control>
           <nz-select nzAllowClear id="serviceCompanyId" formControlName="serviceCompanyId">
-            <nz-option *ngFor="let item of serviceCompanyList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+            <nz-option *ngFor="let item of serviceCompanyList" [nzValue]="item.id" [nzLabel]="item.displayNameLocalization"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -62,8 +62,8 @@
         <nz-form-label nzFor="fbaPickUpMethodType">交货方式</nz-form-label>
         <nz-form-control>
           <nz-radio-group formControlName="fbaPickUpMethodType">
-            <label nz-radio nzValue="DeliveryGoodsByClient">自送货</label>
-            <label nz-radio nzValue="PickupByCityocean">由CITYOCEAN上门提货</label>
+            <label nz-radio [nzValue]="1">自送货</label>
+            <label nz-radio [nzValue]="2">由CITYOCEAN上门提货</label>
           </nz-radio-group>
         </nz-form-control>
       </nz-form-item>
@@ -100,7 +100,7 @@
       <nz-form-item>
         <nz-form-label nzFor="deliveryDate">预估交货时间</nz-form-label>
         <nz-form-control>
-          <datetime-range-picker></datetime-range-picker>
+          <datetime-range-picker formControlName="deliveryDate"></datetime-range-picker>
         </nz-form-control>
       </nz-form-item>
     </div>
@@ -108,7 +108,9 @@
       <nz-form-item>
         <nz-form-label nzFor="commodity" nzRequired>品名</nz-form-label>
         <nz-form-control nzErrorTip="Please input your commodity!">
-          <input nz-input formControlName="commodity" />
+          <nz-select nzAllowClear id="agentCustomerId" formControlName="commodity">
+            <nz-option *ngFor="let item of commodityList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+          </nz-select>
         </nz-form-control>
       </nz-form-item>
     </div>
@@ -118,8 +120,12 @@
 
   <div class="address-item" *ngFor="let item of addressList; let i = index">
     <div class="address-input">
-      <span>送货地址{{ i + 1 }}</span>
-      <input nz-input />
+      <span
+        >送货地址<span *ngIf="i !== 0">{{ i + 1 }}</span></span
+      >
+      <nz-select nzAllowClear [(ngModel)]="addressList.address">
+        <nz-option *ngFor="let item of addressItemList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+      </nz-select>
       <button nz-button nzType="primary" (click)="addAddress(i)">新增地址</button>
       <button nz-button nzType="default" (click)="deleteAddress(i)" *ngIf="addressList.length > 1 && i > 0">删除</button>
     </div>
