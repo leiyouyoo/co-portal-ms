@@ -31,8 +31,7 @@
               "node_modules/quill/dist/quill.snow.css",
               "src/styles.less",
               "node_modules/@co/theme/default.min.css",
-              "node_modules/cropperjs/dist/cropper.min.css",
-              "src/styles.less"
+              "node_modules/cropperjs/dist/cropper.min.css"
             ],
             "scripts": [
               "node_modules/ajv/dist/ajv.bundle.js",
