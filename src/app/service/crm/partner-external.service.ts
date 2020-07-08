@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { ExternalPartnerDto,ExternalPartnerListDto,ExternalPartnerAndCustomerDto, } from './crm.types';
 
@@ -12,8 +12,8 @@ export class PartnerExternalService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CRM/PartnerExternal/Get
      * 根据合作伙伴id获取合作伙伴
@@ -28,7 +28,7 @@ export class PartnerExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/PartnerExternal/GetAll
      * 分页获取客户下的合作伙伴
@@ -43,7 +43,7 @@ export class PartnerExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/PartnerExternal/GetMyCustomerAndPartners
      * 获取我的所属客户及绑定了客户的合作伙伴(仅CSP用)
@@ -58,7 +58,7 @@ export class PartnerExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/PartnerExternal/GetRegisteredPartners
      * 获取客户下开通了主账号的合作伙伴
@@ -73,7 +73,7 @@ export class PartnerExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/PartnerExternal/Create
      * 创建客户下的合作伙伴
@@ -88,7 +88,7 @@ export class PartnerExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/PartnerExternal/Update
      * 更新合作伙伴
@@ -103,7 +103,7 @@ export class PartnerExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/PartnerExternal/Delete
      * 删除合作伙伴

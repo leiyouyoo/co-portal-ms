@@ -1253,6 +1253,12 @@
             latitude: string;
          
             
+            isOcean: boolean;
+         
+            
+            isAir: boolean;
+         
+            
             id: string;
         
         
@@ -1442,6 +1448,9 @@
             /* 提交后用户修改的上一次属性json */ 
             customerUpdateLastDataJson: string;
          
+            /* 是否包含特殊品 */ 
+            isContainsSpecialGoods: boolean;
+         
             /* CRM查看变更属性历史值（仅显示上一次的） */ 
             lastData: BookingOldData;
          
@@ -1545,9 +1554,6 @@
 0 = Imperial
 1 = Metric */ 
             unitConvertType: number;
-         
-            
-            isContainsSpecialGoods: boolean;
          
             
             containsSpecialGoodsTypes: string;
@@ -1944,6 +1950,9 @@
             /* 提交后用户修改的上一次属性json */ 
             customerUpdateLastDataJson: string;
          
+            /* 是否包含特殊品 */ 
+            isContainsSpecialGoods: boolean;
+         
             /* CRM查看变更属性历史值（仅显示上一次的） */ 
             lastData: BookingOldData;
          
@@ -2032,9 +2041,6 @@
 0 = Imperial
 1 = Metric */ 
             unitConvertType: number;
-         
-            
-            isContainsSpecialGoods: boolean;
          
             
             containsSpecialGoodsTypes: string;
@@ -2342,10 +2348,264 @@ Destination location：默认显示最近一次选中的信息； */
     }
  
     /**
+     * 列表返回的单条记录
+     */
+    export class BookingForFcmDto {
+        
+         
+            /* 创建人Id */ 
+            creatorUserId: number;
+         
+            /* 预订状态(枚举)
+0 = BookingDraft
+1 = WaitingForCancelling
+2 = BookingSubmitted
+3 = ShippingDone
+4 = WaitingForPricing
+5 = WaitingForBuyer
+6 = WaitingForSeller
+7 = BookingCancelled
+8 = ShippingCancelled
+9 = PriceConfirmedByCustomer
+10 = ShippingSubmittedToCarrier
+11 = SoNumberNotifiedToCustomer */ 
+            status: number;
+         
+            /* 订舱单业务号 */ 
+            bookingNo: string;
+         
+            /* 运单号（frm下获取） */ 
+            name: string;
+         
+            /* 下单时间（创建时间） */ 
+            creationTime: string;
+         
+            /* TODO 业务员 */ 
+            customerId: string;
+         
+            
+            customerName: string;
+         
+            /* 货号日期 */ 
+            cargoReadyDate: string;
+         
+            /* 运输方式
+0 = Unknown
+1 = Ocean
+2 = Air */ 
+            freightMethodType: number;
+         
+            /* 起始港Id */ 
+            originPortId: string;
+         
+            /* 服务商存储电商货物的国内仓库地址 */ 
+            deliveryWarehouseId: string;
+         
+            /* 出货口岸 */ 
+            serviceCompanyId: string;
+         
+            /* 渠道 */ 
+            channel: string;
+         
+            /* 交货方式 */ 
+            fbaPickUpMethodType: string;
+         
+            /* 联系人id */ 
+            contactId: string;
+         
+            /* 目的仓库地址（交货仓库） */ 
+            destinationWarehouseId: string;
+         
+            /* 关联的目的地地址 */ 
+            destinationAddressId: string;
+         
+            /* 预估交货日期，指必须交付货物的日期。 */ 
+            deliveryDate: string;
+         
+            /* 品名 */ 
+            commodity: string;
+         
+            /* 重量 */ 
+            weight: number;
+         
+            /* 体积 */ 
+            volume: string;
+         
+            /* 数量 */ 
+            quantity: string;
+         
+            /* CO.CSP.Application.Bookings.Bookings.Dto.FCM.BookingForFcmDto.ContactId 绑定的用户Id */ 
+            contactUserId: string;
+         
+            /* 运送方式
+0 = DeliveryGoodsByMyself
+1 = PickUpByCityocean */ 
+            deliveryMethodType: number;
+         
+            /* 送货地址 */ 
+            destinationAddress: NetWorkLocationModel;
+         
+            
+            id: string;
+        
+        
+    }
+ 
+    /**
+     * 设置 Bookings 为已受理状态
+     */
+    export class SetBookingAcceptedInput {
+        
+         
+            
+            bookingIds: any[];
+        
+        
+    }
+ 
+    /**
+     * 更新状态后的返回值
+     */
+    export class SetBookingAcceptedOutput {
+        
+        
+        
+    }
+ 
+    /**
+     *  No Remark 
+     */
+    export class GetClearanceInvoicesForFcmOutput {
+        
+         
+            
+            cusClearanceInvoices: any[];
+         
+            
+            packingLists: any[];
+        
+        
+    }
+ 
+    /**
+     * 由 FCM端 操作创建或更新 Booking 的输入参数
+     */
+    export class CreateOrUpdateForFcmInput {
+        
+         
+            /* Id，为 null 或 Guid.Empty 时表示新建 */ 
+            id: string;
+         
+            /* 主客户Id */ 
+            customerId: string;
+         
+            /* 业务员id */ 
+            serviceUserId: number;
+         
+            /* 业务类型（运输方式）
+0 = Unknown
+1 = Ocean
+2 = Air */ 
+            transportationMode: number;
+         
+            /* 贸易类型
+0 = NotSet
+1 = General
+2 = FBA
+3 = FBM */ 
+            tradeType: number;
+         
+            /* 运输条款，port_to_door、port_to_port、door_to_door、door_to_port ... */ 
+            freightType: string;
+         
+            /* 订舱单号 */ 
+            bookingNo: string;
+         
+            /* 出货口岸 */ 
+            serviceCompanyId: string;
+         
+            /* 渠道 */ 
+            channel: string;
+         
+            /* 交货方式
+0 = DeliveryGoodsByMyself
+1 = PickUpByCityocean */ 
+            fbaPickUpMethodType: number;
+         
+            /* 联系人id */ 
+            contactId: string;
+         
+            /* 起始仓库地址 */ 
+            originWarehouseId: string;
+         
+            /* 目的仓库地址 */ 
+            destinationWarehouseId: string;
+         
+            /* 预估交货日期，指必须交付货物的日期。 */ 
+            deliveryDate: string;
+         
+            /* 数量 */ 
+            quantity: number;
+         
+            /* 数量单位代码 */ 
+            quantityUnitCode: string;
+         
+            /* 重量 */ 
+            weight: number;
+         
+            /* 重量单位代码 */ 
+            weightUnitCode: string;
+         
+            /* 体积 */ 
+            volume: number;
+         
+            /* 体积单位代码 */ 
+            volumeUnitCode: string;
+        
+        
+    }
+ 
+    /**
+     * 更新booking后返回
+     */
+    export class CreateOrUpdateForFcmOutput {
+        
+         
+            
+            id: string;
+        
+        
+    }
+ 
+    /**
+     *  No Remark 
+     */
+    export class CreateOrUpdateClearanceInvoicesForFcmInput {
+        
+         
+            /* 映射 */ 
+            cusClearanceInvoices: any[];
+         
+            /* 映射 */ 
+            packingLists: any[];
+         
+            /* 客户 Id */ 
+            customerId: string;
+         
+            
+            id: string;
+        
+        
+    }
+ 
+    /**
      * 订舱模板（仅用于全返回）
      */
     export class BookingTemplateOutput {
         
+         
+            /* 是否包含特殊品 */ 
+            isContainsSpecialGoods: boolean;
          
             /* 发货港 */ 
             originPort: PubLocation;
@@ -2405,9 +2665,6 @@ Destination location：默认显示最近一次选中的信息； */
 0 = Imperial
 1 = Metric */ 
             unitConvertType: number;
-         
-            
-            isContainsSpecialGoods: boolean;
          
             
             containsSpecialGoodsTypes: string;
@@ -2590,6 +2847,9 @@ Destination location：默认显示最近一次选中的信息； */
             /* FBA/FBM 上门提货地址（取件详细地址） */ 
             pickUpAddress: NetWorkLocationModel;
          
+            /* 是否包含特殊品 */ 
+            isContainsSpecialGoods: boolean;
+         
             /* Gets or sets the name of the consignee customer. */ 
             consigneeCustomerName: string;
          
@@ -2621,9 +2881,6 @@ Destination location：默认显示最近一次选中的信息； */
 0 = Imperial
 1 = Metric */ 
             unitConvertType: number;
-         
-            
-            isContainsSpecialGoods: boolean;
          
             
             containsSpecialGoodsTypes: string;

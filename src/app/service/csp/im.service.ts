@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { MayInviteUserModel,CreateImGroupInput,CreateImGroupForCustomerInput,AddDeleteGroupInput,AjaxResponse, } from './csp.types';
 
@@ -12,8 +12,8 @@ export class IMService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CSP/IM/GetMayInviteUserList
      * 获取可邀请加入群聊的用户列表
@@ -28,7 +28,7 @@ export class IMService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/IM/CreateImGroup
      * 创建业务IM群
@@ -43,7 +43,7 @@ export class IMService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/IM/CreateImGroupForCustomer
      * 为指定客户创建业务IM群，目前只实现了 Shipment群的建立
@@ -58,7 +58,7 @@ export class IMService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/IM/AddDeleteGroupTask
      * 删除群

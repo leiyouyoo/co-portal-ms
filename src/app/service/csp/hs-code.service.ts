@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { HsCodeDto, } from './csp.types';
 
@@ -12,8 +12,8 @@ export class HsCodeService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CSP/HsCode/Get
      * 获取H.S. Code 明细
@@ -28,7 +28,7 @@ export class HsCodeService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/HsCode/GetAll
      * 获取H.S. Code 列表

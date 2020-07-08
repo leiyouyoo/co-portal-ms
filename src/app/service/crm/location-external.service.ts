@@ -2,9 +2,9 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
-import { ExternalLocationListDto,ExternalLocationDto,CreateOrUpdateLocationExternalInput,AssignUsersToLocationDto,AssignLocationsToUserDto,UnbindUsersLocationDto,GlobalSearchInput,GlobalSearchOutput, } from './crm.types';
+import { ExternalLocationListDto,ExternalLocationDto,FBALocationListDto,CreateOrUpdateLocationExternalInput,AssignUsersToLocationDto,AssignLocationsToUserDto,UnbindUsersLocationDto,GlobalSearchInput,GlobalSearchOutput, } from './crm.types';
 
 @BaseUrl('/crm/LocationExternal')
 @Injectable({ providedIn: 'root' })
@@ -12,8 +12,8 @@ export class LocationExternalService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CRM/LocationExternal/GetLocationByCustomer
      * 获取客户下以及客户的合作伙伴的location、别人共享的地点
@@ -28,7 +28,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/GetLocationByCustomerOwn
      * 获取客户自己的全部地址
@@ -43,7 +43,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/Get
      * 根据Id查location
@@ -58,7 +58,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/GetForUpdate
      * 根据Id获取用于更新的location
@@ -73,7 +73,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/GetAll
      * 获取地点列表（客户自己的或者合作伙伴的）
@@ -88,7 +88,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/GetLocationByIds
      * 根据地点集合查找地点
@@ -103,7 +103,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/GetSharedList
      * 获取客户的共享地点(数据包含客户自己的、客户合作伙伴的、别人共享给客户的)
@@ -118,7 +118,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/GetFBALocations
      * 获取FBA地址
@@ -133,7 +133,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/GetFBALocationsByCustomer
      * 根据客户获取FBA地址
@@ -148,7 +148,22 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
+    /**
+     * @param url /CRM/LocationExternal/GetCustomerLocationAndFBALocations
+     * 获取客户的地址以及海外仓
+     */
+
+    @GET('getCustomerLocationAndFBALocations')
+    getCustomerLocationAndFBALocations(
+        @Payload
+        _req: {customerId?:string} 
+
+    ): Observable<ListResultDto<FBALocationListDto>> {
+        return null as any
+    }
+
+
     /**
      * @param url /CRM/LocationExternal/CreateCustomerLocation
      * 创建客户地点
@@ -163,7 +178,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/UpdateForCustomerLocation
      * 更新客户地点
@@ -178,7 +193,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/CreatePartnerLocation
      * 创建合作伙伴地点
@@ -193,7 +208,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/UpdateForPartnerLocation
      * 更新合作伙伴地点
@@ -208,7 +223,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/GetByContactId
      * 获取联系人的地点
@@ -223,7 +238,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/AssignUsersToLocation
      * 赋值用户（联系人）到地点
@@ -238,7 +253,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/AssignLocationsToUser
      * 赋值地点给用户（联系人）
@@ -253,7 +268,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/UnbindUserLocation
      * 解除联系人地点绑定关系
@@ -268,7 +283,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/Delete
      * 删除地点
@@ -283,7 +298,7 @@ export class LocationExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/LocationExternal/GlobalSearch
      * 全局搜索

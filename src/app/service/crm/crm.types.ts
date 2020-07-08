@@ -1962,6 +1962,42 @@
     }
  
     /**
+     *  No Remark 
+     */
+    export class FBALocationListDto {
+        
+         
+            /* 邮政编码 */ 
+            zip: string;
+         
+            /* 街道地址 */ 
+            streetAddress: string;
+         
+            /* 公寓/套房/单元/建筑 */ 
+            streetAddress2: string;
+         
+            /* 地点名称 */ 
+            name: string;
+         
+            /* 国家 */ 
+            country: string;
+         
+            /* 省/洲 */ 
+            province: string;
+         
+            /* 城市 */ 
+            city: string;
+         
+            /* 是否海外仓 */ 
+            isForeign: boolean;
+         
+            
+            id: string;
+        
+        
+    }
+ 
+    /**
      * 创建或更新地点Dto
      */
     export class CreateOrUpdateLocationExternalInput {
@@ -2317,6 +2353,12 @@
          
             
             countryName: string;
+         
+            
+            isOcean: boolean;
+         
+            
+            isAir: boolean;
         
         
     }
@@ -2693,6 +2735,12 @@
 5 = User
 6 = FBMAddress */ 
             historyDataType: number;
+         
+            /* 是否海港 */ 
+            isOcean: boolean;
+         
+            /* 是否空港 */ 
+            isAir: boolean;
         
         
     }

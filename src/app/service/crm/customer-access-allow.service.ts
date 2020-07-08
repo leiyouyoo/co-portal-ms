@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { CustomerAccessAllowOutput, } from './crm.types';
 
@@ -12,8 +12,8 @@ export class CustomerAccessAllowService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CRM/CustomerAccessAllow/GetAll
      * 客户访问权限列表
@@ -28,7 +28,7 @@ export class CustomerAccessAllowService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/CustomerAccessAllow/Create
      * 添加客户访问权限

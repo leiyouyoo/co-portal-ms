@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { CustomerDto,CustomerBindCoUserDto,GetByCustomerIdsOutput,GetCustomerAndPartnerOutput,CustomerAndContactDto,CustomerListDto,BecomeCooperationInput, } from './crm.types';
 
@@ -12,8 +12,8 @@ export class CustomerExternalService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CRM/CustomerExternal/Get
      * 客户详情
@@ -28,7 +28,7 @@ export class CustomerExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/CustomerExternal/GetCoUserByCustomer
      * 根据当前登录客户获取客户所属业务员、以及业务员所属的组织机构客户
@@ -43,7 +43,7 @@ export class CustomerExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/CustomerExternal/GetSaleUsersByCustomer
      * 根据当前登录客户获取客户所属业务员集合
@@ -58,7 +58,7 @@ export class CustomerExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/CustomerExternal/GetByCustomerIds
      * 根据客户id集合返回客户集合
@@ -73,7 +73,7 @@ export class CustomerExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/CustomerExternal/GetCustomerAndPartner
      * 获取当前客户所有的合作伙伴（包含客户自己的信息）
@@ -88,7 +88,7 @@ export class CustomerExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/CustomerExternal/GetCustomerAndContact
      * 搜索获取客户、联系人 (Rate询价列表可用)
@@ -103,7 +103,7 @@ export class CustomerExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/CustomerExternal/GetAgentCustomers
      * 获取代理商客户
@@ -118,7 +118,7 @@ export class CustomerExternalService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/CustomerExternal/BecomeCooperation
      * 转成合作客户

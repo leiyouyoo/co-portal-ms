@@ -91,6 +91,13 @@
             /* 承运人（代理）客户Id，如 Cityocean ... */ 
             agentCustomerId: string;
          
+            /* 贸易类型(如果选择的送货地址是国外仓则为FBA，否则FBM )
+0 = NotSet
+1 = General
+2 = Fba
+3 = Fbm */ 
+            tradeType: number;
+         
             /* 转运单号 */ 
             transferNo: string;
          

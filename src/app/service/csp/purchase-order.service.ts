@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { PurchaseOrderDetailOutput,GetPurchaseOrderListInput,PurchaseOrderListDto,PurchaseOrderListToProductDto,ProductDto,PurchaseOrderListDetailOutput,PurchaseOrderChangeDetailOutput,ViewChangeInput,PurchaseOrderDto,PurchaseOrderConfirmInput,PurchaseOrderRejectInput,PurchaseOrderBookingInput,PurchaseOrderBookingOutput,PurchaseOrderBookingSearchInput,PurchaseOrderBookingSearchOutput,PurchaseOrderImportInput,ImportResult,PurchaseOrderExportInput,ConditionItemAttribute,PurchaseOrderFilterDto,DeleteByItemIdInput, } from './csp.types';
 
@@ -12,8 +12,8 @@ export class PurchaseOrderService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CSP/PurchaseOrder/Get
      * 获取采购订单明细
@@ -28,7 +28,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/GetAll
      * 获取采购订单列表
@@ -43,7 +43,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/GetAllByProductId
      * 根据产品Id获取采购订单列表
@@ -58,7 +58,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/GetListDetailByProductId
      * 根据产品Id获取采购订单列表明细
@@ -73,7 +73,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/GetListDetail
      * 获取采购订单列表明细
@@ -88,7 +88,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/GetChangeDetail
      * 获取采购订单修改记录.
@@ -103,7 +103,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/ViewChange
      * 查看变更记录
@@ -118,7 +118,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/GetShipmentProducts
      * 获取Shipments产品列表
@@ -133,7 +133,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/GetShipmentPurchaseOrders
      * 获取Shipments采购订单列表
@@ -148,7 +148,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/Create
      * 创建采购订单
@@ -163,7 +163,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/Update
      * 更新采购订单
@@ -178,7 +178,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/Confirm
      * 确认采购订单
@@ -193,7 +193,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/Reject
      * 拒绝采购订单
@@ -208,7 +208,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/Booking
      * 创建Booking
@@ -223,7 +223,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/BookingSearch
      * Booking搜索绑定
@@ -238,7 +238,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/Import
      * 上传采购订单
@@ -253,7 +253,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/Export
      * 下载采购订单
@@ -268,7 +268,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/GetFilters
      * 获取Filters内容
@@ -283,7 +283,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/GetFilterProductList
      * 获取Filter产品列表
@@ -298,7 +298,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/GetFilterCompanyList
      * 获取Filter公司列表
@@ -313,7 +313,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/GetFilterReceiverList
      * 获取Filter接收人列表
@@ -328,7 +328,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/GetFilterSenderList
      * 获取Filter发送人列表
@@ -343,7 +343,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/GetFilterStatusList
      * 获取Filter状态列表
@@ -358,7 +358,7 @@ export class PurchaseOrderService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/PurchaseOrder/DeleteByItemId
      * 移除 Order Item

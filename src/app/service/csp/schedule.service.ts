@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { ScheduleDto,ScheduleSentInput, } from './csp.types';
 
@@ -12,8 +12,8 @@ export class ScheduleService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CSP/Schedule/GetAllScheduleList
      * 根据条件获取日程包括自定义与shipment日程
@@ -28,7 +28,7 @@ export class ScheduleService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Schedule/Get
      * 根据Id获取详情
@@ -43,7 +43,7 @@ export class ScheduleService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Schedule/CreateAsync
      * 创建自定义日程
@@ -58,7 +58,7 @@ export class ScheduleService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Schedule/UpdateAsync
      * 编辑自定义日程
@@ -73,7 +73,7 @@ export class ScheduleService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Schedule/Delete
      * 删除自定义日程
@@ -88,7 +88,7 @@ export class ScheduleService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Schedule/ScheduleSent
      * 推送接口（定时调用）
@@ -103,7 +103,7 @@ export class ScheduleService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Schedule/RemoveExpiredSchedule
      * 删除过期的日程-导入的数据（定时调用）
@@ -118,7 +118,7 @@ export class ScheduleService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Schedule/CreateOrUpdate
      * 保存
@@ -133,7 +133,7 @@ export class ScheduleService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Schedule/GetAll
      * 
@@ -148,7 +148,7 @@ export class ScheduleService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Schedule/Create
      * 
@@ -163,7 +163,7 @@ export class ScheduleService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Schedule/Update
      * 

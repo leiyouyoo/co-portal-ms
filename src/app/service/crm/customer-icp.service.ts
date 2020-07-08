@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { IcpCreateOrUpdateCustomerInput,CustomerOutput,IcpUpdateCustomerCodeInput, } from './crm.types';
 
@@ -12,8 +12,8 @@ export class CustomerIcpService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CRM/CustomerIcp/CreateOrUpdate
      * 新增或者修改客户
@@ -28,7 +28,7 @@ export class CustomerIcpService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/CustomerIcp/UpdateCode
      * 更新Code
@@ -43,7 +43,7 @@ export class CustomerIcpService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/CustomerIcp/Delete
      * 删除客户

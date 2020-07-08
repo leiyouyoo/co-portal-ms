@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { TraceLogListDto,CreateTraceLogInput, } from './crm.types';
 
@@ -12,8 +12,8 @@ export class TraceLogService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CRM/TraceLog/Get
      * 获取单条跟进记录详情
@@ -28,7 +28,7 @@ export class TraceLogService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/TraceLog/GetAll
      * 分页获取日志
@@ -43,7 +43,7 @@ export class TraceLogService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/TraceLog/Create
      * 发表日志
@@ -58,7 +58,7 @@ export class TraceLogService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/TraceLog/Update
      * 编辑日志
@@ -73,7 +73,7 @@ export class TraceLogService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/TraceLog/Delete
      * 删除日志
@@ -88,7 +88,7 @@ export class TraceLogService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CRM/TraceLog/AddPraise
      * 给日志点赞

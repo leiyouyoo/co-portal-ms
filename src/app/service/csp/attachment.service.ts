@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
 import { TestDtoValidateInput,HttpResponseMessage,AttachmentListDto,AttachmentDto,BatchCreateAttachmentInput,CreateAttachmentInput,ShareableContactModel,AttachmentForIcpDto, } from './csp.types';
 
@@ -12,8 +12,8 @@ export class AttachmentService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CSP/Attachment/TestDtoValidate
      * 
@@ -28,7 +28,7 @@ export class AttachmentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Attachment/TestAgentJob
      * 
@@ -43,7 +43,7 @@ export class AttachmentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Attachment/TestL
      * 
@@ -58,7 +58,7 @@ export class AttachmentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Attachment/GetList
      * 根据业务获取附件列表.
@@ -73,7 +73,7 @@ export class AttachmentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Attachment/Delete
      * 删除附件
@@ -88,7 +88,7 @@ export class AttachmentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Attachment/BatchDelete
      * 批量删除附件
@@ -103,7 +103,7 @@ export class AttachmentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Attachment/Get
      * 获取附件信息
@@ -118,7 +118,7 @@ export class AttachmentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Attachment/GetByFileId
      * 根据文件 Id 获取附件信息
@@ -133,7 +133,7 @@ export class AttachmentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Attachment/GetListByFileIds
      * 根据文件 Id 获取附件信息
@@ -148,7 +148,7 @@ export class AttachmentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Attachment/BatchCreate
      * 批量创建附件
@@ -163,7 +163,7 @@ export class AttachmentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Attachment/Create
      * 创建附件
@@ -178,7 +178,7 @@ export class AttachmentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Attachment/GetShareableUsers
      * 获取待分享用户
@@ -193,7 +193,7 @@ export class AttachmentService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Attachment/GetAllForIcp
      * 提供给ICP获取文档列表

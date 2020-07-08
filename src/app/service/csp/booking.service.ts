@@ -2,9 +2,9 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
-import { ListResultDto, PagedResultDto } from '@co/core';
+import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
-import { GetAllListForCRMInput,GetAllListForCRMOutput,UpdateRoutesForCRMInput,SureServiceCompanyInput,CoEntityDto,BookingDto,SearchModel,GetCustomerBindUserForCRMOutput,CRMBookingBindQuoteInput,BookingCheckIsExistsInputDto,UpdateBookingForIcpInput,PurchaseOrderItemForIcpDto,BookingForIcpDto,ClearanceInviocesUploadOutput,ClearanceInviocesDownloadOutput,BookingRecentlyUsedOutput,BookingStatisticsOutput,ChangeBookingStatusInput,CancelBookingInput,GetRelatedBusinessOutput,GetChannelListOutput, } from './csp.types';
+import { GetAllListForCRMInput,GetAllListForCRMOutput,UpdateRoutesForCRMInput,SureServiceCompanyInput,CoEntityDto,BookingDto,SearchModel,GetCustomerBindUserForCRMOutput,CRMBookingBindQuoteInput,BookingCheckIsExistsInputDto,UpdateBookingForIcpInput,PurchaseOrderItemForIcpDto,BookingForIcpDto,ClearanceInviocesUploadOutput,ClearanceInviocesDownloadOutput,BookingRecentlyUsedOutput,BookingStatisticsOutput,ChangeBookingStatusInput,CancelBookingInput,GetRelatedBusinessOutput,GetChannelListOutput,BookingForFcmDto,SetBookingAcceptedInput,SetBookingAcceptedOutput,GetClearanceInvoicesForFcmOutput,CreateOrUpdateForFcmInput,CreateOrUpdateForFcmOutput,CreateOrUpdateClearanceInvoicesForFcmInput, } from './csp.types';
 
 @BaseUrl('/csp/Booking')
 @Injectable({ providedIn: 'root' })
@@ -12,8 +12,8 @@ export class BookingService extends BaseApi {
   constructor(injector: Injector) {
     super(injector);
   }
+
   
-   
     /**
      * @param url /CSP/Booking/GetAllListForCRM
      * 为CRM提供订舱单列表
@@ -28,7 +28,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/UpdateRoutesForCRM
      * 为CRM提供更新路线
@@ -43,7 +43,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/SureServiceCompany
      * CRM确定出货口岸
@@ -58,7 +58,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/SalesConfirmCancelForCRM
      * 业务员确认取消
@@ -73,7 +73,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/GetForCRM
      * CRM根据Id获取详情（收获方与发货方、创建者可见）
@@ -88,7 +88,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/GetFilterDataSource
      * CRM条件过滤数据源
@@ -103,7 +103,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/GetCustomerBindUserForCRM
      * CRM订舱绑定报价入口获取报价接受客户与用户联动关系(BookingId)
@@ -118,7 +118,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/CRMBookingBindQuote
      * CRM订舱绑定报价
@@ -133,7 +133,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/UpdateForCRM
      * 编辑Booking(普通编辑+既改状态又含普通编辑)
@@ -148,7 +148,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/GetListByIds
      * 根据多个bookingId获取对应详情
@@ -163,7 +163,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/Get
      * 根据Id获取详情（收获方与发货方、创建者可见）
@@ -178,7 +178,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/GetAllList
      * 获取全部列表显示(只返回显示数据)
@@ -193,7 +193,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/Create
      * 创建Booking
@@ -208,7 +208,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/Update
      * 编辑Booking(普通编辑+既改状态又含普通编辑)
@@ -223,7 +223,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/IsExists
      * 校验 Booking 名称 和关联的PO是否存在其他Booking中
@@ -238,7 +238,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/UpdateForIcp
      * 此方法目前仅提供给Icp变更Cargo、客服及订舱员
@@ -253,7 +253,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/GetBookingOrderItemsForIcp
      * 根据 BookingId 返回需要发货的PO信息
@@ -268,7 +268,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/GetAllListForIcp
      * 此方法目前仅提供给Icp 获取全部列表显示
@@ -283,7 +283,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/ClearanceInviocesUpload
      * 清关发票数据上传解析
@@ -298,7 +298,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/ClearanceInviocesDownload
      * 清关发票下载数据生成
@@ -313,7 +313,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/GetRecentlyUsed
      * 最近使用
@@ -328,7 +328,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/GetBookingsStatistics
      * 获取Booking统计信息
@@ -343,7 +343,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/ChangeBookingStatus
      * 修改 Booking 状态
@@ -358,7 +358,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/Cancel
      * CSP 客户申请取消 Booking，之后 ICP 或 CRM 调用 ChangeBookingStatus()或SalesConfirmCancelForCRM 设置状态为 BookingCancelled
@@ -373,7 +373,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/CancelShippingOrder
      * 取消 Shipping Order
@@ -388,7 +388,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/GetRelatedBusiness
      * Booking业务对话获取相关的业务id（app端）
@@ -403,7 +403,7 @@ export class BookingService extends BaseApi {
         return null as any
     }
 
- 
+
     /**
      * @param url /CSP/Booking/GetChannelList
      * 获取FBA渠道列表
@@ -415,6 +415,81 @@ export class BookingService extends BaseApi {
         _req: {freightMethodType:number} 
 
     ): Observable<ListResultDto<GetChannelListOutput>> {
+        return null as any
+    }
+
+
+    /**
+     * @param url /CSP/Booking/GetPagedListForFcm
+     * 获取Fcm预订舱数据
+     */
+
+    @GET('getPagedListForFcm')
+    getPagedListForFcm(
+        @Payload
+        _req: {sorting?:string,maxResultCount?:number,skipCount?:number} 
+
+    ): Observable<PagedResultDto<BookingForFcmDto>> {
+        return null as any
+    }
+
+
+    /**
+     * @param url /CSP/Booking/SetBookingAccepted
+     * 设置 Bookings 为已受理状态
+     */
+
+    @POST('setBookingAccepted')
+    setBookingAccepted(
+        @Payload
+        _req:SetBookingAcceptedInput
+
+    ): Observable<SetBookingAcceptedOutput> {
+        return null as any
+    }
+
+
+    /**
+     * @param url /CSP/Booking/GetClearanceInvoicesForFcm
+     * FCM 根据Id获取 清关列表
+     */
+
+    @GET('getClearanceInvoicesForFcm')
+    getClearanceInvoicesForFcm(
+        @Payload
+        _req: {id?:string} 
+
+    ): Observable<GetClearanceInvoicesForFcmOutput> {
+        return null as any
+    }
+
+
+    /**
+     * @param url /CSP/Booking/CreateOrUpdateForFcm
+     * 更新预订舱信息
+     */
+
+    @POST('createOrUpdateForFcm')
+    createOrUpdateForFcm(
+        @Payload
+        _req:CreateOrUpdateForFcmInput
+
+    ): Observable<CreateOrUpdateForFcmOutput> {
+        return null as any
+    }
+
+
+    /**
+     * @param url /CSP/Booking/CreateOrUpdateClearanceInvoicesForFcm
+     * 处理清关发票、包装清单
+     */
+
+    @POST('createOrUpdateClearanceInvoicesForFcm')
+    createOrUpdateClearanceInvoicesForFcm(
+        @Payload
+        _req:CreateOrUpdateClearanceInvoicesForFcmInput
+
+    ): Observable<any> {
         return null as any
     }
 
