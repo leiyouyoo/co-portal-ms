@@ -11,11 +11,19 @@
           <button nz-button nzType="default" (click)="refresh()">刷新</button>
         </div>
         <div class="table-style">
-          <co-st #st [data]="listOfData" [columns]="columns" [scroll]="{ x: '1200px' }" [showFilters]="false"
-            [total]="preListTotal" [page]="{ front: false }" (change)="checkChange($event)">
+          <co-st
+            #st
+            [data]="listOfData"
+            [columns]="columns"
+            [scroll]="{ x: '1200px' }"
+            [showFilters]="false"
+            [total]="preListTotal"
+            [page]="{ front: false }"
+            (change)="checkChange($event)"
+          >
           </co-st>
         </div>
-        <app-add-order [isVisible]="isAddVisible"></app-add-order>
+        <app-add-order [isVisible]="isAddVisible" (getPreListData)="getPreListData()"></app-add-order>
       </ng-template>
     </nz-tab>
     <nz-tab nzTitle="已受理">
@@ -25,12 +33,9 @@
     </nz-tab>
   </nz-tabset>
   <nz-modal [(nzVisible)]="isVisible" nzTitle="确认入仓" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-    <nz-date-picker [(ngModel)]="date" [nzFormat]="' yyyy/MM/dd'" style="width: 80%;">
-    </nz-date-picker>
+    <nz-date-picker [(ngModel)]="date" [nzFormat]="' yyyy/MM/dd'" style="width: 80%;"> </nz-date-picker>
   </nz-modal>
 </div>
-
-
 
 <!-- 确认入仓弹窗 -->
 <enter-warehouse-modal [ids]="listSelectIds" (successCallBack)="refresh()"></enter-warehouse-modal>
