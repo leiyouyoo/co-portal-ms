@@ -695,33 +695,7 @@ export class PackingListComponent implements OnInit {
   fileType: string = '';
 
   initHeader() {
-    // let arr = [];
-    // arr.push({ propertyName: 'Sku', order: '0' });
-    // arr.push({ propertyName: 'FbaNo', order: '1' });
-    // arr.push({ propertyName: 'ReferenceId', order: '2' });
-    // arr.push({ propertyName: 'CommodityEnglishDesc', order: '3' });
-    // arr.push({ propertyName: 'CommodityChineseDesc', order: '4' });
-    // arr.push({ propertyName: 'Brand', order: '5' });
-    // arr.push({ propertyName: 'Material', order: '6' });
-    // arr.push({ propertyName: 'Uses', order: '7' });
-    // arr.push({ propertyName: 'Model', order: '8' });
-    // arr.push({ propertyName: 'HsCode', order: '9' });
-    // arr.push({ propertyName: 'Quantity', order: '10' });
-    // arr.push({ propertyName: 'Unit', order: '11' });
-    // arr.push({ propertyName: 'UnitPriceValue', order: '12' });
-    // arr.push({ propertyName: 'TotalPriceValue', order: '13' });
-    // arr.push({ propertyName: 'ImageId', order: '14' });
-    // arr.push({ propertyName: 'IsContainsBattery', order: '15' });
-    // arr.push({ propertyName: 'Asin', order: '16' });
-    // arr.push({ propertyName: 'Ctns', order: '17' });
-    // arr.push({ propertyName: 'QuantitiesCarton', order: '18' });
-    // arr.push({ propertyName: 'Length', order: '19' });
-    // arr.push({ propertyName: 'Width', order: '20' });
-    // arr.push({ propertyName: 'Height', order: '21' });
-    // arr.push({ propertyName: 'Cbm', order: '22' });
-    // arr.push({ propertyName: 'GrossWeight', order: '23' });
-    // arr.push({ propertyName: 'NetWeight', order: '24' });
-    let arr = [
+    const arr = [
       { propertyName: 'Sku', order: '0' },
       { propertyName: 'FbaNo', order: '1' },
       { propertyName: 'ReferenceId', order: '2' },

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { ShipmentService } from 'src/app/service/fcm';
 
 @Component({
   selector: 'enter-warehouse-modal',
@@ -11,8 +12,12 @@ export class EnterWarehouseModalComponent implements OnInit {
   validateForm: FormGroup;
   isVisible: boolean = false;
 
+  @Input()
+  ids: Array<string>;
+
   constructor(
     private fb: FormBuilder,
+    private shipmentService: ShipmentService
   ) { }
 
   ngOnInit(): void {
@@ -45,8 +50,11 @@ export class EnterWarehouseModalComponent implements OnInit {
     }
 
     if (this.validateForm.valid) {
-      console.log(this.validateForm.get('data').value)
-      this.isVisible = false;
+      console.log(new Date(this.validateForm.get('data').value).toISOString())
+      this.shipmentService.warehousing({ shipmentIds: this.ids, warehousingDate: new Date(this.validateForm.get('data').value).toISOString() }).subscribe(res => {
+        console.log(res);
+        this.isVisible = false;
+      })
     }
   }
 

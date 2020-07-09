@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AddOrderComponent } from '../add-order/add-order.component';
 import { STColumn } from '@co/cbc';
+import { EnterWarehouseModalComponent } from './enter-warehouse-modal/enter-warehouse-modal.component';
 
 @Component({
   selector: 'app-order-list',
@@ -8,6 +9,10 @@ import { STColumn } from '@co/cbc';
   styleUrls: ['./order-list.component.less'],
 })
 export class OrderListComponent implements OnInit {
+
+  @ViewChild(EnterWarehouseModalComponent, { static: true })
+  enterWarehouseModalComponent: EnterWarehouseModalComponent;
+
   @ViewChild(AddOrderComponent)
   addOrderComponent: AddOrderComponent;
   isAddVisible = false;
@@ -15,7 +20,7 @@ export class OrderListComponent implements OnInit {
   date = null;
   listOfData = [
     {
-      id: '1',
+      shipmentIds: '1',
       img: 'John Brown',
       email: 32,
       address: 'New York No. 1 Lake Park',
@@ -24,7 +29,7 @@ export class OrderListComponent implements OnInit {
       aaa: 'zzzz',
     },
     {
-      id: '2',
+      shipmentIds: '2',
       img: 'John Brown',
       email: 32,
       address: 'New York No. 1 Lake Park',
@@ -33,7 +38,7 @@ export class OrderListComponent implements OnInit {
       aaa: 'zzzz',
     },
     {
-      id: '3',
+      shipmentIds: '3',
       img: 'John Brown',
       email: 32,
       address: 'New York No. 1 Lake Park',
@@ -43,7 +48,7 @@ export class OrderListComponent implements OnInit {
     },
   ];
   columns: STColumn[] = [
-    { title: '编号', index: 'id', width: 80 },
+    { title: '编号', index: 'shipmentIds', width: 80 },
     { title: '头像', type: 'img', width: 80, index: 'picture.thumbnail' },
     { title: '邮箱', index: 'email', width: 80 },
     { title: '电话', index: 'phone', width: 80 },
@@ -51,9 +56,12 @@ export class OrderListComponent implements OnInit {
     { title: '注册时间', type: 'date', index: 'registered' },
   ];
 
-  constructor() {}
+  listSelectIds: Array<string> = [];  // 预报列表选中值
 
-  ngOnInit() {}
+  constructor(
+  ) { }
+
+  ngOnInit() { }
 
   showModal(type): void {
     if (type === 1) {
@@ -72,4 +80,13 @@ export class OrderListComponent implements OnInit {
     console.log('Button cancel clicked!');
     this.isVisible = false;
   }
+
+  enterWareHouse(): void {
+    this.enterWarehouseModalComponent.showModal()
+  }
+
+  checkChange(e): void {
+    e.type === 'checkbox' && (this.listSelectIds = e?.checkbox?.length > 0 ? e.checkbox.map(item => { return item.shipmentIds }) : []);
+  }
+
 }
