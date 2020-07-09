@@ -86,9 +86,7 @@ export class OrderListComponent implements OnInit {
   }
 
   checkChange(e): void {
-    if (e.type == "checkbox") {
-      this.listSelectIds = e?.checkbox?.length > 0 ? e.checkbox.map(e => { return e.shipmentIds }) : [];
-    }
+    e.type === 'checkbox' && (this.listSelectIds = e?.checkbox?.length > 0 ? e.checkbox.map(e => { return e.shipmentIds }) : []);
   }
 
 }
