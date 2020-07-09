@@ -1,5 +1,108 @@
  
     /**
+     *  No Remark 
+     */
+    export class QuantityDto {
+        
+         
+            /* 值 */ 
+            value?: number;
+         
+            /* 指定此数量的计量单位。
+对于重量，单位为 kg（千克）或 lbs（磅），
+对于体积，单位为 cbm（立方米）或 cbf（立方英尺） */ 
+            unit?: string;
+        
+        
+    }
+ 
+    /**
+     * shipment列表模型
+     */
+    export class PreShipmentListDto {
+        
+         
+            /* 运单编号 */ 
+            shipmentNo: string;
+         
+            /* 主要运输方式
+0 = NotSet
+1 = Ocean
+2 = Air
+3 = Truck
+4 = Rail */ 
+            transportationMode: number;
+         
+            /* 下单时间（创建时间） */ 
+            creationTime: string;
+         
+            /* 业务员 */ 
+            serviceUser: string;
+         
+            /* 客户 */ 
+            customerName: string;
+         
+            /* 联系人 */ 
+            contactName: string;
+         
+            /* 送货地址(item里取) */ 
+            address: string;
+         
+            /* 交货方式, 客户自送、Cityocean上门取件
+0 = NotSet
+1 = DeliveryGoodsByMyself
+2 = PickUpByCityocean */ 
+            fbaPickUpMethodType: number;
+         
+            /* 交货时间 */ 
+            cargoReadyDate: string;
+         
+            /* 交货位置 */ 
+            originAddress: string;
+         
+            /* 交货仓库 */ 
+            originWarehouse: string;
+         
+            /* 国家-送货地址的国家 */ 
+            country: string;
+         
+            /* 品名 */ 
+            commodity: string;
+         
+            /* 总数量 */ 
+            quantity: QuantityDto;
+         
+            /* 总重量 */ 
+            weight: QuantityDto;
+         
+            /* 总体积 */ 
+            volume: QuantityDto;
+         
+            /* 渠道 */ 
+            channel: string;
+         
+            /* 入仓时间 */ 
+            cargoPutAwayDate: string;
+         
+            /* 操作口岸 */ 
+            serviceCompany: string;
+         
+            /* FBA编号组（取item所有斜杠/分隔） */ 
+            fbano: string;
+         
+            /* 承运人 */ 
+            agentCustomer: string;
+         
+            /* 创建人 */ 
+            creator: string;
+         
+            
+            id: string;
+        
+        
+    }
+ 
+    /**
      * booking相关信息
      */
     export class BookingDetailDto {
@@ -48,11 +151,8 @@
             /* 出货口岸 */ 
             serviceCompanyId?: string;
          
-            /* 渠道 CO.FCM.Domain.Shipments.Enums.ChannelType
-0 = NotSet
-1 = Haika
-2 = HaikaTax */ 
-            channel?: number;
+            /* 渠道 CO.FCM.Domain.Shipments.Enums.ChannelType */ 
+            channel?: string;
         
         
     }
@@ -273,13 +373,62 @@
     }
  
     /**
-     *  No Remark 
+     * 导出的文件列表
      */
     export class ExportSideMarksReportOutput {
         
          
             
-            fileId: string;
+            fileId: any[];
+        
+        
+    }
+ 
+    /**
+     * 侧唛数据
+     */
+    export class SideMarksData {
+        
+         
+            
+            bookingId: string;
+         
+            /* 服务公司Id */ 
+            serviceCompanyId: string;
+         
+            /* 件数 */ 
+            quantity: number;
+         
+            
+            shipmentNo: string;
+         
+            /* 仓库地址 */ 
+            warehouse: string;
+         
+            /* 国家 */ 
+            country: string;
+         
+            /* 仓库代码 */ 
+            warehouseCode: string;
+         
+            /* 交易类型
+0 = NotSet
+1 = General
+2 = Fba
+3 = Fbm */ 
+            tradeType: number;
+         
+            /* FBA No 数组 */ 
+            fbaNos: any[];
+         
+            /* 客服 */ 
+            customerService: string;
+         
+            /* 客服电话 */ 
+            customerServiceTel: string;
+         
+            /* 业务所属公司 */ 
+            customerServiceCompany: string;
         
         
     }

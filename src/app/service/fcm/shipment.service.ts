@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
 import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
-import { CreateOrUpdateShipmentInput,WarehousingDto,ChangeShipmentInvalidStatusInput,GetPostAgentCustomerListOutput,SetShipmentPostAgentCustomerInput,ShipmentDto,GetShipmentListInput, } from './fcm.types';
+import { PreShipmentListDto,CreateOrUpdateShipmentInput,WarehousingDto,ChangeShipmentInvalidStatusInput,GetPostAgentCustomerListOutput,SetShipmentPostAgentCustomerInput,ShipmentDto,GetShipmentListInput, } from './fcm.types';
 
 @BaseUrl('/fcm/Shipment')
 @Injectable({ providedIn: 'root' })
@@ -14,6 +14,21 @@ export class ShipmentService extends BaseApi {
   }
 
   
+    /**
+     * @param url /FCM/Shipment/GetAllPreShipment
+     * 分页获取预报单列表
+     */
+
+    @GET('getAllPreShipment')
+    getAllPreShipment(
+        @Payload
+        _req: {transportationMode?:number,shipmentNo?:string,creationTime?:string,serviceUserId?:number,customerId?:string,contactId?:string,sorting?:string,maxResultCount?:number,skipCount?:number} 
+
+    ): Observable<PagedResultDto<PreShipmentListDto>> {
+        return null as any
+    }
+
+
     /**
      * @param url /FCM/Shipment/GetForUpdate
      * 获取用于更新
