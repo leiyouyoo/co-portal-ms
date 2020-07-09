@@ -71,26 +71,26 @@
       <nz-form-item>
         <nz-form-label nzFor="fbaPickUpMethodType">交货方式</nz-form-label>
         <nz-form-control>
-          <nz-radio-group formControlName="fbaPickUpMethodType">
+          <nz-radio-group formControlName="fbaPickUpMethodType" (ngModelChange)="changeData()">
             <label nz-radio [nzValue]="1">自送货</label>
             <label nz-radio [nzValue]="2">由CITYOCEAN上门提货</label>
           </nz-radio-group>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzFor="destinationWarehouseId">交货仓库</nz-form-label>
+        <nz-form-label nzFor="originWarehouseId">交货仓库</nz-form-label>
         <nz-form-control>
-          <nz-select nzAllowClear nzShowSearch id="gender" formControlName="destinationWarehouseId" (ngModelChange)="getData($event)">
-            <nz-option *ngFor="let item of destinationWarehouseList" [nzValue]="item" [nzLabel]="item.name"></nz-option>
+          <nz-select nzAllowClear nzShowSearch id="originWarehouseId" formControlName="originWarehouseId" (ngModelChange)="getData($event)">
+            <nz-option *ngFor="let item of originWarehouseList" [nzValue]="item" [nzLabel]="item.name"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
     </div>
     <div *ngIf="validateForm.value.fbaPickUpMethodType === 2">
       <nz-form-item>
-        <nz-form-label nzFor="fbaPickUpMethodType">交货位置</nz-form-label>
+        <nz-form-label nzFor="originAddressId">交货位置</nz-form-label>
         <nz-form-control>
-          <nz-select nzAllowClear nzShowSearch id="gender" formControlName="destinationWarehouseId">
+          <nz-select nzAllowClear nzShowSearch id="originAddressId" formControlName="originAddressId">
             <nz-option *ngFor="let item of originAddressList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
           </nz-select>
         </nz-form-control>
@@ -124,9 +124,9 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzFor="deliveryDate">预估交货时间</nz-form-label>
+        <nz-form-label nzFor="pickUpTimeRange">预估交货时间</nz-form-label>
         <nz-form-control>
-          <datetime-range-picker formControlName="deliveryDate"></datetime-range-picker>
+          <datetime-range-picker formControlName="pickUpTimeRange"></datetime-range-picker>
         </nz-form-control>
       </nz-form-item>
     </div>
@@ -134,7 +134,7 @@
       <nz-form-item>
         <nz-form-label nzFor="commodity" nzRequired>品名</nz-form-label>
         <nz-form-control nzErrorTip="Please input your commodity!">
-          <co-commodity-picker formControlName="commodity" coMode="tags" style="width: 100%;"> </co-commodity-picker>
+          <co-commodity-picker formControlName="commodity" coMode="tags" style="width: 100%;" coValueMember="name"> </co-commodity-picker>
         </nz-form-control>
       </nz-form-item>
     </div>
@@ -164,8 +164,8 @@
       <span
         >送货地址<span *ngIf="addressList.length > 1">{{ i + 1 }}</span></span
       >
-      <nz-select nzAllowClear nzShowSearch [(ngModel)]="item.address">
-        <nz-option nzCustomContent *ngFor="let item of addressItemList" [nzValue]="item.id" [nzLabel]="item.unlocode">{{
+      <nz-select nzAllowClear nzShowSearch [(ngModel)]="item.address" (ngModelChange)="getTradeType(item.address, i)">
+        <nz-option nzCustomContent *ngFor="let item of addressItemList" [nzValue]="item" [nzLabel]="item.unlocode">{{
           item.name +
             '(' +
             (item.city ? item.city + ',' : '') +

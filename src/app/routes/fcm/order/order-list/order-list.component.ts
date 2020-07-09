@@ -11,7 +11,6 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./order-list.component.less'],
 })
 export class OrderListComponent implements OnInit {
-
   @ViewChild(EnterWarehouseModalComponent, { static: true })
   enterWarehouseModalComponent: EnterWarehouseModalComponent;
 
@@ -25,14 +24,26 @@ export class OrderListComponent implements OnInit {
   date = null;
   listOfData = [];
   columns: STColumn[] = [
-    { title: this.translate.instant('Freight Method'), index: 'transportationMode', width: 80, type: 'enum', enum: { 0: 'NotSet', 1: 'Ocean', 2: 'Air', 3: 'Truck', 4: 'Rail' } },
+    {
+      title: this.translate.instant('Freight Method'),
+      index: 'transportationMode',
+      width: 80,
+      type: 'enum',
+      enum: { 0: 'NotSet', 1: 'Ocean', 2: 'Air', 3: 'Truck', 4: 'Rail' },
+    },
     { title: this.translate.instant('Shipment No'), index: 'shipmentNo', width: 80 },
     { title: this.translate.instant('Order time'), index: 'creationTime', width: 130, type: 'date', filterType: 'date' },
     { title: this.translate.instant('Sales'), index: 'serviceUser', width: 80 },
     { title: this.translate.instant('Client'), index: 'customerName', width: 80 },
     { title: this.translate.instant('Contact Person'), index: 'contactName', width: 80 },
     { title: this.translate.instant('Delivery Address'), index: 'address', width: 80 },
-    { title: this.translate.instant('Delivery method'), index: 'fbaPickUpMethodType', width: 80, type: 'enum', enum: { 0: 'NotSet', 1: 'DeliveryGoodsByMyself', 2: 'PickUpByCityocean' } },
+    {
+      title: this.translate.instant('Delivery method'),
+      index: 'fbaPickUpMethodType',
+      width: 80,
+      type: 'enum',
+      enum: { 0: 'NotSet', 1: 'DeliveryGoodsByMyself', 2: 'PickUpByCityocean' },
+    },
     { title: this.translate.instant('Delivery time'), index: 'cargoReadyDate', width: 130, type: 'date', filterType: 'date' },
     { title: this.translate.instant('Origin Location'), index: 'originAddress', width: 80 },
     { title: this.translate.instant('Delivery warehouse'), index: 'originWarehouse', width: 80 },
@@ -55,38 +66,40 @@ export class OrderListComponent implements OnInit {
         {
           text: '编辑',
           type: 'none',
-          click: (e) => { console.log(e) },
+          click: (e) => {
+            this.addOrderComponent.getForUpdate();
+            this.addOrderComponent.actionType = 'update';
+          },
         },
         {
           text: '删除',
           type: 'none',
-          click: () => { },
-        }
-      ]
-    }
+          click: () => {},
+        },
+      ],
+    },
   ];
 
-  listSelectIds: Array<string> = [];  // 预报列表选中值
-  preListTotal: number = 0;  //预报列表总条数
+  listSelectIds: Array<string> = []; // 预报列表选中值
+  preListTotal: number = 0; //预报列表总条数
 
-  constructor(
-    private shipmentService: ShipmentService,
-    public translate: TranslateService,
-  ) { }
+  constructor(private shipmentService: ShipmentService, public translate: TranslateService) {}
 
   ngOnInit() {
     this.getPreListData();
   }
 
   getPreListData(skipCount = 0) {
-    this.shipmentService.getAllPreShipment({
-      skipCount: skipCount,
-      maxResultCount: 10
-    }).subscribe(res => {
-      this.listOfData = res.items;
-      this.preListTotal = res.totalCount
-      console.log(res, "preList");
-    })
+    this.shipmentService
+      .getAllPreShipment({
+        skipCount: skipCount,
+        maxResultCount: 10,
+      })
+      .subscribe((res) => {
+        this.listOfData = res.items;
+        this.preListTotal = res.totalCount;
+        console.log(res, 'preList');
+      });
   }
 
   showModal(type): void {
@@ -108,16 +121,21 @@ export class OrderListComponent implements OnInit {
   }
 
   refresh(): void {
-    this.st.reset()
+    this.st.reset();
   }
 
   enterWareHouse(): void {
-    this.enterWarehouseModalComponent.showModal()
+    this.enterWarehouseModalComponent.showModal();
   }
 
   checkChange(e): void {
-    e.type === 'pi' && this.getPreListData((e.pi - 1) * 10)
-    e.type === 'checkbox' && (this.listSelectIds = e?.checkbox?.length > 0 ? e.checkbox.map(item => { return item.id }) : []);
+    e.type === 'pi' && this.getPreListData((e.pi - 1) * 10);
+    e.type === 'checkbox' &&
+      (this.listSelectIds =
+        e?.checkbox?.length > 0
+          ? e.checkbox.map((item) => {
+              return item.id;
+            })
+          : []);
   }
-
 }
