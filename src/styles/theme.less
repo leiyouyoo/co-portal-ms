@@ -58,14 +58,12 @@ html {
         display         : inline-block;
         box-sizing      : border-box;
         width           : 100%;
-        padding         : 4px 11px;
         color           : #17191a;
         font-size       : 14px;
         font-variant    : tabular-nums;
         list-style      : none;
         background-color: #fff;
         background-image: none;
-        border          : 1px solid @input-border-color;
         border-radius   : 4px;
 
         transition           : all 0.3s;
@@ -433,37 +431,6 @@ html {
         color: #6198ff !important;
     }
 
-    .schdules .ant-tabs-tab-active {
-        color: #8ab7ff !important;
-    }
-
-    .schdules {
-        .ant-modal-body {
-            padding: 0;
-        }
-
-        nz-table thead tr th:first-child {
-            color     : #6198ff !important;
-            text-align: left !important;
-        }
-
-        nz-table thead tr th {
-            background: #eff6ff !important;
-        }
-
-        nz-table tbody tr td:first-child {
-            text-align: left !important;
-        }
-
-        nz-table tbody tr td {
-            font-weight: bold;
-        }
-
-        .ant-tabs-bar {
-            margin-bottom: 23px !important;
-            border-bottom: none !important;
-        }
-    }
 
     .rate-table-edit {
         .ant-btn {
@@ -472,20 +439,6 @@ html {
         }
     }
 
-    rate-filter-panel {
-        .ant-card {
-            margin-bottom: 16px;
-            box-shadow   : 0 0 5px 2px #ebedef;
-        }
-
-        .ant-card-head {
-            border-bottom: none !important;
-        }
-
-        .ant-card-actions {
-            background: #fff;
-        }
-    }
 
     .inner-content {
         height  : 100%;
@@ -506,26 +459,6 @@ html {
         }
     }
 
-    .csp-header {
-        .ant-badge-count {
-            font-size : 12px;
-            background: #fc5a5a !important;
-            box-shadow: none;
-
-            p {
-                color: #fff;
-            }
-        }
-    }
-
-    .csp-header-menu {
-        padding      : 27px 16px;
-        border-radius: 0 !important;
-
-        .ant-dropdown-menu-item {
-            padding: 5px 30px 5px 5px;
-        }
-    }
 
     .notifications-menu,
     .csp-header-menu {
@@ -915,20 +848,16 @@ nz-table-inner-scroll {
 }
 
 
-app-order-list nz-tabset {
+.ant-form-item-label>label.ant-form-item-required::before {
+    content: '' !important;
+}
 
-    height        : 100%;
-    display       : flex !important;
-    flex-direction: column;
-
-
-    .ant-tabs-content {
-        flex    : 1;
-        overflow: hidden;
-
-        .ant-tabs-tabpane-active {
-            overflow: hidden;
-            height  : 100%;
-        }
-    }
+.ant-form-item-label>label.ant-form-item-required::after {
+    display     : inline-block !important;
+    margin-right: 4px;
+    color       : #ff4d4f;
+    font-size   : 14px;
+    font-family : SimSun, sans-serif;
+    line-height : 1;
+    content     : '*'
 }

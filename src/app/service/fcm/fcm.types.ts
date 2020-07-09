@@ -5,27 +5,25 @@
     export class QuantityDto {
         
          
-            /* 值 */ 
+            
             value?: number;
          
-            /* 指定此数量的计量单位。
-对于重量，单位为 kg（千克）或 lbs（磅），
-对于体积，单位为 cbm（立方米）或 cbf（立方英尺） */ 
+            
             unit?: string;
         
         
     }
  
     /**
-     * shipment列表模型
+     *  No Remark 
      */
     export class PreShipmentListDto {
         
          
-            /* 运单编号 */ 
+            
             shipmentNo: string;
          
-            /* 主要运输方式
+            /* 
 0 = NotSet
 1 = Ocean
 2 = Air
@@ -33,67 +31,73 @@
 4 = Rail */ 
             transportationMode: number;
          
-            /* 下单时间（创建时间） */ 
+            
             creationTime: string;
          
-            /* 业务员 */ 
+            
             serviceUser: string;
          
-            /* 客户 */ 
+            
             customerName: string;
          
-            /* 联系人 */ 
+            
             contactName: string;
          
-            /* 送货地址(item里取) */ 
+            
             address: string;
          
-            /* 交货方式, 客户自送、Cityocean上门取件
+            /* 
 0 = NotSet
 1 = DeliveryGoodsByMyself
 2 = PickUpByCityocean */ 
             fbaPickUpMethodType: number;
          
-            /* 交货时间 */ 
+            
             cargoReadyDate: string;
          
-            /* 交货位置 */ 
+            
+            originAddressId: string;
+         
+            
             originAddress: string;
          
-            /* 交货仓库 */ 
+            
+            originWarehouseId: string;
+         
+            
             originWarehouse: string;
          
-            /* 国家-送货地址的国家 */ 
+            
             country: string;
          
-            /* 品名 */ 
+            
             commodity: string;
          
-            /* 总数量 */ 
+            
             quantity: QuantityDto;
          
-            /* 总重量 */ 
+            
             weight: QuantityDto;
          
-            /* 总体积 */ 
+            
             volume: QuantityDto;
          
-            /* 渠道 */ 
+            
             channel: string;
          
-            /* 入仓时间 */ 
+            
             cargoPutAwayDate: string;
          
-            /* 操作口岸 */ 
+            
             serviceCompany: string;
          
-            /* FBA编号组（取item所有斜杠/分隔） */ 
+            
             fbano: string;
          
-            /* 承运人 */ 
+            
             agentCustomer: string;
          
-            /* 创建人 */ 
+            
             creator: string;
          
             
@@ -103,55 +107,51 @@
     }
  
     /**
-     * booking相关信息
+     *  No Remark 
      */
     export class BookingDetailDto {
         
          
-            /* CSP客户提交的bookingid */ 
+            
             customerBookingId: string;
          
-            /* 交货方式    CO.FCM.Domain.Shipments.Enums.FbaPickUpMethodType
+            /* 
 0 = NotSet
 1 = DeliveryGoodsByMyself
 2 = PickUpByCityocean */ 
             fbaPickUpMethodType: number;
          
-            /* 联系人id */ 
+            
             contactId: string;
          
-            /* 关联的起始地址Id (存在拖车服务、FBA\M 需要上门取件时有值) */ 
+            
             originAddressId: string;
          
-            /* 起始仓库地址 */ 
+            
             originWarehouseId: string;
          
-            /* 目的港 */ 
+            
             destinationPortId: string;
          
-            /* 起始港Id */ 
+            
             originPortId: string;
          
-            /* 目的仓库地址 */ 
+            
             destinationWarehouseId: string;
          
-            /* 目的地址  
-<remarks>FBM 时来源：客户自己创建的【network-MY-organization-location】</remarks> */ 
+            
             destinationAddressId: string;
          
-            /* 预估交货日期，指必须交付货物的日期。 */ 
+            
             deliveryDate: string;
          
-            /* 品名 */ 
+            
             commodity: string;
          
             
-            id: string;
-         
-            /* 出货口岸 */ 
             serviceCompanyId?: string;
          
-            /* 渠道 CO.FCM.Domain.Shipments.Enums.ChannelType */ 
+            
             channel?: string;
         
         
@@ -163,31 +163,31 @@
     export class OceanShipmentDetailDto {
         
          
-            /* SO 号，船东订舱号 */ 
+            
             carrierBookingNo: string;
         
         
     }
  
     /**
-     * FBA信息Dto  （受理才填）
+     *  No Remark 
      */
     export class FbaShipmentDetailDto {
         
          
-            /* 快递单号 */ 
+            
             expressNo: string;
          
-            /* 快递单号备注 */ 
+            
             expressNoRemark: string;
          
-            /* 入库单号 */ 
+            
             warehouseNo: string;
          
-            /* 货拉拉单号 */ 
+            
             huoLalaOrderNo: string;
          
-            /* FBA运输方式：整柜直送、拆箱后配送，客户自提，暂存仓库
+            /* 
 0 = NotSet
 1 = FCLDirectDelivery
 2 = DeliveryAfterUnboxing
@@ -195,74 +195,80 @@
 4 = TemporaryWarehouse */ 
             fbaDeliveryType: number;
          
-            /* FBA运输方式备注 */ 
+            
             fbaDeliveryTypeRemark: string;
          
-            /* 货物入库时间（入仓时间） */ 
+            
             cargoPutAwayDate: string;
         
         
     }
  
     /**
-     * 创建或编辑shipment
+     *  No Remark 
      */
     export class CreateOrUpdateShipmentInput {
         
          
-            /* 业务员id */ 
+            
             serviceUserId: number;
          
-            /* 承运人（代理）客户Id，如 Cityocean ... */ 
+            
             agentCustomerId: string;
          
-            /* 预估交货时间 */ 
+            
             cargoReadyDate: string;
          
-            /* 贸易条款，可以是 EXW, FCA, FAS, FOB, CPT, CFR, CIF, CIP, DAT, DAP, DDP, or DPU. */ 
+            
+            pickUpTimeRange: string;
+         
+            
             incoterm: string;
          
-            /* 运输条款，port_to_door、port_to_port、door_to_door、door_to_port ... */ 
+            
             freightType: string;
          
-            /* 根据送货地址判断(后台已处理，前端无需处理)
+            /* 
 0 = NotSet
 1 = General
 2 = Fba
 3 = Fbm */ 
             tradeType: number;
          
-            /* 运单编号 */ 
+            
             shipmentNo: string;
          
-            /* 转运单号 */ 
+            
             transferNo: string;
          
-            /* 报关行客户Id */ 
+            
             customsCustomerId: string;
          
-            /* 清关行客户Id */ 
+            
             customsClearanceCustomerId: string;
          
-            /* booking相关信息 */ 
+            
             booking: BookingDetailDto;
          
-            /* 海运业务明细 */ 
+            
             oceanShipment: OceanShipmentDetailDto;
          
-            /* FBA信息 */ 
+            
             fbaShipment: FbaShipmentDetailDto;
          
-            /* Shipment 中的产品信息 */ 
+            
             lineItems: any[];
+         
+            
+            addressItems: any[];
          
             
             id: string;
          
-            /* 主客户Id */ 
+            
             customerId?: string;
          
-            /* 业务类型（运输方式）
+            /* 
 0 = NotSet
 1 = Ocean
 2 = Air
@@ -274,30 +280,30 @@
     }
  
     /**
-     * 入仓模型
+     *  No Remark 
      */
     export class WarehousingDto {
         
          
-            /* shipmentId */ 
+            
             shipmentIds: any[];
          
-            /* 入仓时间 */ 
+            
             warehousingDate?: string;
         
         
     }
  
     /**
-     * 用于作废或取消作废多个Shipment的输入参数
+     *  No Remark 
      */
     export class ChangeShipmentInvalidStatusInput {
         
          
-            /* 需要变更的 ShipmentId 集合 */ 
+            
             shipmentIds: any[];
          
-            /* 是否作废，true 作废，false 取消作废 */ 
+            
             isSetInvalid: boolean;
         
         
@@ -321,10 +327,10 @@
     export class SetShipmentPostAgentCustomerInput {
         
          
-            /* 设置后段代理的 ShipmentId 集合 */ 
+            
             shipmentIds: any[];
          
-            /* 后段代理客户Id */ 
+            
             postAgentCustomerId: string;
         
         
@@ -337,6 +343,89 @@
         
          
             
+            carrierBookingNo: string;
+         
+            /* 
+0 = NotSet
+1 = DeliveryGoodsByMyself
+2 = PickUpByCityocean */ 
+            fbaPickUpMethodType: number;
+         
+            
+            originAddress: string;
+         
+            
+            shipmentNo: string;
+         
+            /* 
+0 = NotSet
+1 = Ocean
+2 = Air
+3 = Truck
+4 = Rail */ 
+            transportationMode: number;
+         
+            
+            creationTime: string;
+         
+            
+            serviceUser: string;
+         
+            
+            customerName: string;
+         
+            
+            contactName: string;
+         
+            
+            address: string;
+         
+            
+            cargoReadyDate: string;
+         
+            
+            originAddressId: string;
+         
+            
+            originWarehouseId: string;
+         
+            
+            originWarehouse: string;
+         
+            
+            country: string;
+         
+            
+            commodity: string;
+         
+            
+            quantity: QuantityDto;
+         
+            
+            weight: QuantityDto;
+         
+            
+            volume: QuantityDto;
+         
+            
+            channel: string;
+         
+            
+            cargoPutAwayDate: string;
+         
+            
+            serviceCompany: string;
+         
+            
+            fbano: string;
+         
+            
+            agentCustomer: string;
+         
+            
+            creator: string;
+         
+            
             id: string;
         
         
@@ -347,6 +436,23 @@
      */
     export class GetShipmentListInput {
         
+         
+            
+            agentCustomerId: string;
+         
+            
+            channel: string;
+         
+            /* 
+0 = CreationTime
+1 = LastModificationTime */ 
+            queryTimeType: number;
+         
+            
+            startTime: string;
+         
+            
+            endTime: string;
          
             /* 排序 */ 
             sorting: string;
@@ -361,7 +467,7 @@
     }
  
     /**
-     * 需要导出侧唛的Id
+     *  No Remark 
      */
     export class ExportSideMarksReportInput {
         
@@ -373,7 +479,7 @@
     }
  
     /**
-     * 导出的文件列表
+     *  No Remark 
      */
     export class ExportSideMarksReportOutput {
         
@@ -385,7 +491,7 @@
     }
  
     /**
-     * 侧唛数据
+     *  No Remark 
      */
     export class SideMarksData {
         
@@ -393,42 +499,66 @@
             
             bookingId: string;
          
-            /* 服务公司Id */ 
+            
             serviceCompanyId: string;
          
-            /* 件数 */ 
+            
             quantity: number;
          
             
             shipmentNo: string;
          
-            /* 仓库地址 */ 
+            
             warehouse: string;
          
-            /* 国家 */ 
+            
             country: string;
          
-            /* 仓库代码 */ 
+            
             warehouseCode: string;
          
-            /* 交易类型
+            /* 
 0 = NotSet
 1 = General
 2 = Fba
 3 = Fbm */ 
             tradeType: number;
          
-            /* FBA No 数组 */ 
-            fbaNos: any[];
+            
+            fbaNo: string;
          
-            /* 客服 */ 
+            
             customerService: string;
          
-            /* 客服电话 */ 
+            
             customerServiceTel: string;
          
-            /* 业务所属公司 */ 
+            
             customerServiceCompany: string;
+        
+        
+    }
+ 
+    /**
+     *  No Remark 
+     */
+    export class GenerateWarehouseReciptInput {
+        
+         
+            
+            ids: any[];
+        
+        
+    }
+ 
+    /**
+     *  No Remark 
+     */
+    export class GenerateWarehouseReciptOutput {
+        
+         
+            
+            fileIds: any[];
         
         
     }

@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { STColumn } from '@co/cbc';
-import { ShipmentService, ChangeShipmentInvalidStatusInput, CreateOrUpdateShipmentInput } from '../../../../../../service/fcm';
 import { AcceptEditComponent } from '../accept-edit/accept-edit.component';
+import { ShipmentService, ChangeShipmentInvalidStatusInput } from 'src/app/service/fcm';
 
 @Component({
   selector: 'app-order-accept-list',
@@ -127,6 +127,7 @@ export class AcceptListComponent implements OnInit {
         transferNo: null,
         customsCustomerId: data.customsCustomerId,
         customsClearanceCustomerId: data.customsClearanceCustomerId,
+        pickUpTimeRange: data.deliveryDate,
         booking: {
           customerBookingId: null,
           serviceCompanyId: data.serviceCompanyId,
@@ -139,9 +140,8 @@ export class AcceptListComponent implements OnInit {
           originPortId: null,
           destinationWarehouseId: null,
           destinationAddressId: null,
-          deliveryDate: data.deliveryDate,
           commodity: data.commodity,
-          id: null,
+          deliveryDate: null,
         },
         oceanShipment: {
           carrierBookingNo: data.carrierBookingNo,
@@ -155,6 +155,7 @@ export class AcceptListComponent implements OnInit {
           fbaDeliveryTypeRemark: data.fbaDeliveryTypeRemark,
           cargoPutAwayDate: data.cargoPutAwayDate ? new Date(data.cargoPutAwayDate).toISOString() : null,
         },
+        addressItems: [],
         lineItems: arr,
         id: null,
       })

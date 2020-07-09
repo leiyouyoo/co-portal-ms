@@ -16,13 +16,13 @@ export class ShipmentService extends BaseApi {
   
     /**
      * @param url /FCM/Shipment/GetAllPreShipment
-     * 分页获取预报单列表
+     * 
      */
 
     @GET('getAllPreShipment')
     getAllPreShipment(
         @Payload
-        _req: {transportationMode?:number,shipmentNo?:string,creationTime?:string,serviceUserId?:number,customerId?:string,contactId?:string,sorting?:string,maxResultCount?:number,skipCount?:number} 
+        _req: {transportationMode?:number,creationTime?:string,serviceUserId?:number,customerId?:string,fbaPickUpMethodType?:number,cargoPutAwayDate?:string,serviceCompanyId?:string,agentCustomerId?:string,contact?:string,shipmentNo?:string,destinationAddress?:string,originAddress?:string,originWarehouse?:string,country?:string,channel?:string,fBANo?:string,creatorUser?:string,sorting?:string,maxResultCount?:number,skipCount?:number} 
 
     ): Observable<PagedResultDto<PreShipmentListDto>> {
         return null as any
@@ -31,7 +31,7 @@ export class ShipmentService extends BaseApi {
 
     /**
      * @param url /FCM/Shipment/GetForUpdate
-     * 获取用于更新
+     * 
      */
 
     @GET('getForUpdate')
@@ -46,7 +46,7 @@ export class ShipmentService extends BaseApi {
 
     /**
      * @param url /FCM/Shipment/CreateOrUpdate
-     * 创建或编辑订单
+     * 
      */
 
     @POST('createOrUpdate')
@@ -61,7 +61,7 @@ export class ShipmentService extends BaseApi {
 
     /**
      * @param url /FCM/Shipment/Warehousing
-     * 入仓
+     * 
      */
 
     @POST('warehousing')
@@ -76,7 +76,7 @@ export class ShipmentService extends BaseApi {
 
     /**
      * @param url /FCM/Shipment/ChangeInvalidStatus
-     * 作废或取消作废指定的 Shipment(s)
+     * 
      */
 
     @POST('changeInvalidStatus')
@@ -91,7 +91,7 @@ export class ShipmentService extends BaseApi {
 
     /**
      * @param url /FCM/Shipment/GetPostAgentCustomerList
-     * 获取有效的后段代理列表 TODO：CRM已有
+     * 
      */
 
     @GET('getPostAgentCustomerList')
@@ -106,7 +106,7 @@ export class ShipmentService extends BaseApi {
 
     /**
      * @param url /FCM/Shipment/SetPostAgentCustomer
-     * 设置 Shipment(s) 的后段代理，已分配数据不能重复分配
+     * 
      */
 
     @POST('setPostAgentCustomer')
@@ -120,14 +120,14 @@ export class ShipmentService extends BaseApi {
 
 
     /**
-     * @param url /FCM/Shipment/DeleteBooking
-     * 删除预报单
+     * @param url /FCM/Shipment/Delete
+     * 
      */
 
-    @DELETE('deleteBooking')
-    deleteBooking(
+    @DELETE('delete')
+    delete(
         @Payload
-        _req: {shipmentId?:string,bookingId?:string} 
+        _req: {id?:string} 
 
     ): Observable<any> {
         return null as any
@@ -136,7 +136,7 @@ export class ShipmentService extends BaseApi {
 
     /**
      * @param url /FCM/Shipment/Get
-     * 获取已受理单明细
+     * 
      */
 
     @GET('get')
@@ -151,7 +151,7 @@ export class ShipmentService extends BaseApi {
 
     /**
      * @param url /FCM/Shipment/GetPagedListForFcm
-     * 获取已受理列表数据
+     * 
      */
 
     @POST('getPagedListForFcm')
