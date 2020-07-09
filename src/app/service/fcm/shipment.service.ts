@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
 import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
-import { CreateOrUpdateShipmentInput,ChangeShipmentInvalidStatusInput,GetPostAgentCustomerListOutput,SetShipmentPostAgentCustomerInput, } from './fcm.types';
+import { CreateOrUpdateShipmentInput,ChangeShipmentInvalidStatusInput,GetPostAgentCustomerListOutput,SetShipmentPostAgentCustomerInput,ShipmentDto,GetShipmentListInput, } from './fcm.types';
 
 @BaseUrl('/fcm/Shipment')
 @Injectable({ providedIn: 'root' })
@@ -38,6 +38,21 @@ export class ShipmentService extends BaseApi {
     createOrUpdate(
         @Payload
         _req:CreateOrUpdateShipmentInput
+
+    ): Observable<any> {
+        return null as any
+    }
+
+
+    /**
+     * @param url /FCM/Shipment/Warehousing
+     * 入仓
+     */
+
+    @POST('warehousing')
+    warehousing(
+        @Payload
+        _req: {} 
 
     ): Observable<any> {
         return null as any
@@ -100,6 +115,36 @@ export class ShipmentService extends BaseApi {
         _req: {shipmentId?:string,bookingId?:string} 
 
     ): Observable<any> {
+        return null as any
+    }
+
+
+    /**
+     * @param url /FCM/Shipment/Get
+     * 获取已受理单明细
+     */
+
+    @GET('get')
+    get(
+        @Payload
+        _req: {id?:string} 
+
+    ): Observable<ShipmentDto> {
+        return null as any
+    }
+
+
+    /**
+     * @param url /FCM/Shipment/GetPagedListForFcm
+     * 获取已受理列表数据
+     */
+
+    @POST('getPagedListForFcm')
+    getPagedListForFcm(
+        @Payload
+        _req:GetShipmentListInput
+
+    ): Observable<PagedResultDto<ShipmentDto>> {
         return null as any
     }
 
