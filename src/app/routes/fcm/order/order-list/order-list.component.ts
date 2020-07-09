@@ -18,7 +18,7 @@ export class OrderListComponent implements OnInit {
   @ViewChild(AddOrderComponent)
   addOrderComponent: AddOrderComponent;
 
-  @ViewChild('st', null) st: any;
+  @ViewChild('st') st: any;
 
   isAddVisible = false;
   isVisible = false;
