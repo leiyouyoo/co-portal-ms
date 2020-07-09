@@ -2,11 +2,23 @@
   div {
     overflow: hidden;
     nz-form-item {
-      width: calc(50% - 12px);
       float: left;
+      width: calc(50% - 12px);
     }
     nz-form-item:nth-of-type(1) {
       margin-right: 24px;
+    }
+  }
+}
+.tips-class {
+  position: absolute;
+  bottom: 8px;
+  margin-bottom: 0;
+  span {
+    margin-right: 50px;
+    .text-color {
+      display: inline;
+      color: #faad14;
     }
   }
 }
@@ -14,13 +26,13 @@
   margin-bottom: 24px;
   .address-input {
     display: flex;
-    margin-bottom: 24px;
     height: 32px;
+    margin-bottom: 24px;
     line-height: 32px;
     span {
-      margin-right: 24px;
       width: 60px;
       min-width: fit-content;
+      margin-right: 24px;
     }
     nz-select {
       width: calc(100% - 324px);
@@ -31,14 +43,14 @@
     }
   }
   .tr-center {
-    text-align: center;
-    border: 1px dashed #1890ff !important;
     padding: 5px !important;
     color: #1890ff;
+    text-align: center;
+    border: 1px dashed #1890ff !important;
     cursor: pointer;
     i {
-      color: #1890ff;
       margin-right: 5px;
+      color: #1890ff;
       font-size: 14px !important;
       transform: scale(1.5);
     }
@@ -46,4 +58,10 @@
 }
 nz-alert {
   margin-bottom: 24px;
+}
+.color-red {
+  color: red;
+}
+.margin-left-5 {
+  margin-left: 5px;
 }
