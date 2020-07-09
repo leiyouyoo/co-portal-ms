@@ -88,7 +88,7 @@ export class OrderListComponent implements OnInit {
     this.isVisible = false;
   }
 
-  enterWarehouseCallBcak(): void {
+  refresh(): void {
     this.st.reset()
   }
 

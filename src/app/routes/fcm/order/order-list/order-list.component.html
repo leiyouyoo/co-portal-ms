@@ -9,7 +9,7 @@
           <button nz-button nzType="default" [disabled]="listSelectIds.length<=0"
             (click)="enterWareHouse()">确认入仓</button>
           <button nz-button nzType="default">导出</button>
-          <button nz-button nzType="default">刷新</button>
+          <button nz-button nzType="default" (click)="refresh()">刷新</button>
         </div>
         <div class="table-style">
           <co-st #st [data]="listOfData" [columns]="columns" [scroll]="{ x: '1200px' }" [showFilters]="false"
@@ -34,4 +34,4 @@
 
 
 <!-- 确认入仓弹窗 -->
-<enter-warehouse-modal [ids]="listSelectIds" (successCallBack)="enterWarehouseCallBcak()"></enter-warehouse-modal>
+<enter-warehouse-modal [ids]="listSelectIds" (successCallBack)="refresh()"></enter-warehouse-modal>
