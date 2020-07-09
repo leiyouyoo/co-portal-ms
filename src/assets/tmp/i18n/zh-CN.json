@@ -390,5 +390,7 @@
   "Ocean": "海运",
   "Air": "空运",
   "Truck": "拖车",
-  "Rail": "铁路"
+  "Rail": "铁路",
+  "DeliveryGoodsByMyself": "自送货",
+  "PickUpByCityocean": "由cityocean上门提货"
 }

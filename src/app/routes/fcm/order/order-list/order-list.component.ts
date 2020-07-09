@@ -33,7 +33,7 @@ export class OrderListComponent implements OnInit {
     { title: this.translate.instant('Client'), index: 'customerName', width: 80 },
     { title: this.translate.instant('Contact Person'), index: 'contactName', width: 80 },
     { title: this.translate.instant('Delivery Address'), index: 'address', width: 80 },
-    { title: this.translate.instant('Delivery method'), index: 'fbaPickUpMethodType', width: 80, type: 'enum', enum: { 0: 'NotSet', 1: 'DeliveryGoodsByMyself', 2: 'PickUpByCityocean' } },
+    { title: this.translate.instant('Delivery method'), index: 'fbaPickUpMethodType', width: 80, type: 'enum', enum: { 0: 'NotSet', 1: this.translate.instant('DeliveryGoodsByMyself'), 2: this.translate.instant('PickUpByCityocean') } },
     { title: this.translate.instant('Delivery time'), index: 'cargoReadyDate', width: 130, type: 'date', filterType: 'date' },
     { title: this.translate.instant('Origin Location'), index: 'originAddress', width: 80 },
     { title: this.translate.instant('Delivery warehouse'), index: 'originWarehouse', width: 80 },
