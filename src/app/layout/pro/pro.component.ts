@@ -165,7 +165,7 @@ export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
       this.setClass();
     });
 
-    this.user = JSON.parse(window.localStorage.getItem('ICPUserMsg'));
+    this.user = JSON.parse(window.localStorage.getItem('co.session'));
     this.getUserHead();
   }
 

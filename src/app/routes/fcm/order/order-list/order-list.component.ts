@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AddOrderComponent } from '../add-order/add-order.component';
 import { STColumn } from '@co/cbc';
 import { EnterWarehouseModalComponent } from './enter-warehouse-modal/enter-warehouse-modal.component';
+import { ShipmentService } from 'src/app/service/fcm';
 
 @Component({
   selector: 'app-order-list',
@@ -18,50 +19,50 @@ export class OrderListComponent implements OnInit {
   isAddVisible = false;
   isVisible = false;
   date = null;
-  listOfData = [
-    {
-      shipmentIds: '1',
-      img: 'John Brown',
-      email: 32,
-      address: 'New York No. 1 Lake Park',
-      phone: '1212',
-      date: 'date',
-      aaa: 'zzzz',
-    },
-    {
-      shipmentIds: '2',
-      img: 'John Brown',
-      email: 32,
-      address: 'New York No. 1 Lake Park',
-      phone: '1212',
-      date: 'date',
-      aaa: 'zzzz',
-    },
-    {
-      shipmentIds: '3',
-      img: 'John Brown',
-      email: 32,
-      address: 'New York No. 1 Lake Park',
-      phone: '1212',
-      date: 'date',
-      aaa: 'zzzz',
-    },
-  ];
+  listOfData = [];
   columns: STColumn[] = [
-    { title: '编号', index: 'shipmentIds', width: 80 },
-    { title: '头像', type: 'img', width: 80, index: 'picture.thumbnail' },
-    { title: '邮箱', index: 'email', width: 80 },
-    { title: '电话', index: 'phone', width: 80 },
-    { title: { text: '佣金', optional: '（单位：元）', optionalHelp: '计算公式=订单金额 * 0.6%' }, index: 'price', type: 'currency' },
-    { title: '注册时间', type: 'date', index: 'registered' },
+    { title: '运输方式', index: 'transportationMode', width: 80 },
+    { title: '运单号', index: 'shipmentNo', width: 80 },
+    { title: '下单日期', index: 'creationTime', width: 80 },
+    { title: '业务员', index: 'serviceUser', width: 80 },
+    { title: '客户', index: 'customerName', width: 80 },
+    { title: '联系人', index: 'contactName', width: 80 },
+    { title: '送货地址', index: 'address', width: 80 },
+    { title: '送货方式', index: 'fbaPickUpMethodType', width: 80 },
+    { title: '交货时间', index: 'cargoReadyDate', width: 80 },
+    { title: '交货位置', index: 'originAddress', width: 80 },
+    { title: '交货仓库', index: 'originWarehouse', width: 80 },
+    { title: '国家', index: 'country', width: 80 },
+    { title: '品名', index: 'commodity', width: 80 },
+    { title: '体积(CBN)', index: 'volume.value', width: 80 },
+    { title: '件数(CTN)', index: 'quantity.value', width: 80 },
+    { title: '重量KG', index: 'weight.value', width: 80 },
+    { title: '渠道', index: 'channel', width: 80 },
+    { title: '入仓时间', index: 'cargoPutAwayDate', width: 80 },
+    { title: '操作口岸', index: 'serviceCompany', width: 80 },
+    { title: 'FBA NO', index: 'fbano', width: 80 },
+    { title: '承运人', index: 'agentCustomer', width: 80 },
+    { title: '创建人', index: 'creator', width: 80 },
   ];
 
   listSelectIds: Array<string> = [];  // 预报列表选中值
 
   constructor(
+    private shipmentService: ShipmentService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.getPreListData();
+  }
+
+  getPreListData() {
+    this.shipmentService.getAllPreShipment({
+      skipCount: 0,
+      maxResultCount: 10
+    }).subscribe(res => {
+      console.log(res);
+    })
+  }
 
   showModal(type): void {
     if (type === 1) {
@@ -86,7 +87,7 @@ export class OrderListComponent implements OnInit {
   }
 
   checkChange(e): void {
-    e.type === 'checkbox' && (this.listSelectIds = e?.checkbox?.length > 0 ? e.checkbox.map(item => { return item.shipmentIds }) : []);
+    e.type === 'checkbox' && (this.listSelectIds = e?.checkbox?.length > 0 ? e.checkbox.map(item => { return item.id }) : []);
   }
 
 }

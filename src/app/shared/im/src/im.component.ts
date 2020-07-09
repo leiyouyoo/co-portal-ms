@@ -44,7 +44,7 @@ const moment = moment_;
   providers: [SocialService],
 })
 export class ImComponent implements OnInit {
-  userMsg = JSON.parse(localStorage.getItem('ICPUserMsg') || 'null');
+  userMsg = JSON.parse(localStorage.getItem('co.session') || 'null');
   @ViewChild('imageUpload') imageChild: ElementRef;
   @ViewChild('fileUploadElement') fileChild: ElementRef;
   @ViewChild('avatarUploadElement') avatarChild: ElementRef;
@@ -173,7 +173,7 @@ export class ImComponent implements OnInit {
         nzOnOk: () => {
           // this.socialService.logout();
         },
-        nzOnCancel: () => {},
+        nzOnCancel: () => { },
       });
       return true;
     }

@@ -11,8 +11,8 @@ import { HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class FileManageService {
-  userMsg = JSON.parse(localStorage.getItem('ICPUserMsg') || 'null');
-  constructor(public http: _HttpClient) {}
+  userMsg = JSON.parse(localStorage.getItem('co.session') || 'null');
+  constructor(public http: _HttpClient) { }
 
   /**
    * 查询文件

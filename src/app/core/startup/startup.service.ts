@@ -9,6 +9,7 @@ import { ICONS } from '../../../style-icons';
 import { ICONS_AUTO } from '../../../style-icons-auto';
 import { I18NService } from '../i18n/i18n.service';
 import { environment } from '@env/environment';
+import { ACLService, ACLType } from '@co/acl';
 
 /**
  * 用于应用启动时
@@ -19,13 +20,31 @@ export class StartupService {
   constructor(
     private iconSrv: NzIconService,
     private translate: TranslateService,
+    private aclService: ACLService,
     @Inject(CO_I18N_TOKEN) private i18n: I18NService,
     private httpClient: HttpClient,
   ) {
     iconSrv.addIcon(...ICONS_AUTO, ...ICONS);
     this.iconSrv.fetchFromIconfont({
-      scriptUrl: 'https://at.alicdn.com/t/font_1909561_q35t123ky6k.js',
+      scriptUrl: 'https://at.alicdn.com/t/font_1909561_klqzxqh6z5.js',
     });
+  }
+
+
+  setupAclData(sessionData: any) {
+    const positions: any[] = sessionData?.session?.user?.positions.map(p => p.positionName);
+    const jobs: any[] = sessionData?.session?.user?.positions.map(p => p.jobName);
+    const organizationUnits: any[] = sessionData?.session?.user?.positions.map(p => p.organizationUnitName);
+    const roles: any[] = sessionData?.session?.user?.roles;
+    const abilities: any[] = sessionData?.auth?.grantedFunctionPermissions;
+    const acls: ACLType = {
+      roles,
+      abilities,
+      positions,
+      jobs,
+      organizationUnits
+    }
+    this.aclService.set(acls)
   }
 
   load(): Promise<any> {
@@ -51,13 +70,15 @@ export class StartupService {
             this.translate.setTranslation(this.i18n.defaultLang, langData);
             this.translate.setDefaultLang(this.i18n.defaultLang);
 
+            this.setupAclData(appData);
+
             // application data
             const res: any = appData;
             if (res) {
-              window.localStorage.setItem('ICPUserMsg', JSON.stringify(res));
+              window.localStorage.setItem('co.session', JSON.stringify(res));
             }
           },
-          () => {},
+          () => { },
           () => {
             resolve(null);
           },
