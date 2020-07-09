@@ -1,22 +1,18 @@
-<nz-modal [(nzVisible)]="isVisible" nzTitle="新增订单" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzWidth="70%">
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzMaskClosable="false"
+  nzTitle="新增订单"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  nzWidth="70%"
+>
   <form class="form-style" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" [nzLayout]="'vertical'">
     <div>
       <nz-form-item>
         <nz-form-label nzRequired nzFor="customer">客户</nz-form-label>
         <nz-form-control nzErrorTip="Please input your customer!">
-          <nz-select
-            nzAllowClear
-            nzShowSearch
-            id="customer"
-            formControlName="customerId"
-            (nzOnSearch)="getCustomerList($event)"
-            (ngModelChange)="getOtherData()"
-          >
-            <nz-option *ngFor="let item of customerList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
-          </nz-select>
-          <!-- 
           <co-customer-picker style="width: 100%;" formControlName="customerId" [coFilter]="customerFilter" (coBlur)="getOtherData()">
-          </co-customer-picker> -->
+          </co-customer-picker>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
@@ -138,34 +134,56 @@
       <nz-form-item>
         <nz-form-label nzFor="commodity" nzRequired>品名</nz-form-label>
         <nz-form-control nzErrorTip="Please input your commodity!">
-          <!-- <nz-select nzAllowClear nzShowSearch id="agentCustomerId" formControlName="commodity">
-            <nz-option *ngFor="let item of commodityList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
-          </nz-select> -->
           <co-commodity-picker formControlName="commodity" coMode="tags" style="width: 100%;"> </co-commodity-picker>
         </nz-form-control>
       </nz-form-item>
     </div>
   </form>
   <nz-divider></nz-divider>
-  <nz-alert nzType="success" [nzMessage]="tipsTemplate"></nz-alert>
+  <nz-alert nzType="warning" [nzMessage]="tipsTemplate" class="tips-class"></nz-alert>
   <ng-template #tipsTemplate>
-    {{ 'Total ：件数(CTN)' + totalQuantity + ' 重量(KG)' + totalWeight + '体积(CBM)' + totalVolume }}
+    <span>
+      {{ 'Total ：件数(CTN):' }}
+      <h4 class="text-color">{{ totalQuantity }}</h4>
+    </span>
+    <span>
+      {{ ' 重量(KG):' }}
+      <h4 class="text-color">
+        {{ totalWeight }}
+      </h4>
+    </span>
+    <span>
+      {{ '体积(CBM):' }}
+      <h4 class="text-color">
+        {{ totalVolume }}
+      </h4>
+    </span>
   </ng-template>
   <div class="address-item" *ngFor="let item of addressList; let i = index">
     <div class="address-input">
       <span
         >送货地址<span *ngIf="addressList.length > 1">{{ i + 1 }}</span></span
       >
-      <nz-select nzAllowClear nzShowSearch [(ngModel)]="addressList.address">
-        <nz-option *ngFor="let item of addressItemList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+      <nz-select nzAllowClear nzShowSearch [(ngModel)]="item.address">
+        <nz-option nzCustomContent *ngFor="let item of addressItemList" [nzValue]="item.id" [nzLabel]="item.unlocode">{{
+          item.name +
+            '(' +
+            (item.city ? item.city + ',' : '') +
+            (item.province ? item.province + ',' : '') +
+            (item.country ? item.country : '') +
+            ')'
+        }}</nz-option>
       </nz-select>
+
       <button nz-button nzType="primary" (click)="addAddress(i)">新增地址</button>
-      <button nz-button nzType="default" (click)="deleteAddress(i)" *ngIf="addressList.length > 1 && i > 0">删除</button>
+      <button nz-button nzType="danger" (click)="deleteAddress(i)" *ngIf="addressList.length > 1 && i > 0">删除</button>
     </div>
     <nz-table nzShowPagination="false" [nzData]="addressList[i].tableList" nzTableLayout="fixed">
       <thead>
         <tr>
-          <th *ngFor="let column of listOfColumn">{{ column.title }}</th>
+          <th *ngFor="let column of listOfColumn; let i = index">
+            {{ column.title }}<span class="color-red margin-left-5" *ngIf="i === 2 || i === 4">*</span>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -173,16 +191,16 @@
           <td><input nz-input [(ngModel)]="data.FBANo" /></td>
           <td><input nz-input [(ngModel)]="data.referenceId" /></td>
           <td>
-            <nz-input-number [(ngModel)]="data.totalQuantity.value" [nzMin]="0" [nzStep]="1"></nz-input-number>
+            <nz-input-number [(ngModel)]="data.totalQuantity.value" [nzMin]="0" [nzStep]="1" (ngModelChange)="count()"></nz-input-number>
           </td>
           <td>
-            <nz-input-number [(ngModel)]="data.totalWeight.value" [nzMin]="0" [nzStep]="1"></nz-input-number>
+            <nz-input-number [(ngModel)]="data.totalWeight.value" [nzMin]="0" [nzStep]="1" (ngModelChange)="count()"></nz-input-number>
           </td>
           <td>
-            <nz-input-number [(ngModel)]="data.totalVolume.value" [nzMin]="0" [nzStep]="1"></nz-input-number>
+            <nz-input-number [(ngModel)]="data.totalVolume.value" [nzMin]="0" [nzStep]="1" (ngModelChange)="count()"></nz-input-number>
           </td>
-          <td>
-            <span class="iconfont icon-Delete" (click)="deleteLine(i, childIndex)"></span>
+          <td class="color-red">
+            <span class="iconfont icon-Delete" style="font-size: 23px;" (click)="deleteLine(i, childIndex)"></span>
           </td>
         </tr>
         <tr>
