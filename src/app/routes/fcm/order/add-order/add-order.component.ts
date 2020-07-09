@@ -9,7 +9,7 @@ import { ShipmentService } from '../../../../service/fcm/shipment.service';
 import { CreateOrUpdateShipmentInput } from 'src/app/service/fcm';
 import { BookingService } from '../../../../service/csp/booking.service';
 import { ContactExternalService } from '../../../../service/crm/contact-external.service';
-// import { CustomerSearchScope } from '@co/cds';
+import { CustomerSearchScope } from '@co/cds';
 @Component({
   selector: 'app-add-order',
   templateUrl: './add-order.component.html',
@@ -69,8 +69,7 @@ export class AddOrderComponent implements OnInit {
   destinationWarehouseList = [];
   agentCustomerList = [];
   customerFilter: any = {
-    // scope: this.customerSearchScope.Department,
-    scope: 2,
+    scope: CustomerSearchScope.Department,
   };
   channelList = [];
   portReq = { isOcean: false, regionIds: [], isPaged: false, maxResultCount: 1000 };
@@ -85,7 +84,25 @@ export class AddOrderComponent implements OnInit {
     transferNo: null,
     customsCustomerId: null,
     customsClearanceCustomerId: null,
-    booking: { fbaPickUpMethodType: null, contactId: null, destinationWarehouseId: null, deliveryDate: null, commodity: null },
+    serviceUserId: null,
+    cargoReadyDate: null,
+    incoterm: null,
+    freightType: null,
+    shipmentNo: null,
+    booking: {
+      fbaPickUpMethodType: null,
+      contactId: null,
+      destinationWarehouseId: null,
+      deliveryDate: null,
+      commodity: null,
+      customerBookingId: null,
+      originAddressId: null,
+      originWarehouseId: null,
+      destinationPortId: null,
+      originPortId: null,
+      destinationAddressId: null,
+      id: null,
+    },
     oceanShipment: { carrierBookingNo: null },
     fbaShipment: {
       expressNo: null,
@@ -158,7 +175,6 @@ export class AddOrderComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.getCustomerList();
     this.validateForm = this.fb.group({
       customerId: [null, [Validators.required]],
       transportationMode: [null, [Validators.required]],
@@ -196,22 +212,17 @@ export class AddOrderComponent implements OnInit {
     private locationExternalService: LocationExternalService,
     private companyConfigureService: CompanyConfigureService,
     private organizationUnitService: OrganizationUnitService,
-    private commodityService: CommodityService, // private customerSearchScope: CustomerSearchScope,
+    private commodityService: CommodityService,
     private shipmentService: ShipmentService,
     private bookingService: BookingService,
     private contactExternalService: ContactExternalService,
   ) {}
-  getCustomerList(name = null, id = null) {
-    this.customerService.getDepartmentCustomer({ name: name, customerId: id }).subscribe((res) => {
-      this.customerList = res.items;
-    });
-  }
+
   // 获取承运人
   getAgentCustomerList(name = null) {
     this.customerService
       .getForwardingCompanies({
         searchText: name,
-        // IsOwnDepartment: true,
         maxResultCount: 1000,
         skipCount: 0,
       })
@@ -221,9 +232,6 @@ export class AddOrderComponent implements OnInit {
   }
   // 获取联系人
   getContactList(id) {
-    // this.locationExternalService.getLocationByCustomer({ customerId: id }).subscribe((res) => {
-    //   this.cantactList = res.items;
-    // });
     this.contactExternalService
       .getByCustomerAndPartner({
         customerId: id,
@@ -302,35 +310,36 @@ export class AddOrderComponent implements OnInit {
   }
 
   handleOk(): void {
-    console.log(this.validateForm.value);
-    // for (const i in this.validateForm.controls) {
-    //   this.validateForm.controls[i].markAsDirty();
-    //   this.validateForm.controls[i].updateValueAndValidity();
-    // }
-    // if (this.validateForm.valid) {
-    this.commitData.customerId = this.validateForm.value.customerId;
-    this.commitData.serviceUserId = this.validateForm.value.serviceUserId;
-    this.commitData.transportationMode = this.validateForm.value.transportationMode;
-    this.commitData.agentCustomerId = this.validateForm.value.agentCustomerId;
-    this.commitData.tradeType = this.validateForm.value.tradeType;
-    this.commitData.transferNo = this.validateForm.value.transferNo;
-    this.commitData.customsCustomerId = this.validateForm.value.customsCustomerId;
-    this.commitData.booking.serviceCompanyId = this.validateForm.value.serviceCompanyId;
-    this.commitData.booking.fbaPickUpMethodType = this.validateForm.value.fbaPickUpMethodType;
-    this.commitData.booking.contactId = this.validateForm.value.contactId;
-    this.commitData.booking.destinationWarehouseId = this.validateForm.value.destinationWarehouseId.id;
-    this.commitData.booking.deliveryDate = this.validateForm.value.deliveryDate;
-    this.commitData.booking.commodity = this.validateForm.value.commodity;
-    this.commitData.oceanShipment.carrierBookingNo = this.validateForm.value?.carrierBookingNo;
-    this.commitData.lineItems = this.addressList;
-    this.shipmentService.createOrUpdate(this.commitData).subscribe((res) => {
-      this.isVisible = false;
-    });
-    // }
+    const reg = new RegExp(',', 'g');
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+    }
+    if (this.validateForm.valid) {
+      this.commitData.customerId = this.validateForm.value.customerId;
+      this.commitData.serviceUserId = this.validateForm.value.serviceUserId;
+      this.commitData.transportationMode = this.validateForm.value.transportationMode;
+      this.commitData.agentCustomerId = this.validateForm.value.agentCustomerId;
+      this.commitData.tradeType = this.validateForm.value.tradeType;
+      this.commitData.transferNo = this.validateForm.value.transferNo;
+      this.commitData.customsCustomerId = this.validateForm.value.customsCustomerId;
+      this.commitData.booking.serviceCompanyId = this.validateForm.value.serviceCompanyId;
+      this.commitData.booking.fbaPickUpMethodType = this.validateForm.value.fbaPickUpMethodType;
+      this.commitData.booking.contactId = this.validateForm.value.contactId;
+      if (this.validateForm.value.destinationWarehouseId) {
+        this.commitData.booking.destinationWarehouseId = this.validateForm.value.destinationWarehouseId.id;
+      }
+      this.commitData.booking.deliveryDate = this.validateForm.value.deliveryDate;
+      this.commitData.booking.commodity = this.validateForm.value.commodity.toString().replace(reg, '/');
+      this.commitData.oceanShipment.carrierBookingNo = this.validateForm.value?.carrierBookingNo;
+      this.commitData.lineItems = this.addressList;
+      this.shipmentService.createOrUpdate(this.commitData).subscribe((res) => {
+        this.isVisible = false;
+      });
+    }
   }
 
   handleCancel(): void {
-    console.log('Button cancel clicked!');
     this.isVisible = false;
     this.resetModal();
   }
@@ -374,6 +383,7 @@ export class AddOrderComponent implements OnInit {
   deleteAddress(index) {
     if (this.addressList.length > 1) {
       this.addressList.splice(index, 1);
+      this.count();
     }
   }
 
@@ -412,10 +422,12 @@ export class AddOrderComponent implements OnInit {
   deleteLine(index, childIndex) {
     if (this.addressList[index].tableList.length > 1) {
       this.addressList[index].tableList.splice(childIndex, 1);
+      this.count();
     }
   }
   resetModal() {
     this.validateForm.reset();
+    this.validateForm.get('fbaPickUpMethodType').setValue(1);
     this.addressList = [
       {
         address: null,
@@ -454,7 +466,29 @@ export class AddOrderComponent implements OnInit {
       },
     ];
   }
-  count() {}
+  // 计算总数
+  count() {
+    const q = [],
+      w = [],
+      v = [];
+    this.addressList.forEach((element) => {
+      element.tableList.forEach((t) => {
+        q.push(t.totalQuantity.value);
+        w.push(t.totalWeight.value);
+        v.push(t.totalVolume.value);
+      });
+    });
+    this.totalQuantity = q.reduce((t, c) => {
+      return (t += c);
+    });
+    this.totalVolume = v.reduce((t, c) => {
+      return (t += c);
+    });
+    this.totalWeight = w.reduce((t, c) => {
+      return (t += c);
+    });
+  }
+  // 获取国家
   getData(value) {
     if (value) {
       this.validateForm.get('country').setValue(value.country);
