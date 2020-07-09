@@ -16,6 +16,9 @@ export class OrderListComponent implements OnInit {
 
   @ViewChild(AddOrderComponent)
   addOrderComponent: AddOrderComponent;
+
+  @ViewChild('st', null) st: any;
+
   isAddVisible = false;
   isVisible = false;
   date = null;
@@ -23,13 +26,13 @@ export class OrderListComponent implements OnInit {
   columns: STColumn[] = [
     { title: '运输方式', index: 'transportationMode', width: 80, type: 'enum', enum: { 0: 'NotSet', 1: 'Ocean', 2: 'Air', 3: 'Truck', 4: 'Rail' } },
     { title: '运单号', index: 'shipmentNo', width: 80 },
-    { title: '下单日期', index: 'creationTime', width: 80 },
+    { title: '下单日期', index: 'creationTime', width: 80, type: 'date', filterType: 'date' },
     { title: '业务员', index: 'serviceUser', width: 80 },
     { title: '客户', index: 'customerName', width: 80 },
     { title: '联系人', index: 'contactName', width: 80 },
     { title: '送货地址', index: 'address', width: 80 },
     { title: '送货方式', index: 'fbaPickUpMethodType', width: 80, type: 'enum', enum: { 0: 'NotSet', 1: 'DeliveryGoodsByMyself', 2: 'PickUpByCityocean' } },
-    { title: '交货时间', index: 'cargoReadyDate', width: 80 },
+    { title: '交货时间', index: 'cargoReadyDate', width: 80, type: 'date', filterType: 'date' },
     { title: '交货位置', index: 'originAddress', width: 80 },
     { title: '交货仓库', index: 'originWarehouse', width: 80 },
     { title: '国家', index: 'country', width: 80 },
@@ -38,7 +41,7 @@ export class OrderListComponent implements OnInit {
     { title: '件数(CTN)', index: 'quantity.value', width: 80 },
     { title: '重量KG', index: 'weight.value', width: 80 },
     { title: '渠道', index: 'channel', width: 80 },
-    { title: '入仓时间', index: 'cargoPutAwayDate', width: 80 },
+    { title: '入仓时间', index: 'cargoPutAwayDate', width: 80, type: 'date', filterType: 'date' },
     { title: '操作口岸', index: 'serviceCompany', width: 80 },
     { title: 'FBA NO', index: 'fbano', width: 80 },
     { title: '承运人', index: 'agentCustomer', width: 80 },
@@ -46,7 +49,7 @@ export class OrderListComponent implements OnInit {
   ];
 
   listSelectIds: Array<string> = [];  // 预报列表选中值
-  preListTotal: number = 0;
+  preListTotal: number = 0;  //预报列表总条数
 
   constructor(
     private shipmentService: ShipmentService
@@ -85,12 +88,15 @@ export class OrderListComponent implements OnInit {
     this.isVisible = false;
   }
 
+  enterWarehouseCallBcak(): void {
+    this.st.reset()
+  }
+
   enterWareHouse(): void {
     this.enterWarehouseModalComponent.showModal()
   }
 
   checkChange(e): void {
-    console.log(e);
     e.type === 'pi' && this.getPreListData((e.pi - 1) * 10)
     e.type === 'checkbox' && (this.listSelectIds = e?.checkbox?.length > 0 ? e.checkbox.map(item => { return item.id }) : []);
   }

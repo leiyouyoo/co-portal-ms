@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ShipmentService } from 'src/app/service/fcm';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'enter-warehouse-modal',
@@ -15,9 +16,12 @@ export class EnterWarehouseModalComponent implements OnInit {
   @Input()
   ids: Array<string>;
 
+  @Output() successCallBack = new EventEmitter<any>();
+
   constructor(
     private fb: FormBuilder,
-    private shipmentService: ShipmentService
+    private shipmentService: ShipmentService,
+    private msg: NzMessageService,
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +44,7 @@ export class EnterWarehouseModalComponent implements OnInit {
 
   handleCancel() {
     this.isVisible = false;
+    this.validateForm.reset();
   }
 
   handleOk() {
@@ -53,7 +58,10 @@ export class EnterWarehouseModalComponent implements OnInit {
       console.log(new Date(this.validateForm.get('data').value).toISOString())
       this.shipmentService.warehousing({ shipmentIds: this.ids, warehousingDate: new Date(this.validateForm.get('data').value).toISOString() }).subscribe(res => {
         console.log(res);
+        this.msg.success('success');
         this.isVisible = false;
+        this.validateForm.reset();
+        this.successCallBack.emit();
       })
     }
   }
