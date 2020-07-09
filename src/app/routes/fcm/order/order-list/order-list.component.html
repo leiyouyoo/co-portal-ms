@@ -1,4 +1,4 @@
-<div class="main-container">
+<div class="main-container" style="overflow-x: auto;">
   <nz-tabset [nzTabPosition]="'top'" [nzAnimated]="false">
     <nz-tab nzTitle="预报">
       <ng-template nz-tab>
@@ -12,7 +12,8 @@
           <button nz-button nzType="default">刷新</button>
         </div>
         <div class="table-style">
-          <co-st #st [data]="listOfData" [columns]="columns" [showFilters]="false" (change)="checkChange($event)">
+          <co-st #st [data]="listOfData" [columns]="columns" [showFilters]="false" [total]="preListTotal"
+            [page]="{ front: false }" (change)="checkChange($event)">
           </co-st>
         </div>
         <app-add-order [isVisible]="isAddVisible"></app-add-order>
@@ -25,7 +26,8 @@
     </nz-tab>
   </nz-tabset>
   <nz-modal [(nzVisible)]="isVisible" nzTitle="确认入仓" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-    <nz-date-picker [(ngModel)]="date" [nzFormat]="'yyyy/MM/dd'" style="width: 80%;"></nz-date-picker>
+    <nz-date-picker [(ngModel)]="date" [nzFormat]="' yyyy/MM/dd'" style="width: 80%;">
+    </nz-date-picker>
   </nz-modal>
 </div>
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AddOrderComponent } from '../add-order/add-order.component';
-import { STColumn } from '@co/cbc';
+import { STColumn, STColumnBadge } from '@co/cbc';
 import { EnterWarehouseModalComponent } from './enter-warehouse-modal/enter-warehouse-modal.component';
 import { ShipmentService } from 'src/app/service/fcm';
 
@@ -21,14 +21,14 @@ export class OrderListComponent implements OnInit {
   date = null;
   listOfData = [];
   columns: STColumn[] = [
-    { title: '运输方式', index: 'transportationMode', width: 80 },
+    { title: '运输方式', index: 'transportationMode', width: 80, type: 'enum', enum: { 0: 'NotSet', 1: 'Ocean', 2: 'Air', 3: 'Truck', 4: 'Rail' } },
     { title: '运单号', index: 'shipmentNo', width: 80 },
     { title: '下单日期', index: 'creationTime', width: 80 },
     { title: '业务员', index: 'serviceUser', width: 80 },
     { title: '客户', index: 'customerName', width: 80 },
     { title: '联系人', index: 'contactName', width: 80 },
     { title: '送货地址', index: 'address', width: 80 },
-    { title: '送货方式', index: 'fbaPickUpMethodType', width: 80 },
+    { title: '送货方式', index: 'fbaPickUpMethodType', width: 80, type: 'enum', enum: { 0: 'NotSet', 1: 'DeliveryGoodsByMyself', 2: 'PickUpByCityocean' } },
     { title: '交货时间', index: 'cargoReadyDate', width: 80 },
     { title: '交货位置', index: 'originAddress', width: 80 },
     { title: '交货仓库', index: 'originWarehouse', width: 80 },
@@ -46,6 +46,7 @@ export class OrderListComponent implements OnInit {
   ];
 
   listSelectIds: Array<string> = [];  // 预报列表选中值
+  preListTotal: number = 0;
 
   constructor(
     private shipmentService: ShipmentService
@@ -55,12 +56,14 @@ export class OrderListComponent implements OnInit {
     this.getPreListData();
   }
 
-  getPreListData() {
+  getPreListData(skipCount = 0) {
     this.shipmentService.getAllPreShipment({
-      skipCount: 0,
+      skipCount: skipCount,
       maxResultCount: 10
     }).subscribe(res => {
-      console.log(res);
+      this.listOfData = res.items;
+      this.preListTotal = res.totalCount
+      console.log(res, "preList");
     })
   }
 
@@ -87,6 +90,8 @@ export class OrderListComponent implements OnInit {
   }
 
   checkChange(e): void {
+    console.log(e);
+    e.type === 'pi' && this.getPreListData((e.pi - 1) * 10)
     e.type === 'checkbox' && (this.listSelectIds = e?.checkbox?.length > 0 ? e.checkbox.map(item => { return item.id }) : []);
   }
 
