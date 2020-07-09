@@ -13,7 +13,6 @@
                 </div>
             </nz-card>
             <nz-card class="line-box">
-
             </nz-card>
         </div>
         <nz-card class="content_info_right">
@@ -23,7 +22,7 @@
     <nz-card>
         <nz-tabset>
             <nz-tab nzTitle="{{ 'Packing case list' | translate }}">
-                <booking-packing-list></booking-packing-list>
+                <booking-packing-list [bookingId]="bookingId"></booking-packing-list>
             </nz-tab>
             <nz-tab nzTitle="{{ 'Document' | translate }}">
 

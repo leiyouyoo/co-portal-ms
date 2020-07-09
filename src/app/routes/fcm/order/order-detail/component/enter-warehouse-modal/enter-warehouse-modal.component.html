@@ -6,7 +6,7 @@
                 <nz-form-item>
                     <nz-form-label [nzSpan]="4" nzFor="email" nzRequired>入仓时间</nz-form-label>
                     <nz-form-control [nzSpan]="20" nzErrorTip="{{ 'Putaway date is required' | translate }}">
-                        <nz-date-picker formControlName="data" style="width: 90%;">
+                        <nz-date-picker [nzFormat]="'yyyy/MM/dd'" formControlName="data" style="width: 90%;">
                         </nz-date-picker>
                     </nz-form-control>
                 </nz-form-item>
