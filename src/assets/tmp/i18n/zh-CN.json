@@ -341,8 +341,8 @@
   "Last Free Date": "免堆期",
   "Putaway date is required": "入仓时间是必填",
   "Basic Information": "基本信息",
-  "salesman" : "业务员",
-  "Customers" : "客户",
+  "salesman": "业务员",
+  "Customers": "客户",
   "Create Order Date": "下单日期",
   "Create Order people": "下单人",
   "Shipment info": "运单信息",
@@ -358,5 +358,11 @@
   "End No": "截止编号",
   "Packing case list": "货箱清单",
   "Document": "文档",
-  "Box order": "装箱单"
+  "Box order": "装箱单",
+  "FBA shipping method": "整柜直送",
+  "Delivery after unboxing": "拆箱后配送",
+  "Customer mention": "客户自提",
+  "Temporary warehouse": "暂存仓库",
+  "Picked up by CITYOCEAN": "由CITYOCEAN上门提货",
+  "Self-delivery": "自送货"
 }
