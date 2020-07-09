@@ -6,7 +6,7 @@ import {
   CoSTModule,
   DatetimeRangePickerModule,
   CustomerPickerModule,
-  ProductPickerModule,
+  CommodityPickerModule,
   PortPickerModule,
 } from '@co/cbc';
 import { G2BarModule } from '@co/chart/bar';
@@ -49,6 +49,6 @@ export const SHARED_DELON_MODULES = [
   CoSTModule,
   DatetimeRangePickerModule,
   CustomerPickerModule,
-  ProductPickerModule,
+  CommodityPickerModule,
   PortPickerModule,
 ];
