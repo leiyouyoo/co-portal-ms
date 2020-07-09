@@ -77,15 +77,24 @@ app-order-list {
     display       : flex;
     flex-direction: column;
 
+    nz-select {
+        min-width: 200px;
+    }
+
+
     .co-page-header {
         .co-page-header-search {
-            margin         : 24px 0;
-            display        : flex;
-            justify-content: space-between;
+            margin : 24px 0;
+            display: flex;
+
 
             .co-page-header-search-left {
                 display: flex;
             }
+        }
+
+        .co-page-header-advanced_search {
+            margin-bottom: 24px;
         }
     }
 
