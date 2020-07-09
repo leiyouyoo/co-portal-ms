@@ -49,17 +49,17 @@ export class OrderListComponent implements OnInit {
     { title: this.translate.instant('Carrier'), index: 'agentCustomer', width: 80 },
     { title: this.translate.instant('Creat By'), index: 'creator', width: 80 },
     {
-      title: '操作',
+      title: this.translate.instant('Action'),
       width: 120,
       fixed: 'right',
       buttons: [
         {
-          text: '编辑',
+          text: this.translate.instant('Edit'),
           type: 'none',
           click: (e) => { console.log(e) },
         },
         {
-          text: '删除',
+          text: this.translate.instant('Delete'),
           type: 'none',
           click: () => { },
         }
