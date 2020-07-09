@@ -6,7 +6,16 @@
         <nz-form-item>
           <nz-form-label nzRequired nzFor="agentCustomerId">{{ 'Carrier' | translate }}</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
-            <co-customer-picker style="width: 100%;" formControlName="agentCustomerId"> </co-customer-picker>
+            <nz-select
+              nzAllowClear
+              nzShowSearch
+              formControlName="agentCustomerId"
+              (nzOnSearch)="getCustomerList($event)"
+              (ngModelChange)="bindCustomerData($event)"
+              [nzPlaceHolder]="'Please enter' | translate"
+            >
+              <nz-option *ngFor="let item of agentCustomerList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+            </nz-select>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -15,10 +24,8 @@
         <nz-form-item>
           <nz-form-label nzRequired nzFor="serviceUserId">{{ 'Salesman' | translate }}</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
-            <nz-select formControlName="serviceUserId">
-              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            <nz-select nzShowSearch nzAllowClear formControlName="serviceUserId" [nzPlaceHolder]="'Please enter' | translate">
+              <nz-option *ngFor="let item of saleUserList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
@@ -39,7 +46,13 @@
         <nz-form-item>
           <nz-form-label nzRequired nzFor="transportationMode">{{ 'Business type' | translate }}</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
-            <nz-select formControlName="transportationMode">
+            <nz-select
+              nzShowSearch
+              nzAllowClear
+              formControlName="transportationMode"
+              (ngModelChange)="getChannelList()"
+              [nzPlaceHolder]="'Please enter' | translate"
+            >
               <nz-option [nzValue]="1" nzLabel="{{ 'Ocean' | translate }}"></nz-option>
               <nz-option [nzValue]="2" nzLabel="{{ 'Air' | translate }}"></nz-option>
             </nz-select>
@@ -51,10 +64,8 @@
         <nz-form-item>
           <nz-form-label nzRequired nzFor="channel">{{ 'Channel' | translate }}</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
-            <nz-select formControlName="channel">
-              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            <nz-select nzAllowClear nzShowSearch nzAllowClear formControlName="channel" [nzPlaceHolder]="'Please enter' | translate">
+              <nz-option *ngFor="let item of channelList" [nzValue]="item.channelGroupStr" [nzLabel]="item.channelGroupStr"></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
@@ -73,12 +84,10 @@
     <div nz-row [nzGutter]="24">
       <div nz-col [nzSpan]="6">
         <nz-form-item>
-          <nz-form-label nzRequired nzFor="customer">{{ 'Port of shipment' | translate }}</nz-form-label>
+          <nz-form-label nzRequired nzFor="serviceCompanyId">{{ 'Port of shipment' | translate }}</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
-            <nz-select formControlName="customerId">
-              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            <nz-select nzShowSearch nzAllowClear formControlName="serviceCompanyId" [nzPlaceHolder]="'Please enter' | translate">
+              <nz-option *ngFor="let item of serviceCompanyList" [nzValue]="item.id" [nzLabel]="item.displayNameLocalization"></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
@@ -88,11 +97,13 @@
         <nz-form-item>
           <nz-form-label>{{ 'Country' | translate }}</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
-            <nz-select>
-              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
-            </nz-select>
+            <input
+              nz-input
+              formControlName="country"
+              placeholder="{{ 'Input address binding' | translate }}"
+              readonly
+              style="background: #f2f2f2;"
+            />
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -112,10 +123,15 @@
         <nz-form-item>
           <nz-form-label nzRequired nzFor="customerId">{{ 'Customer' | translate }}</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
-            <nz-select formControlName="customerId">
-              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            <nz-select
+              nzAllowClear
+              nzShowSearch
+              formControlName="customerId"
+              (nzOnSearch)="getCustomerList($event)"
+              (ngModelChange)="bindCustomerData($event)"
+              [nzPlaceHolder]="'Please enter' | translate"
+            >
+              <nz-option *ngFor="let item of customerList?.items" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
@@ -125,7 +141,13 @@
         <nz-form-item>
           <nz-form-label>&nbsp;</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
-            <input nz-input placeholder="{{ 'Please enter' | translate }}" />
+            <input
+              nz-input
+              formControlName="customerType"
+              placeholder="{{ 'Please enter' | translate }}"
+              readonly
+              style="background: #f2f2f2;"
+            />
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -134,10 +156,15 @@
         <nz-form-item>
           <nz-form-label nzFor="customsCustomerId">{{ 'Customs broker' | translate }}</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
-            <nz-select formControlName="customsCustomerId">
-              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            <nz-select
+              nzShowSearch
+              nzAllowClear
+              formControlName="customsCustomerId"
+              [nzServerSearch]="true"
+              [nzPlaceHolder]="'Please enter' | translate"
+              (nzOnSearch)="onSearchCustomerList($event)"
+            >
+              <nz-option *ngFor="let item of customsCustomerList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
@@ -147,10 +174,15 @@
         <nz-form-item>
           <nz-form-label nzFor="customsClearanceCustomerId">{{ 'Customs broker' | translate }}</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
-            <nz-select formControlName="customsClearanceCustomerId">
-              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            <nz-select
+              nzShowSearch
+              nzAllowClear
+              [nzServerSearch]="true"
+              formControlName="customsClearanceCustomerId"
+              [nzPlaceHolder]="'Please enter' | translate"
+              (nzOnSearch)="onSearchCustomerList($event)"
+            >
+              <nz-option *ngFor="let item of customsCustomerList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
@@ -162,24 +194,42 @@
         <nz-form-item>
           <nz-form-label nzFor="contactId">{{ 'Contact person' | translate }}</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
-            <input nz-input formControlName="contactId" placeholder="{{ 'Please enter' | translate }}" />
+            <nz-select nzAllowClear nzShowSearch nzAllowClear formControlName="contactId" [nzPlaceHolder]="'Please enter' | translate">
+              <nz-option *ngFor="let item of cantactList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+            </nz-select>
           </nz-form-control>
         </nz-form-item>
 
-        <nz-form-item nzLayout="inline">
+        <nz-form-item>
           <nz-form-label nzFor="fbaPickUpMethodType">{{ 'Delivery Method' | translate }}</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
-            <nz-radio-group formControlName="fbaPickUpMethodType">
+            <nz-radio-group formControlName="fbaPickUpMethodType" (ngModelChange)="changeFbaPickUpMethodType($event)">
               <label nz-radio [nzValue]="1">{{ 'Self-delivery' | translate }}</label>
               <label nz-radio [nzValue]="2">{{ 'Picked up by CITYOCEAN' | translate }}</label>
             </nz-radio-group>
           </nz-form-control>
         </nz-form-item>
 
+        <nz-form-item *ngIf="validateForm.get('fbaPickUpMethodType').value === 2">
+          <nz-form-label nzFor="originWarehouseId">{{ 'Delivery Method' | translate }}</nz-form-label>
+          <nz-form-control [nzErrorTip]="'Please enter' | translate">
+            <input nz-input formControlName="originWarehouseId" placeholder="{{ 'Please enter' | translate }}" />
+          </nz-form-control>
+        </nz-form-item>
+
         <nz-form-item>
           <nz-form-label nzFor="originAddressId">{{ 'Delivery warehouse' | translate }}</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
-            <input nz-input formControlName="originAddressId" placeholder="{{ 'Please enter' | translate }}" />
+            <nz-select
+              nzAllowClear
+              nzShowSearch
+              id="gender"
+              [nzPlaceHolder]="'Please enter' | translate"
+              formControlName="originAddressId"
+              (ngModelChange)="getData($event)"
+            >
+              <nz-option *ngFor="let item of destinationWarehouseList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+            </nz-select>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -192,7 +242,7 @@
         <nz-form-item>
           <nz-form-label nzFor="fbaDeliveryType">{{ 'FBA shipping method' | translate }}</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
-            <nz-select formControlName="fbaDeliveryType">
+            <nz-select nzShowSearch nzAllowClear formControlName="fbaDeliveryType" [nzPlaceHolder]="'Please enter' | translate">
               <nz-option [nzValue]="0" [nzLabel]="'FCL direct delivery' | translate"></nz-option>
               <nz-option [nzValue]="1" [nzLabel]="'Delivery after unboxing' | translate"></nz-option>
               <nz-option [nzValue]="2" [nzLabel]="'Customer mention' | translate"></nz-option>
@@ -220,7 +270,7 @@
         <nz-form-item>
           <nz-form-label nzFor="deliveryDate">{{ 'Estimated delivery time' | translate }}</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
-            <nz-range-picker formControlName="deliveryDate"></nz-range-picker>
+            <datetime-range-picker formControlName="deliveryDate"></datetime-range-picker>
           </nz-form-control>
         </nz-form-item>
 
@@ -262,7 +312,9 @@
 
     <div nz-row [nzGutter]="24">
       <div style="padding: 24px 0; width: 100%;">
-        <nz-tag nzColor="primary" style="width: 100%;">{{ 'Total' | translate }} ：件数(CTN) 24 重量(KG) 747.7 体积(CBM)4.15</nz-tag>
+        <nz-tag nzColor="processing" style="width: 100%; padding: 12px; border-radius: 5px;"
+          >{{ 'Total' | translate }} ：件数(CTN) 24 重量(KG) 747.7 体积(CBM)4.15</nz-tag
+        >
       </div>
 
       <div formArrayName="lineItems" class="address-list">
@@ -293,12 +345,22 @@
                 </div>
               </nz-form-label>
               <nz-form-control [nzErrorTip]="'Please enter' | translate">
-                <textarea
-                  nz-input
-                  [placeholder]="'Please enter' | translate"
+                <nz-select
+                  nzAllowClear
+                  nzShowSearch
                   formControlName="address"
-                  [nzAutosize]="{ minRows: 3, maxRows: 5 }"
-                ></textarea>
+                  [nzPlaceHolder]="'Please enter' | translate"
+                  (ngModelChange)="addressChanged($event, i)"
+                >
+                  <nz-option nzCustomContent *ngFor="let item of addressList" [nzValue]="item" [nzLabel]="item.unlocode">{{
+                    item.name +
+                      '(' +
+                      (item.city ? item.city + ',' : '') +
+                      (item.province ? item.province + ',' : '') +
+                      (item.country ? item.country : '') +
+                      ')'
+                  }}</nz-option>
+                </nz-select>
               </nz-form-control>
             </nz-form-item>
           </div>
