@@ -4,15 +4,32 @@
       <nz-form-item>
         <nz-form-label nzRequired nzFor="customer">客户</nz-form-label>
         <nz-form-control nzErrorTip="Please input your customer!">
-          <co-customer-picker style="width: 100%;" formControlName="customerId"> </co-customer-picker>
+          <nz-select
+            nzAllowClear
+            nzShowSearch
+            id="customer"
+            formControlName="customerId"
+            (nzOnSearch)="getCustomerList($event)"
+            (ngModelChange)="getOtherData()"
+          >
+            <nz-option *ngFor="let item of customerList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+          </nz-select>
+          <!-- 
+          <co-customer-picker style="width: 100%;" formControlName="customerId" [coFilter]="customerFilter" (coBlur)="getOtherData()">
+          </co-customer-picker> -->
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label nzFor="transportationMode" nzRequired>业务类型</nz-form-label>
         <nz-form-control nzErrorTip="Please select your transportationMode!">
-          <nz-select nzAllowClear id="transportationMode" formControlName="transportationMode">
-            <nz-option nzValue="male" nzLabel="male"></nz-option>
-            <nz-option nzValue="female" nzLabel="female"></nz-option>
+          <nz-select
+            nzAllowClear
+            nzShowSearch
+            id="transportationMode"
+            formControlName="transportationMode"
+            (ngModelChange)="getChannelList()"
+          >
+            <nz-option *ngFor="let item of transportationModeList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -21,18 +38,16 @@
       <nz-form-item>
         <nz-form-label nzFor="contactId">联系人</nz-form-label>
         <nz-form-control nzErrorTip="Please select your contact!">
-          <nz-select nzAllowClear id="contactId" formControlName="contactId">
-            <nz-option nzValue="male" nzLabel="male"></nz-option>
-            <nz-option nzValue="female" nzLabel="female"></nz-option>
+          <nz-select nzAllowClear nzShowSearch id="contactId" formControlName="contactId">
+            <nz-option *ngFor="let item of cantactList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label nzFor="channel" nzRequired>渠道</nz-form-label>
         <nz-form-control nzErrorTip="Please select your channel!">
-          <nz-select nzAllowClear id="channel" formControlName="channel">
-            <nz-option nzValue="male" nzLabel="male"></nz-option>
-            <nz-option nzValue="female" nzLabel="female"></nz-option>
+          <nz-select nzAllowClear nzShowSearch id="channel" formControlName="channel">
+            <nz-option *ngFor="let item of channelList" [nzValue]="item.channelGroupStr" [nzLabel]="item.channelGroupStr"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -42,18 +57,16 @@
       <nz-form-item>
         <nz-form-label nzFor="serviceUserId" nzRequired>业务员</nz-form-label>
         <nz-form-control nzErrorTip="Please select your serviceUser!">
-          <nz-select nzAllowClear id="serviceUserId" formControlName="serviceUserId">
-            <nz-option nzValue="male" nzLabel="male"></nz-option>
-            <nz-option nzValue="female" nzLabel="female"></nz-option>
+          <nz-select nzAllowClear nzShowSearch id="serviceUserId" formControlName="serviceUserId" (nzOnSearch)="getSaleUsers($event)">
+            <nz-option *ngFor="let item of serviceUserList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label nzFor="serviceCompanyId">操作口岸</nz-form-label>
         <nz-form-control>
-          <nz-select nzAllowClear id="serviceCompanyId" formControlName="serviceCompanyId">
-            <nz-option nzValue="male" nzLabel="male"></nz-option>
-            <nz-option nzValue="female" nzLabel="female"></nz-option>
+          <nz-select nzAllowClear nzShowSearch id="serviceCompanyId" formControlName="serviceCompanyId">
+            <nz-option *ngFor="let item of serviceCompanyList" [nzValue]="item.id" [nzLabel]="item.displayNameLocalization"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -63,47 +76,61 @@
         <nz-form-label nzFor="fbaPickUpMethodType">交货方式</nz-form-label>
         <nz-form-control>
           <nz-radio-group formControlName="fbaPickUpMethodType">
-            <label nz-radio nzValue="A">自送货</label>
-            <label nz-radio nzValue="B">由CITYOCEAN上门提货</label>
+            <label nz-radio [nzValue]="1">自送货</label>
+            <label nz-radio [nzValue]="2">由CITYOCEAN上门提货</label>
           </nz-radio-group>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzFor="gender">国家</nz-form-label>
-        <input nz-input [(ngModel)]="country" formControlName="country" />
+        <nz-form-label nzFor="destinationWarehouseId">交货仓库</nz-form-label>
+        <nz-form-control>
+          <nz-select nzAllowClear nzShowSearch id="gender" formControlName="destinationWarehouseId" (ngModelChange)="getData($event)">
+            <nz-option *ngFor="let item of destinationWarehouseList" [nzValue]="item" [nzLabel]="item.name"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div *ngIf="validateForm.value.fbaPickUpMethodType === 2">
+      <nz-form-item>
+        <nz-form-label nzFor="fbaPickUpMethodType">交货位置</nz-form-label>
+        <nz-form-control>
+          <nz-select nzAllowClear nzShowSearch id="gender" formControlName="destinationWarehouseId">
+            <nz-option *ngFor="let item of originAddressList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+          </nz-select>
+        </nz-form-control>
       </nz-form-item>
     </div>
     <div>
       <nz-form-item>
         <nz-form-label nzFor="agentCustomerId">承运人</nz-form-label>
         <nz-form-control>
-          <nz-select nzAllowClear id="agentCustomerId" formControlName="agentCustomerId">
-            <nz-option nzValue="male" nzLabel="male"></nz-option>
-            <nz-option nzValue="female" nzLabel="female"></nz-option>
+          <nz-select
+            nzAllowClear
+            nzShowSearch
+            id="agentCustomerId"
+            formControlName="agentCustomerId"
+            (nzOnSearch)="getAgentCustomerList($event)"
+          >
+            <nz-option *ngFor="let item of agentCustomerList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label nzFor="destinationWarehouseId">交货仓库</nz-form-label>
-        <nz-form-control>
-          <nz-select nzAllowClear id="gender" formControlName="destinationWarehouseId">
-            <nz-option nzValue="male" nzLabel="male"></nz-option>
-            <nz-option nzValue="female" nzLabel="female"></nz-option>
-          </nz-select>
-        </nz-form-control>
+        <nz-form-label nzFor="gender">国家</nz-form-label>
+        <input nz-input [(ngModel)]="country" formControlName="country" readonly />
       </nz-form-item>
     </div>
     <div>
       <nz-form-item>
-        <nz-form-label nzFor="transferNo">SO号</nz-form-label>
+        <nz-form-label nzFor="carrierBookingNo">SO号</nz-form-label>
         <nz-form-control>
-          <input nz-input formControlName="transferNo" />
+          <input nz-input formControlName="carrierBookingNo" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label nzFor="deliveryDate">预估交货时间</nz-form-label>
         <nz-form-control>
-          <datetime-range-picker></datetime-range-picker>
+          <datetime-range-picker formControlName="deliveryDate"></datetime-range-picker>
         </nz-form-control>
       </nz-form-item>
     </div>
@@ -111,36 +138,56 @@
       <nz-form-item>
         <nz-form-label nzFor="commodity" nzRequired>品名</nz-form-label>
         <nz-form-control nzErrorTip="Please input your commodity!">
-          <input nz-input formControlName="commodity" />
+          <!-- <nz-select nzAllowClear nzShowSearch id="agentCustomerId" formControlName="commodity">
+            <nz-option *ngFor="let item of commodityList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+          </nz-select> -->
+          <co-commodity-picker formControlName="commodity" coMode="tags" style="width: 100%;"> </co-commodity-picker>
         </nz-form-control>
       </nz-form-item>
     </div>
   </form>
   <nz-divider></nz-divider>
-  <nz-alert nzType="success" nzMessage="Total ：件数(CTN) 24    重量(KG) 747.7    体积(CBM)4.15"></nz-alert>
-
+  <nz-alert nzType="success" [nzMessage]="tipsTemplate"></nz-alert>
+  <ng-template #tipsTemplate>
+    {{ 'Total ：件数(CTN)' + totalQuantity + ' 重量(KG)' + totalWeight + '体积(CBM)' + totalVolume }}
+  </ng-template>
   <div class="address-item" *ngFor="let item of addressList; let i = index">
     <div class="address-input">
-      <span>送货地址</span>
-      <input nz-input placeholder="Basic usage" />
+      <span
+        >送货地址<span *ngIf="addressList.length > 1">{{ i + 1 }}</span></span
+      >
+      <nz-select nzAllowClear nzShowSearch [(ngModel)]="addressList.address">
+        <nz-option *ngFor="let item of addressItemList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+      </nz-select>
       <button nz-button nzType="primary" (click)="addAddress(i)">新增地址</button>
       <button nz-button nzType="default" (click)="deleteAddress(i)" *ngIf="addressList.length > 1 && i > 0">删除</button>
     </div>
-    <nz-table #sortTable [nzData]="listOfData" nzShowPagination="false" nzTableLayout="fixed">
+    <nz-table nzShowPagination="false" [nzData]="addressList[i].tableList" nzTableLayout="fixed">
       <thead>
         <tr>
           <th *ngFor="let column of listOfColumn">{{ column.title }}</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of sortTable.data">
-          <td>{{ data.name }}</td>
-          <td>{{ data.chinese }}</td>
-          <td>{{ data.math }}</td>
-          <td>{{ data.english }}</td>
-          <td>{{ data.math }}</td>
+        <tr *ngFor="let data of addressList[i].tableList; let childIndex = index">
+          <td><input nz-input [(ngModel)]="data.FBANo" /></td>
+          <td><input nz-input [(ngModel)]="data.referenceId" /></td>
           <td>
-            <span class="iconfont icon-Delete"></span>
+            <nz-input-number [(ngModel)]="data.totalQuantity.value" [nzMin]="0" [nzStep]="1"></nz-input-number>
+          </td>
+          <td>
+            <nz-input-number [(ngModel)]="data.totalWeight.value" [nzMin]="0" [nzStep]="1"></nz-input-number>
+          </td>
+          <td>
+            <nz-input-number [(ngModel)]="data.totalVolume.value" [nzMin]="0" [nzStep]="1"></nz-input-number>
+          </td>
+          <td>
+            <span class="iconfont icon-Delete" (click)="deleteLine(i, childIndex)"></span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="6" nzAlign="center" class="tr-center" (click)="addLine(i)">
+            <i nz-icon nzIconfont="iconadd" class="alain-pro__menu-item-icon"></i>
           </td>
         </tr>
       </tbody>
