@@ -2,45 +2,80 @@
 
 :host {
     ::ng-deep {
+
+        .orderNo {
+            font-weight  : 900;
+            font-size    : 16px;
+            color        : #1890ff;
+            margin-bottom: 12px;
+        }
+
         nz-tag {
             margin: 0 !important;
         }
 
-        .address-tables {
-            display        : flex;
-            justify-content: space-between;
+        nz-form-item {
+            nz-date-picker {
+                width: 100%;
+            }
 
-            nz-form-item {
-                flex        : auto;
-                margin-right: 12px;
-
-                &:last-child {
-                    text-align: right;
-
-                    nz-form-label {
-                        text-align: right;
-                    }
-                }
+            nz-range-picker {
+                width: 100%;
             }
         }
 
         .address-list {
-            padding      : 12px;
-            background   : #f2f2f2;
-            border-radius: 5px;
-            width        : 100%;
+            width: 100%;
+
+            .address-item {
+                margin-bottom: 24px;
+
+                .address-add {
+                    h3 {
+                        color: #1890ff !important;
+                    }
+
+                    label {
+                        display        : flex;
+                        justify-content: space-between;
+                    }
+                }
+            }
+
+
+            .table-add {
+                text-align   : center;
+                padding      : 12px 0;
+                border       : 1px dashed #1890ff;
+                color        : #1890ff;
+                font-weight  : 800;
+                cursor       : pointer;
+                border-radius: 5px;
+                transition   : all 1s;
+                box-sizing   : border-box;
+
+                i {
+                    font-weight: 800;
+                }
+
+            }
         }
 
         .table-list {
             padding-top: 8px;
         }
 
-        .setting i {
-            margin: 0 5px;
-            cursor: pointer;
+        .setting {
+            text-align: center;
 
-            &:last-child {
-                color: #e55354;
+            i {
+
+                margin: 0 5px;
+                cursor: pointer;
+
+                &:last-child {
+                    color: #e55354;
+                }
             }
         }
 

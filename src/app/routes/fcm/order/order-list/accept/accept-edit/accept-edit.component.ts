@@ -7,7 +7,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
   styleUrls: ['./accept-edit.component.less'],
 })
 export class AcceptEditComponent implements OnInit {
-  validateForm: FormGroup;
+  validateForm: any;
 
   constructor(private fb: FormBuilder) {}
 
@@ -67,5 +67,43 @@ export class AcceptEditComponent implements OnInit {
 
   removeTablesRow(index: number, tindex: number) {
     this.validateForm.controls.addressList['controls'][index].controls.tables.removeAt(tindex);
+  }
+
+  removeAddressListRow(index: number) {
+    this.validateForm.controls.addressList.removeAt(index);
+  }
+
+  validate() {
+    // tslint:disable-next-line: forin
+    for (const i in this.validateForm.controls) {
+      if (i === 'addressList') {
+        const controls = (this.validateForm.controls[i] as FormArray).controls;
+        for (const z in controls) {
+          const formGroup = controls[z] as FormGroup;
+          // tslint:disable-next-line: forin
+          for (const q in formGroup.controls) {
+            if (q === 'tables') {
+              const mControls = (formGroup.controls[q] as FormArray).controls;
+              // tslint:disable-next-line: forin
+              for (const l in mControls) {
+                const lControls = (mControls[l] as FormArray).controls;
+                // tslint:disable-next-line: forin
+                for (const b in lControls) {
+                  lControls[b].markAsDirty();
+                  lControls[b].updateValueAndValidity();
+                }
+              }
+            } else {
+              formGroup.controls[q].markAsDirty();
+              formGroup.controls[q].updateValueAndValidity();
+            }
+          }
+        }
+      } else {
+        this.validateForm.controls[i].markAsDirty();
+        this.validateForm.controls[i].updateValueAndValidity();
+      }
+    }
+    return this.validateForm.valid;
   }
 }
