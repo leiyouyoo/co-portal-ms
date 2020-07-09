@@ -26,7 +26,7 @@ import { takeUntil } from 'rxjs/operators';
 import { BrandService } from './pro.service';
 import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 import { I18NService } from 'src/app/core/i18n/i18n.service';
-
+import { logOut } from '@im';
 @Component({
   selector: 'layout-pro',
   templateUrl: './pro.component.html',
@@ -190,6 +190,11 @@ export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
 
   logout() {
     this.tokenService.clear();
+    try {
+      logOut();
+    } catch (e) {
+      console.log('im logout error');
+    }
     window.location.href = '/#/passport/login';
   }
 }

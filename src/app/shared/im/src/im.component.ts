@@ -339,7 +339,9 @@ export class ImComponent implements OnInit {
       });
       getMyProfile().then((imResponse) => {
         console.log(imResponse);
-        self.myProfile = imResponse.data;
+        if (imResponse) {
+          self.myProfile = imResponse.data;
+        }
       });
 
       let imRes = await getConversationList();
