@@ -9,7 +9,7 @@ const moment = moment_;
   styleUrls: ['./chat-history.component.less'],
 })
 export class ChatHistoryComponent implements OnInit, OnChanges {
-  userMsg = JSON.parse(localStorage.getItem('ICPUserMsg') || 'null');
+  userMsg = JSON.parse(localStorage.getItem('co.session') || 'null');
   searchHistoryText = '';
   @Output() showChatWithMsgId: EventEmitter<any> = new EventEmitter<any>();
   @Input() groupID: string;
@@ -21,11 +21,11 @@ export class ChatHistoryComponent implements OnInit, OnChanges {
     skipCount: 0,
     total: 0,
   };
-  constructor(private imTemplateService: ImService) {}
+  constructor(private imTemplateService: ImService) { }
   ngOnChanges(changes: import('@angular/core').SimpleChanges): void {
     this.clearSearch();
   }
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   clearSearch() {
     this.searchHistoryText = '';
     this.historyList = [];

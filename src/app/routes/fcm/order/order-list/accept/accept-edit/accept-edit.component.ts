@@ -13,30 +13,26 @@ export class AcceptEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      customerId: [null, [Validators.required]],
-      transportationMode: [null, [Validators.required]],
-      contactId: [null],
-      transferNo: [null],
+      agentCustomerId: [null, [Validators.required]],
+      serviceUserId: [null, [Validators.required]],
+      cargoPutAwayDate: [null, [Validators.required]],
+      transportationMode: [1, [Validators.required]],
       channel: [null, [Validators.required]],
-      serviceUserId: [null, [Validators.required]], // 业务员
-      serviceCompanyId: [null], //口岸
-      agentCustomerId: [null], //承运人
-      customsCustomerId: [null], //报关行客户Id
-      customsClearanceCustomerId: [null], //清关行客户Id
-      destinationWarehouseId: [null], // 交货仓库
-      deliveryDate: [null],
-      commodity: [null, [Validators.required]],
+      shipmentNo: [null],
       carrierBookingNo: [null],
-      expressNo: [null],
-      warehouseNo: [null],
-      expressNoRemark: [null],
-      huoLalaOrderNo: [null],
-      fbaDeliveryType: [null],
-      fbaDeliveryTypeRemark: [null],
-      cargoPutAwayDate: [null],
-      fbaPickUpMethodType: [null],
-      country: [null],
-      addressList: new FormArray([]),
+      customerId: [null, [Validators.required]],
+      customsCustomerId: [],
+      customsClearanceCustomerId: [],
+      contactId: [],
+      fbaPickUpMethodType: [1],
+      originAddressId: [],
+      deliveryDate: [],
+      fbaDeliveryType: [1],
+      fbaDeliveryTypeRemark: [],
+      commodity: [],
+      expressNo: [],
+      expressNoRemark: [],
+      lineItems: new FormArray([]),
     });
     debugger;
     this.addAddressListRow();
@@ -45,44 +41,43 @@ export class AcceptEditComponent implements OnInit {
   addAddressListRow() {
     let row: FormGroup = this.fb.group({
       address: ['这是我的地址', [Validators.required]],
-      tables: new FormArray([]),
+      shipmentLineItem: new FormArray([]),
     });
 
     this.addTablesRow(row);
-    (this.validateForm.controls.addressList as FormArray).push(row);
+    (this.validateForm.controls.lineItems as FormArray).push(row);
   }
 
   addTablesRow(row: FormGroup) {
-    debugger;
     let table: FormGroup = this.fb.group({
-      a: ['123', [Validators.required]],
-      b: [null, [Validators.required]],
-      c: [null, [Validators.required]],
-      d: [null],
-      e: [null],
+      fbaNo: [],
+      referenceId: [null],
+      totalQuantity: [null, [Validators.required]],
+      totalWeight: [null, [Validators.required]],
+      totalVolume: [null, [Validators.required]],
     });
 
-    (row.controls.tables as FormArray).push(table);
+    (row.controls.shipmentLineItem as FormArray).push(table);
   }
 
   removeTablesRow(index: number, tindex: number) {
-    this.validateForm.controls.addressList['controls'][index].controls.tables.removeAt(tindex);
+    this.validateForm.controls.lineItems['controls'][index].controls.shipmentLineItem.removeAt(tindex);
   }
 
   removeAddressListRow(index: number) {
-    this.validateForm.controls.addressList.removeAt(index);
+    this.validateForm.controls.lineItems.removeAt(index);
   }
 
   validate() {
     // tslint:disable-next-line: forin
     for (const i in this.validateForm.controls) {
-      if (i === 'addressList') {
+      if (i === 'lineItems') {
         const controls = (this.validateForm.controls[i] as FormArray).controls;
         for (const z in controls) {
           const formGroup = controls[z] as FormGroup;
           // tslint:disable-next-line: forin
           for (const q in formGroup.controls) {
-            if (q === 'tables') {
+            if (q === 'shipmentLineItem') {
               const mControls = (formGroup.controls[q] as FormArray).controls;
               // tslint:disable-next-line: forin
               for (const l in mControls) {

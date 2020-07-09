@@ -31,7 +31,7 @@ export class loginMainComponent implements OnInit {
     private notification: NzNotificationService,
     private message: NzMessageService,
     private activatedRoute: ActivatedRoute,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -165,7 +165,7 @@ export class loginMainComponent implements OnInit {
 
     this.httpService.get(`/platform/Session/GetCurrentUserConfiguration`).subscribe(
       (data: any) => {
-        window.localStorage.setItem('ICPUserMsg', JSON.stringify(data));
+        window.localStorage.setItem('co.session', JSON.stringify(data));
         try {
           data.nav.menus.MainMenu.items.sort(this.sortItem);
         } catch (e) {
