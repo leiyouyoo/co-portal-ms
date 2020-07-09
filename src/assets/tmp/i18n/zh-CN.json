@@ -385,5 +385,10 @@
   "Shipping Port Office" : "操作口岸",
   "Carrier" : "承运人",
   "Creat By" : "创建人",
-  "Freight Method": "运输方式"
+  "Freight Method": "运输方式",
+  "Please selected the order": "请选择订单",
+  "Ocean": "海运",
+  "Air": "空运",
+  "Truck": "拖车",
+  "Rail": "铁路"
 }

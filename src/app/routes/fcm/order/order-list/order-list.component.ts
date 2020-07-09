@@ -4,6 +4,7 @@ import { STColumn, STColumnBadge } from '@co/cbc';
 import { EnterWarehouseModalComponent } from './enter-warehouse-modal/enter-warehouse-modal.component';
 import { ShipmentService } from 'src/app/service/fcm';
 import { TranslateService } from '@ngx-translate/core';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-order-list',
@@ -25,7 +26,7 @@ export class OrderListComponent implements OnInit {
   date = null;
   listOfData = [];
   columns: STColumn[] = [
-    { title: this.translate.instant('Freight Method'), index: 'transportationMode', width: 80, type: 'enum', enum: { 0: 'NotSet', 1: 'Ocean', 2: 'Air', 3: 'Truck', 4: 'Rail' } },
+    { title: this.translate.instant('Freight Method'), index: 'transportationMode', width: 80, type: 'enum', enum: { 0: this.translate.instant('NotSet'), 1: this.translate.instant('Ocean'), 2: this.translate.instant('Air'), 3: this.translate.instant('Truck'), 4: this.translate.instant('Rail') } },
     { title: this.translate.instant('Shipment No'), index: 'shipmentNo', width: 80 },
     { title: this.translate.instant('Order time'), index: 'creationTime', width: 130, type: 'date', filterType: 'date' },
     { title: this.translate.instant('Sales'), index: 'serviceUser', width: 80 },
@@ -72,6 +73,7 @@ export class OrderListComponent implements OnInit {
   constructor(
     private shipmentService: ShipmentService,
     public translate: TranslateService,
+    private message: NzMessageService,
   ) { }
 
   ngOnInit() {
@@ -112,7 +114,11 @@ export class OrderListComponent implements OnInit {
   }
 
   enterWareHouse(): void {
-    this.enterWarehouseModalComponent.showModal()
+    if (this.listSelectIds.length > 0) {
+      this.enterWarehouseModalComponent.showModal()
+    } else {
+      this.message.warning(this.translate.instant('Please selected the order'))
+    }
   }
 
   checkChange(e): void {
