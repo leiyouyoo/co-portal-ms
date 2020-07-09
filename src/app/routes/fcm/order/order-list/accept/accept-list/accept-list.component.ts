@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { STColumn } from '@co/cbc';
-import { ShipmentService, ChangeShipmentInvalidStatusInput } from '../../../../../../service/fcm';
+import { ShipmentService, ChangeShipmentInvalidStatusInput, CreateOrUpdateShipmentInput } from '../../../../../../service/fcm';
 import { AcceptEditComponent } from '../accept-edit/accept-edit.component';
 
 @Component({
@@ -68,6 +68,7 @@ export class AcceptListComponent implements OnInit {
   ];
 
   editModal = false;
+  advancedSearch = false;
   constructor(private shipmentService: ShipmentService) {}
 
   ngOnInit(): void {}
@@ -80,7 +81,87 @@ export class AcceptListComponent implements OnInit {
     if (!this.acceptEditComponent.validate()) {
       return;
     }
-    this.editModal = false;
+
+    debugger;
+    const data = this.acceptEditComponent.validateForm.value;
+    var arr = [];
+
+    let address = null;
+    if (data.lineItems) {
+      address = data.lineItems[0].address;
+    }
+    data.lineItems.forEach((e) => {
+      delete e.address;
+
+      e.shipmentLineItem.forEach((z) => {
+        z.address = address;
+        z.totalQuantity = {
+          value: z.totalQuantity,
+          unit: 'CTN',
+        };
+
+        z.totalWeight = {
+          value: z.totalWeight,
+          unit: 'KG',
+        };
+
+        z.totalVolume = {
+          value: z.totalVolume,
+          unit: 'CBM',
+        };
+        arr.push(z);
+      });
+    });
+
+    this.shipmentService
+      .createOrUpdate({
+        customerId: data.customerId,
+        serviceUserId: data.serviceUserId,
+        transportationMode: data.transportationMode,
+        agentCustomerId: data.agentCustomerId,
+        cargoReadyDate: null,
+        incoterm: null,
+        freightType: null,
+        tradeType: 0,
+        shipmentNo: data.shipmentNo,
+        transferNo: null,
+        customsCustomerId: data.customsCustomerId,
+        customsClearanceCustomerId: data.customsClearanceCustomerId,
+        booking: {
+          customerBookingId: null,
+          serviceCompanyId: data.serviceCompanyId,
+          channel: data.channel,
+          fbaPickUpMethodType: data.fbaPickUpMethodType,
+          contactId: data.contactId,
+          originAddressId: data.originAddressId,
+          originWarehouseId: null,
+          destinationPortId: null,
+          originPortId: null,
+          destinationWarehouseId: null,
+          destinationAddressId: null,
+          deliveryDate: data.deliveryDate,
+          commodity: data.commodity,
+          id: null,
+        },
+        oceanShipment: {
+          carrierBookingNo: data.carrierBookingNo,
+        },
+        fbaShipment: {
+          expressNo: data.expressNo,
+          expressNoRemark: data.expressNoRemark,
+          warehouseNo: null,
+          huoLalaOrderNo: null,
+          fbaDeliveryType: data.fbaDeliveryType,
+          fbaDeliveryTypeRemark: data.fbaDeliveryTypeRemark,
+          cargoPutAwayDate: data.cargoPutAwayDate ? new Date(data.cargoPutAwayDate).toISOString() : null,
+        },
+        lineItems: arr,
+        id: null,
+      })
+      .subscribe((res) => {
+        debugger;
+        this.editModal = false;
+      });
   }
 
   /**
@@ -95,5 +176,10 @@ export class AcceptListComponent implements OnInit {
     this.shipmentService.changeInvalidStatus(req).subscribe((res) => {
       console.log(res);
     });
+  }
+
+  showEdit() {
+    this.editModal = true;
+    this.acceptEditComponent.validateForm.reset();
   }
 }

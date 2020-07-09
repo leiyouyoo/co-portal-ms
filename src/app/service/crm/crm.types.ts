@@ -1988,6 +1988,9 @@
             /* 城市 */ 
             city: string;
          
+            
+            unlocode: string;
+         
             /* 是否海外仓 */ 
             isForeign: boolean;
          

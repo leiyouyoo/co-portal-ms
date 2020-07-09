@@ -4,6 +4,7 @@ import { STColumn, STColumnBadge } from '@co/cbc';
 import { EnterWarehouseModalComponent } from './enter-warehouse-modal/enter-warehouse-modal.component';
 import { ShipmentService } from 'src/app/service/fcm';
 import { TranslateService } from '@ngx-translate/core';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-order-list',
@@ -17,7 +18,7 @@ export class OrderListComponent implements OnInit {
   @ViewChild(AddOrderComponent)
   addOrderComponent: AddOrderComponent;
 
-  @ViewChild('st', null) st: any;
+  @ViewChild('st') st: any;
 
   isAddVisible = false;
   isVisible = false;
@@ -29,7 +30,13 @@ export class OrderListComponent implements OnInit {
       index: 'transportationMode',
       width: 80,
       type: 'enum',
-      enum: { 0: 'NotSet', 1: 'Ocean', 2: 'Air', 3: 'Truck', 4: 'Rail' },
+      enum: {
+        0: this.translate.instant('NotSet'),
+        1: this.translate.instant('Ocean'),
+        2: this.translate.instant('Air'),
+        3: this.translate.instant('Truck'),
+        4: this.translate.instant('Rail'),
+      },
     },
     { title: this.translate.instant('Shipment No'), index: 'shipmentNo', width: 80 },
     { title: this.translate.instant('Order time'), index: 'creationTime', width: 130, type: 'date', filterType: 'date' },
@@ -42,7 +49,7 @@ export class OrderListComponent implements OnInit {
       index: 'fbaPickUpMethodType',
       width: 80,
       type: 'enum',
-      enum: { 0: 'NotSet', 1: 'DeliveryGoodsByMyself', 2: 'PickUpByCityocean' },
+      enum: { 0: 'NotSet', 1: this.translate.instant('DeliveryGoodsByMyself'), 2: this.translate.instant('PickUpByCityocean') },
     },
     { title: this.translate.instant('Delivery time'), index: 'cargoReadyDate', width: 130, type: 'date', filterType: 'date' },
     { title: this.translate.instant('Origin Location'), index: 'originAddress', width: 80 },
@@ -59,12 +66,12 @@ export class OrderListComponent implements OnInit {
     { title: this.translate.instant('Carrier'), index: 'agentCustomer', width: 80 },
     { title: this.translate.instant('Creat By'), index: 'creator', width: 80 },
     {
-      title: '操作',
+      title: this.translate.instant('Action'),
       width: 120,
       fixed: 'right',
       buttons: [
         {
-          text: '编辑',
+          text: this.translate.instant('Edit'),
           type: 'none',
           click: (e) => {
             this.addOrderComponent.getForUpdate();
@@ -72,7 +79,7 @@ export class OrderListComponent implements OnInit {
           },
         },
         {
-          text: '删除',
+          text: this.translate.instant('Delete'),
           type: 'none',
           click: () => {},
         },
@@ -83,7 +90,7 @@ export class OrderListComponent implements OnInit {
   listSelectIds: Array<string> = []; // 预报列表选中值
   preListTotal: number = 0; //预报列表总条数
 
-  constructor(private shipmentService: ShipmentService, public translate: TranslateService) {}
+  constructor(private shipmentService: ShipmentService, public translate: TranslateService, private message: NzMessageService) {}
 
   ngOnInit() {
     this.getPreListData();
@@ -125,7 +132,11 @@ export class OrderListComponent implements OnInit {
   }
 
   enterWareHouse(): void {
-    this.enterWarehouseModalComponent.showModal();
+    if (this.listSelectIds.length > 0) {
+      this.enterWarehouseModalComponent.showModal();
+    } else {
+      this.message.warning(this.translate.instant('Please selected the order'));
+    }
   }
 
   checkChange(e): void {
