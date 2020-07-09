@@ -36,7 +36,7 @@ export class LayoutProMenuComponent implements OnInit, OnDestroy {
   @Input() mode = 'inline';
   @ViewChild('submenu', { static: false }) submenu!: NzPopoverComponent;
 
-  constructor(private menuSrv: MenuService, private router: Router, public pro: BrandService, private cdr: ChangeDetectorRef) {}
+  constructor(private menuSrv: MenuService, private router: Router, public pro: BrandService, private cdr: ChangeDetectorRef) { }
 
   private cd() {
     this.cdr.markForCheck();
@@ -50,7 +50,7 @@ export class LayoutProMenuComponent implements OnInit, OnDestroy {
 
   private getMenu() {
     try {
-      const menu = ((JSON.parse(window.localStorage.getItem('ICPUserMsg')) as any).nav.menus.MainMenu.items || []) as Menu[];
+      const menu = ((JSON.parse(window.localStorage.getItem('co.session')) as any).nav.menus.MainMenu.items || []) as Menu[];
       if (menu && menu.length) {
         menu.sort((a, b) => a.order - b.order);
         urlFactory(menu);

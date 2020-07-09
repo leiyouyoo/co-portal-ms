@@ -9,7 +9,7 @@ const moment = moment_;
   styleUrls: ['./im-file-lists.component.less'],
 })
 export class ImFileListsComponent implements OnInit {
-  userMsg = JSON.parse(localStorage.getItem('ICPUserMsg') || 'null');
+  userMsg = JSON.parse(localStorage.getItem('co.session') || 'null');
   @Input() GroupId = '';
   @Input() FromAccount = '';
   ToAccount = this.userMsg?.session?.user?.id;
@@ -19,7 +19,7 @@ export class ImFileListsComponent implements OnInit {
     skipCount: 0,
     total: 0,
   };
-  constructor(private imTemplateService: ImService) {}
+  constructor(private imTemplateService: ImService) { }
 
   ngOnInit(): void {
     this.getFileLists();
