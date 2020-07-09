@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { EnterWarehouseModalComponent } from './component/enter-warehouse-modal/enter-warehouse-modal.component';
 @Component({
   selector: 'app-order-detail',
   templateUrl: './order-detail.component.html',
@@ -7,8 +6,7 @@ import { EnterWarehouseModalComponent } from './component/enter-warehouse-modal/
 })
 export class OrderDetailComponent implements OnInit {
 
-  @ViewChild(EnterWarehouseModalComponent, { static: true })
-  enterWarehouseModalComponent: EnterWarehouseModalComponent;
+
 
   bookingId = "09522afc-cf59-401a-2a3a-08d82267d2b6";
 
