@@ -165,7 +165,7 @@ export class ImComponent implements OnInit {
     this.compareUrl();
   }
   checkAnonymous(): boolean {
-    if (this.aclService.can({ roles: ['Anonymous'] })) {
+    if (this.aclService.can('r: Anonymous')) {
       this.modalService.confirm({
         nzTitle: this.translate.instant('This operation need to login first'),
         nzIconType: 'info-circle',
