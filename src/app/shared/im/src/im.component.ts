@@ -165,7 +165,7 @@ export class ImComponent implements OnInit {
     this.compareUrl();
   }
   checkAnonymous(): boolean {
-    if (this.aclService.can({ role: ['Anonymous'] })) {
+    if (this.aclService.can('r: Anonymous')) {
       this.modalService.confirm({
         nzTitle: this.translate.instant('This operation need to login first'),
         nzIconType: 'info-circle',
@@ -173,7 +173,7 @@ export class ImComponent implements OnInit {
         nzOnOk: () => {
           // this.socialService.logout();
         },
-        nzOnCancel: () => { },
+        nzOnCancel: () => {},
       });
       return true;
     }
@@ -339,7 +339,9 @@ export class ImComponent implements OnInit {
       });
       getMyProfile().then((imResponse) => {
         console.log(imResponse);
-        self.myProfile = imResponse.data;
+        if (imResponse) {
+          self.myProfile = imResponse.data;
+        }
       });
 
       let imRes = await getConversationList();

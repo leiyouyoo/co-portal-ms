@@ -10,22 +10,28 @@
       <button nz-button nzType="default">刷新</button>
       <button nz-button nzType="default" (click)="isChangeStatus(true)">作废</button>
       <button nz-button nzType="default" (click)="isChangeStatus()">取消作废</button>
-      <button nz-button nzType="default" (click)="showEdit()">新增</button>
     </div>
 
     <div class="co-page-header-search">
       <div class="co-page-header-search-left">
         <nz-space>
-          <nz-space-item> 搜索：<input nz-input placeholder="搜索运单号/SO号/柜号/提单号/客户名称" style="width: 200px;" /> </nz-space-item>
+          <nz-space-item>
+            搜索：<input
+              nz-input
+              placeholder="搜索运单号/SO号/柜号/提单号/客户名称"
+              [(ngModel)]="shipmentData.searchText"
+              style="width: 200px;"
+            />
+          </nz-space-item>
           <nz-space-item>
             选择日期：
-            <nz-range-picker></nz-range-picker>
+            <nz-range-picker [(ngModel)]="searchDate" (ngModelChange)="dateChange($event)"></nz-range-picker>
           </nz-space-item>
 
           <nz-space-item>
             <div class="co-page-header-search-right">
-              <button nz-button [nzType]="'primary'">搜索</button>
-              <button nz-button [nzType]="'default'">重置</button>
+              <button nz-button [nzType]="'primary'" (click)="onSearch($event)">搜索</button>
+              <button nz-button [nzType]="'default'" (click)="onClear($event)">重置</button>
               <button nz-button [nzType]="'link'" (click)="advancedSearch = !advancedSearch">高级搜索<i nz-icon nzType="down"></i></button>
             </div>
           </nz-space-item>
@@ -37,7 +43,12 @@
       <nz-space>
         <nz-space-item>
           承运人：
-          <nz-select [nzMaxTagCount]="3" nzMode="multiple" [nzPlaceHolder]="'Please enter' | translate">
+          <nz-select
+            [nzMaxTagCount]="3"
+            nzMode="multiple"
+            [nzPlaceHolder]="'Please enter' | translate"
+            [(ngModel)]="shipmentData.agentCustomerIds"
+          >
             <nz-option [nzLabel]="1" [nzValue]="1"></nz-option>
             <nz-option [nzLabel]="2" [nzValue]="2"></nz-option>
             <nz-option [nzLabel]="3" [nzValue]="3"></nz-option>
@@ -46,7 +57,7 @@
 
         <nz-space-item>
           渠道：
-          <nz-select ngModel="lucy" [nzPlaceHolder]="'Please enter' | translate">
+          <nz-select ngModel="lucy" [nzPlaceHolder]="'Please enter' | translate" [(ngModel)]="shipmentData.channel">
             <nz-option nzValue="jack" nzLabel="海派"></nz-option>
             <nz-option nzValue="lucy" nzLabel="海卡"></nz-option>
             <nz-option nzValue="lucy" nzLabel="空派"></nz-option>
@@ -55,7 +66,7 @@
 
         <nz-space-item>
           日期类型：
-          <nz-select ngModel="lucy" [nzPlaceHolder]="'Please enter' | translate">
+          <nz-select ngModel="lucy" [nzPlaceHolder]="'Please enter' | translate" [(ngModel)]="shipmentData.sorting">
             <nz-option nzValue="1" nzLabel="下单日期"></nz-option>
             <nz-option nzValue="2" nzLabel="最新更新日期"></nz-option>
             <nz-option nzValue="3" nzLabel="账单日期"></nz-option>
@@ -66,7 +77,16 @@
   </div>
 
   <div class="co-page-content">
-    <co-st #st [data]="listOfData" [columns]="columns" [showFilters]="false" [scroll]="{ x: '2000px' }"></co-st>
+    <co-st
+      #st
+      [data]="listOfData?.items"
+      [columns]="columns"
+      [showFilters]="false"
+      [scroll]="{ x: '2000px' }"
+      [total]="listOfData?.totalCount"
+      calcScroll
+      disableCalcX
+    ></co-st>
   </div>
 
   <nz-modal

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { STColumn } from '@co/cbc';
 import { AcceptEditComponent } from '../accept-edit/accept-edit.component';
-import { ShipmentService, ChangeShipmentInvalidStatusInput } from 'src/app/service/fcm';
+import { ShipmentService, ChangeShipmentInvalidStatusInput, GetShipmentListInput } from 'src/app/service/fcm';
 import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
@@ -10,483 +10,101 @@ import { NzMessageService } from 'ng-zorro-antd';
   templateUrl: './accept-list.component.html',
   styleUrls: ['./accept-list.component.less'],
 })
-export class AcceptListComponent {
+export class AcceptListComponent implements OnInit {
   @ViewChild('edit', { static: false }) acceptEditComponent: AcceptEditComponent;
-  listOfData = [
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-    {
-      id: '客户提交了订单，等待处理',
-      img: '海运',
-      email: 'FONB20060001',
-      address: '2020/6/8 下午12:21:00',
-      phone: 'Alfred',
-      date: '通达',
-      aaa: 'King',
-      bbb: 'Peln',
-      ccc: 'China',
-      ddd: '自送货',
-      eee: '2020/12/22 12:00-13:00',
-      fff: 'China',
-      ggg: 'Taiwan',
-      hhh: 'Yantian',
-      iii: 'China',
-      jjj: '威士忌杯',
-      kkk: '8.57',
-      lll: '63',
-      mmm: '12',
-      nnn: '海卡',
-      ooo: '2020/6/8 下午12:21:00',
-      ppp: '',
-    },
-  ];
+  editModal = false;
+  listOfData: any;
+  choosedId: any;
   columns: STColumn[] = [
-    { title: '操作进度', index: 'id' },
-    { title: '运输方式', type: 'img' },
-    { title: '运单号', index: 'email' },
-    { title: '下单日期', index: 'phone' },
-    { title: '业务员', index: 'aaa' },
-    { title: '客户', index: 'bbb' },
-    { title: '联系人', index: 'ccc' },
-    { title: '送货地址', index: 'ddd' },
-    { title: '交货方式', index: 'eee' },
-    { title: '交货时间', index: 'fff' },
-    { title: '交货位置', index: 'ggg' },
-    { title: '交货仓库', index: 'hhh' },
-    { title: '国家', index: 'iii' },
-    { title: '品名', index: 'jjj' },
-    { title: '体积（CBN）', index: 'kkk' },
-    { title: '件数(CTN)', index: 'lll' },
-    { title: '重量（KG）', index: 'mmm' },
-    { title: '渠道', index: 'nnn' },
-    { title: '入仓时间', index: 'ooo' },
-    { title: '是否进仓', index: 'ppp' },
-    { title: '操作口岸', index: 'qqq' },
-    { title: 'FBA NO', index: 'rrr' },
-    { title: '承运人', index: 'sss' },
-    { title: '创建人', index: 'ttt' },
+    { width: '120px', title: '业务进度', index: 'shipmentNo' },
+    { width: '120px', title: '操作进度', type: 'img' },
+    { width: '120px', title: '承运人', index: 'agentCustomer' },
+    { width: '120px', title: '报关行', index: 'phone' },
+    { width: '120px', title: '清关行', index: 'aaa' },
+    { width: '120px', title: '代理', index: 'bbb' },
+    { width: '120px', title: '下单时间', index: 'creationTime' },
+    { width: '120px', title: '业务类型', index: 'ddd' },
+    { width: '120px', title: '渠道', index: 'eee' },
+    { width: '120px', title: '运单号', index: 'shipmentNo' },
+    { width: '120px', title: 'SO号', index: 'ggg' },
+    { width: '120px', title: '国家', index: 'country' },
+    { width: '120px', title: '送货地址', index: 'address' },
+    { width: '120px', title: '出货口岸', index: 'serviceCompany' },
+    { width: '120px', title: '业务员', index: 'serviceUser' },
+    { width: '120px', title: '客户', index: 'customerName' },
+    { width: '120px', title: '性质', index: 'mmm' },
+    { width: '120px', title: '联系人', index: 'contactName' },
+    {
+      width: '120px',
+      title: '交货方式',
+      index: 'fbaPickUpMethodType',
+      enum: {
+        0: 'NotSet',
+        1: 'DeliveryGoodsByMyself',
+        2: 'PickUpByCityocean',
+      },
+      type: 'enum',
+    },
+    { width: '120px', title: '交货位置', index: '' },
+    { width: '120px', title: '交货仓库', index: 'originAddress' },
+    { width: '120px', title: '交货/提货时间', index: 'cargoReadyDate' },
+    { width: '120px', title: '品名', index: 'commodity' },
+    { width: '120px', title: '体积（CBM）', index: 'volume.value' },
+    { width: '120px', title: '件数（CTN）', index: 'quantity.value' },
+    { width: '120px', title: '重量', index: 'ttt' },
+    { width: '120px', title: '入仓时间', index: 'cargoPutAwayDate' },
+    { width: '120px', title: '装柜时间', index: 'mmm' },
+    { width: '120px', title: '柜号', index: 'nnn' },
+    { width: '120px', title: '柜型', index: 'ooo' },
+    { width: '120px', title: '提单号码', index: 'ppp' },
+    { width: '120px', title: '目的港', index: 'qqq' },
+    { width: '120px', title: '码头名称', index: 'rrr' },
+    { width: '120px', title: 'FBA号', index: 'fbano' },
+    { width: '120px', title: 'Reference ID', index: 'ttt' },
+    { width: '120px', title: '快递号', index: 'ttt' },
+    { width: '120px', title: '备注', index: 'ttt' },
+    { width: '120px', title: 'ETD', index: 'ttt' },
+    { width: '120px', title: 'ETA', index: 'ttt' },
+    { width: '120px', title: 'FBA运输方式', index: 'ttt' },
+    { width: '120px', title: '备注', index: 'ttt' },
+    {
+      title: 'Action',
+      width: 120,
+      fixed: 'right',
+      buttons: [
+        {
+          text: 'Edit',
+          type: 'none',
+          click: (e) => {
+            debugger;
+            this.choosedId = e.id;
+            this.showEdit(e.id);
+          },
+        },
+      ],
+    },
   ];
 
-  editModal = false;
+  searchDate: any;
+
+  shipmentData: GetShipmentListInput = {
+    searchText: '',
+    agentCustomerIds: [],
+    channel: '',
+    startTime: null,
+    endTime: null,
+    sorting: null,
+    maxResultCount: 20,
+    skipCount: 0,
+  };
   advancedSearch = false;
   constructor(private shipmentService: ShipmentService, private message: NzMessageService) {}
-
-  handleCancel() {
-    this.editModal = false;
-  }
 
   handleOk() {
     if (!this.acceptEditComponent.validate()) {
       return;
     }
 
-    debugger;
     const data = this.acceptEditComponent.validateForm.value;
     var arr = [];
 
@@ -533,6 +151,7 @@ export class AcceptListComponent {
         customsClearanceCustomerId: data.customsClearanceCustomerId,
         pickUpTimeRange: data.deliveryDate,
         booking: {
+          isCustomerCreate: null,
           customerBookingId: null,
           serviceCompanyId: data.serviceCompanyId,
           channel: data.channel,
@@ -561,12 +180,12 @@ export class AcceptListComponent {
         },
         addressItems: [],
         lineItems: arr,
-        id: null,
+        id: this.choosedId,
       })
       .subscribe((res) => {
         debugger;
         this.message.success('Edit Success');
-        this.editModal = false;
+        this.acceptEditComponent.editModal = false;
       });
   }
 
@@ -584,9 +203,49 @@ export class AcceptListComponent {
     });
   }
 
-  showEdit() {
+  showEdit(id) {
     this.editModal = true;
     this.acceptEditComponent.validateForm.reset();
-    this.acceptEditComponent.getBIndData();
+    while (this.acceptEditComponent.validateForm.controls?.lineItems.length !== 0) {
+      this.acceptEditComponent.validateForm.controls.lineItems.removeAt(0);
+    }
+    this.acceptEditComponent.getBIndData(id);
+  }
+
+  handleCancel() {
+    this.editModal = false;
+  }
+
+  ngOnInit() {
+    this.getTableList();
+  }
+
+  getTableList() {
+    this.shipmentService.getShipmentList(this.shipmentData).subscribe((res) => {
+      this.listOfData = res;
+    });
+  }
+
+  dateChange(data) {
+    if (data) {
+      this.shipmentData.startTime = data[0];
+    }
+    this.shipmentData.endTime = data[1];
+  }
+
+  onSearch() {
+    this.shipmentData.skipCount = 0;
+    this.shipmentData.maxResultCount = 20;
+    this.getTableList();
+  }
+
+  onClear() {
+    this.shipmentData.searchText = '';
+    this.shipmentData.agentCustomerIds = [];
+    this.shipmentData.channel = '';
+    this.shipmentData.startTime = null;
+    this.shipmentData.endTime = null;
+    this.shipmentData.sorting = null;
+    this.searchDate = null;
   }
 }

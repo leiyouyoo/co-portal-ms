@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { _HttpClient, AuthService } from '@co/common';
 
 import { NzNotificationService, NzMessageService } from 'ng-zorro-antd';
-
+import { GetUserSigService, logOut } from '@im';
 @Component({
   selector: 'user-login-main',
   templateUrl: './login-main.component.html',
@@ -31,7 +31,8 @@ export class loginMainComponent implements OnInit {
     private notification: NzNotificationService,
     private message: NzMessageService,
     private activatedRoute: ActivatedRoute,
-  ) { }
+    private getUserSigService: GetUserSigService,
+  ) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -70,7 +71,7 @@ export class loginMainComponent implements OnInit {
       .thirdLogin(parame)
       .then((res: any) => {
         if (res.access_token) {
-          this.doRedirect({ isRedirectByQueryParam: true });
+          this.doRedirect({ isRedirectByQueryParam: true, isLoginIm: true });
         }
       })
       .catch((e: any) => {
@@ -108,7 +109,7 @@ export class loginMainComponent implements OnInit {
       .finally(() => (this.loading = false))
       .then((res: any) => {
         if (res.access_token) {
-          this.doRedirect({ isRedirectByQueryParam: true });
+          this.doRedirect({ isRedirectByQueryParam: true, isLoginIm: true });
         } else {
           this.message.error('登录失败');
         }
@@ -158,21 +159,25 @@ export class loginMainComponent implements OnInit {
     return a.order - b.order;
   }
 
-  doRedirect(option: { isRedirectByQueryParam?: boolean } = {}) {
+  doRedirect(option: { isRedirectByQueryParam?: boolean; isLoginIm?: boolean } = {}) {
     if (option.isRedirectByQueryParam && this.activatedRoute.snapshot.queryParams.redirectUrl) {
       return (location.href = this.activatedRoute.snapshot.queryParams.redirectUrl);
     }
 
     this.httpService.get(`/platform/Session/GetCurrentUserConfiguration`).subscribe(
-      (data: any) => {
-        window.localStorage.setItem('co.session', JSON.stringify(data));
+      async (data: any) => {
+        window.localStorage.setItem('ICPUserMsg', JSON.stringify(data));
         try {
           data.nav.menus.MainMenu.items.sort(this.sortItem);
         } catch (e) {
           console.error('菜单排序报错');
         }
         // location.href = data.nav.menus.MainMenu.items[0].url;
-        location.href = '#/dashboard';
+        if (option.isLoginIm) {
+          logOut();
+          await this.getUserSigService.imLogin();
+          location.href = '#/dashboard';
+        }
       },
       (err) => {
         this.notification.error('Error', err || 'Get User Configuration Failed.');

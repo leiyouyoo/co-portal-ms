@@ -13,7 +13,6 @@ class TIMSetting {
 }
 // 创建 SDK 实例，TIM.create() 方法对于同一个 SDKAppID 只会返回同一份实例
 let tim;
-let userMsg = JSON.parse(localStorage.getItem('co.session') || 'null');
 const subject = new ReplaySubject<TIM>(1);
 /*群组创建接口 */
 interface GroupInfoCheck {
@@ -90,36 +89,47 @@ export async function login(UserID: string, UserSig: string) {
   providedIn: 'root',
 })
 export class GetUserSigService {
-  constructor(private _HttpClient: _HttpClient) { }
+  constructor(private _HttpClient: _HttpClient) {}
   imLogin() {
     // 监听事件，例如：
     // 收到离线消息和会话列表同步完毕通知，接入侧可以调用 sendMessage 等需要鉴权的接口
     // event.name - TIM.EVENT.SDK_READY
-    this._HttpClient.get('/IM/IMCommonService/GetUserSig', { Identifier: userMsg.session.user.id.toString() }).subscribe(async (r: any) => {
-      // setup tim
-      options.SDKAppID = r.imAppID;
-      TIMSetting.userSig = r.userSig;
-      tim = TIM.create(options); // SDK 实例通常用 tim 表示
-      tim.COStatus = 0;
-      // 设置 SDK 日志输出级别，详细分级请参见 setLogLevel 接口的说明
-      tim.setLogLevel(1); // 普通级别，日志量较多，接入时建议使用
-      // 注册 COS SDK 插件
-      tim.registerPlugin({ 'cos-js-sdk': COS });
+    this._HttpClient
+      .get('/IM/IMCommonService/GetUserSig', {
+        Identifier: JSON.parse(localStorage.getItem('ICPUserMsg') || 'null').session.user.id.toString(),
+      })
+      .subscribe(async (r: any) => {
+        this.onImLogin(r);
+      });
+  }
+  async onImLogin(r) {
+    options.SDKAppID = r.imAppID;
+    TIMSetting.userSig = r.userSig;
+    tim = TIM.create(options); // SDK 实例通常用 tim 表示
+    tim.COStatus = 0;
+    // 设置 SDK 日志输出级别，详细分级请参见 setLogLevel 接口的说明
+    tim.setLogLevel(1); // 普通级别，日志量较多，接入时建议使用
+    // 注册 COS SDK 插件
+    tim.registerPlugin({ 'cos-js-sdk': COS });
 
-      // start login
-      let userSig = TIMSetting.userSig;
-      await login(userMsg.session.user.id.toString(), userSig);
-      subject.next();
-    });
+    // start login
+    let userSig = TIMSetting.userSig;
+    await login(JSON.parse(localStorage.getItem('ICPUserMsg') || 'null').session.user.id.toString(), userSig);
+    subject.next();
   }
 }
 
 /*登出 */
 export function logOut(): void {
+  subject && subject.complete();
   let promise = tim.logout();
-  promise.then((imResponse) => {
-    console.log(imResponse.data);
-  });
+  try {
+    promise.then((imResponse) => {
+      console.log(imResponse.data);
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 /*创建文本消息 */
@@ -315,7 +325,7 @@ export async function createGroup(groupInfo) {
  * }
  */
 export async function getGroupList() {
-  await onSDKReady(() => { });
+  await onSDKReady(() => {});
   return await tim.getGroupList();
 }
 
@@ -323,7 +333,7 @@ export async function getGroupProfile(groupID: string) {
   let params = {
     groupID: groupID,
   };
-  await onSDKReady(() => { });
+  await onSDKReady(() => {});
   return await tim.getGroupProfile(params);
 }
 
@@ -332,7 +342,7 @@ export async function getGroupProfile(groupID: string) {
  * @param groupInfo 群组资料
  */
 export async function updateGroupProfile(groupInfo: GroupInfoUpdate) {
-  await onSDKReady(() => { });
+  await onSDKReady(() => {});
   return await tim.updateGroupProfile(groupInfo);
 }
 /**
@@ -340,7 +350,7 @@ export async function updateGroupProfile(groupInfo: GroupInfoUpdate) {
  * return {imResponse.data; // 个人资料 - Profile 实例
  */
 export async function getMyProfile() {
-  await onSDKReady(() => { });
+  await onSDKReady(() => {});
   return await tim.getMyProfile();
 }
 /**
@@ -365,7 +375,7 @@ export function deleteConversation(conversationID: string) {
  * @param groupInfo 群组资料
  */
 export async function updateMyProfile(myInfo: myInfoCheck) {
-  await onSDKReady(() => { });
+  await onSDKReady(() => {});
   return await tim.updateMyProfile(myInfo);
 }
 /**
@@ -410,7 +420,7 @@ export function getGroupMemberProfile(groupId: string, userIdList: Array<string>
  *        }
  */
 export async function getMessageList(conversationID: string, nextReqMessageID?: string) {
-  await onSDKReady(() => { });
+  await onSDKReady(() => {});
   if (!nextReqMessageID) {
     return await tim.getMessageList({ conversationID: conversationID, count: 15 });
   }
@@ -432,7 +442,7 @@ export async function onConversationUpdate(fun: Function) {
   // 收到会话列表更新通知，可通过遍历 event.data 获取会话列表数据并渲染到页面
   // event.name - TIM.EVENT.CONVERSATION_LIST_UPDATED
   // event.data - 存储 Conversation 对象的数组 - [Conversation]
-  await onSDKReady(() => { });
+  await onSDKReady(() => {});
   tim.on(TIM.EVENT.CONVERSATION_LIST_UPDATED, fun);
 }
 
@@ -441,7 +451,7 @@ export async function onConversationUpdate(fun: Function) {
  * @return imResponse.data.conversationList;
  */
 export async function getConversationList() {
-  await onSDKReady(() => { });
+  await onSDKReady(() => {});
   return await tim.getConversationList();
 }
 
@@ -493,7 +503,7 @@ export async function onKickedOut(fun: Function) {
   // 收到被踢下线通知
   // event.name - TIM.EVENT.KICKED_OUT
   // event.data.type - 被踢下线的原因，例如 TIM.TYPES.KICKED_OUT_MULT_ACCOUNT 多账号登录被踢
-  await onSDKReady(() => { });
+  await onSDKReady(() => {});
   tim.on(TIM.EVENT.KICKED_OUT, fun);
 }
 

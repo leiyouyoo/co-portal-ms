@@ -164,7 +164,12 @@
               [nzPlaceHolder]="'Please enter' | translate"
               (nzOnSearch)="onSearchCustomerList($event)"
             >
-              <nz-option *ngFor="let item of customsCustomerList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+              <nz-option
+                *ngFor="let item of customsCustomerList"
+                [nzDisabled]="item.id === validateForm.get('customsClearanceCustomerId').value"
+                [nzValue]="item.id"
+                [nzLabel]="item.name"
+              ></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
@@ -182,7 +187,12 @@
               [nzPlaceHolder]="'Please enter' | translate"
               (nzOnSearch)="onSearchCustomerList($event)"
             >
-              <nz-option *ngFor="let item of customsCustomerList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+              <nz-option
+                *ngFor="let item of customsCustomerList"
+                [nzDisabled]="item.id === validateForm.get('customsCustomerId').value"
+                [nzValue]="item.id"
+                [nzLabel]="item.name"
+              ></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>

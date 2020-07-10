@@ -24,7 +24,7 @@ export class AcceptEditComponent implements OnInit {
   agentCustomerList: any;
   customsCustomerList: any;
   destinationWarehouseList: any;
-
+  editModal = false;
   constructor(
     private locationExternalService: LocationExternalService,
     private fb: FormBuilder,
@@ -135,24 +135,11 @@ export class AcceptEditComponent implements OnInit {
     });
   }
 
-  getBIndData() {
-    this.shipmentService.getForUpdate({ id: '1569C20E-1CCB-4317-2ADE-08D82410BB43' }).subscribe((res) => {
-      debugger;
-
-      // let arr: any = [];
-      // res.lineItems.forEach((e) => {
-      //   let address = e.address;
-      //   let data = null;
-      //   data.address = address;
-      //   data.shipmentLineItem = {
-      //     fbaNo: e.fbaNo,
-      //     referenceId: e.referenceId,
-      //     totalQuantity: e.totalQuantity?.value,
-      //     totalWeight: e.totalWeight?.value,
-      //     totalVolume: e.totalVolume?.value,
-      //   };
-      //   arr.push(data);
-      // });
+  getBIndData(id) {
+    this.shipmentService.getForUpdate({ id: id }).subscribe((res) => {
+      res.addressItems?.forEach((e) => {
+        this.addAddressListRow(e);
+      });
 
       this.validateForm.patchValue({
         agentCustomerId: res.agentCustomerId,
@@ -177,10 +164,7 @@ export class AcceptEditComponent implements OnInit {
         commodity: res.booking.commodity,
         expressNo: res.fbaShipment.expressNo,
         expressNoRemark: res.fbaShipment.expressNoRemark,
-        lineItems: [],
       });
-
-      this.validateForm.pa;
     });
   }
 
@@ -270,23 +254,30 @@ export class AcceptEditComponent implements OnInit {
     }
   }
 
-  addAddressListRow() {
+  addAddressListRow(data?: any) {
     let row: FormGroup = this.fb.group({
-      address: [null, [Validators.required]],
+      address: [data?.address || null, [Validators.required]],
       shipmentLineItem: new FormArray([]),
     });
 
-    this.addTablesRow(row);
+    if (data) {
+      data.lineItems.forEach((e) => {
+        this.addTablesRow(row, e);
+      });
+    } else {
+      this.addTablesRow(row);
+    }
+
     (this.validateForm.controls.lineItems as FormArray).push(row);
   }
 
-  addTablesRow(row: FormGroup) {
+  addTablesRow(row: FormGroup, data?: any) {
     let table: FormGroup = this.fb.group({
-      fbaNo: [],
-      referenceId: [null],
-      totalQuantity: [null, [Validators.required]],
-      totalWeight: [null, [Validators.required]],
-      totalVolume: [null, [Validators.required]],
+      fbaNo: [data?.fbaNo || null],
+      referenceId: [data?.referenceId?.value || null],
+      totalQuantity: [data?.totalQuantity?.value || null, [Validators.required]],
+      totalWeight: [data?.totalWeight?.value || null, [Validators.required]],
+      totalVolume: [data?.totalVolume?.value || null, [Validators.required]],
     });
 
     (row.controls.shipmentLineItem as FormArray).push(table);
@@ -337,7 +328,7 @@ export class AcceptEditComponent implements OnInit {
   addressChanged(event, index) {
     // 产品说取第一个为准
     if (event && index === 0) {
-      const detail = this.addressList.find((e) => e.id === event);
+      const detail = this.addressList?.find((e) => e.id === event);
       if (detail) {
         var tradeType = 3;
         if (detail.IsForeign) {
