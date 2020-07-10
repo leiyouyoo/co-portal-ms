@@ -4,6 +4,7 @@
   nzTitle="新增订单"
   (nzOnCancel)="handleCancel()"
   (nzOnOk)="handleOk()"
+  [nzOkLoading]="addLoading"
   nzWidth="70%"
 >
   <form class="form-style" nz-form [formGroup]="validateForm" [nzLayout]="'vertical'">
