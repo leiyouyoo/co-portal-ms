@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { BaseApi, BaseUrl, DELETE, FORM, GET, Payload, POST, PUT } from '@co/common';
 import { ListResultDto, PagedResultDto, OwnerLessPagedResultDto } from '@co/core';
 
-import { PreShipmentListDto,CreateOrUpdateShipmentInput,WarehousingDto,ChangeShipmentInvalidStatusInput,GetPostAgentCustomerListOutput,SetShipmentPostAgentCustomerInput,ShipmentDto,GetShipmentListInput, } from './fcm.types';
+import { PreShipmentListInput,PreShipmentListItemDto,ShipmentListItemDto,CreateOrUpdateShipmentInput,WarehousingDto,ChangeShipmentInvalidStatusInput,SetShipmentPostAgentCustomerInput,ShipmentDto,GetShipmentListInput, } from './fcm.types';
 
 @BaseUrl('/fcm/Shipment')
 @Injectable({ providedIn: 'root' })
@@ -19,12 +19,12 @@ export class ShipmentService extends BaseApi {
      * 
      */
 
-    @GET('getAllPreShipment')
+    @POST('getAllPreShipment')
     getAllPreShipment(
         @Payload
-        _req: {transportationMode?:number,creationTime?:string,serviceUserId?:number,customerId?:string,fbaPickUpMethodType?:number,cargoPutAwayDate?:string,serviceCompanyId?:string,agentCustomerId?:string,contact?:string,shipmentNo?:string,destinationAddress?:string,originAddress?:string,originWarehouse?:string,country?:string,channel?:string,fBANo?:string,creatorUser?:string,sorting?:string,maxResultCount?:number,skipCount?:number} 
+        _req:PreShipmentListInput
 
-    ): Observable<PagedResultDto<PreShipmentListDto>> {
+    ): Observable<PagedResultDto<PreShipmentListItemDto>> {
         return null as any
     }
 
@@ -90,21 +90,6 @@ export class ShipmentService extends BaseApi {
 
 
     /**
-     * @param url /FCM/Shipment/GetPostAgentCustomerList
-     * 
-     */
-
-    @GET('getPostAgentCustomerList')
-    getPostAgentCustomerList(
-        @Payload
-        _req: {input?:object} 
-
-    ): Observable<GetPostAgentCustomerListOutput> {
-        return null as any
-    }
-
-
-    /**
      * @param url /FCM/Shipment/SetPostAgentCustomer
      * 
      */
@@ -150,16 +135,16 @@ export class ShipmentService extends BaseApi {
 
 
     /**
-     * @param url /FCM/Shipment/GetPagedListForFcm
+     * @param url /FCM/Shipment/GetShipmentList
      * 
      */
 
-    @POST('getPagedListForFcm')
-    getPagedListForFcm(
+    @POST('getShipmentList')
+    getShipmentList(
         @Payload
         _req:GetShipmentListInput
 
-    ): Observable<PagedResultDto<ShipmentDto>> {
+    ): Observable<PagedResultDto<ShipmentListItemDto>> {
         return null as any
     }
 

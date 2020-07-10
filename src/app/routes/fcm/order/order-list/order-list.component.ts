@@ -99,8 +99,28 @@ export class OrderListComponent implements OnInit {
   getPreListData(skipCount = 0) {
     this.shipmentService
       .getAllPreShipment({
-        skipCount: skipCount,
+        transportationMode: null,
+        creationTime: null,
+        serviceUserId: null,
+        customerId: null,
+        fbaPickUpMethodType: null,
+        cargoPutAwayDate: null,
+        serviceCompanyId: null,
+        agentCustomerId: null,
+        contact: null,
+        shipmentNo: null,
+        destinationAddress: null,
+        originAddress: null,
+        originWarehouse: null,
+        country: null,
+        channel: null,
+        fbaNo: null,
+        creatorUser: null,
+        sorting: null,
+        /* 页大小 */
         maxResultCount: 10,
+        /* 跳过指定条数 */
+        skipCount: skipCount,
       })
       .subscribe((res) => {
         this.listOfData = res.items;

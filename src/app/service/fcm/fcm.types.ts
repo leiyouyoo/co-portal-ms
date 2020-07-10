@@ -2,6 +2,83 @@
     /**
      *  No Remark 
      */
+    export class PreShipmentListInput {
+        
+         
+            /* 
+0 = NotSet
+1 = Ocean
+2 = Air
+3 = Truck
+4 = Rail */ 
+            transportationMode: number;
+         
+            
+            creationTime: string;
+         
+            
+            serviceUserId: number;
+         
+            
+            customerId: string;
+         
+            /* 
+0 = NotSet
+1 = DeliveryGoodsByMyself
+2 = PickUpByCityocean */ 
+            fbaPickUpMethodType: number;
+         
+            
+            cargoPutAwayDate: string;
+         
+            
+            serviceCompanyId: string;
+         
+            
+            agentCustomerId: string;
+         
+            
+            contact: string;
+         
+            
+            shipmentNo: string;
+         
+            
+            destinationAddress: string;
+         
+            
+            originAddress: string;
+         
+            
+            originWarehouse: string;
+         
+            
+            country: string;
+         
+            
+            channel: string;
+         
+            
+            fbaNo: string;
+         
+            
+            creatorUser: string;
+         
+            /* 排序 */ 
+            sorting: string;
+         
+            /* 页大小 */ 
+            maxResultCount: number;
+         
+            /* 跳过指定条数 */ 
+            skipCount: number;
+        
+        
+    }
+ 
+    /**
+     *  No Remark 
+     */
     export class QuantityDto {
         
          
@@ -17,7 +94,7 @@
     /**
      *  No Remark 
      */
-    export class PreShipmentListDto {
+    export class PreShipmentListItemDto {
         
          
             
@@ -101,6 +178,9 @@
             creator: string;
          
             
+            isCustomerCreate: boolean;
+         
+            
             id: string;
         
         
@@ -114,6 +194,9 @@
          
             
             customerBookingId: string;
+         
+            
+            isCustomerCreate: boolean;
          
             /* 
 0 = NotSet
@@ -312,18 +395,6 @@
     /**
      *  No Remark 
      */
-    export class GetPostAgentCustomerListOutput {
-        
-         
-            
-            items: any[];
-        
-        
-    }
- 
-    /**
-     *  No Remark 
-     */
     export class SetShipmentPostAgentCustomerInput {
         
          
@@ -347,12 +418,10 @@
          
             /* 
 0 = NotSet
-1 = DeliveryGoodsByMyself
-2 = PickUpByCityocean */ 
-            fbaPickUpMethodType: number;
-         
-            
-            originAddress: string;
+1 = General
+2 = Fba
+3 = Fbm */ 
+            tradeType: number;
          
             
             shipmentNo: string;
@@ -380,11 +449,20 @@
             
             address: string;
          
+            /* 
+0 = NotSet
+1 = DeliveryGoodsByMyself
+2 = PickUpByCityocean */ 
+            fbaPickUpMethodType: number;
+         
             
             cargoReadyDate: string;
          
             
             originAddressId: string;
+         
+            
+            originAddress: string;
          
             
             originWarehouseId: string;
@@ -426,6 +504,9 @@
             creator: string;
          
             
+            isCustomerCreate: boolean;
+         
+            
             id: string;
         
         
@@ -438,15 +519,13 @@
         
          
             
-            agentCustomerId: string;
+            searchText: string;
+         
+            
+            agentCustomerIds: any[];
          
             
             channel: string;
-         
-            /* 
-0 = CreationTime
-1 = LastModificationTime */ 
-            queryTimeType: number;
          
             
             startTime: string;
@@ -462,6 +541,101 @@
          
             /* 跳过指定条数 */ 
             skipCount: number;
+        
+        
+    }
+ 
+    /**
+     *  No Remark 
+     */
+    export class ShipmentListItemDto {
+        
+         
+            
+            shipmentNo: string;
+         
+            /* 
+0 = NotSet
+1 = Ocean
+2 = Air
+3 = Truck
+4 = Rail */ 
+            transportationMode: number;
+         
+            
+            creationTime: string;
+         
+            
+            serviceUser: string;
+         
+            
+            customerName: string;
+         
+            
+            contactName: string;
+         
+            
+            address: string;
+         
+            /* 
+0 = NotSet
+1 = DeliveryGoodsByMyself
+2 = PickUpByCityocean */ 
+            fbaPickUpMethodType: number;
+         
+            
+            cargoReadyDate: string;
+         
+            
+            originAddressId: string;
+         
+            
+            originAddress: string;
+         
+            
+            originWarehouseId: string;
+         
+            
+            originWarehouse: string;
+         
+            
+            country: string;
+         
+            
+            commodity: string;
+         
+            
+            quantity: QuantityDto;
+         
+            
+            weight: QuantityDto;
+         
+            
+            volume: QuantityDto;
+         
+            
+            channel: string;
+         
+            
+            cargoPutAwayDate: string;
+         
+            
+            serviceCompany: string;
+         
+            
+            fbano: string;
+         
+            
+            agentCustomer: string;
+         
+            
+            creator: string;
+         
+            
+            isCustomerCreate: boolean;
+         
+            
+            id: string;
         
         
     }
