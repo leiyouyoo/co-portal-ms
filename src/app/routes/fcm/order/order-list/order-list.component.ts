@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AddOrderComponent } from '../add-order/add-order.component';
 import { STColumn, STColumnBadge } from '@co/cbc';
 import { EnterWarehouseModalComponent } from './enter-warehouse-modal/enter-warehouse-modal.component';
-import { ShipmentService } from 'src/app/service/fcm';
+import { ShipmentService, PreShipmentListInput } from 'src/app/service/fcm';
 import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd';
 
@@ -97,6 +97,9 @@ export class OrderListComponent implements OnInit {
   }
 
   getPreListData(skipCount = 0) {
+    let parame = new PreShipmentListInput();
+    parame.skipCount = skipCount;
+    parame.maxResultCount = 10;
     this.shipmentService
       .getAllPreShipment({
         transportationMode: null,
