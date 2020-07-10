@@ -10,7 +10,7 @@ import { NzMessageService } from 'ng-zorro-antd';
   templateUrl: './accept-list.component.html',
   styleUrls: ['./accept-list.component.less'],
 })
-export class AcceptListComponent implements OnInit {
+export class AcceptListComponent {
   @ViewChild('edit', { static: false }) acceptEditComponent: AcceptEditComponent;
   listOfData = [
     {
@@ -477,8 +477,6 @@ export class AcceptListComponent implements OnInit {
   advancedSearch = false;
   constructor(private shipmentService: ShipmentService, private message: NzMessageService) {}
 
-  ngOnInit(): void {}
-
   handleCancel() {
     this.editModal = false;
   }
@@ -589,5 +587,6 @@ export class AcceptListComponent implements OnInit {
   showEdit() {
     this.editModal = true;
     this.acceptEditComponent.validateForm.reset();
+    this.acceptEditComponent.getBIndData();
   }
 }

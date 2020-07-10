@@ -5,6 +5,7 @@ import { CustomerService, CustomerListDto, ContactExternalService, LocationExter
 
 import { OrganizationUnitService, CompanyConfigureService } from '@co/cds';
 import { BookingService } from 'src/app/service/csp';
+import { ShipmentService } from 'src/app/service/fcm';
 
 @Component({
   selector: 'app-order-accept-edit',
@@ -32,6 +33,7 @@ export class AcceptEditComponent implements OnInit {
     private organizationUnitService: OrganizationUnitService,
     private contactExternalService: ContactExternalService,
     private companyConfigureService: CompanyConfigureService,
+    private shipmentService: ShipmentService,
   ) {}
 
   ngOnInit(): void {
@@ -130,6 +132,55 @@ export class AcceptEditComponent implements OnInit {
   getCustomerByType() {
     this.customerService.getPageCustomerByType({ customerType: 6 }).subscribe((res) => {
       this.customsCustomerList = res.items;
+    });
+  }
+
+  getBIndData() {
+    this.shipmentService.getForUpdate({ id: '1569C20E-1CCB-4317-2ADE-08D82410BB43' }).subscribe((res) => {
+      debugger;
+
+      // let arr: any = [];
+      // res.lineItems.forEach((e) => {
+      //   let address = e.address;
+      //   let data = null;
+      //   data.address = address;
+      //   data.shipmentLineItem = {
+      //     fbaNo: e.fbaNo,
+      //     referenceId: e.referenceId,
+      //     totalQuantity: e.totalQuantity?.value,
+      //     totalWeight: e.totalWeight?.value,
+      //     totalVolume: e.totalVolume?.value,
+      //   };
+      //   arr.push(data);
+      // });
+
+      this.validateForm.patchValue({
+        agentCustomerId: res.agentCustomerId,
+        serviceUserId: res.serviceUserId,
+        cargoPutAwayDate: res.pickUpTimeRange,
+        transportationMode: res.transportationMode,
+        channel: res.booking.channel,
+        shipmentNo: res.shipmentNo,
+        serviceCompanyId: res.booking.serviceCompanyId,
+        carrierBookingNo: res.oceanShipment.carrierBookingNo,
+        customerId: res.customerId,
+        customsCustomerId: res.customsCustomerId,
+        customsClearanceCustomerId: res.customsClearanceCustomerId,
+        contactId: res.booking.contactId,
+        tradeType: res.tradeType,
+        fbaPickUpMethodType: res.booking.fbaPickUpMethodType,
+        originAddressId: res.booking.originAddressId,
+        originWarehouseId: res.booking.originWarehouseId,
+        deliveryDate: res.booking.deliveryDate,
+        fbaDeliveryType: res.fbaShipment.fbaDeliveryType,
+        fbaDeliveryTypeRemark: res.fbaShipment.fbaDeliveryTypeRemark,
+        commodity: res.booking.commodity,
+        expressNo: res.fbaShipment.expressNo,
+        expressNoRemark: res.fbaShipment.expressNoRemark,
+        lineItems: arr,
+      });
+
+      this.validateForm.pa;
     });
   }
 

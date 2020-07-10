@@ -125,7 +125,6 @@ export class AddOrderComponent implements OnInit {
       fbaDeliveryTypeRemark: null,
       cargoPutAwayDate: null,
     },
-    addressItems: [{ lineItems: [], address: {} }],
     lineItems: [],
     id: null,
   };

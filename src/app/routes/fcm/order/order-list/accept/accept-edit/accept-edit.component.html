@@ -220,14 +220,7 @@
         <nz-form-item>
           <nz-form-label nzFor="originAddressId">{{ 'Delivery warehouse' | translate }}</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
-            <nz-select
-              nzAllowClear
-              nzShowSearch
-              id="gender"
-              [nzPlaceHolder]="'Please enter' | translate"
-              formControlName="originAddressId"
-              (ngModelChange)="getData($event)"
-            >
+            <nz-select nzAllowClear nzShowSearch id="gender" [nzPlaceHolder]="'Please enter' | translate" formControlName="originAddressId">
               <nz-option *ngFor="let item of destinationWarehouseList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
             </nz-select>
           </nz-form-control>
