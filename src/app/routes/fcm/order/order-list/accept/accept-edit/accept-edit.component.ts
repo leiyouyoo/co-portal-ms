@@ -25,6 +25,7 @@ export class AcceptEditComponent implements OnInit {
   customsCustomerList: any;
   destinationWarehouseList: any;
   editModal = false;
+  fbaNo: any;
   constructor(
     private locationExternalService: LocationExternalService,
     private fb: FormBuilder,
@@ -94,19 +95,6 @@ export class AcceptEditComponent implements OnInit {
       });
   }
 
-  // 获取承运人
-  getAgentCustomerList(name = null) {
-    this.customerService
-      .getForwardingCompanies({
-        searchText: name,
-        maxResultCount: 1000,
-        skipCount: 0,
-      })
-      .subscribe((res) => {
-        this.agentCustomerList = res.items;
-      });
-  }
-
   // 获取渠道
   getChannelList() {
     this.validateForm.get('channel').setValue(null);
@@ -141,6 +129,7 @@ export class AcceptEditComponent implements OnInit {
         this.addAddressListRow(e);
       });
 
+      this.fbaNo = res.shipmentNo;
       this.validateForm.patchValue({
         agentCustomerId: res.agentCustomerId,
         serviceUserId: res.serviceUserId,
@@ -182,6 +171,19 @@ export class AcceptEditComponent implements OnInit {
     });
   }
 
+  // 获取承运人
+  getAgentCustomerList(name = '') {
+    this.customerService
+      .getForwardingCompanies({
+        searchText: name,
+        maxResultCount: 400,
+        skipCount: 0,
+      })
+      .subscribe((res) => {
+        this.agentCustomerList = res.items;
+      });
+  }
+
   getCustomerList(name = null, id = null) {
     this.customerService.getDepartmentCustomer({ name: name, customerId: id }).subscribe((res) => {
       this.customerList = res;
@@ -189,7 +191,6 @@ export class AcceptEditComponent implements OnInit {
   }
 
   onSearchCustomerList(name) {
-    debugger;
     if (!name) {
       return;
     }
@@ -274,7 +275,7 @@ export class AcceptEditComponent implements OnInit {
   addTablesRow(row: FormGroup, data?: any) {
     let table: FormGroup = this.fb.group({
       fbaNo: [data?.fbaNo || null],
-      referenceId: [data?.referenceId?.value || null],
+      referenceId: [data?.referenceId || null],
       totalQuantity: [data?.totalQuantity?.value || null, [Validators.required]],
       totalWeight: [data?.totalWeight?.value || null, [Validators.required]],
       totalVolume: [data?.totalVolume?.value || null, [Validators.required]],

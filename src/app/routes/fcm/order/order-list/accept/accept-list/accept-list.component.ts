@@ -4,6 +4,8 @@ import { STColumn } from '@co/cbc';
 import { AcceptEditComponent } from '../accept-edit/accept-edit.component';
 import { ShipmentService, ChangeShipmentInvalidStatusInput, GetShipmentListInput } from 'src/app/service/fcm';
 import { NzMessageService } from 'ng-zorro-antd';
+import { BookingService } from 'src/app/service/csp';
+import { CustomerService } from 'src/app/service/crm';
 
 @Component({
   selector: 'app-order-accept-list',
@@ -76,7 +78,6 @@ export class AcceptListComponent implements OnInit {
           text: 'Edit',
           type: 'none',
           click: (e) => {
-            debugger;
             this.choosedId = e.id;
             this.showEdit(e.id);
           },
@@ -86,7 +87,8 @@ export class AcceptListComponent implements OnInit {
   ];
 
   searchDate: any;
-
+  channelList: any;
+  agentCustomerList: any;
   shipmentData: GetShipmentListInput = {
     searchText: '',
     agentCustomerIds: [],
@@ -98,7 +100,12 @@ export class AcceptListComponent implements OnInit {
     skipCount: 0,
   };
   advancedSearch = false;
-  constructor(private shipmentService: ShipmentService, private message: NzMessageService) {}
+  constructor(
+    private bookingService: BookingService,
+    private shipmentService: ShipmentService,
+    private message: NzMessageService,
+    private customerService: CustomerService,
+  ) {}
 
   handleOk() {
     if (!this.acceptEditComponent.validate()) {
@@ -151,7 +158,7 @@ export class AcceptListComponent implements OnInit {
         customsClearanceCustomerId: data.customsClearanceCustomerId,
         pickUpTimeRange: data.deliveryDate,
         booking: {
-          isCustomerCreate: null,
+          isCustomerCreate: false,
           customerBookingId: null,
           serviceCompanyId: data.serviceCompanyId,
           channel: data.channel,
@@ -183,9 +190,9 @@ export class AcceptListComponent implements OnInit {
         id: this.choosedId,
       })
       .subscribe((res) => {
-        debugger;
         this.message.success('Edit Success');
-        this.acceptEditComponent.editModal = false;
+        this.getTableList();
+        this.editModal = false;
       });
   }
 
@@ -218,6 +225,28 @@ export class AcceptListComponent implements OnInit {
 
   ngOnInit() {
     this.getTableList();
+    this.getChannelList();
+    this.getAgentCustomerList('');
+  }
+
+  // 获取渠道
+  getChannelList() {
+    this.bookingService.getChannelList({ freightMethodType: 1 }).subscribe((res) => {
+      this.channelList = res.items;
+    });
+  }
+
+  // 获取承运人
+  getAgentCustomerList(name = '') {
+    this.customerService
+      .getForwardingCompanies({
+        searchText: name,
+        maxResultCount: 100,
+        skipCount: 0,
+      })
+      .subscribe((res) => {
+        this.agentCustomerList = res.items;
+      });
   }
 
   getTableList() {
