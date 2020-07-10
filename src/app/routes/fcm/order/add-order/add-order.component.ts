@@ -82,6 +82,7 @@ export class AddOrderComponent implements OnInit {
   serviceCompanyList = [];
   originWarehouseList = [];
   agentCustomerList = [];
+  addLoading = false;
   customerFilter: any = {
     scope: CustomerSearchScope.Department,
   };
@@ -167,32 +168,6 @@ export class AddOrderComponent implements OnInit {
       title: '操作',
 
       priority: 1,
-    },
-  ];
-  listOfData = [
-    {
-      name: 'John Brown',
-      chinese: 98,
-      math: 60,
-      english: 70,
-    },
-    {
-      name: 'Jim Green',
-      chinese: 98,
-      math: 66,
-      english: 89,
-    },
-    {
-      name: 'Joe Black',
-      chinese: 98,
-      math: 90,
-      english: 70,
-    },
-    {
-      name: 'Jim Red',
-      chinese: 88,
-      math: 99,
-      english: 89,
     },
   ];
 
@@ -396,6 +371,7 @@ export class AddOrderComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.valid) {
+      this.addLoading = true;
       this.commitData.customerId = this.validateForm.value.customerId;
       this.commitData.serviceUserId = this.validateForm.value.serviceUserId;
       this.commitData.transportationMode = this.validateForm.value.transportationMode;
@@ -420,13 +396,14 @@ export class AddOrderComponent implements OnInit {
         });
       });
       this.shipmentService.createOrUpdate(this.commitData).subscribe((res) => {
-        this.isVisible = false;
+        this.handleCancel();
 
         if (this.actionType === 'create') {
           this.message.success('新增成功');
         } else {
           this.message.success('修改成功');
         }
+        this.addLoading = false;
         this.getPreListData.emit();
       });
     }
@@ -546,6 +523,7 @@ export class AddOrderComponent implements OnInit {
     this.totalQuantity = 0;
     this.totalVolume = 0;
     this.totalWeight = 0;
+    this.country = null;
     this.validateForm.get('fbaPickUpMethodType').setValue(1);
     this.addressList = [
       {
