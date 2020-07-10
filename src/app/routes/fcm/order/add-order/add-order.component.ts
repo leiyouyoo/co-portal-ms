@@ -1,15 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustomerService } from '../../../../service/crm/customer.service';
-import { CompanyConfigureService } from '../../../../service/platform/company-configure.service';
+
 import { LocationExternalService } from '../../../../service/crm/location-external.service';
-import { CommodityService } from '../../../../service/pub/commodity.service';
-import { OrganizationUnitService } from '../../../../service/platform/organization-unit.service';
+
 import { ShipmentService } from '../../../../service/fcm/shipment.service';
 import { CreateOrUpdateShipmentInput } from 'src/app/service/fcm';
 import { BookingService } from '../../../../service/csp/booking.service';
 import { ContactExternalService } from '../../../../service/crm/contact-external.service';
-import { CustomerSearchScope } from '@co/cds';
+import { CustomerSearchScope, CompanyConfigureService, OrganizationUnitService, CommodityService } from '@co/cds';
 import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-add-order',
@@ -89,48 +88,7 @@ export class AddOrderComponent implements OnInit {
   totalWeight = 0; // 总重量
   totalVolume = 0; //总体积
   actionType = 'create';
-  commitData: CreateOrUpdateShipmentInput = {
-    customer: null,
-    agentCustomer: null,
-    agentCustomerId: null,
-    tradeType: null,
-    transferNo: null,
-    customsCustomerId: null,
-    customsClearanceCustomerId: null,
-    serviceUserId: null,
-    pickUpTimeRange: null,
-    cargoReadyDate: null,
-    incoterm: null,
-    freightType: null,
-    shipmentNo: null,
-    addressItems: null,
-    booking: {
-      isCustomerCreate: null,
-      fbaPickUpMethodType: null,
-      contactId: null,
-      deliveryDate: null,
-      commodity: null,
-      destinationWarehouseId: null,
-      customerBookingId: null,
-      originAddressId: null,
-      originWarehouseId: null,
-      destinationPortId: null,
-      originPortId: null,
-      destinationAddressId: null,
-    },
-    oceanShipment: { carrierBookingNo: null },
-    fbaShipment: {
-      expressNo: null,
-      warehouseNo: null,
-      expressNoRemark: null,
-      huoLalaOrderNo: null,
-      fbaDeliveryType: null,
-      fbaDeliveryTypeRemark: null,
-      cargoPutAwayDate: null,
-    },
-    lineItems: [],
-    id: null,
-  };
+  commitData: CreateOrUpdateShipmentInput;
 
   listOfColumn = [
     {
@@ -339,11 +297,9 @@ export class AddOrderComponent implements OnInit {
   }
   // 获取业务员
   getSaleUsers(name = '', id) {
-    this.organizationUnitService
-      .getSaleUsers({ searchText: name, isOwnDepartment: true, sorting: '', maxResultCount: 1000, skipCount: 0 })
-      .subscribe((res) => {
-        this.serviceUserList = res.items;
-      });
+    this.organizationUnitService.getSaleUsers({ searchText: name, sorting: '', maxResultCount: 1000, skipCount: 0 }).subscribe((res) => {
+      this.serviceUserList = res.items;
+    });
   }
 
   // 品名选择器
