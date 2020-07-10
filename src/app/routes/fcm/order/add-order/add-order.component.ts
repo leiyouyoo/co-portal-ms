@@ -509,6 +509,7 @@ export class AddOrderComponent implements OnInit {
     }
   }
   getTradeType(event, index) {
+    this.addressList[index].address = event;
     if (index === 0) {
       if (event.isForeign === true) {
         this.validateForm.get('tradeType').setValue(2);

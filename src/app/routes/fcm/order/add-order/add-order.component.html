@@ -119,7 +119,7 @@
       </nz-form-item>
       <nz-form-item>
         <nz-form-label nzFor="gender">国家</nz-form-label>
-        <input nz-input [(ngModel)]="country" formControlName="country" readonly />
+        <input nz-input formControlName="country" readonly />
       </nz-form-item>
     </div>
     <div>
@@ -170,15 +170,22 @@
       <span
         >送货地址<span *ngIf="addressList.length > 1">{{ i + 1 }}</span></span
       >
-      <nz-select nzAllowClear nzShowSearch [(ngModel)]="item.address" (ngModelChange)="getTradeType(item, i)">
-        <nz-option nzCustomContent *ngFor="let item of addressItemList" [nzValue]="item" [nzLabel]="item.unlocode">{{
-          item.name +
-            '(' +
-            (item.city ? item.city + ',' : '') +
-            (item.province ? item.province + ',' : '') +
-            (item.country ? item.country : '') +
-            ')'
-        }}</nz-option>
+      <nz-select nzAllowClear nzShowSearch [(ngModel)]="item.address.id" (coNzOptionExtraChange)="getTradeType($event, i)">
+        <nz-option
+          nzCustomContent
+          *ngFor="let item of addressItemList"
+          [nzValue]="item.id"
+          [nzLabel]="item.unlocode"
+          [coNzOptionExtra]="item"
+          >{{
+            item.name +
+              '(' +
+              (item.city ? item.city + ',' : '') +
+              (item.province ? item.province + ',' : '') +
+              (item.country ? item.country : '') +
+              ')'
+          }}</nz-option
+        >
       </nz-select>
 
       <button nz-button nzType="primary" (click)="addAddress(i)">新增地址</button>

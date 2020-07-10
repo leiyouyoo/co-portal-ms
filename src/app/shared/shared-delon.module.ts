@@ -8,6 +8,7 @@ import {
   CustomerPickerModule,
   CommodityPickerModule,
   PortPickerModule,
+  CoNzSelectExtraModule,
 } from '@co/cbc';
 import { G2BarModule } from '@co/chart/bar';
 import { G2CardModule } from '@co/chart/card';
@@ -47,6 +48,7 @@ export const SHARED_DELON_MODULES = [
   ReuseTabModule,
   NgxPlanetModule,
   CoSTModule,
+  CoNzSelectExtraModule,
   DatetimeRangePickerModule,
   CustomerPickerModule,
   CommodityPickerModule,
