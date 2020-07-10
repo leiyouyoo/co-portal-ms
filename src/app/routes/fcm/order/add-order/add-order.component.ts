@@ -105,7 +105,6 @@ export class AddOrderComponent implements OnInit {
     customsClearanceCustomerId: null,
     serviceUserId: null,
     pickUpTimeRange: null,
-    cargoReadyDate: null,
     incoterm: null,
     freightType: null,
     shipmentNo: null,
@@ -113,6 +112,7 @@ export class AddOrderComponent implements OnInit {
     booking: {
       serviceCompanyId: null,
       channel: null,
+      cargoReadyDate: null,
       fbaPickUpMethodType: null,
       contactId: null,
       deliveryDate: null,
@@ -203,7 +203,7 @@ export class AddOrderComponent implements OnInit {
     this.getChannelList(); // 获取渠道
     this.getOriginWarehouseList(); //交货仓库
     this.getAgentCustomerList();
-    this.commitData.lineItems.forEach((element) => {});
+    this.commitData.lineItems.forEach((element) => { });
   }
   constructor(
     private fb: FormBuilder,
@@ -216,7 +216,7 @@ export class AddOrderComponent implements OnInit {
     private bookingService: BookingService,
     private contactExternalService: ContactExternalService,
     private message: NzMessageService,
-  ) {}
+  ) { }
 
   // 获取承运人
   getAgentCustomerList(name = null) {
