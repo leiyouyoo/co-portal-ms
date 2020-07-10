@@ -101,6 +101,7 @@ export class AddOrderComponent implements OnInit {
     incoterm: null,
     freightType: null,
     shipmentNo: null,
+    addressItems: null,
     booking: {
       fbaPickUpMethodType: null,
       contactId: null,
@@ -113,7 +114,6 @@ export class AddOrderComponent implements OnInit {
       destinationPortId: null,
       originPortId: null,
       destinationAddressId: null,
-      channel: null,
     },
     oceanShipment: { carrierBookingNo: null },
     fbaShipment: {

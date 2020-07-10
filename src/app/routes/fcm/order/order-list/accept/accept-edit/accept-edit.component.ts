@@ -50,7 +50,7 @@ export class AcceptEditComponent implements OnInit {
       customsCustomerId: [],
       customsClearanceCustomerId: [],
       contactId: [],
-      tradeType: [1],
+      tradeType: [3],
       fbaPickUpMethodType: [1],
       originAddressId: [],
       originWarehouseId: [],
@@ -288,7 +288,7 @@ export class AcceptEditComponent implements OnInit {
     if (event && index === 0) {
       const detail = this.addressList.find((e) => e.id === event);
       if (detail) {
-        var tradeType = 1;
+        var tradeType = 3;
         if (detail.IsForeign) {
           tradeType = 2;
         }
