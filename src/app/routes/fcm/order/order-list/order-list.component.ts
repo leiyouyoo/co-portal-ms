@@ -74,7 +74,8 @@ export class OrderListComponent implements OnInit {
           text: this.translate.instant('Edit'),
           type: 'none',
           click: (e) => {
-            console.log(e);
+            this.addOrderComponent.getForUpdate(e.id);
+            this.addOrderComponent.actionType = 'update';
           },
         },
         {
