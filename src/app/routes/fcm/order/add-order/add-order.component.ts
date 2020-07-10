@@ -407,7 +407,7 @@ export class AddOrderComponent implements OnInit {
       this.commitData.booking.contactId = this.validateForm.value.contactId;
       this.commitData.booking.channel = this.validateForm.value.channel;
       if (this.validateForm.value.originWarehouseId) {
-        this.commitData.booking.originWarehouseId = this.validateForm.value.originWarehouseId.id;
+        this.commitData.booking.originWarehouseId = this.validateForm.value.originWarehouseId;
       }
       this.commitData.pickUpTimeRange = this.validateForm.value.pickUpTimeRange;
       this.commitData.booking.commodity = this.validateForm.value.commodity.toString().replace(reg, '/');
