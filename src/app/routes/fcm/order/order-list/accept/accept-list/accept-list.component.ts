@@ -231,7 +231,7 @@ export class AcceptListComponent implements OnInit {
 
   // 获取渠道
   getChannelList() {
-    this.bookingService.getChannelList({ freightMethodType: 1 }).subscribe((res) => {
+    this.bookingService.getChannelList({}).subscribe((res) => {
       this.channelList = res.items;
     });
   }

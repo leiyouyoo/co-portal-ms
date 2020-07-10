@@ -16,7 +16,7 @@ export class WarehouseReceiptService extends BaseApi {
   
     /**
      * @param url /FCM/WarehouseReceipt/GenerateWarehouseRecipt
-     * 
+     * 生成入仓单
      */
 
     @POST('generateWarehouseRecipt')
@@ -31,7 +31,7 @@ export class WarehouseReceiptService extends BaseApi {
 
     /**
      * @param url /FCM/WarehouseReceipt/GetWarehouseRecipt
-     * 
+     * 获取入仓单文件
      */
 
     @GET('getWarehouseRecipt')
