@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ShipmentService, ShipmentDto } from 'src/app/service/fcm';
 @Component({
   selector: 'app-order-detail',
   templateUrl: './order-detail.component.html',
@@ -6,7 +8,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class OrderDetailComponent implements OnInit {
 
-
+  id: string = null;
+  orderInfo: ShipmentDto;
 
   bookingId = "09522afc-cf59-401a-2a3a-08d82267d2b6";
 
@@ -252,9 +255,27 @@ export class OrderDetailComponent implements OnInit {
       }]
   }
 
-  constructor() { }
+  constructor(
+    public activeRoute: ActivatedRoute,
+    public shipmentService: ShipmentService
+  ) {
+    this.activeRoute.queryParams.subscribe(queryParam => {
+      if (queryParam['id']) {
+        this.id = queryParam['id']
+      }
+    });
+
+  }
 
   ngOnInit(): void {
+    this.getInfo();
+  }
+
+  getInfo(): void {
+    this.shipmentService.get({ id: this.id }).subscribe(res => {
+      console.log(res, "res")
+      this.orderInfo = res;
+    })
   }
 
 }

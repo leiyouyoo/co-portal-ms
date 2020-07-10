@@ -5,6 +5,7 @@ import { EnterWarehouseModalComponent } from './enter-warehouse-modal/enter-ware
 import { ShipmentService, PreShipmentListInput } from 'src/app/service/fcm';
 import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-list',
@@ -67,7 +68,7 @@ export class OrderListComponent implements OnInit {
     { title: this.translate.instant('Creat By'), index: 'creator', width: 120 },
     {
       title: this.translate.instant('Action'),
-      width: 120,
+      width: 160,
       fixed: 'right',
       buttons: [
         {
@@ -81,8 +82,13 @@ export class OrderListComponent implements OnInit {
         {
           text: this.translate.instant('Delete'),
           type: 'none',
-          click: () => {},
+          click: () => { },
         },
+        {
+          text: this.translate.instant('Detail'),
+          type: 'none',
+          click: (e) => { this.router.navigate(['fcm/order/orderDetail'], { queryParams: { id: e.id } }) },
+        }
       ],
     },
   ];
@@ -90,7 +96,7 @@ export class OrderListComponent implements OnInit {
   listSelectIds: Array<string> = []; // 预报列表选中值
   preListTotal: number = 0; //预报列表总条数
 
-  constructor(private shipmentService: ShipmentService, public translate: TranslateService, private message: NzMessageService) {}
+  constructor(private shipmentService: ShipmentService, public translate: TranslateService, private message: NzMessageService, public router: Router,) { }
 
   ngOnInit() {
     this.getPreListData();
@@ -101,30 +107,7 @@ export class OrderListComponent implements OnInit {
     parame.skipCount = skipCount;
     parame.maxResultCount = 10;
     this.shipmentService
-      .getAllPreShipment({
-        transportationMode: null,
-        creationTime: null,
-        serviceUserId: null,
-        customerId: null,
-        fbaPickUpMethodType: null,
-        cargoPutAwayDate: null,
-        serviceCompanyId: null,
-        agentCustomerId: null,
-        contact: null,
-        shipmentNo: null,
-        destinationAddress: null,
-        originAddress: null,
-        originWarehouse: null,
-        country: null,
-        channel: null,
-        fbaNo: null,
-        creatorUser: null,
-        sorting: null,
-        /* 页大小 */
-        maxResultCount: 10,
-        /* 跳过指定条数 */
-        skipCount: skipCount,
-      })
+      .getAllPreShipment(parame)
       .subscribe((res) => {
         this.listOfData = res.items;
         this.preListTotal = res.totalCount;
@@ -168,8 +151,8 @@ export class OrderListComponent implements OnInit {
       (this.listSelectIds =
         e?.checkbox?.length > 0
           ? e.checkbox.map((item) => {
-              return item.id;
-            })
+            return item.id;
+          })
           : []);
   }
 }
