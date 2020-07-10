@@ -542,6 +542,9 @@ export class AddOrderComponent implements OnInit {
   }
   resetModal() {
     this.validateForm.reset();
+    this.totalQuantity = 0;
+    this.totalVolume = 0;
+    this.totalWeight = 0;
     this.validateForm.get('fbaPickUpMethodType').setValue(1);
     this.addressList = [
       {
