@@ -105,6 +105,21 @@ export class LocationExternalService extends BaseApi {
 
 
     /**
+     * @param url /CRM/LocationExternal/GetAllLocationByIds
+     * 根据id获取地点集合(包括FBA)
+     */
+
+    @POST('getAllLocationByIds')
+    getAllLocationByIds(
+        @Payload
+        _req: {} 
+
+    ): Observable<ListResultDto<ExternalLocationListDto>> {
+        return null as any
+    }
+
+
+    /**
      * @param url /CRM/LocationExternal/GetSharedList
      * 获取客户的共享地点(数据包含客户自己的、客户合作伙伴的、别人共享给客户的)
      */

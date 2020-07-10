@@ -1,15 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustomerService } from '../../../../service/crm/customer.service';
-import { CompanyConfigureService } from '../../../../service/platform/company-configure.service';
+
 import { LocationExternalService } from '../../../../service/crm/location-external.service';
-import { CommodityService } from '../../../../service/pub/commodity.service';
-import { OrganizationUnitService } from '../../../../service/platform/organization-unit.service';
+
 import { ShipmentService } from '../../../../service/fcm/shipment.service';
 import { CreateOrUpdateShipmentInput } from 'src/app/service/fcm';
 import { BookingService } from '../../../../service/csp/booking.service';
 import { ContactExternalService } from '../../../../service/crm/contact-external.service';
-import { CustomerSearchScope } from '@co/cds';
+import { CustomerSearchScope, CompanyConfigureService, OrganizationUnitService, CommodityService } from '@co/cds';
 import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-add-order',
@@ -83,6 +82,7 @@ export class AddOrderComponent implements OnInit {
   serviceCompanyList = [];
   originWarehouseList = [];
   agentCustomerList = [];
+  addLoading = false;
   customerFilter: any = {
     scope: CustomerSearchScope.Department,
   };
@@ -94,6 +94,8 @@ export class AddOrderComponent implements OnInit {
   totalVolume = 0; //总体积
   actionType = 'create';
   commitData: CreateOrUpdateShipmentInput = {
+    customerId: null,
+    transportationMode: null,
     customer: null,
     agentCustomer: null,
     agentCustomerId: null,
@@ -109,6 +111,8 @@ export class AddOrderComponent implements OnInit {
     shipmentNo: null,
     addressItems: null,
     booking: {
+      serviceCompanyId: null,
+      channel: null,
       fbaPickUpMethodType: null,
       contactId: null,
       deliveryDate: null,
@@ -164,32 +168,6 @@ export class AddOrderComponent implements OnInit {
       title: '操作',
 
       priority: 1,
-    },
-  ];
-  listOfData = [
-    {
-      name: 'John Brown',
-      chinese: 98,
-      math: 60,
-      english: 70,
-    },
-    {
-      name: 'Jim Green',
-      chinese: 98,
-      math: 66,
-      english: 89,
-    },
-    {
-      name: 'Joe Black',
-      chinese: 98,
-      math: 90,
-      english: 70,
-    },
-    {
-      name: 'Jim Red',
-      chinese: 88,
-      math: 99,
-      english: 89,
     },
   ];
 
@@ -348,11 +326,9 @@ export class AddOrderComponent implements OnInit {
   }
   // 获取业务员
   getSaleUsers(name = '', id) {
-    this.organizationUnitService
-      .getSaleUsers({ searchText: name, isOwnDepartment: true, sorting: '', maxResultCount: 1000, skipCount: 0 })
-      .subscribe((res) => {
-        this.serviceUserList = res.items;
-      });
+    this.organizationUnitService.getSaleUsers({ searchText: name, sorting: '', maxResultCount: 1000, skipCount: 0 }).subscribe((res) => {
+      this.serviceUserList = res.items;
+    });
   }
 
   // 品名选择器
@@ -395,6 +371,7 @@ export class AddOrderComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.valid) {
+      this.addLoading = true;
       this.commitData.customerId = this.validateForm.value.customerId;
       this.commitData.serviceUserId = this.validateForm.value.serviceUserId;
       this.commitData.transportationMode = this.validateForm.value.transportationMode;
@@ -419,13 +396,14 @@ export class AddOrderComponent implements OnInit {
         });
       });
       this.shipmentService.createOrUpdate(this.commitData).subscribe((res) => {
-        this.isVisible = false;
+        this.handleCancel();
 
         if (this.actionType === 'create') {
           this.message.success('新增成功');
         } else {
           this.message.success('修改成功');
         }
+        this.addLoading = false;
         this.getPreListData.emit();
       });
     }
@@ -545,6 +523,7 @@ export class AddOrderComponent implements OnInit {
     this.totalQuantity = 0;
     this.totalVolume = 0;
     this.totalWeight = 0;
+    this.country = null;
     this.validateForm.get('fbaPickUpMethodType').setValue(1);
     this.addressList = [
       {

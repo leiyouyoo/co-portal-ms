@@ -82,7 +82,9 @@ export class OrderListComponent implements OnInit {
         {
           text: this.translate.instant('Delete'),
           type: 'none',
-          click: () => { },
+          click: (e) => {
+            this.deleteLine({ id: e.id });
+          },
         },
         {
           text: this.translate.instant('Detail'),
@@ -154,5 +156,11 @@ export class OrderListComponent implements OnInit {
             return item.id;
           })
           : []);
+  }
+  deleteLine(id) {
+    this.shipmentService.delete(id).subscribe((res) => {
+      this.message.success('删除成功');
+      this.getPreListData();
+    });
   }
 }
