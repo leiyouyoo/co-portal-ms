@@ -1,15 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustomerService } from '../../../../service/crm/customer.service';
-import { CompanyConfigureService } from '../../../../service/platform/company-configure.service';
+
 import { LocationExternalService } from '../../../../service/crm/location-external.service';
-import { CommodityService } from '../../../../service/pub/commodity.service';
-import { OrganizationUnitService } from '../../../../service/platform/organization-unit.service';
+
 import { ShipmentService } from '../../../../service/fcm/shipment.service';
 import { CreateOrUpdateShipmentInput } from 'src/app/service/fcm';
 import { BookingService } from '../../../../service/csp/booking.service';
 import { ContactExternalService } from '../../../../service/crm/contact-external.service';
-import { CustomerSearchScope } from '@co/cds';
+import { CustomerSearchScope, CompanyConfigureService, OrganizationUnitService, CommodityService } from '@co/cds';
 import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-add-order',
@@ -95,6 +94,8 @@ export class AddOrderComponent implements OnInit {
   totalVolume = 0; //总体积
   actionType = 'create';
   commitData: CreateOrUpdateShipmentInput = {
+    customerId: null,
+    transportationMode: null,
     customer: null,
     agentCustomer: null,
     agentCustomerId: null,
@@ -104,12 +105,14 @@ export class AddOrderComponent implements OnInit {
     customsClearanceCustomerId: null,
     serviceUserId: null,
     pickUpTimeRange: null,
-    cargoReadyDate: null,
     incoterm: null,
     freightType: null,
     shipmentNo: null,
     addressItems: null,
     booking: {
+      serviceCompanyId: null,
+      channel: null,
+      cargoReadyDate: null,
       fbaPickUpMethodType: null,
       contactId: null,
       deliveryDate: null,
@@ -200,7 +203,7 @@ export class AddOrderComponent implements OnInit {
     this.getChannelList(); // 获取渠道
     this.getOriginWarehouseList(); //交货仓库
     this.getAgentCustomerList();
-    this.commitData.lineItems.forEach((element) => {});
+    this.commitData.lineItems.forEach((element) => { });
   }
   constructor(
     private fb: FormBuilder,
@@ -213,7 +216,7 @@ export class AddOrderComponent implements OnInit {
     private bookingService: BookingService,
     private contactExternalService: ContactExternalService,
     private message: NzMessageService,
-  ) {}
+  ) { }
 
   // 获取承运人
   getAgentCustomerList(name = null) {
@@ -323,11 +326,9 @@ export class AddOrderComponent implements OnInit {
   }
   // 获取业务员
   getSaleUsers(name = '', id) {
-    this.organizationUnitService
-      .getSaleUsers({ searchText: name, isOwnDepartment: true, sorting: '', maxResultCount: 1000, skipCount: 0 })
-      .subscribe((res) => {
-        this.serviceUserList = res.items;
-      });
+    this.organizationUnitService.getSaleUsers({ searchText: name, sorting: '', maxResultCount: 1000, skipCount: 0 }).subscribe((res) => {
+      this.serviceUserList = res.items;
+    });
   }
 
   // 品名选择器

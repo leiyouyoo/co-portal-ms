@@ -1,28 +1,28 @@
 <section class="content">
     <section class="content_number">
-        <span> 运单 / a176915d-0376-4d41-10fa-08d80ddc7b46 </span>
-        <span> so号 / a176915d-0376-4d41-10fa-08d80ddc7b46 </span>
+        <span> 运单 / {{ orderInfo?.shipmentNo || '--' }} </span>
+        <span> so号 / {{ orderInfo?.carrierBookingNo || '--' }} </span>
     </section>
     <section class="content_info">
         <div class="content_info_left">
             <nz-card class="car-box">
                 <div style="min-width: 800px;">
-                    <shipment-list-item *ngFor="let shipment of shipmentData?.items" [showDetailInfo]="false"
+                    <!-- <shipment-list-item *ngFor="let shipment of shipmentData?.items" [showDetailInfo]="false"
                         [shipment]="shipment">
-                    </shipment-list-item>
+                    </shipment-list-item> -->
                 </div>
             </nz-card>
             <nz-card class="line-box">
             </nz-card>
         </div>
         <nz-card class="content_info_right">
-            <order-info></order-info>
+            <order-info [orderInfo]="orderInfo"></order-info>
         </nz-card>
     </section>
     <nz-card>
         <nz-tabset>
             <nz-tab nzTitle="{{ 'Packing case list' | translate }}">
-                <booking-packing-list [bookingId]="bookingId"></booking-packing-list>
+                <!-- <booking-packing-list [bookingId]="bookingId"></booking-packing-list> -->
             </nz-tab>
             <nz-tab nzTitle="{{ 'Document' | translate }}">
 

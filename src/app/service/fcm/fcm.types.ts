@@ -2,8 +2,28 @@
     /**
      *  No Remark 
      */
+    export class QuantityDto {
+        
+         
+            /* 值 */ 
+            value?: number;
+         
+            /* 指定此数量的计量单位。
+对于重量，单位为 kg（千克）或 lbs（磅），
+对于体积，单位为 cbm（立方米）或 cbf（立方英尺） */ 
+            unit?: string;
+        
+        
+    }
+ 
+    /**
+     *  No Remark 
+     */
     export class ShipmentDto {
         
+         
+            
+            customerBookingId: string;
          
             /* SO号（OceanShipment） */ 
             carrierBookingNo: string;
@@ -52,6 +72,54 @@
 1 = SelfMade
 2 = Outsourcing */ 
             carrierType: number;
+         
+            
+            serviceUser: string;
+         
+            
+            customerName: string;
+         
+            
+            creationTime: string;
+         
+            
+            creator: string;
+         
+            
+            fbano: string;
+         
+            
+            referenceId: string;
+         
+            
+            expressNo: string;
+         
+            
+            containerNos: string;
+         
+            
+            containerCounts: string;
+         
+            
+            vesselName: string;
+         
+            
+            voyageNo: string;
+         
+            
+            commodity: string;
+         
+            
+            totalQuantity: QuantityDto;
+         
+            
+            totalWeight: QuantityDto;
+         
+            
+            totalVolume: QuantityDto;
+         
+            
+            remark: string;
          
             
             id: string;
@@ -132,23 +200,6 @@
          
             /* 跳过指定条数 */ 
             skipCount: number;
-        
-        
-    }
- 
-    /**
-     *  No Remark 
-     */
-    export class QuantityDto {
-        
-         
-            /* 值 */ 
-            value?: number;
-         
-            /* 指定此数量的计量单位。
-对于重量，单位为 kg（千克）或 lbs（磅），
-对于体积，单位为 cbm（立方米）或 cbf（立方英尺） */ 
-            unit?: string;
         
         
     }
@@ -291,6 +342,9 @@
             /* 预计在目的港交货日期，指必须交付货物的日期。 */ 
             deliveryDate: string;
          
+            
+            cargoReadyDate: string;
+         
             /* 品名 */ 
             commodity: string;
          
@@ -367,9 +421,6 @@
          
             
             agentCustomer: string;
-         
-            /* 在起始地交货日期（货物就绪时间） */ 
-            cargoReadyDate: string;
          
             /* 上门提货时间范围(解析后赋值到cargoreadydate) */ 
             pickUpTimeRange: string;

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ShipmentDto } from 'src/app/service/fcm';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'order-info',
@@ -7,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderInfoComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  orderInfo: ShipmentDto;
+
+  fbaPickUpMethodTypePipe = {
+    0: this.translate.instant('NotSet'),
+    1: this.translate.instant('DeliveryGoodsByMyself'),
+    2: this.translate.instant('PickUpByCityocean')
+  }
+
+  constructor(public translate: TranslateService) { }
 
   ngOnInit(): void {
   }

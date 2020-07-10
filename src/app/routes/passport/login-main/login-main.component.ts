@@ -174,7 +174,12 @@ export class loginMainComponent implements OnInit {
         }
         // location.href = data.nav.menus.MainMenu.items[0].url;
         if (option.isLoginIm) {
-          logOut();
+          try {
+            logOut();
+          } catch (ex) {
+            console.error(ex);
+          }
+
           await this.getUserSigService.imLogin();
           location.href = '#/dashboard';
         }

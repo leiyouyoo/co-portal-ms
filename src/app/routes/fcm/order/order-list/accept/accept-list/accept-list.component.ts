@@ -105,7 +105,7 @@ export class AcceptListComponent implements OnInit {
     private shipmentService: ShipmentService,
     private message: NzMessageService,
     private customerService: CustomerService,
-  ) {}
+  ) { }
 
   handleOk() {
     if (!this.acceptEditComponent.validate()) {
@@ -150,7 +150,6 @@ export class AcceptListComponent implements OnInit {
         serviceUserId: data.serviceUserId,
         transportationMode: data.transportationMode,
         agentCustomerId: data.agentCustomerId,
-        cargoReadyDate: null,
         incoterm: null,
         freightType: null,
         tradeType: 0,
@@ -162,6 +161,7 @@ export class AcceptListComponent implements OnInit {
         booking: {
           isCustomerCreate: false,
           customerBookingId: null,
+          cargoReadyDate: null,
           serviceCompanyId: data.serviceCompanyId,
           channel: data.channel,
           fbaPickUpMethodType: data.fbaPickUpMethodType,

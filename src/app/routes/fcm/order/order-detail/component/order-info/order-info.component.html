@@ -1,22 +1,32 @@
 <button nz-button nzType="default" style="float: right;">{{ 'Edit' | translate }}</button>
 <h3 style="clear: both;">{{ 'Basic Information' | translate }}</h3>
-<p>海运 FBA / 海卡（包税） / 自拼</p>
-<p>{{ 'salesman' | translate }}： TEST</p>
-<p>{{ 'Customers' | translate }}：佰禾（直客）</p>
-<p>{{ 'Create Order Date' | translate }}：2019-18-45</p>
-<p>{{ 'Create Order people' | translate }}：XXX</p>
+<p> {{ fbaPickUpMethodTypePipe[orderInfo?.fbaPickUpMethodType]  || '--' }} /
+    {{ orderInfo?.originAddress || '--' }} /
+    {{ orderInfo?.originWarehouse || '--' }}
+</p>
+<p>{{ 'salesman' | translate }}： {{ orderInfo?.serviceUser || '--' }}</p>
+<p>{{ 'Customers' | translate }}：{{ orderInfo?.customerName || '--' }}</p>
+<p>{{ 'Create Order Date' | translate }}：{{ orderInfo?.creationTime | date }}</p>
+<p>{{ 'Create Order people' | translate }}：{{ orderInfo?.creator || '--' }}</p>
 
 <h3>{{ 'Shipment info' | translate }}</h3>
-<p>{{ 'FBA number' | translate }}： kjsldfkjalsdfkjladksfjlakf</p>
-<p>Reference ID: XXXXXXXXXX</p>
-<p>{{ 'Express number' | translate }}：XXXXXXX</p>
-<p>{{ 'Cabinet number' | translate }}：</p>
-<p>{{ 'Cabinet type' | translate }}：</p>
-<p>{{ 'Course name/voyage' | translate }}：XXXXXXXX</p>
+<p>{{ 'FBA number' | translate }}： {{ orderInfo?.fbano || '--' }}</p>
+<p>Reference ID: {{ orderInfo?.referenceId || '--' }}</p>
+<p>{{ 'Express number' | translate }}：{{ orderInfo?.expressNo || '--' }}</p>
+<p>{{ 'Cabinet number' | translate }}：{{ orderInfo?.containerNos || '--' }} </p>
+<p>{{ 'Cabinet type' | translate }}： {{ orderInfo?.containerCounts || '--' }}</p>
+<p>{{ 'Course name/voyage' | translate }}：{{ orderInfo?.voyageNo || '--' }}</p>
 
 <h3>{{ 'Goods describe' | translate }}</h3>
-<p>燃气热水器</p>
-<p>500CTNS /4000KG /200CBM</p>
+<p>{{ orderInfo?.commodity || '--' }}</p>
+<p>
+    {{ orderInfo?.totalQuantity?.value }}
+    {{ orderInfo?.totalQuantity?.unit }} /
+    {{ orderInfo?.totalWeight?.value }}
+    {{ orderInfo?.totalWeight?.unit }} /
+    {{ orderInfo?.totalVolume?.value }}
+    {{ orderInfo?.totalVolume?.unit }}
+</p>
 
 <h3>{{ 'Remark' | translate }}</h3>
-<p>箱子上贴了迈买云腾（美国站）1到26小小 的侧唛</p>
+<p>{{ orderInfo?.remark || '--' }}</p>
