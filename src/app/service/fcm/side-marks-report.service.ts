@@ -30,21 +30,6 @@ export class SideMarksReportService extends BaseApi {
 
 
     /**
-     * @param url /FCM/SideMarksReport/PreCheck
-     * 
-     */
-
-    @POST('preCheck')
-    preCheck(
-        @Payload
-        _req: {} 
-
-    ): Observable<any> {
-        return null as any
-    }
-
-
-    /**
      * @param url /FCM/SideMarksReport/GetReport
      * 
      */
@@ -61,13 +46,13 @@ export class SideMarksReportService extends BaseApi {
 
     /**
      * @param url /FCM/SideMarksReport/GetSideMarksQrCodeData
-     * 
+     * 获取侧唛二维码信息
      */
 
     @GET('getSideMarksQrCodeData')
     getSideMarksQrCodeData(
         @Payload
-        _req: {id?:string,fbaNo?:string} 
+        _req: {bookingid?:string,fbaNo?:string} 
 
     ): Observable<SideMarksData> {
         return null as any

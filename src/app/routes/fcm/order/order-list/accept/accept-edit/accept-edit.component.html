@@ -1,5 +1,5 @@
 <div style="height: 100%;">
-  <div class="orderNo">{{ 'Waybill number' | translate }}：FONB20060001</div>
+  <div class="orderNo">{{ 'Waybill number' | translate }}:{{ fbaNo }}</div>
   <form nzLayout="vertical" nz-form [formGroup]="validateForm" style="height: 100%; display: flex; flex-direction: column;">
     <div nz-row [nzGutter]="24">
       <div nz-col [nzSpan]="6">
@@ -10,8 +10,7 @@
               nzAllowClear
               nzShowSearch
               formControlName="agentCustomerId"
-              (nzOnSearch)="getCustomerList($event)"
-              (ngModelChange)="bindCustomerData($event)"
+              (nzOnSearch)="getAgentCustomerList($event)"
               [nzPlaceHolder]="'Please enter' | translate"
             >
               <nz-option *ngFor="let item of agentCustomerList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
@@ -177,7 +176,7 @@
 
       <div nz-col [nzSpan]="6">
         <nz-form-item>
-          <nz-form-label nzFor="customsClearanceCustomerId">{{ 'Customs broker' | translate }}</nz-form-label>
+          <nz-form-label nzFor="customsClearanceCustomerId">{{ 'Customs clearance broker' | translate }}</nz-form-label>
           <nz-form-control [nzErrorTip]="'Please enter' | translate">
             <nz-select
               nzShowSearch
