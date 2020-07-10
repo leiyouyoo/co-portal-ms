@@ -11,16 +11,8 @@
           <button nz-button nzType="default" (click)="refresh()">刷新</button>
         </div>
         <div class="table-style">
-          <co-st
-            #st
-            [data]="listOfData"
-            [columns]="columns"
-            [scroll]="{ x: '1200px' }"
-            [showFilters]="false"
-            [total]="preListTotal"
-            [page]="{ front: false }"
-            (change)="checkChange($event)"
-          >
+          <co-st #st [data]="listOfData" [columns]="columns" [scroll]="{ x: '1200px' }" [showFilters]="false"
+            [total]="preListTotal" [page]="{ front: false }" (change)="checkChange($event)">
           </co-st>
         </div>
         <app-add-order [isVisible]="isAddVisible" (getPreListData)="getPreListData()"></app-add-order>

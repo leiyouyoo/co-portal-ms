@@ -2,6 +2,83 @@
     /**
      *  No Remark 
      */
+    export class PreShipmentListInput {
+        
+         
+            /* 
+0 = NotSet
+1 = Ocean
+2 = Air
+3 = Truck
+4 = Rail */ 
+            transportationMode: number;
+         
+            
+            creationTime: string;
+         
+            
+            serviceUserId: number;
+         
+            
+            customerId: string;
+         
+            /* 
+0 = NotSet
+1 = DeliveryGoodsByMyself
+2 = PickUpByCityocean */ 
+            fbaPickUpMethodType: number;
+         
+            
+            cargoPutAwayDate: string;
+         
+            
+            serviceCompanyId: string;
+         
+            
+            agentCustomerId: string;
+         
+            
+            contact: string;
+         
+            
+            shipmentNo: string;
+         
+            
+            destinationAddress: string;
+         
+            
+            originAddress: string;
+         
+            
+            originWarehouse: string;
+         
+            
+            country: string;
+         
+            
+            channel: string;
+         
+            
+            fbaNo: string;
+         
+            
+            creatorUser: string;
+         
+            /* 排序 */ 
+            sorting: string;
+         
+            /* 页大小 */ 
+            maxResultCount: number;
+         
+            /* 跳过指定条数 */ 
+            skipCount: number;
+        
+        
+    }
+ 
+    /**
+     *  No Remark 
+     */
     export class QuantityDto {
         
          

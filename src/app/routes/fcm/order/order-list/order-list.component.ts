@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AddOrderComponent } from '../add-order/add-order.component';
 import { STColumn, STColumnBadge } from '@co/cbc';
 import { EnterWarehouseModalComponent } from './enter-warehouse-modal/enter-warehouse-modal.component';
-import { ShipmentService } from 'src/app/service/fcm';
+import { ShipmentService, PreShipmentListInput } from 'src/app/service/fcm';
 import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd';
 
@@ -81,7 +81,7 @@ export class OrderListComponent implements OnInit {
         {
           text: this.translate.instant('Delete'),
           type: 'none',
-          click: () => {},
+          click: () => { },
         },
       ],
     },
@@ -90,18 +90,18 @@ export class OrderListComponent implements OnInit {
   listSelectIds: Array<string> = []; // 预报列表选中值
   preListTotal: number = 0; //预报列表总条数
 
-  constructor(private shipmentService: ShipmentService, public translate: TranslateService, private message: NzMessageService) {}
+  constructor(private shipmentService: ShipmentService, public translate: TranslateService, private message: NzMessageService) { }
 
   ngOnInit() {
     this.getPreListData();
   }
 
   getPreListData(skipCount = 0) {
+    let parame = new PreShipmentListInput();
+    parame.skipCount = skipCount;
+    parame.maxResultCount = 10;
     this.shipmentService
-      .getAllPreShipment({
-        skipCount: skipCount,
-        maxResultCount: 10,
-      })
+      .getAllPreShipment(parame)
       .subscribe((res) => {
         this.listOfData = res.items;
         this.preListTotal = res.totalCount;
@@ -145,8 +145,8 @@ export class OrderListComponent implements OnInit {
       (this.listSelectIds =
         e?.checkbox?.length > 0
           ? e.checkbox.map((item) => {
-              return item.id;
-            })
+            return item.id;
+          })
           : []);
   }
 }
