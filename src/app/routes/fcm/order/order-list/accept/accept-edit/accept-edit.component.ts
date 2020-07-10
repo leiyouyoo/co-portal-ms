@@ -177,7 +177,7 @@ export class AcceptEditComponent implements OnInit {
         commodity: res.booking.commodity,
         expressNo: res.fbaShipment.expressNo,
         expressNoRemark: res.fbaShipment.expressNoRemark,
-        lineItems: arr,
+        lineItems: [],
       });
 
       this.validateForm.pa;
