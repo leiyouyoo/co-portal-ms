@@ -107,7 +107,6 @@ export class AddOrderComponent implements OnInit {
     shipmentNo: null,
     addressItems: null,
     booking: {
-      isCustomerCreate: null,
       fbaPickUpMethodType: null,
       contactId: null,
       deliveryDate: null,
