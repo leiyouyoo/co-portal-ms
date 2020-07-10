@@ -11,7 +11,12 @@
       <nz-form-item>
         <nz-form-label nzRequired nzFor="customer">客户</nz-form-label>
         <nz-form-control nzErrorTip="Please input your customer!">
-          <co-customer-picker style="width: 100%;" formControlName="customerId" [coFilter]="customerFilter" (coBlur)="getOtherData()">
+          <co-customer-picker
+            style="width: 100%;"
+            formControlName="customerId"
+            [coFilter]="customerFilter"
+            (ngModelChange)="getOtherData()"
+          >
           </co-customer-picker>
         </nz-form-control>
       </nz-form-item>
@@ -80,8 +85,8 @@
       <nz-form-item>
         <nz-form-label nzFor="originWarehouseId">交货仓库</nz-form-label>
         <nz-form-control>
-          <nz-select nzAllowClear nzShowSearch id="originWarehouseId" formControlName="originWarehouseId" (ngModelChange)="getData($event)">
-            <nz-option *ngFor="let item of originWarehouseList" [nzValue]="item" [nzLabel]="item.name"></nz-option>
+          <nz-select nzAllowClear nzShowSearch id="originWarehouseId" formControlName="originWarehouseId" (ngModelChange)="getData()">
+            <nz-option *ngFor="let item of originWarehouseList" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -164,7 +169,7 @@
       <span
         >送货地址<span *ngIf="addressList.length > 1">{{ i + 1 }}</span></span
       >
-      <nz-select nzAllowClear nzShowSearch [(ngModel)]="item.address" (ngModelChange)="getTradeType(item.address, i)">
+      <nz-select nzAllowClear nzShowSearch [(ngModel)]="item.address" (ngModelChange)="getTradeType(item, i)">
         <nz-option nzCustomContent *ngFor="let item of addressItemList" [nzValue]="item" [nzLabel]="item.unlocode">{{
           item.name +
             '(' +

@@ -24,12 +24,14 @@ export class AddOrderComponent implements OnInit {
       address: {
         name: null,
         city: null,
-        state: null,
         country: null,
-        countryCode: null,
         zip: null,
         unlocode: null,
-        timezone: null,
+        id: null,
+        streetAddress: null,
+        province: null,
+        streetAddress2: null,
+        isForeign: null,
       },
       tableList: [
         {
@@ -54,12 +56,14 @@ export class AddOrderComponent implements OnInit {
           address: {
             name: null,
             city: null,
-            state: null,
             country: null,
-            countryCode: null,
             zip: null,
             unlocode: null,
-            timezone: null,
+            id: null,
+            streetAddress: null,
+            province: null,
+            streetAddress2: null,
+            isForeign: null,
           },
         },
       ],
@@ -88,7 +92,50 @@ export class AddOrderComponent implements OnInit {
   totalWeight = 0; // 总重量
   totalVolume = 0; //总体积
   actionType = 'create';
-  commitData: CreateOrUpdateShipmentInput;
+  commitData: CreateOrUpdateShipmentInput = {
+    customer: null,
+    agentCustomer: null,
+    agentCustomerId: null,
+    tradeType: null,
+    transferNo: null,
+    customsCustomerId: null,
+    customsClearanceCustomerId: null,
+    serviceUserId: null,
+    pickUpTimeRange: null,
+    cargoReadyDate: null,
+    incoterm: null,
+    freightType: null,
+    shipmentNo: null,
+    addressItems: null,
+    booking: {
+      serviceCompanyId: null,
+      channel: null,
+      fbaPickUpMethodType: null,
+      contactId: null,
+      deliveryDate: null,
+      commodity: null,
+      destinationWarehouseId: null,
+      customerBookingId: null,
+      originAddressId: null,
+      originWarehouseId: null,
+      destinationPortId: null,
+      originPortId: null,
+      destinationAddressId: null,
+      isCustomerCreate: false,
+    },
+    oceanShipment: { carrierBookingNo: null },
+    fbaShipment: {
+      expressNo: null,
+      warehouseNo: null,
+      expressNoRemark: null,
+      huoLalaOrderNo: null,
+      fbaDeliveryType: null,
+      fbaDeliveryTypeRemark: null,
+      cargoPutAwayDate: null,
+    },
+    lineItems: [],
+    id: null,
+  };
 
   listOfColumn = [
     {
@@ -177,7 +224,7 @@ export class AddOrderComponent implements OnInit {
     });
     this.getByPlaceOrLocation(); // 获取口岸
     this.getChannelList(); // 获取渠道
-    this.getDestinationWarehouseList(); //交货仓库
+    this.getOriginWarehouseList(); //交货仓库
     this.getAgentCustomerList();
     this.commitData.lineItems.forEach((element) => {});
   }
@@ -225,7 +272,6 @@ export class AddOrderComponent implements OnInit {
       this.commitData = res;
 
       this.validateForm.patchValue(this.commitData);
-      this.getOtherData();
       this.validateForm.get('carrierBookingNo').setValue(this.commitData.oceanShipment.carrierBookingNo);
       this.validateForm.get('transportationMode').setValue(this.commitData.transportationMode);
       this.validateForm.get('contactId').setValue(this.commitData.booking.contactId);
@@ -242,26 +288,32 @@ export class AddOrderComponent implements OnInit {
       this.validateForm.get('fbaPickUpMethodType').setValue(this.commitData.booking.fbaPickUpMethodType);
       this.validateForm.get('originAddressId').setValue(this.commitData.booking.originAddressId);
       this.validateForm.get('expressNo').setValue(this.commitData.fbaShipment.expressNo);
-      this.validateForm.get('customer').setValue(this.commitData.customerId);
+      this.validateForm.get('customerId').setValue(this.commitData.customerId);
       this.validateForm.get('warehouseNo').setValue(this.commitData.fbaShipment.warehouseNo);
       this.validateForm.get('expressNoRemark').setValue(this.commitData.fbaShipment.expressNoRemark);
       this.validateForm.get('fbaDeliveryType').setValue(this.commitData.fbaShipment.fbaDeliveryType);
       this.validateForm.get('fbaDeliveryTypeRemark').setValue(this.commitData.fbaShipment.fbaDeliveryTypeRemark);
       this.validateForm.get('huoLalaOrderNo').setValue(this.commitData.fbaShipment.huoLalaOrderNo);
-      const commodity = this.commitData.booking.commodity.replace(reg, ',').split(',');
-      this.validateForm.get('commodity').setValue(commodity);
-      this.getAllForUiPicker(commodity);
+      this.getOtherData();
       this.commitData.addressItems.forEach((element, i) => {
         this.addressList[i].address = element.address;
         this.addressList[i].tableList = element.lineItems;
       });
+      const commodity = this.commitData.booking.commodity.replace(reg, ',').split(',');
+      this.validateForm.get('commodity').setValue(commodity);
+      this.getAllForUiPicker(commodity);
     });
     this.isVisible = true;
 
-    this.getDestinationWarehouseList();
+    this.getOriginWarehouseList();
+
     this.getByPlaceOrLocation();
     this.getChannelList(); // 获取渠道
     this.getSaleUsers(null, null);
+    setTimeout(() => {
+      this.count();
+      this.getData();
+    }, 100);
   }
   // 获取渠道
   getChannelList() {
@@ -284,7 +336,7 @@ export class AddOrderComponent implements OnInit {
     });
   }
   // 获取交货仓库
-  getDestinationWarehouseList() {
+  getOriginWarehouseList() {
     this.locationExternalService.getFBALocations({ isCityocean: true }).subscribe((res) => {
       this.originWarehouseList = res.items;
     });
@@ -354,14 +406,14 @@ export class AddOrderComponent implements OnInit {
       this.commitData.booking.contactId = this.validateForm.value.contactId;
       this.commitData.booking.channel = this.validateForm.value.channel;
       if (this.validateForm.value.originWarehouseId) {
-        this.commitData.booking.originWarehouseId = this.validateForm.value.originWarehouseId.id;
+        this.commitData.booking.originWarehouseId = this.validateForm.value.originWarehouseId;
       }
       this.commitData.pickUpTimeRange = this.validateForm.value.pickUpTimeRange;
       this.commitData.booking.commodity = this.validateForm.value.commodity.toString().replace(reg, '/');
       this.commitData.oceanShipment.carrierBookingNo = this.validateForm.value?.carrierBookingNo;
-
       this.addressList.forEach((element, index) => {
         element.tableList.forEach((e, i) => {
+          e.address = element.address;
           this.commitData.lineItems.push(e);
         });
       });
@@ -387,12 +439,14 @@ export class AddOrderComponent implements OnInit {
       address: {
         name: null,
         city: null,
-        state: null,
         country: null,
-        countryCode: null,
         zip: null,
         unlocode: null,
-        timezone: null,
+        id: null,
+        streetAddress: null,
+        province: null,
+        streetAddress2: null,
+        isForeign: null,
       },
       tableList: [
         {
@@ -417,12 +471,14 @@ export class AddOrderComponent implements OnInit {
           address: {
             name: null,
             city: null,
-            state: null,
             country: null,
-            countryCode: null,
             zip: null,
             unlocode: null,
-            timezone: null,
+            id: null,
+            streetAddress: null,
+            province: null,
+            streetAddress2: null,
+            isForeign: null,
           },
         },
       ],
@@ -457,12 +513,14 @@ export class AddOrderComponent implements OnInit {
       address: {
         name: null,
         city: null,
-        state: null,
         country: null,
-        countryCode: null,
         zip: null,
         unlocode: null,
-        timezone: null,
+        id: null,
+        streetAddress: null,
+        province: null,
+        streetAddress2: null,
+        isForeign: null,
       },
     });
   }
@@ -483,33 +541,38 @@ export class AddOrderComponent implements OnInit {
   }
   resetModal() {
     this.validateForm.reset();
+    this.totalQuantity = 0;
+    this.totalVolume = 0;
+    this.totalWeight = 0;
     this.validateForm.get('fbaPickUpMethodType').setValue(1);
     this.addressList = [
       {
         address: {
           name: null,
           city: null,
-          state: null,
           country: null,
-          countryCode: null,
           zip: null,
           unlocode: null,
-          timezone: null,
+          id: null,
+          streetAddress: null,
+          province: null,
+          streetAddress2: null,
+          isForeign: null,
         },
         tableList: [
           {
             shipmentId: null,
             totalQuantity: {
               value: 0,
-              unit: null,
+              unit: 'CTN',
             },
             totalWeight: {
               value: 0,
-              unit: null,
+              unit: 'KG',
             },
             totalVolume: {
               value: 0,
-              unit: null,
+              unit: 'CBM',
             },
             purchaseOrderNo: null,
             productName: null,
@@ -519,12 +582,14 @@ export class AddOrderComponent implements OnInit {
             address: {
               name: null,
               city: null,
-              state: null,
               country: null,
-              countryCode: null,
               zip: null,
               unlocode: null,
-              timezone: null,
+              id: null,
+              streetAddress: null,
+              province: null,
+              streetAddress2: null,
+              isForeign: null,
             },
           },
         ],
@@ -554,9 +619,13 @@ export class AddOrderComponent implements OnInit {
     });
   }
   // 获取国家
-  getData(value) {
-    if (value) {
-      this.validateForm.get('country').setValue(value.country);
+  getData() {
+    if (this.validateForm.value.originWarehouseId) {
+      this.originWarehouseList.forEach((element) => {
+        if (element.id === this.validateForm.value.originWarehouseId) {
+          this.validateForm.get('country').setValue(element.country);
+        }
+      });
     }
   }
 }
