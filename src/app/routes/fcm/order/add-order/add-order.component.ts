@@ -257,9 +257,9 @@ export class AddOrderComponent implements OnInit {
   }
 
   // 根据ID拿订单数据
-  getForUpdate() {
+  getForUpdate(id) {
     const reg = new RegExp('/', 'g');
-    this.shipmentService.getForUpdate({ id: '155363F8-EC84-42D3-123C-08D823E7F938' }).subscribe((res) => {
+    this.shipmentService.getForUpdate({ id }).subscribe((res) => {
       console.log(res);
       this.commitData = res;
 
