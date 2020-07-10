@@ -17,7 +17,6 @@ export class AcceptEditComponent implements OnInit {
   customerList: any;
   cantactList: any;
   addressList: any;
-  originAddressList: any;
   saleUserList: any;
   channelList: any;
   serviceCompanyList: any;
@@ -147,20 +146,13 @@ export class AcceptEditComponent implements OnInit {
         fbaPickUpMethodType: res.booking.fbaPickUpMethodType,
         originAddressId: res.booking.originAddressId,
         originWarehouseId: res.booking.originWarehouseId,
-        deliveryDate: res.booking.deliveryDate,
+        deliveryDate: res.pickUpTimeRange,
         fbaDeliveryType: res.fbaShipment.fbaDeliveryType,
         fbaDeliveryTypeRemark: res.fbaShipment.fbaDeliveryTypeRemark,
         commodity: res.booking.commodity,
         expressNo: res.fbaShipment.expressNo,
         expressNoRemark: res.fbaShipment.expressNoRemark,
       });
-    });
-  }
-
-  // 获取交货位置
-  getLocationByCustomer(id) {
-    this.locationExternalService.getLocationByCustomer({ customerId: id }).subscribe((res) => {
-      this.originAddressList = res.items;
     });
   }
 
@@ -247,11 +239,14 @@ export class AcceptEditComponent implements OnInit {
 
         this.validateForm.patchValue({
           customerType: key,
+          contactId: null,
         });
       }
       this.getCustomerLocationAndFBALocations(customerId);
       this.getContactList(customerId);
-      this.getLocationByCustomer(customerId);
+      this.validateForm.controls.lineItems.controls.forEach((e) => {
+        e.controls.address.reset();
+      });
     }
   }
 
