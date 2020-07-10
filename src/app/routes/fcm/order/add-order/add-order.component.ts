@@ -90,6 +90,8 @@ export class AddOrderComponent implements OnInit {
   totalVolume = 0; //总体积
   actionType = 'create';
   commitData: CreateOrUpdateShipmentInput = {
+    customer: null,
+    agentCustomer: null,
     agentCustomerId: null,
     tradeType: null,
     transferNo: null,

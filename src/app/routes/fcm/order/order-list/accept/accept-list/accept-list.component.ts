@@ -144,6 +144,8 @@ export class AcceptListComponent implements OnInit {
 
     this.shipmentService
       .createOrUpdate({
+        customer: null,
+        agentCustomer: null,
         customerId: data.customerId,
         serviceUserId: data.serviceUserId,
         transportationMode: data.transportationMode,
