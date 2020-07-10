@@ -97,28 +97,9 @@ export class OrderListComponent implements OnInit {
   }
 
   getPreListData(skipCount = 0) {
-    let parame: PreShipmentListInput = {
-      transportationMode: null,
-      creationTime: null,
-      serviceUserId: null,
-      customerId: null,
-      fbaPickUpMethodType: null,
-      cargoPutAwayDate: null,
-      serviceCompanyId: null,
-      agentCustomerId: null,
-      contact: null,
-      shipmentNo: null,
-      destinationAddress: null,
-      originAddress: null,
-      originWarehouse: null,
-      country: null,
-      channel: null,
-      fbaNo: null,
-      creatorUser: null,
-      sorting: null,
-      skipCount: skipCount,
-      maxResultCount: 10,
-    }
+    let parame = new PreShipmentListInput();
+    parame.skipCount = skipCount;
+    parame.maxResultCount = 10;
     this.shipmentService
       .getAllPreShipment(parame)
       .subscribe((res) => {
