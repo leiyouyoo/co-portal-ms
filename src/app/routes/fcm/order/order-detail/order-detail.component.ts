@@ -9,7 +9,7 @@ import { ShipmentService, ShipmentDto } from 'src/app/service/fcm';
 export class OrderDetailComponent implements OnInit {
 
   id: string = null;
-  orderInfo: ShipmentDto;
+  orderInfo: any;
 
   bookingId = "09522afc-cf59-401a-2a3a-08d82267d2b6";
 
