@@ -2,7 +2,7 @@
 <ul class="co-portal__menu-wrap" #menu1>
   <li class="co-portal__menu-item co-portal__menu-item-active co-portal__menu-item-main">
     <a co-submenu #submenu [nzContent]="contentTemplate1" [coPopoverOrigin]="menu1" [nzNoAnimation]="true"
-      coPopoverTrigger="click" coPopoverPlacement="rightTop">
+      coPopoverTrigger="hover" coPopoverPlacement="rightTop">
       <i nz-icon nzIconfont="iconsetting" class="co-portal__menu-item-icon"></i>
       <span *ngIf="!pro.onlyIcon" class="co-portal__menu-item-title-text">
         {{ 'Menu' | translate }}
@@ -11,7 +11,7 @@
     </a>
   </li>
   <ng-template #contentTemplate1>
-    <div nz-row>
+    <div nz-row style="height: 100%;">
       <div nz-col [nzSpan]="12" class="co-portal__menu-category">
         <div class="co-portal__menu-categoryitem">
           <i nz-icon nzIconfont="iconsetting" class="co-categoryitem-categoryitem-icon"></i>
@@ -167,27 +167,26 @@
   <div>
     <nz-divider></nz-divider>
     <li class="co-portal__menu-item">
-      <a [routerLink]="['/platform/user']" nzTooltipTitle="E-commerce" nzTooltipPlacement="right" nz-tooltip>
+      <a [routerLink]="['/platform/job']" nzTooltipTitle="E-commerce" nzTooltipPlacement="right" nz-tooltip>
         <i nz-icon nzIconfont="iconsetting" class="co-portal__menu-item-icon"></i>
         <span class="co-portal__menu-item-title-text">
-          {{ 'E-commerce' | translate }}
+          职务
         </span>
-
       </a>
     </li>
   </div>
   <div>
     <nz-divider></nz-divider>
     <li class="co-portal__menu-item">
-      <a [routerLink]="['/platform/role']" nzTooltipTitle="E-commerce" nzTooltipPlacement="right" nz-tooltip>
+      <a [routerLink]="['/platform/position']" nzTooltipTitle="E-commerce" nzTooltipPlacement="right" nz-tooltip>
         <i nz-icon nzIconfont="iconsetting" class="co-portal__menu-item-icon"></i>
         <span class="co-portal__menu-item-title-text">
-          {{ 'E-commerce' | translate }}
+          职位
         </span>
       </a>
     </li>
   </div>
-  <div>
+  <!-- <div>
     <nz-divider></nz-divider>
     <li class="co-portal__menu-item">
       <a [routerLink]="['/fcm/order']" nzTooltipTitle="E-commerce" nzTooltipPlacement="right" nz-tooltip>
@@ -197,5 +196,5 @@
         </span>
       </a>
     </li>
-  </div>
+  </div> -->
 </ul>
