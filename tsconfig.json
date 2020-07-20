@@ -17,8 +17,6 @@
       "dom"
     ],
     "paths": {
-      "ngx-planet": ["packages/planet/src/public-api.ts"],
-      "ngx-planet/*": ["packages/planet/src/*"],
       "@shared": [
         "src/app/shared/index"
       ],
@@ -28,10 +26,13 @@
       "@env/*": [
         "src/environments/*"
       ],
-      "@brand": [
-        "src/app/layout/pro/index"
+      "@layout": [
+        "src/app/layout/default/index"
       ],
       "@im": ["src/app/shared/im/index"],
+      "@platform-app/*": [
+        "apps/palform/*"
+      ],
     },
     "typeRoots": [
       "node_modules/@types"

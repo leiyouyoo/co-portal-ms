@@ -2,9 +2,9 @@
 import { registerLocaleData } from '@angular/common';
 import ngEn from '@angular/common/locales/en';
 import ngZh from '@angular/common/locales/zh';
-import ngZhTw from '@angular/common/locales/zh-Hant';
 import { Injectable } from '@angular/core';
-import { CoI18NService, CoLocaleService, en_US as delonEnUS, SettingsService, zh_CN as delonZhCn, zh_TW as delonZhTw } from '@co/common';
+import { CoI18NService } from '@co/core';
+import { CoLocaleService, en_US as delonEnUS, SettingsService, zh_CN as coZhCn } from '@co/common';
 import { TranslateService } from '@ngx-translate/core';
 import { enUS as dfEn, zhCN as dfZhCn, zhTW as dfZhTw } from 'date-fns/locale';
 import { en_US as zorroEnUS, NzI18nService, zh_CN as zorroZhCN, zh_TW as zorroZhTW } from 'ng-zorro-antd/i18n';
@@ -16,7 +16,7 @@ interface LangData {
   ng: any;
   zorro: any;
   date: any;
-  delon: any;
+  co: any;
   abbr: string;
 }
 
@@ -27,7 +27,7 @@ const LANGS: { [key: string]: LangData } = {
     ng: ngZh,
     zorro: zorroZhCN,
     date: dfZhCn,
-    delon: delonZhCn,
+    co: coZhCn,
     abbr: '🇨🇳',
   },
   'en-US': {
@@ -35,7 +35,7 @@ const LANGS: { [key: string]: LangData } = {
     ng: ngEn,
     zorro: zorroEnUS,
     date: dfEn,
-    delon: delonEnUS,
+    co: delonEnUS,
     abbr: '🇬🇧',
   },
 };
@@ -53,7 +53,7 @@ export class I18NService implements CoI18NService {
   constructor(
     private settings: SettingsService,
     private nzI18nService: NzI18nService,
-    private delonLocaleService: CoLocaleService,
+    private coLocaleService: CoLocaleService,
     private translate: TranslateService,
   ) {
     // `@ngx-translate/core` 预先知道支持哪些语言
@@ -80,7 +80,7 @@ export class I18NService implements CoI18NService {
     registerLocaleData(item.ng);
     this.nzI18nService.setLocale(item.zorro);
     this.nzI18nService.setDateLocale(item.date);
-    this.delonLocaleService.setLocale(item.delon);
+    this.coLocaleService.setLocale(item.co);
   }
 
   get change(): Observable<string> {
@@ -95,18 +95,22 @@ export class I18NService implements CoI18NService {
     this.updateLangData(lang);
     this.translate.use(lang).subscribe(() => this.change$.next(lang));
   }
+
   /** 获取语言列表 */
   getLangs() {
     return this._langs;
   }
+
   /** 翻译 */
   fanyi(key: string, interpolateParams?: {}) {
     return this.translate.instant(key, interpolateParams);
   }
+
   /** 默认语言 */
   get defaultLang() {
     return this._default;
   }
+
   /** 当前语言 */
   get currentLang() {
     return this.translate.currentLang || this.translate.getDefaultLang() || this._default;

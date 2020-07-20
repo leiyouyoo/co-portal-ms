@@ -1,13 +1,20 @@
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { TitleService } from '@co/common';
-// import { VERSION as VERSION_CO } from '@co/core';
+
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { VERSION as VERSION_ZORRO } from 'ng-zorro-antd/version';
+
 import { filter } from 'rxjs/operators';
-import { AppRootContext } from '../../apps/common';
-import { Planet, SwitchModes, GlobalEventDispatcher, ApplicationStatus, PlanetApplication } from '../../packages/planet/src/public-api';
+
+import { TitleService } from '@co/common';
+import { Planet, SwitchModes } from '@co/cms';
+import { ReuseTabService } from '@co/cbc';
+
 import { GetUserSigService } from '@im';
+
+/**
+ * 应用入口组件
+ */
 @Component({
   selector: 'app-root',
   template: ` <router-outlet></router-outlet>`,
@@ -15,19 +22,14 @@ import { GetUserSigService } from '@im';
 export class AppComponent implements OnInit {
   activeAppNames: string[] = [];
 
-  get loadingDone() {
-    return this.planet.loadingDone;
-  }
-
   constructor(
     el: ElementRef,
     renderer: Renderer2,
     private planet: Planet,
-    private globalEventDispatcher: GlobalEventDispatcher,
-    public appRootContext: AppRootContext,
     private router: Router,
     private titleSrv: TitleService,
     private modalSrv: NzModalService,
+    private reuseTabService: ReuseTabService,
     private getUserSigService: GetUserSigService,
   ) {
     renderer.setAttribute(el.nativeElement, 'ng-zorro-version', VERSION_ZORRO.full);
@@ -38,60 +40,38 @@ export class AppComponent implements OnInit {
       this.titleSrv.setTitle();
       this.modalSrv.closeAll();
     });
+
     // 登陆Im
-    try {
-      this.getUserSigService.imLogin();
-    } catch (e) {
-      console.error(e);
-    }
+    // try {
+    //   this.getUserSigService.imLogin();
+    // } catch (e) {
+    //   console.error(e);
+    // }
+
+    // // 设置微服务选项
     // this.planet.setOptions({
     //   switchMode: SwitchModes.coexist,
     //   errorHandler: error => {
-    //     console.log(`错误`, '加载资源失败' + JSON.stringify(error));
+    //     console.error(`Failed to load resource, error:`, error);
     //   }
     // });
 
-    // this.appRootContext.setName(`my name is app root context`);
-
+    // // 设置门户应用数据
     // this.planet.setPortalAppData({
-    //   appRootContext: this.appRootContext
+    //   data: this.reuseTabService
     // });
 
-    // const appHostClass = 'thy-layout';
-    // this.planet.registerApps([
-    //   {
-    //     name: 'app3',
-    //     hostParent: '#app-host-container',
-    //     hostClass: appHostClass,
-    //     routerPathPrefix: '/app3',
-    //     selector: 'app3-root',
-    //     resourcePathPrefix: '/static/app3/',
-    //     preload: true,
-    //     switchMode: SwitchModes.coexist,
-    //     loadSerial: false,
-    //     // prettier-ignore
-    //     scripts: [
-    //       'main.js'
-    //       // 'polyfills.js'
-    //     ],
-    //     // styles: ['assets/main.css'],
-    //     manifest: 'static/app3/manifest.json',
-    //     extra: {
-    //       name: '应用3',
-    //       color: '#ffa415'
-    //     }
-    //   },
-    // ]);
+    // // 注册配置中的应用
+    // // tslint:disable-next-line:quotemark
+    // this.planet.registerApps(window["CO_PLATFORM"].apps);
 
+    // // 启动
     // this.planet.start();
 
-    // this.globalEventDispatcher.register('openADetail').subscribe(event => {
-    //   // this.thyDialog.open(ADetailComponent);
-    // });
-
+    // // 订阅子应用加载事件
     // this.planet.appsLoadingStart.subscribe(event => {
-    //   this.activeAppNames = event.shouldLoadApps.map(item => item.name);
-    //   console.log(`active app names: ${this.activeAppNames.join(',')}`);
+    //   const activeAppNames = event.shouldLoadApps.map(item => item.name);
+    //   console.log(`激活子应用: ${activeAppNames.join(',')}`);
     // });
   }
 }

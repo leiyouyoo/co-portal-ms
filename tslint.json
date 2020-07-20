@@ -157,7 +157,7 @@
       [
         "@core",
         "@shared",
-        "@brand",
+        "@layout",
         "ngx-planet",
         "@ms-common"
       ]

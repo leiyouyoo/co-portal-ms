@@ -1,34 +1,41 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { throwIfAlreadyLoaded } from '@core';
 import { CoMockModule } from '@co/mock';
 import { CoConfig, CO_CONFIG } from '@co/core';
-
-// Please refer to: https://ng-alain.com/docs/global-config
-// #region NG-ALAIN Config
-
 import { CoACLModule } from '@co/acl';
+import { CoAuthModule, SimpleInterceptor } from '@co/auth';
 
-const alainConfig: CoConfig = {
+const coConfig: CoConfig = {
   st: { modal: { size: 'lg' } },
-  pageHeader: { homeI18n: 'home', recursiveBreadcrumb: true },
-  auth: { login_url: '/passport/login' },
+  auth: {
+    login_url: '/passport/login',
+    token_send_place: 'header',
+    token_send_key: 'Authorization',
+    token_send_template: 'Bearer ${token}'
+  },
 };
 
-const alainModules = [CoACLModule.forRoot(), CoMockModule.forRoot()];
-const alainProvides = [{ provide: CO_CONFIG, useValue: alainConfig }];
+const coModules = [CoACLModule.forRoot(), CoMockModule.forRoot(), CoAuthModule];
 
-// mock
+const coProvides = [{ provide: CO_CONFIG, useValue: coConfig }, { provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true }];
+
+// #region mock配置
+
 import { environment } from '@env/environment';
 import * as MOCKDATA from '../../_mock';
 if (!environment.production) {
-  alainConfig.mock = { data: MOCKDATA };
+  coConfig.mock = { data: MOCKDATA };
 }
 
-// #region reuse-tab
+// #endregion
+
+// #region  路由复用配置
 
 import { RouteReuseStrategy } from '@angular/router';
 import { ReuseTabService, ReuseTabStrategy, ReuseTabMatchMode } from '@co/cbc';
-alainProvides.push({
+coProvides.push({
   provide: RouteReuseStrategy,
   useClass: ReuseTabStrategy,
   deps: [ReuseTabService],
@@ -36,36 +43,32 @@ alainProvides.push({
 
 // #endregion
 
-// #endregion
 
-// Please refer to: https://ng.ant.design/docs/global-config/en#how-to-use
-// #region NG-ZORRO Config
+// #region NG-ZORRO 配置
 
 import { NzConfig, NZ_CONFIG } from 'ng-zorro-antd/core/config';
-
 const ngZorroConfig: NzConfig = {};
-
 const zorroProvides = [{ provide: NZ_CONFIG, useValue: ngZorroConfig }];
 
 // #endregion
 
+/**
+ * 全局配置模块
+ */
 @NgModule({
-  imports: [...alainModules],
+  imports: [...coModules],
 })
 export class GlobalConfigModule {
   constructor(@Optional() @SkipSelf() parentModule: GlobalConfigModule, reuseTabService: ReuseTabService) {
     throwIfAlreadyLoaded(parentModule, 'GlobalConfigModule');
-    // NOTICE: Only valid for menus with reuse property
-    // Pls refer to the E-Mail demo effect
     reuseTabService.mode = ReuseTabMatchMode.MenuForce;
-    // Shouled be trigger init, you can ingore when used `reuse-tab` component in layout component
     reuseTabService.init();
   }
 
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: GlobalConfigModule,
-      providers: [...alainProvides, ...zorroProvides],
+      providers: [...coProvides, ...zorroProvides],
     };
   }
 }

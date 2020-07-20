@@ -1,0 +1,25 @@
+<div *ngIf="pro.isTopMenu" class="co-portal__top-nav">
+  <div class="co-portal__top-nav-main" [ngClass]="{ 'co-portal__top-nav-main-wide': pro.isFixed }">
+    <div class="co-portal__top-nav-main-left">
+      <default-layout-logo class="co-portal__top-nav-logo"></default-layout-logo>
+      <div class="co-portal__menu-wrap">
+        <div default-layout-menu mode="horizontal"></div>
+      </div>
+    </div>
+    <div class="co-portal__top-nav-main-right" default-layout-header-widget></div>
+  </div>
+</div>
+<div *ngIf="!pro.isTopMenu" class="co-portal__header">
+  <div class="d-flex align-items-center">
+    <ng-container *ngIf="pro.isMobile">
+      <a [routerLink]="['/']" class="co-portal__header-logo">
+        <img src="./assets/logo-color.svg" width="32" />
+      </a>
+      <div class="ant-divider ant-divider-vertical"></div>
+    </ng-container>
+    <div class="co-portal__header-item co-portal__header-trigger" (click)="pro.setCollapsed()">
+      <i nz-icon nzType="menu-{{ pro.collapsed ? 'unfold' : 'fold' }}" class="co-portal__header-item-icon"></i>
+    </div>
+  </div>
+  <div default-layout-header-widget></div>
+</div>

@@ -1,48 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-// layout
-import { LayoutProComponent } from '@brand';
+import { DefaultLayoutComponent } from '@layout';
 import { environment } from '@env/environment';
 import { LayoutPassportComponent } from '../layout/passport/passport.component';
-// single pages
 import { CallbackComponent } from './callback/callback.component';
-// dashboard pages
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserLockComponent } from './passport/lock/lock.component';
-// passport pages
 
-import { EmptyComponent } from 'ngx-planet';
+import { EmptyComponent } from '@co/cms';
 import { LoginComponent } from './passport/login.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: LayoutProComponent,
+    component: DefaultLayoutComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent, data: { titleI18n: 'app.home', reuse: true, icon: 'snippets' } },
-      { path: 'ec', loadChildren: () => import('./ec/ec.module').then((m) => m.ECModule) },
       {
         path: 'exception',
         loadChildren: () => import('./exception/exception.module').then((m) => m.ExceptionModule),
       },
-      {
-        path: 'fcm',
-        data: { titleI18n: 'E-commerce', reuse: true },
-        loadChildren: () => import('./fcm/fcm.module').then((m) => m.FcmModule),
-      },
     ],
   },
-  {
-    path: 'app3',
-    component: EmptyComponent,
-    children: [
-      {
-        path: '**',
-        component: EmptyComponent,
-      },
-    ],
-  },
+
   {
     path: 'passport',
     component: LayoutPassportComponent,
@@ -64,13 +45,28 @@ const routes: Routes = [
   { path: '**', component: EmptyComponent },
 ];
 
+const apps: any[] = window["CO_PLATFORM"].apps;
+apps.forEach(a => {
+  routes[0].children.push({
+    path: a.name,
+    component: EmptyComponent,
+    children: [
+      {
+        path: '**',
+        component: EmptyComponent
+      }
+    ]
+  });
+});
+
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      useHash: environment.useHash,
+      useHash: true,
       paramsInheritanceStrategy: 'always',
     }),
   ],
   exports: [RouterModule],
 })
-export class RouteRoutingModule {}
+export class RouteRoutingModule { }

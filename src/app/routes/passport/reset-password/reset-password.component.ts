@@ -17,7 +17,7 @@ export class ResetPasswordComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private httpClient: _HttpClient,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.formGroup = this.formBuilder.group({
@@ -35,7 +35,7 @@ export class ResetPasswordComponent implements OnInit {
         password: this.formGroup.controls.password.value,
       })
       .subscribe((data) => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/passport/login']);
       });
   }
 

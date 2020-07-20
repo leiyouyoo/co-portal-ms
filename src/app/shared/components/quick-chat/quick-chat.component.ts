@@ -14,7 +14,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { InputNumber, InputBoolean } from '@co/core';
 
-import { ScrollbarDirective } from '../scrollbar/scrollbar.directive';
+import { CoScrollbarDirective } from '@co/cbc';
 import { QuickChatService } from './quick-chat.service';
 
 @Component({
@@ -42,7 +42,7 @@ export class QuickChatComponent implements OnInit, OnDestroy {
   inited: boolean;
   hasMessage = false;
 
-  @ViewChild('messageScrollbar', { static: true }) messageScrollbar?: ScrollbarDirective;
+  @ViewChild('messageScrollbar', { static: true }) messageScrollbar?: CoScrollbarDirective;
 
   // #region fileds
   @Input() @InputNumber() height = 380;

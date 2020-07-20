@@ -1,0 +1,284 @@
+@{co-portal-prefix} {
+
+  &__submenu {
+    height: 100%;
+    width: 100%;
+    column-count: 2;
+    column-width: 120px;
+    column-gap: 24px;
+    column-fill: auto;
+    margin-bottom: 4px;
+    color: #9F9C9F;
+    padding: 8px 16px;
+    background-color: #2E2B2E;
+
+    // display: flex;
+    // flex-direction: column;
+    // flex-wrap: wrap;
+
+    &-group {
+      width: 120px;
+      height: 32px;
+      font-size: 14px;
+      line-height: 32px;
+      color: #6F6F6F;
+
+      >i {
+        display: inline-block;
+        height: 14px;
+        width: 4px;
+        border-radius: 2px;
+        background-color: #1B8EFF;
+        margin-right: 8px;
+        margin-bottom: -2px;
+      }
+
+    }
+
+    &-item {
+      // width: 120px;
+      height: 32px;
+      padding-left: 12px;
+      font-size: 12px;
+      line-height: 32px;
+      break-inside: avoid;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #1B8EFF;
+      }
+    }
+
+    .ant-divider-horizontal {
+      // width: 120px;
+      min-width: 24px;
+      margin: 8px 0px;
+      background-color: #585858;
+    }
+  }
+
+  &__submenu-overlay {
+    background-color: #39373A;
+
+    >.ant-popover {
+      height: 100%;
+
+      >.ant-popover-content {
+        height: 100%;
+
+        >.ant-popover-inner {
+          height: 100%;
+
+          >div {
+            height: 100%;
+
+            >.ant-popover-inner-content {
+              height: 100%;
+
+            }
+          }
+        }
+      }
+    }
+
+    .ant-popover-inner {
+      background-color: #39373A;
+    }
+
+    .ant-popover-inner-content {
+      padding: 0px !important;
+    }
+  }
+
+  &__menu {
+    display: block;
+
+    &-wrap {
+      display: flex;
+      flex-direction: column;
+      padding-left: 0px;
+
+      .ant-divider-horizontal {
+        width: 160px;
+        min-width: 24px;
+        margin: 0px 20px;
+        background-color: #585858;
+        top: 0px;
+      }
+    }
+
+    &-item {
+      margin: 4px 20px;
+      padding: 8px;
+      list-style: none;
+      font-size: 12px;
+      height: 36px;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &-active {
+        background-color: #1890FFFF;
+      }
+
+      // &:hover {
+      //   background-color: #383838;
+
+      //   >a {
+      //     color: #1890FFFF;
+      //   }
+      // }
+
+      >a {
+        color: #FFFFFFD9;
+        cursor: pointer;
+        display: block;
+      }
+
+      &-icon {
+        font-size: 14px;
+      }
+
+      &-arrow {
+        font-size: 14px;
+        float: right;
+        margin-top: 4px;
+      }
+
+
+      &-title-text {
+        display: inline-block;
+        margin-left: 8px;
+      }
+
+      &-main {
+        margin-bottom: 16px;
+      }
+
+      &--disabled {
+        pointer-events: none;
+      }
+    }
+
+    &-category {
+      background-color: #39373A;
+
+      .ant-divider-horizontal {
+        width: 180px;
+        min-width: 24px;
+        margin: auto;
+        background-color: #585858;
+      }
+    }
+
+    &-categoryitem {
+      margin: 0px;
+      padding: 0px 24px;
+      list-style: none;
+      font-size: 12px;
+      height: 56px;
+      line-height: 56px;
+      color: #FFFFFFD9;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #2E2B2E;
+      }
+
+      &-icon {
+        font-size: 14px;
+      }
+
+      &-arrow {
+        font-size: 14px;
+        color: #6F6F6F;
+        float: right;
+        margin: 20px 4px;
+      }
+
+
+      &-title-text {
+        display: inline-block;
+        margin-left: 8px;
+      }
+    }
+  }
+
+
+  &__side-nav {
+    @{co-portal-prefix}__menu {
+      &-title {
+        display: flex;
+        align-items: center;
+
+        &-text {
+          flex: 1;
+        }
+      }
+    }
+
+    .@{ant-prefix}-menu-inline-collapsed {
+      @{co-portal-prefix}__menu-title-badge {
+        position: absolute;
+        top: 0;
+        right: -16px;
+        width: 8px;
+        height: 8px;
+
+        >em {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+
+// 当缩进时隐藏站点名称
+@{aside-collapsed-prefix} {
+
+  @{co-portal-prefix}__menu {
+    &-wrap {
+      .ant-divider-horizontal {
+        width: 24px;
+        margin: 0px auto;
+      }
+    }
+
+    &-item {
+      margin: 0px;
+      padding: 16px 8px;
+      height: auto;
+      border-radius: 0px;
+
+      &-active {
+        background-color: #383838;
+
+        >a {
+          color: #1890FFFF;
+        }
+      }
+
+      >a {
+        text-align: center;
+      }
+
+      &-arrow {
+        display: none;
+      }
+
+      &-icon {
+        font-size: 20px;
+      }
+
+      &-main {
+        margin-bottom: 0px;
+      }
+
+      &-title-text {
+        display: none;
+      }
+
+
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { CO_I18N_TOKEN } from '@co/common';
+import { CO_I18N_TOKEN } from '@co/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NzIconService } from 'ng-zorro-antd/icon';
 import { zip } from 'rxjs';
@@ -15,7 +15,7 @@ import { ACLService, ACLType } from '@co/acl';
  * 用于应用启动时
  * 一般用来获取应用所需要的基础数据等
  */
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class StartupService {
   constructor(
     private iconSrv: NzIconService,
@@ -52,12 +52,13 @@ export class StartupService {
     // https://github.com/angular/angular/issues/15088
     return new Promise((resolve) => {
       zip(
-        this.httpClient.get(`assets/tmp/i18n/${this.i18n.defaultLang}.json`),
+        this.httpClient.get(`assets/i18n/${this.i18n.defaultLang}.json`),
         this.httpClient.get(environment.SERVER_URL + '/platform/Session/GetCurrentUserConfiguration'),
       )
         .pipe(
           // 接收其他拦截器后产生的异常消息
           catchError((res) => {
+            window.localStorage.removeItem('_token');
             console.warn(`StartupService.load: Network request failed`, res);
             resolve(null);
             return [];
@@ -68,6 +69,7 @@ export class StartupService {
             // setting language data
 
             this.translate.setTranslation(this.i18n.defaultLang, langData);
+            this.translate.use(this.i18n.defaultLang);
             this.translate.setDefaultLang(this.i18n.defaultLang);
 
             this.setupAclData(appData);

@@ -82,9 +82,7 @@ export function genMp(id?: number) {
   return `https://randomuser.me/api/portraits/lego/${typeof id === 'undefined' ? Random.natural(0, 8) : id}.jpg`;
 }
 
-export function genBigMp() {
-  return `./assets/tmp/img-big/${Random.natural(1, 8)}.jpg`;
-}
+
 
 export function genTag(num = -3) {
   return genArr(['Angular', 'Node', 'HTML5', 'Less', 'Db', 'Python', 'Go'], num);

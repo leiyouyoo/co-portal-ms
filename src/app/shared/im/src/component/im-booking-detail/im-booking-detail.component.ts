@@ -289,7 +289,7 @@ export class ImBookingDetailComponent implements OnInit, OnChanges {
   };
   @Input() id = '';
   statusStep: number;
-  constructor(private bookingLibraryService: ImBookingLibraryService) {}
+  constructor(private bookingLibraryService: ImBookingLibraryService) { }
   ngOnChanges(changes: import('@angular/core').SimpleChanges): void {
     this.ngOnInit();
   }
@@ -457,7 +457,6 @@ export class ImBookingDetailComponent implements OnInit, OnChanges {
   }
   getSpecialGoodsName(): Array<any> {
     if (this.bookingDetail && this.bookingDetail.containsSpecialGoodsTypes) {
-      debugger;
       return JSON.parse(this.bookingDetail.containsSpecialGoodsTypes);
     }
     return [];

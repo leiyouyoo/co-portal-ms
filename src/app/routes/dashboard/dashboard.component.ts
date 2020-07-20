@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { _HttpClient } from '@co/common';
-import { CSPExcelService } from '@co/cds';
+// import { CSPExcelService } from '@co/cds';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +9,7 @@ import { CSPExcelService } from '@co/cds';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
-  constructor(private httpClient: _HttpClient, public cSPExcelService: CSPExcelService) {}
+  constructor(private httpClient: _HttpClient) { }
 
   ngOnInit() {
     // var file = new File([], '12');

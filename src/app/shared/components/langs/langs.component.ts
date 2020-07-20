@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, Inject, Input } from '@angular/core';
-import { SettingsService, CO_I18N_TOKEN } from '@co/common';
+import { CO_I18N_TOKEN } from '@co/core';
+import { SettingsService } from '@co/common';
 import { I18NService } from '@core';
 import { DOCUMENT } from '@angular/common';
 
@@ -12,8 +13,8 @@ export class LangsComponent {
   langs: any[];
 
   @Input() placement = 'bottomRight';
-  @Input() btnClass = 'alain-pro__header-item';
-  @Input() btnIconClass = 'alain-pro__header-item-icon';
+  @Input() btnClass = 'co-portal__header-item';
+  @Input() btnIconClass = 'co-portal__header-item-icon';
 
   constructor(public settings: SettingsService, @Inject(CO_I18N_TOKEN) private i18n: I18NService, @Inject(DOCUMENT) private doc: any) {
     this.langs = this.i18n.getLangs().map((v: any) => {

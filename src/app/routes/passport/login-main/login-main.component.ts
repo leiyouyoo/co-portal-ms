@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { _HttpClient, AuthService } from '@co/common';
+import { _HttpClient, CoAuthService } from '@co/common';
 
 import { NzNotificationService, NzMessageService } from 'ng-zorro-antd';
 import { GetUserSigService, logOut } from '@im';
@@ -25,14 +25,14 @@ export class loginMainComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    public loginService: AuthService,
+    public loginService: CoAuthService,
     private router: Router,
     public httpService: _HttpClient,
     private notification: NzNotificationService,
     private message: NzMessageService,
     private activatedRoute: ActivatedRoute,
     private getUserSigService: GetUserSigService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({

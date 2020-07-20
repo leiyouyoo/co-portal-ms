@@ -1,104 +1,104 @@
 @import '~@co/theme/system/index';
 @import '~@co/cbc/index';
-@import '~@co/chart/index';
-@import 'app/layout/pro/styles/index.less';
+// @import '~@co/chart/index';
+@import 'app/layout/default/styles/index.less';
 
 @import './styles/index';
 @import './styles/theme';
 
 .shipment-list-item-popover-timeline {
-    .ant-timeline-item-last {
-        padding-bottom: 0;
+  .ant-timeline-item-last {
+    padding-bottom: 0;
 
-        &>.ant-timeline-item-content {
-            min-height: 26px;
-        }
+    &>.ant-timeline-item-content {
+      min-height: 26px;
     }
+  }
 }
 
 .shipment-list-item-popover-timeline {
-    .ant-timeline {
-        background   : #f2f2f2;
-        padding      : 14px 12px 0;
-        border-radius: 2px;
-    }
+  .ant-timeline {
+    background: #f2f2f2;
+    padding: 14px 12px 0;
+    border-radius: 2px;
+  }
 }
 
 app-order-list {
-    .ant-tabs-nav-wrap {
-        padding-top: 0 !important;
-    }
+  .ant-tabs-nav-wrap {
+    padding-top: 0 !important;
+  }
 
-    .ant-tabs-nav-container {
-        padding-left: 0 !important;
+  .ant-tabs-nav-container {
+    padding-left: 0 !important;
 
-    }
+  }
 }
 
 .icp-nav {
-    margin: 0 !important;
+  margin: 0 !important;
 
-    .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
-        border       : none !important;
-        line-height  : 24px !important;
-        border-radius: 5px 5px 0 0 !important;
-    }
+  .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+    border: none !important;
+    line-height: 24px !important;
+    border-radius: 5px 5px 0 0 !important;
+  }
 }
 
-.alain-pro__sider-avatar {}
+.co-portal__sider-avatar {}
 
 /* 滚动条样式 */
 ::-webkit-scrollbar {
-    /* 滚动条整体样式 */
-    width: 8px !important;
+  /* 滚动条整体样式 */
+  width: 8px !important;
 
-    /* 高宽分别对应横竖滚动条的尺寸 */
-    height: 8px !important;
+  /* 高宽分别对应横竖滚动条的尺寸 */
+  height: 8px !important;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgb(202, 202, 202);
+  background: rgb(202, 202, 202);
 
-    /* 滚动条里面小方块 */
-    border-radius     : 8px;
-    -webkit-box-shadow: inset 0 0 8px #fff;
+  /* 滚动条里面小方块 */
+  border-radius: 8px;
+  -webkit-box-shadow: inset 0 0 8px #fff;
 }
 
 ::-webkit-scrollbar-track {
-    background   : transparent;
-    border-radius: 0;
+  background: transparent;
+  border-radius: 0;
 
-    /* 滚动条里面轨道 */
-    -webkit-box-shadow: inset 0 0 8px #fff;
+  /* 滚动条里面轨道 */
+  -webkit-box-shadow: inset 0 0 8px #fff;
 }
 
 .co-page {
-    height        : 100%;
-    display       : flex;
-    flex-direction: column;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
-    nz-select {
-        min-width: 200px;
+  nz-select {
+    min-width: 200px;
+  }
+
+
+  .co-page-header {
+    .co-page-header-search {
+      margin: 24px 0;
+      display: flex;
+
+
+      .co-page-header-search-left {
+        display: flex;
+      }
     }
 
-
-    .co-page-header {
-        .co-page-header-search {
-            margin : 24px 0;
-            display: flex;
-
-
-            .co-page-header-search-left {
-                display: flex;
-            }
-        }
-
-        .co-page-header-advanced_search {
-            margin-bottom: 24px;
-        }
+    .co-page-header-advanced_search {
+      margin-bottom: 24px;
     }
+  }
 
-    .co-page-content {
-        flex: 1;
-    }
+  .co-page-content {
+    flex: 1;
+  }
 }

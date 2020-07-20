@@ -1,0 +1,103 @@
+<ng-template #sideTpl>
+  <nz-sider [nzTrigger]="null" [nzCollapsible]="true" [nzCollapsed]="isMobile ? false : pro.collapsed"
+    [nzWidth]="pro.width" [nzCollapsedWidth]="pro.widthInCollapsed" class="co-portal__sider" style="max-width: 200px;"
+    [ngClass]="{ 'co-portal__sider-fixed': pro.fixSiderbar }">
+    <div class="co-portal__sider-header">
+      <!--Logo-->
+      <default-layout-logo class="co-portal__sider-logo">
+      </default-layout-logo>
+
+      <!--头像区域-->
+      <div class="co-portal__sider-avatar">
+        <nz-avatar [nzSrc]="
+            userInfo?.profilePictureId
+              ? imgUrl + '/Storage/File/GetDownLoadFile?fileId=' + userInfo?.profilePictureId + '&Handler=image'
+              : '/assets/images/avatar.png'
+          " class="user-avatar"></nz-avatar>
+        <div class="user-desc">
+          <h3>{{ user.session.user.name }} <i nz-icon nztype="down"></i></h3>
+          <p>
+            {{ user.session.user.emailAddress }}
+          </p>
+        </div>
+      </div>
+
+      <!--搜索栏-->
+      <div class="co-portal__sider-search">
+        <nz-input-group [nzSuffix]="suffixIconSearch" nzSize="small">
+          <input type="text" nz-input placeholder="{{ 'Shortcut search' | translate }}" />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+          <i nz-icon nzType="search"></i>
+        </ng-template>
+      </div>
+    </div>
+
+    <!--菜单导航区域-->
+    <div class="co-portal__sider-main">
+      <div class="co-portal__sider-wrap" default-layout-menu></div>
+    </div>
+
+    <!--底部栏-->
+    <div class="co-portal__sider-footer">
+      <ul>
+        <li>
+          <a nz-dropdown [nzDropdownMenu]="menu" nzSize="small">
+            <i nz-icon nzIconfont="iconsetting"></i>
+            <span class="title">
+              简体中文
+            </span>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li nz-menu-item (click)="change('zh-CN')">简体中文</li>
+              <li nz-menu-item (click)="change('en-US')">English</li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+        <li>
+          <a nz-button nzSize="small" nzType="link" (click)="logout()" style="cursor: pointer;">
+            <i nz-icon nzIconfont="iconsetting"></i>
+            <span class="title">
+              设置
+            </span></a>
+        </li>
+      </ul>
+    </div>
+  </nz-sider>
+</ng-template>
+
+<ng-template #headerWidgets>
+  <div class="co-portal__top-nav-main-right" default-layout-header-widget></div>
+</ng-template>
+
+<div class="ant-layout ant-layout-has-sider" style="height: 100vh;">
+  <ng-container *ngIf="pro.menu === 'side' || isMobile">
+    <nz-drawer *ngIf="isMobile" [nzWidth]="pro.width" nzWrapClassName="co-portal__drawer" [nzVisible]="!pro.collapsed"
+      [nzClosable]="false" nzPlacement="left" (nzOnClose)="pro.setCollapsed(true)">
+      <ng-template [ngTemplateOutlet]="sideTpl"></ng-template>
+    </nz-drawer>
+    <ng-container *ngIf="!isMobile">
+      <ng-template [ngTemplateOutlet]="sideTpl"></ng-template>
+    </ng-container>
+  </ng-container>
+  <div class="ant-layout co-portal__main" [ngStyle]="getLayoutStyle" style="height: 100vh;">
+    <!-- <default-layout-header></default-layout-header> -->
+    <div class="ant-layout-content co-portal__body" [class.co-portal__fetching]="isFetching" [ngStyle]="getContentStyle"
+      style="display: flex; flex-direction: column;">
+      <div class="co-portal__header-item co-portal__header-trigger" (click)="pro.setCollapsed()">
+        <i nz-icon nzType="menu-{{ pro.collapsed ? 'unfold' : 'fold' }}" class="co-portal__header-item-icon"></i>
+      </div>
+      <nz-spin class="co-portal__fetching-icon" nzSpinning></nz-spin>
+
+      <reuse-tab #reuseTab [tabBarExtraContent]="headerWidgets" tabType="card" class="icp-nav"></reuse-tab>
+
+      <nz-content style="flex: auto; margin: 12px; background: #fff; border-radius: 10px; overflow: hidden;">
+        <router-outlet></router-outlet>
+        <div id="app-host-container" class="app-layout"></div>
+      </nz-content>
+
+    </div>
+  </div>
+</div>
+<app-im [fromType]="'csp'"></app-im>

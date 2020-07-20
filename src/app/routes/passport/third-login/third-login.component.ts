@@ -12,7 +12,7 @@ export class ThirdLoginComponent implements OnInit {
   notification: any;
 
   constructor(
-    private location:Location,
+    private location: Location,
     public loginService: AuthService,
     private activatedRoute: ActivatedRoute,
     public httpService: HttpService,
@@ -24,58 +24,58 @@ export class ThirdLoginComponent implements OnInit {
     console.log(this.getQueryString()['code'])
 
     // 微信登录
-    if(this.getQueryString()['loginType']=="wechat" && this.getQueryString()['code']){
-      this.thirdLogin("WechatWeb",this.getQueryString()['code']);
-    }else if (this.getQueryString()['loginType']=="workwechat" && this.getQueryString()['code']){
-      this.thirdLogin("WorkWechat",this.getQueryString()['code']);
+    if (this.getQueryString()['loginType'] == "wechat" && this.getQueryString()['code']) {
+      this.thirdLogin("WechatWeb", this.getQueryString()['code']);
+    } else if (this.getQueryString()['loginType'] == "workwechat" && this.getQueryString()['code']) {
+      this.thirdLogin("WorkWechat", this.getQueryString()['code']);
     }
   }
 
-  thirdLogin(type,code){
-    let parame={
+  thirdLogin(type, code) {
+    let parame = {
       externalProvider: type,
       externalAccessCode: code
     }
 
-    this.loginService.thirdLogin(parame).then((res:any)=>{
+    this.loginService.thirdLogin(parame).then((res: any) => {
       if (res.access_token) {
         this.doRedirect({ isRedirectByQueryParam: true });
       }
     })
-    .catch((e: any) => {
-      this.router.navigate(['/login'], {
-        queryParams: {
-          errorText:e.error.error_description
-        }
+      .catch((e: any) => {
+        this.router.navigate(['/passport/login'], {
+          queryParams: {
+            errorText: e.error.error_description
+          }
+        });
       });
-    });
 
   }
 
 
   getQueryString() {
-    var uId = location.href.substr(location.href.indexOf('?'));  
+    var uId = location.href.substr(location.href.indexOf('?'));
     var obj = {};
-    var arr =uId.slice(1,uId.length).split('&');
-    arr.forEach(function(val){
+    var arr = uId.slice(1, uId.length).split('&');
+    arr.forEach(function (val) {
       var arr1 = val.split('=');
-      obj[arr1[0]]=arr1[1];
+      obj[arr1[0]] = arr1[1];
     })
     return obj
   }
 
 
-  wechatLogin(code){
-    let parame={
+  wechatLogin(code) {
+    let parame = {
       externalProvider: "WechatWeb",
       externalAccessCode: code
     }
-    this.loginService.thirdLogin(parame).then((res:any)=>{
+    this.loginService.thirdLogin(parame).then((res: any) => {
       if (res.access_token) {
         this.doRedirect({ isRedirectByQueryParam: true });
       }
     })
-    
+
   }
 
   doRedirect(option: { isRedirectByQueryParam?: boolean } = {}) {
@@ -100,12 +100,12 @@ export class ThirdLoginComponent implements OnInit {
     return a.order - b.order;
   }
 
-  bindWeChat(code){
-    let parame={
+  bindWeChat(code) {
+    let parame = {
       "externalProvider": "WechatWeb",
-      "externalAccessCode":  code
+      "externalAccessCode": code
     }
-    this.ssoService.BindExternalUser(parame).subscribe(res=>{
+    this.ssoService.BindExternalUser(parame).subscribe(res => {
       window.history.go(-1);
     })
   }
