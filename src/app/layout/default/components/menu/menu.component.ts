@@ -108,22 +108,22 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const { unsubscribe$, router, pro } = this;
-    this.menuSrv.change.pipe(takeUntil(unsubscribe$)).subscribe((res) => this.genMenus(res));
+    // const { unsubscribe$, router, pro } = this;
+    // this.menuSrv.change.pipe(takeUntil(unsubscribe$)).subscribe((res) => this.genMenus(res));
 
-    router.events
-      .pipe(
-        takeUntil(unsubscribe$),
-        filter((e) => e instanceof NavigationEnd),
-      )
-      .subscribe(() => this.openStatus());
+    // router.events
+    //   .pipe(
+    //     takeUntil(unsubscribe$),
+    //     filter((e) => e instanceof NavigationEnd),
+    //   )
+    //   .subscribe(() => this.openStatus());
 
-    pro.notify
-      .pipe(
-        takeUntil(unsubscribe$),
-        filter(() => !!this.menus),
-      )
-      .subscribe(() => this.cd());
+    // pro.notify
+    //   .pipe(
+    //     takeUntil(unsubscribe$),
+    //     filter(() => !!this.menus),
+    //   )
+    //   .subscribe(() => this.cd());
   }
 
   ngOnDestroy() {

@@ -99,7 +99,6 @@ export class CoSubmenuComponent extends NzTooltipBaseComponent {
   }
 
   protected isEmpty(): boolean {
-    debugger
     return isTooltipEmpty(this.nzTitle) && isTooltipEmpty(this.nzContent);
   }
 
