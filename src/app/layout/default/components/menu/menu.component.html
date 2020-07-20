@@ -1,8 +1,15 @@
 <!--底部栏-->
 <ul class="co-portal__menu-wrap" #menu1>
   <li class="co-portal__menu-item co-portal__menu-item-active co-portal__menu-item-main">
-    <a co-submenu #submenu [nzContent]="contentTemplate1" [coPopoverOrigin]="menu1" [nzNoAnimation]="true"
-      coPopoverTrigger="click" coPopoverPlacement="rightTop">
+    <a
+      co-submenu
+      #submenu
+      [nzContent]="contentTemplate1"
+      [coPopoverOrigin]="menu1"
+      [nzNoAnimation]="true"
+      coPopoverTrigger="click"
+      coPopoverPlacement="rightTop"
+    >
       <i nz-icon nzIconfont="iconsetting" class="co-portal__menu-item-icon"></i>
       <span *ngIf="!pro.onlyIcon" class="co-portal__menu-item-title-text">
         {{ 'Menu' | translate }}
@@ -39,8 +46,7 @@
         <nz-divider></nz-divider>
       </div>
       <div nz-col [nzSpan]="12" class="co-portal__submenu">
-        <h3 class="co-portal__submenu-group"><i></i>组1
-        </h3>
+        <h3 class="co-portal__submenu-group"><i></i>组1</h3>
         <div class="co-portal__submenu-item">
           Content2
         </div>
@@ -61,8 +67,7 @@
         </div>
         <nz-divider></nz-divider>
 
-        <h3 class="co-portal__submenu-group"><i></i>组1
-        </h3>
+        <h3 class="co-portal__submenu-group"><i></i>组1</h3>
         <div class="co-portal__submenu-item">
           Content1
         </div>
@@ -86,8 +91,7 @@
         </div>
         <nz-divider></nz-divider>
 
-        <h3 class="co-portal__submenu-group"><i></i>组1
-        </h3>
+        <h3 class="co-portal__submenu-group"><i></i>组1</h3>
         <div class="co-portal__submenu-item">
           Content1
         </div>
@@ -142,9 +146,7 @@
         </div> -->
       </div>
     </div>
-
   </ng-template>
-
 
   <!-- <nz-divider></nz-divider> -->
 
@@ -172,7 +174,6 @@
         <span class="co-portal__menu-item-title-text">
           {{ 'E-commerce' | translate }}
         </span>
-
       </a>
     </li>
   </div>
@@ -183,6 +184,17 @@
         <i nz-icon nzIconfont="iconsetting" class="co-portal__menu-item-icon"></i>
         <span class="co-portal__menu-item-title-text">
           {{ 'E-commerce' | translate }}
+        </span>
+      </a>
+    </li>
+  </div>
+  <div>
+    <nz-divider></nz-divider>
+    <li class="co-portal__menu-item">
+      <a [routerLink]="['/platform/position']" nzTooltipTitle="E-commerce" nzTooltipPlacement="right" nz-tooltip>
+        <i nz-icon nzIconfont="iconsetting" class="co-portal__menu-item-icon"></i>
+        <span class="co-portal__menu-item-title-text">
+          {{ 'position' | translate }}
         </span>
       </a>
     </li>
