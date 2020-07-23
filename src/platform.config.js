@@ -19,6 +19,9 @@ window.CO_PLATFORM={
       "preload": true,
       "scripts": [
         "main.js"
+      ],
+      "styles": [
+        "styles.css"
       ]
     },
     // {

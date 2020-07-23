@@ -335,6 +335,7 @@
             "styles": ["apps/platform/styles.less"],
             "scripts": [],
             "aot": false,
+            "extractCss": true,
             "namedChunks": false,
             "vendorChunk": false
           },
@@ -346,7 +347,7 @@
                   "with": "apps/platform/environments/environment.prod.ts"
                 }
               ],
-              "optimization": false,
+              "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,

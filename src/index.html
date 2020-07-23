@@ -37,7 +37,18 @@
     }
 
   </style>
-  <script type="text/javascript" src="platform.config.js"></script>
+  <script type="text/javascript">
+    function loadScript(path) {
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = path;
+      script.async = false;
+      document.head.appendChild(script);
+    }
+
+    loadScript("platform.config.js?hash=" + new Date().getTime());
+
+  </script>
 </head>
 
 <body theme-name="pro">
