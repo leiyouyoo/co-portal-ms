@@ -16,24 +16,6 @@
       "es2018",
       "dom"
     ],
-    "paths": {
-      "@shared": [
-        "src/app/shared/index"
-      ],
-      "@core": [
-        "src/app/core/index"
-      ],
-      "@env/*": [
-        "src/environments/*"
-      ],
-      "@layout": [
-        "src/app/layout/default/index"
-      ],
-      "@im": ["src/app/shared/im/index"],
-      "@platform-app/*": [
-        "apps/palform/*"
-      ],
-    },
     "typeRoots": [
       "node_modules/@types"
     ],
