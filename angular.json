@@ -215,6 +215,10 @@
               "vendorChunk": false,
               "aot":true,
               "buildOptimizer": true,
+              "assets": [
+                "src/favicon.ico",
+                "src/assets"
+              ],
               "budgets": [
                 {
                   "type": "initial",
