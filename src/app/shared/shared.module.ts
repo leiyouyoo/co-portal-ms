@@ -10,7 +10,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CoACLModule } from '@co/acl';
 import { CoCommonModule } from '@co/common';
 import { CoFormModule } from '@co/form';
-import { CoLayoutComponentsModule } from '@co/cbc';
 
 import { SHARED_CO_MODULES } from './shared-co.module';
 import { SHARED_ZORRO_MODULES } from './shared-zorro.module';
@@ -44,7 +43,6 @@ const DIRECTIVES = [];
     CoACLModule.forRoot(),
     CoFormModule.forRoot(),
     CoCommonModule.forRoot({ environment }),
-    CoLayoutComponentsModule,
     DragulaModule.forRoot(),
     ...SHARED_CO_MODULES,
     ...SHARED_ZORRO_MODULES,
@@ -66,7 +64,6 @@ const DIRECTIVES = [];
     CoACLModule,
     CoFormModule,
     CoCommonModule,
-    CoLayoutComponentsModule,
     // i18n
     TranslateModule,
     ...SHARED_CO_MODULES,
