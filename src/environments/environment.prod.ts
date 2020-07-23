@@ -3,10 +3,10 @@
 // The list of file replacements can be found in `angular.json`
 //appBaseUrl:`http://wechat.cityocean.com:8994` // APP 地址
 
-const protocol = 'https';
-const serverHost = 'test-api.cityocean.com';
-const apiPort = '10001';
-const signalRPort = '10002';
+const protocol = 'http';
+const serverHost = '192.168.1.5';
+const apiPort = '8000';
+const signalRPort = '8002';
 const serverUrlPrefix = `${protocol}://${serverHost}`;
 const apiUrlPrefix = `${serverUrlPrefix}:${apiPort}`;
 
