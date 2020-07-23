@@ -6,3 +6,6 @@ export * from './utils/yuan';
 
 // Module
 export * from './shared.module';
+
+// Types
+export * from './types';
