@@ -330,7 +330,7 @@
             "outputPath": "dist/apps/platform",
             "index": "apps/platform/index.html",
             "main": "apps/platform/main.ts",
-            "tsConfig": "apps/platform/tsconfig.app.json",
+            "tsConfig": "tsconfig.platform.json",
             "assets": [ "apps/platform/assets"],
             "styles": ["apps/platform/styles.less"],
             "scripts": [],
@@ -399,7 +399,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/platform/tsconfig.app.json", "apps/platform/tsconfig.spec.json"],
+            "tsConfig": ["tsconfig.platform.json", "apps/platform/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
           }
         }
@@ -424,7 +424,7 @@
             "index": "apps/platform/index.html",
             "main": "apps/platform/main-dev.ts",
             "polyfills": "apps/platform/polyfills.ts",
-            "tsConfig": "apps/platform/tsconfig.app.json",
+            "tsConfig": "tsconfig.platform.json",
             "assets": [ "apps/platform/assets", "apps/platform/favicon.ico"],
             "styles": ["apps/platform/styles.less"],
             "aot": false,
@@ -494,7 +494,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/platform/tsconfig.app.json", "apps/platform/tsconfig.spec.json"],
+            "tsConfig": ["tsconfig.platform.json", "apps/platform/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
           }
         }

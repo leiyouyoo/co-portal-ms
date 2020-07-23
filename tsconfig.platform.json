@@ -1,0 +1,32 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": ["node"],
+    "paths": {
+      "@shared": [
+        "apps/platform/app/shared/index"
+      ],
+      "@core": [
+        "apps/platform/app/core/index"
+      ],
+      "@env/*": [
+        "apps/platform/environments/*"
+      ],
+      "@layout": [
+        "apps/platform/app/layout/default/index"
+      ]
+    }
+  },
+  "files": [
+    "apps/platform/main.ts",
+    "apps/platform/polyfills.ts"
+  ],
+  "include": [
+    "apps/platform/**/*.d.ts"
+  ],
+  "exclude": [
+    "apps/platform/test.ts",
+    "apps/platform/**/*.spec.ts"
+  ]
+}

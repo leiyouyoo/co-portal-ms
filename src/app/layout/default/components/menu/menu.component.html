@@ -38,82 +38,102 @@
         </div>
         <nz-divider></nz-divider>
       </div>
-      <div nz-col [nzSpan]="12" class="portal-menu__submenu">
+      <<<<<<< HEAD <div nz-col [nzSpan]="12" class="portal-menu__submenu">
         <h3 class="portal-menu__submenu-group"><i></i>组1
         </h3>
         <div class="portal-menu__submenu-item">
-          Content2
-        </div>
-        <div class="portal-menu__submenu-item">
-          Content3
-        </div>
-        <div class="portal-menu__submenu-item">
-          Content4
-        </div>
-        <div class="portal-menu__submenu-item">
-          Content5
-        </div>
-        <div class="portal-menu__submenu-item">
-          Content6
-        </div>
-        <div class="portal-menu__submenu-item">
-          Content7
-        </div>
-        <nz-divider></nz-divider>
+          =======
+          <div nz-col [nzSpan]="12" class="co-portal__submenu">
+            <h3 class="co-portal__submenu-group"><i></i>组1</h3>
+            <div class="co-portal__submenu-item">
+              >>>>>>> f4e6c55e6ca6bff1691b4a7393946458376a1f14
+              Content2
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content3
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content4
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content5
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content6
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content7
+            </div>
+            <nz-divider></nz-divider>
 
-        <h3 class="portal-menu__submenu-group"><i></i>组1
-        </h3>
-        <div class="portal-menu__submenu-item">
-          Content1
-        </div>
-        <div class="portal-menu__submenu-item">
-          Content2
-        </div>
-        <div class="portal-menu__submenu-item">
-          Content3
-        </div>
-        <div class="portal-menu__submenu-item">
-          Content4
-        </div>
-        <div class="portal-menu__submenu-item">
-          Content5
-        </div>
-        <div class="portal-menu__submenu-item">
-          Content6
-        </div>
-        <div class="portal-menu__submenu-item">
-          Content7
-        </div>
-        <nz-divider></nz-divider>
+            <h3 class="co-portal__submenu-group"><i></i>组1</h3>
+            <div class="co-portal__submenu-item">
+              Content1
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content2
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content3
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content4
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content5
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content6
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content7
+            </div>
+            <nz-divider></nz-divider>
 
-        <h3 class="portal-menu__submenu-group"><i></i>组1
-        </h3>
-        <div class="portal-menu__submenu-item">
-          Content1
+            <h3 class="co-portal__submenu-group"><i></i>组1</h3>
+            <div class="co-portal__submenu-item">
+              Content1
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content2
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content3
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content4
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content5
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content6
+            </div>
+            <div class="portal-menu__submenu-item">
+              Content7
+            </div>
+            <nz-divider></nz-divider>
+          </div>
         </div>
-        <div class="portal-menu__submenu-item">
-          Content2
-        </div>
-        <div class="portal-menu__submenu-item">
-          Content3
-        </div>
-        <div class="portal-menu__submenu-item">
-          Content4
-        </div>
-        <div class="portal-menu__submenu-item">
-          Content5
-        </div>
-        <div class="portal-menu__submenu-item">
-          Content6
-        </div>
-        <div class="portal-menu__submenu-item">
-          Content7
-        </div>
-        <nz-divider></nz-divider>
-      </div>
-    </div>
-
   </ng-template>
+
+  <!-- <nz-divider></nz-divider> -->
+
+  <!-- <div *ngFor="let item of menus; let i = index">
+    <li class="co-portal__menu-item">
+      <a nz-popover #submenu [nzPopoverContent]="contentTemplate" [nzPopoverOrigin]="menu1" nzPopoverTrigger="click"
+        nzOverlayClassName="co-portal__menu-level1" nzPopoverPlacement="rightTop" (click)="onShowSubmenu()"
+        [routerLink]="item._url">
+        <i nz-icon nzIconfont="iconsetting" class="co-portal__menu-item-icon"></i>
+        <i nz-icon nziconfont="iconsetting" class="co-portal__menu-item-icon"></i>
+        <span class="co-portal__menu-item-title-text">
+          {{ item.displayName }}
+        </span>
+        <i nz-icon nzType="right" class="co-portal__menu-item-arrow"></i>
+      </a>
+    </li>
+    <nz-divider></nz-divider>
+  </div> -->
 
   <div>
     <nz-divider></nz-divider>
@@ -141,11 +161,30 @@
   <!-- 
   <div *ngFor="let menu of menus">
     <nz-divider></nz-divider>
+<<<<<<< HEAD
     <li class="portal-menu__item">
       <a [routerLink]="['/platform/position']" [nzTooltipTitle]="menu.text" nzTooltipPlacement="right" nz-tooltip>
         <i nz-icon [nzIconfont]="menu.icon" class="portal-menu__item-icon"></i>
         <span class="portal-menu__item-title">
           {{menu.text}}
+=======
+    <li class="co-portal__menu-item">
+      <a [routerLink]="['/platform/position']" nzTooltipTitle="E-commerce" nzTooltipPlacement="right" nz-tooltip>
+        <i nz-icon nzIconfont="iconsetting" class="co-portal__menu-item-icon"></i>
+        <span class="co-portal__menu-item-title-text">
+          {{ 'position' | translate }}
+        </span>
+      </a>
+    </li>
+  </div>
+  <div>
+    <nz-divider></nz-divider>
+    <li class="co-portal__menu-item">
+      <a [routerLink]="['/fcm/order']" nzTooltipTitle="E-commerce" nzTooltipPlacement="right" nz-tooltip>
+        <i nz-icon nzIconfont="iconsetting" class="co-portal__menu-item-icon"></i>
+        <span class="co-portal__menu-item-title-text">
+          {{ 'E-commerce' | translate }}
+>>>>>>> f4e6c55e6ca6bff1691b4a7393946458376a1f14
         </span>
       </a>
     </li>
