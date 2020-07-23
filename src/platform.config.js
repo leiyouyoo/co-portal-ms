@@ -15,6 +15,7 @@ window.CO_PLATFORM={
       "routerPathPrefix": "/platform",
       "selector": "platform-root",
       "resourcePathPrefix": "/apps/platform/",
+      "manifest":"manifest.json",
       "preload": true,
       "scripts": [
         "main.js"
@@ -27,6 +28,7 @@ window.CO_PLATFORM={
       "routerPathPrefix": "/fcm",
       "selector": "fcm-root",
       "resourcePathPrefix": "/apps/fcm/",
+      "manifest":"manifest.json",
       "preload": true,
       "scripts": [
         "main.js"

@@ -16,9 +16,9 @@ import { _HttpClient } from '@co/common';
   templateUrl: 'search.component.html',
   // tslint:disable-next-line: no-host-metadata-property
   host: {
-    '[class.co-portal__header-item]': 'true',
-    '[class.co-portal__header-search]': 'true',
-    '[class.co-portal__header-search-show]': 'show',
+    '[class.portal__header-item]': 'true',
+    '[class.portal__header-search]': 'true',
+    '[class.portal__header-search-show]': 'show',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -30,16 +30,16 @@ export class DefaultLayoutWidgetSearchComponent implements OnDestroy {
   list: any[] = [];
 
   constructor(http: _HttpClient, cdr: ChangeDetectorRef) {
-    this.search$
-      .pipe(
-        debounceTime(300),
-        distinctUntilChanged(),
-        switchMap((q: string) => http.get('/user', { no: q, pi: 1, ps: 5 })),
-      )
-      .subscribe((res: any) => {
-        this.list = res.list;
-        cdr.detectChanges();
-      });
+    // this.search$
+    //   .pipe(
+    //     debounceTime(300),
+    //     distinctUntilChanged(),
+    //     switchMap((q: string) => http.get('/user', { no: q, pi: 1, ps: 5 })),
+    //   )
+    //   .subscribe((res: any) => {
+    //     this.list = res.list;
+    //     cdr.detectChanges();
+    //   });
   }
 
   @HostListener('click')

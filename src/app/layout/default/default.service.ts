@@ -19,7 +19,7 @@ export class DefaultLayoutService {
   /**
    * Specify width of the sidebar, If you change it, muse be synchronize change less parameter:
    * ```less
-   * @co-portal-sider-menu-width: 256px;
+   * @portal-sider-menu-width: 256px;
    * ```
    */
   readonly width = 200;
@@ -35,7 +35,7 @@ export class DefaultLayoutService {
   /**
    * Specify height of the header, If you change it, muse be synchronize change less parameter:
    * ```less
-   * @co-portal-header-height: 64px;
+   * @portal-header-height: 64px;
    * ```
    */
   readonly headerHeight = 44;

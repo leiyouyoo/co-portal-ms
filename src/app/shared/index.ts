@@ -1,5 +1,5 @@
 // Components
-export * from './components/langs/langs.component';
+// export * from './components/langs/langs.component';
 
 // Utils
 export * from './utils/yuan';

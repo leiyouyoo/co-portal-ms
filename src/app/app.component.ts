@@ -10,7 +10,7 @@ import { TitleService } from '@co/common';
 import { Planet, SwitchModes } from '@co/cms';
 import { ReuseTabService } from '@co/cbc';
 
-import { GetUserSigService } from '@im';
+// import { GetUserSigService } from '@im';
 
 /**
  * 应用入口组件
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
     private titleSrv: TitleService,
     private modalSrv: NzModalService,
     private reuseTabService: ReuseTabService,
-    private getUserSigService: GetUserSigService,
+    // private getUserSigService: GetUserSigService,
   ) {
     renderer.setAttribute(el.nativeElement, 'ng-zorro-version', VERSION_ZORRO.full);
   }

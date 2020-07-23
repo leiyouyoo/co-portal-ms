@@ -29,7 +29,7 @@ import { Planet, SwitchModes } from '@co/cms';
 import { DefaultLayoutService } from './default.service';
 import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 import { I18NService } from 'src/app/core/i18n/i18n.service';
-import { logOut } from '@im';
+// import { logOut } from '@im';
 @Component({
   selector: 'layout-default',
   styleUrls: ['./default.component.less'],
@@ -228,7 +228,7 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
   logout() {
     this.tokenService.clear();
     try {
-      logOut();
+      // logOut();
     } catch (e) {
       console.log('im logout error');
     }

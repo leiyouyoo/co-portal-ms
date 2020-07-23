@@ -6,7 +6,7 @@ import { DA_SERVICE_TOKEN, ITokenService } from '@co/auth';
   selector: '[default-layout-header-widget]',
   templateUrl: './widget.component.html',
   host: {
-    '[class.co-portal__header-right]': 'true',
+    '[class.portal__header-right]': 'true',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

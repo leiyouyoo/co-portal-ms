@@ -10,8 +10,8 @@ import { DefaultLayoutService } from '../../default.service';
   templateUrl: './header.component.html',
   host: {
     '[class.ant-layout-header]': 'true',
-    '[class.co-portal__header-fixed]': 'pro.fixedHeader',
-    '[class.co-portal__header-hide]': 'hideHeader',
+    '[class.portal__header-fixed]': 'pro.fixedHeader',
+    '[class.portal__header-hide]': 'hideHeader',
     '[style.padding.px]': '0',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
