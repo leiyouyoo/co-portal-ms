@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { _HttpClient, CoAuthService } from '@co/common';
 
 import { NzNotificationService, NzMessageService } from 'ng-zorro-antd';
-import { GetUserSigService, logOut } from '@im';
+// import { GetUserSigService, logOut } from '@im';
 @Component({
   selector: 'user-login-main',
   templateUrl: './login-main.component.html',
@@ -31,7 +31,7 @@ export class loginMainComponent implements OnInit {
     private notification: NzNotificationService,
     private message: NzMessageService,
     private activatedRoute: ActivatedRoute,
-    private getUserSigService: GetUserSigService,
+    // private getUserSigService: GetUserSigService,
   ) { }
 
   ngOnInit(): void {
@@ -175,12 +175,12 @@ export class loginMainComponent implements OnInit {
         // location.href = data.nav.menus.MainMenu.items[0].url;
         if (option.isLoginIm) {
           try {
-            logOut();
+            // logOut();
           } catch (ex) {
             console.error(ex);
           }
 
-          await this.getUserSigService.imLogin();
+          // await this.getUserSigService.imLogin();
           location.href = '#/dashboard';
         }
       },

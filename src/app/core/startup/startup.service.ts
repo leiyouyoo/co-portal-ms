@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { CO_I18N_TOKEN } from '@co/core';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { TranslateService } from '@ngx-translate/core';
+import { CO_I18N_TOKEN } from '@co/core';
+import { MenuService } from '@co/common';
 import { NzIconService } from 'ng-zorro-antd/icon';
 import { zip } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -23,6 +25,8 @@ export class StartupService {
     private aclService: ACLService,
     @Inject(CO_I18N_TOKEN) private i18n: I18NService,
     private httpClient: HttpClient,
+    private menuService: MenuService,
+
   ) {
     iconSrv.addIcon(...ICONS_AUTO, ...ICONS);
     this.iconSrv.fetchFromIconfont({
@@ -45,6 +49,38 @@ export class StartupService {
       organizationUnits
     }
     this.aclService.set(acls)
+  }
+
+
+  /**
+   * 递归访问整个树
+   */
+  convertMenus(
+    menus: NzSafeAny[]
+  ): any[] {
+    const inFn = (data: NzSafeAny[], parent: NzSafeAny, newMenus: any[]) => {
+      for (const item of data) {
+        const newMenu = {
+          text: item.displayName,
+          il8N: item.displayName,
+          link: item.url,
+          icon: item.icon,
+          children: []
+        };
+
+        const childrenVal = item.items;
+        if (childrenVal && childrenVal.length > 0) {
+          inFn(childrenVal, item, newMenu.children);
+        }
+
+        newMenus.push(newMenu);
+      }
+    };
+
+    const newMenus: any[] = [];
+    inFn(menus, null, newMenus);
+
+    return newMenus;
   }
 
   load(): Promise<any> {
@@ -73,6 +109,10 @@ export class StartupService {
             this.translate.setDefaultLang(this.i18n.defaultLang);
 
             this.setupAclData(appData);
+
+            // 初始化菜单
+            const menus = this.convertMenus(appData.nav.menus.MainMenu.items as any[])
+            this.menuService.add(menus);
 
             // application data
             const res: any = appData;

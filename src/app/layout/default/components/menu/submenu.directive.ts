@@ -94,7 +94,11 @@ export class CoSubmenuDirective extends NzTooltipBaseDirective {
 export class CoSubmenuComponent extends NzTooltipBaseComponent {
   _prefix = 'co-submenu-placement';
 
-  constructor(cdr: ChangeDetectorRef, @Host() @Optional() public noAnimation?: NzNoAnimationDirective) {
+  protected readonly triggerDisposables: Array<() => void> = [];
+
+  private delayTimer?: any;
+
+  constructor(cdr: ChangeDetectorRef, protected renderer: Renderer2, @Host() @Optional() public noAnimation?: NzNoAnimationDirective) {
     super(cdr, noAnimation);
   }
 
@@ -104,10 +108,76 @@ export class CoSubmenuComponent extends NzTooltipBaseComponent {
 
   onPositionChange(position) {
     if (this.origin && this.overlay && this.overlay.overlayRef) {
-      this.overlay.overlayRef.overlayElement.classList.add('co-portal__submenu-overlay')
+      this.overlay.overlayRef.overlayElement.classList.add('portal-menu__submenu-overlay')
       this.overlay.overlayRef.overlayElement.style.overflow = "auto";
       this.overlay.overlayRef.overlayElement.style.top = "44px";
       this.overlay.overlayRef.overlayElement.style.bottom = "0px";
+
+      this.registerTriggers();
     }
   }
+
+
+  protected registerTriggers(): void {
+    const categoryItemEls = document.querySelectorAll(".portal-menu__category-item");
+    const submenuEl = document.querySelector(".portal-menu__submenu");
+
+    this.removeTriggerListeners();
+
+    categoryItemEls.forEach(el => {
+      this.triggerDisposables.push(
+        this.renderer.listen(el, 'mouseenter', () => {
+          this.delayEnterLeave(true, true, this.nzMouseEnterDelay);
+        })
+      );
+      this.triggerDisposables.push(
+        this.renderer.listen(el, 'mouseleave', () => {
+          this.delayEnterLeave(true, false, 0);
+          if (submenuEl) {
+            this.triggerDisposables.push(
+              this.renderer.listen(submenuEl, 'mouseenter', () => {
+                this.delayEnterLeave(false, true);
+              })
+            );
+            this.triggerDisposables.push(
+              this.renderer.listen(submenuEl, 'mouseleave', () => {
+                this.delayEnterLeave(false, false);
+              })
+            );
+          }
+        })
+      );
+    })
+  }
+
+  private delayEnterLeave(isOrigin: boolean, isEnter: boolean, delay: number = -1): void {
+    if (this.delayTimer) {
+      this.clearTogglingTimer();
+    } else if (delay > 0) {
+
+      this.delayTimer = setTimeout(() => {
+        this.delayTimer = undefined;
+        isEnter && this.active();
+      }, delay * 1000);
+    } else {
+      (isEnter && isOrigin) && this.active();
+    }
+  }
+
+  private removeTriggerListeners(): void {
+    this.triggerDisposables.forEach(dispose => dispose());
+    this.triggerDisposables.length = 0;
+  }
+
+  private clearTogglingTimer(): void {
+    if (this.delayTimer) {
+      clearTimeout(this.delayTimer);
+      this.delayTimer = undefined;
+    }
+  }
+
+  active(): void {
+    console.log('active');
+  }
+
 }

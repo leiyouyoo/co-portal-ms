@@ -15,9 +15,13 @@ window.CO_PLATFORM={
       "routerPathPrefix": "/platform",
       "selector": "platform-root",
       "resourcePathPrefix": "/apps/platform/",
+      "manifest":"manifest.json",
       "preload": true,
       "scripts": [
         "main.js"
+      ],
+      "styles": [
+        "styles.css"
       ]
     },
     // {

@@ -1,5 +1,5 @@
 <i nz-icon nzType="search"></i>
-<div class="co-portal__header-search-input ant-select-auto-complete ant-select">
+<div class="portal__header-search-input ant-select-auto-complete ant-select">
   <input #ipt placeholder="站内搜索" nz-input [nzAutocomplete]="searchAuto" [(ngModel)]="q"
     (input)="search$.next($event.target?.value)" (blur)="show = false" />
 </div>

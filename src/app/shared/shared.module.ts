@@ -23,11 +23,9 @@ const THIRDMODULES = [CountdownModule, DragDropModule];
 
 // #region your componets & directives
 import { DEFAULT_SHARED_COMPONENTS } from '../layout/default';
-import { QUICK_CHAT_COMPONENTS } from './components/quick-chat';
 import { environment } from '@env/environment';
 
 const COMPONENTS_ENTRY = [
-  ...QUICK_CHAT_COMPONENTS,
 ];
 const COMPONENTS = [...COMPONENTS_ENTRY, ...DEFAULT_SHARED_COMPONENTS];
 const DIRECTIVES = [];
