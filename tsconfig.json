@@ -11,18 +11,49 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "lib": [
       "es2018",
       "dom"
     ],
+    "paths": {
+      "@shared": [
+        "src/app/shared/index"
+      ],
+      "@core": [
+        "src/app/core/index"
+      ],
+      "@env/*": [
+        "src/environments/*"
+      ],
+      "@layout": [
+        "src/app/layout/default/index"
+      ],
+      "@im": [
+        "src/app/shared/im/index"
+      ],
+      "@platform-shared": [
+        "apps/platform/app/shared/index"
+      ],
+      "@platform-core": [
+        "apps/platform/app/core/index"
+      ],
+      "@platform-env/*": [
+        "apps/platform/environments/*"
+      ],
+      "@platform-layout": [
+        "apps/platform/app/layout/default/index"
+      ]
+    },
     "typeRoots": [
       "node_modules/@types"
     ],
     "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
-     "//enableIvy": false,
+    "//enableIvy": false,
     "//fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   }
