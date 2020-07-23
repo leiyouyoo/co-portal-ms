@@ -18,7 +18,7 @@
 @input-border-color: rgba(0, 0, 0, 0.15);
 
 //次标题颜色 部分icon颜色
-@SubtitleColor : #717a83;
+@SubtitleColor: #717a83;
 //控件内顶部栏颜⾊和选中时交互底⾊ 部分阴影⾊
 @Interaction-color: #eff6ff;
 
@@ -32,7 +32,7 @@
 //table
 //--
 //表格表⾏hover背景⾊
-@table-row-hover-bg : #f6f8fa;
+@table-row-hover-bg: #f6f8fa;
 // TimePicker
 // ---
 @time-picker-selected-bg: @primary-color;
@@ -42,21 +42,20 @@
 @progress-default-color: @primary-color;
 
 //botton
-@btn-danger-color : @errorBorder;
-@btn-danger-bg : #fff;
+@btn-danger-color: @errorBorder;
+@btn-danger-bg: #fff;
 @btn-danger-border: @errorBorder;
 
 html {
-
   body {
-    font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Source Han Sans", "Noto Sans CJK Sc", "Microsoft YaHei", "Microsoft Jhenghei", sans-serif;
+    font-family: 'PingFang SC', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Helvetica, Arial, 'Hiragino Sans GB',
+      'Source Han Sans', 'Noto Sans CJK Sc', 'Microsoft YaHei', 'Microsoft Jhenghei', sans-serif;
   }
 
   nz-tabset {
     height: 100%;
     display: flex;
     flex-direction: column;
-
 
     .ant-tabs-content {
       flex: 1;
@@ -129,7 +128,7 @@ html {
 
   .ant-btn-primary {
     font-size: 14px;
-    background-color: @primary-color  !important;
+    background-color: @primary-color !important;
   }
 
   .ant-select-selection {
@@ -194,7 +193,7 @@ html {
   .ant-btn-primary {
     position: relative;
     font-size: 14px;
-    background-color: @primary-color  !important;
+    background-color: @primary-color !important;
 
     &::before {
       position: absolute;
@@ -297,7 +296,7 @@ html {
     }
 
     &[disabled] {
-      color: @primary-color  !important;
+      color: @primary-color !important;
       opacity: 0.4;
     }
   }
@@ -363,7 +362,7 @@ html {
     border: none;
   }
 
-  .ant-table-thead>tr>th {
+  .ant-table-thead > tr > th {
     overflow: hidden;
     white-space: nowrap;
     text-align: left;
@@ -371,15 +370,15 @@ html {
     border: 0;
   }
 
-  .ant-table-thead>tr:first-child>th:last-child {
+  .ant-table-thead > tr:first-child > th:last-child {
     text-align: left !important;
   }
 
-  .ant-table-tbody>tr {
+  .ant-table-tbody > tr {
     border: 0;
   }
 
-  .ant-table-tbody>tr>td {
+  .ant-table-tbody > tr > td {
     max-height: 64px;
     margin: 0;
     overflow: hidden;
@@ -407,11 +406,11 @@ html {
     }
   }
 
-  .ant-table-thead>tr>th .ant-table-header-column .ant-table-column-sorters:hover::before {
+  .ant-table-thead > tr > th .ant-table-header-column .ant-table-column-sorters:hover::before {
     background: #fafafa !important;
   }
 
-  .ant-table-thead>tr>th.ant-table-column-has-actions.ant-table-column-has-sorters:hover {
+  .ant-table-thead > tr > th.ant-table-column-has-actions.ant-table-column-has-sorters:hover {
     background: #fafafa;
   }
 
@@ -422,7 +421,7 @@ html {
   }
 
   //鼠标移上去小手样式
-  .ant-table-tbody>tr>td:hover {
+  .ant-table-tbody > tr > td:hover {
     cursor: pointer;
   }
 
@@ -452,14 +451,12 @@ html {
     color: #6198ff !important;
   }
 
-
   .rate-table-edit {
     .ant-btn {
       color: #6198ff;
       border-color: #6198ff;
     }
   }
-
 
   .inner-content {
     height: 100%;
@@ -479,7 +476,6 @@ html {
       }
     }
   }
-
 
   .notifications-menu,
   .csp-header-menu {
@@ -506,7 +502,7 @@ html {
   }
 }
 
-.ant-table-thead>tr>th .ant-table-column-sorter .ant-table-column-sorter-inner {
+.ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner {
   height: initial;
 }
 
@@ -647,7 +643,7 @@ html {
 
   .ant-radio-button-wrapper-checked {
     color: #fff !important;
-    background: @primary-color  !important;
+    background: @primary-color !important;
     box-shadow: 0 5px 20px 0 rgba(24, 144, 255, 0.2) !important;
   }
 
@@ -659,7 +655,7 @@ html {
   nz-select {
     height: 28px;
 
-    &>div {
+    & > div {
       height: 28px;
       border: none;
     }
@@ -695,7 +691,7 @@ html {
 .ant-calendar-picker {
   width: 100%;
 
-  &>nz-picker {
+  & > nz-picker {
     width: 100%;
   }
 }
@@ -748,7 +744,7 @@ html {
   }
 }
 
-.ant-table-thead>tr>th .ant-table-column-sorter .ant-table-column-sorter-inner:hover {
+.ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner:hover {
   color: rgba(0, 0, 0, 0.65);
 }
 
@@ -766,8 +762,7 @@ html {
   max-width: 70% !important;
   max-height: 80% !important;
 
-  @media all and (-ms-high-contrast: none),
-  (-ms-high-contrast: active) {
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     height: 100%;
   }
 
@@ -868,17 +863,19 @@ nz-table-inner-scroll {
   border-radius: 4px !important;
 }
 
-
-.ant-form-item-label>label.ant-form-item-required::before {
+.ant-form-item-label > label.ant-form-item-required::before {
   content: '' !important;
 }
 
-.ant-form-item-label>label.ant-form-item-required::after {
+.ant-form-item-label > label.ant-form-item-required::after {
   display: inline-block !important;
   margin-right: 4px;
   color: #ff4d4f;
   font-size: 14px;
   font-family: SimSun, sans-serif;
   line-height: 1;
-  content: '*'
+  content: '*';
+}
+.job-list-trbg {
+  background-color: #e6f7ff !important;
 }
