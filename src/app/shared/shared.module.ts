@@ -25,12 +25,11 @@ const THIRDMODULES = [CountdownModule, DragDropModule];
 // #region your componets & directives
 import { DEFAULT_SHARED_COMPONENTS } from '../layout/default';
 import { environment } from '@env/environment';
-import { DebounceInputDirective } from './directives/DebounceInput.Directive';
 environment.SERVER_URL = CoConfigManager.getValue('serverUrl');
 
 const COMPONENTS_ENTRY = [];
 const COMPONENTS = [...COMPONENTS_ENTRY, ...DEFAULT_SHARED_COMPONENTS];
-const DIRECTIVES = [DebounceInputDirective];
+const DIRECTIVES = [];
 // #endregion
 
 @NgModule({
