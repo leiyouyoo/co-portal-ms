@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { CoACLModule } from '@co/acl';
 import { CoCommonModule } from '@co/common';
+import { CoConfigManager } from '@co/core';
 import { CoFormModule } from '@co/form';
 
 import { SHARED_CO_MODULES } from './shared-co.module';
@@ -24,6 +25,7 @@ const THIRDMODULES = [CountdownModule, DragDropModule];
 // #region your componets & directives
 import { DEFAULT_SHARED_COMPONENTS } from '../layout/default';
 import { environment } from '@env/environment';
+environment.SERVER_URL = CoConfigManager.getValue("serverUrl");
 
 const COMPONENTS_ENTRY = [
 ];

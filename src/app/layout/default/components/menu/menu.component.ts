@@ -17,14 +17,25 @@ import { DefaultLayoutService } from '../../default.service';
 })
 export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
-  menus: Menu[];
-
-  // @ViewChild('submenu', { static: false }) submenu!: CoSubmenuComponent;
-
+  activedCategory: string;
+  allMenus: Menu[];
+  childMenus: Menu[] = [];
   constructor(public elementRef: ElementRef, private menuSrv: MenuService, private router: Router, public pro: DefaultLayoutService, private cdr: ChangeDetectorRef, protected renderer: Renderer2) { }
 
+  public get favoritesMenus() {
+    const favorites = this.allMenus.find(m => m.key === 'favorites');
+    return favorites?.children;
+  }
+
+
+  public get defaultMenus() {
+    const favorites = this.allMenus.find(m => m.key === 'menus');
+    return favorites?.children;
+  }
+
   private genMenus(data: Menu[]) {
-    this.menus = this.menuSrv.menus;
+    this.allMenus = this.menuSrv.menus;
+    this.genChildMenus(this.defaultMenus[0].key);
     this.cdr.markForCheck();
   }
 
@@ -33,10 +44,20 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
     this.menuSrv.change.pipe(takeUntil(unsubscribe$)).subscribe((res) => this.genMenus(res));
   }
 
-
   ngOnDestroy() {
     const { unsubscribe$ } = this;
     unsubscribe$.next();
     unsubscribe$.complete();
+  }
+
+  private genChildMenus(category: any) {
+    const menuCategory = this.defaultMenus.find(m => m.key === category);
+    this.childMenus = menuCategory?.children;
+    this.cdr.markForCheck();
+  }
+
+  onCatecoryActived(category: string) {
+    this.activedCategory = category;
+    this.genChildMenus(category);
   }
 }

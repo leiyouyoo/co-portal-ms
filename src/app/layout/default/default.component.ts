@@ -18,7 +18,7 @@ import {
 import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
 import { ReuseTabService } from '@co/cbc';
 import { ScrollService, _HttpClient, SettingsService } from '@co/common';
-import { updateHostClass } from '@co/core';
+import { updateHostClass, CoConfigManager } from '@co/core';
 import { environment } from '@env/environment';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject } from 'rxjs';
@@ -41,7 +41,7 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
   private unsubscribe$ = new Subject<void>();
 
   private queryCls: string;
-  imgUrl = environment.SERVER_URL;
+  imgUrl = CoConfigManager.getValue("serverUrl");
   user: any;
   userInfo: any;
   @ViewChild('settingHost', { read: ViewContainerRef, static: false }) private settingHost: ViewContainerRef;

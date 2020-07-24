@@ -1,8 +1,23 @@
+
+(function () { 
+  
+var protocol = 'http';
+var serverHost = '192.168.1.5';
+var apiPort = '8000';
+var signalRPort = '8002';
+var serverUrlPrefix = protocol+'://'+serverHost;
+var apiUrlPrefix = serverUrlPrefix+':'+apiPort;
+
 window.CO_PLATFORM={
   "name": "co.portal",
   "version": "0.0.1",
-  "apiBase":"",
-  "signalBase":"",
+  "serverUrl": apiUrlPrefix,
+  "signalRUrl": serverUrlPrefix+':'+signalRPort,
+  "storeUrl": apiUrlPrefix,
+  "loginUrl": "/#/passport/login",
+  "uploadUrl": apiUrlPrefix+'/Storage/File/Upload',
+  "downloadUrl": apiUrlPrefix+'/Storage/File/GetDownLoadFile',
+  "iconSrv":"https://at.alicdn.com/t/font_1909561_klqzxqh6z5.js",
   "mapbox":{
   },
   "im":{
@@ -38,4 +53,6 @@ window.CO_PLATFORM={
     // }
   ]
 }
+ 
+} ());
 

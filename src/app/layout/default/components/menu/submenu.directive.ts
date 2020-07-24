@@ -8,9 +8,11 @@ import {
   ElementRef,
   Host,
   Input,
+  Output,
   Optional,
   Renderer2,
   ViewContainerRef,
+  EventEmitter,
   ViewEncapsulation
 } from '@angular/core';
 import { zoomBigMotion } from 'ng-zorro-antd/core/animation';
@@ -18,6 +20,7 @@ import { NzNoAnimationDirective } from 'ng-zorro-antd/core/no-animation';
 import { NzTSType } from 'ng-zorro-antd/core/types';
 
 import { isTooltipEmpty, NzTooltipBaseDirective, NzTooltipBaseComponent, NzTooltipTrigger } from 'ng-zorro-antd/tooltip';
+import { basename } from 'path';
 
 @Directive({
   selector: '[co-submenu]',
@@ -34,6 +37,10 @@ export class CoSubmenuDirective extends NzTooltipBaseDirective {
   @Input('coPopoverPlacement') specificPlacement?: string;
   @Input('coOverlayClassName') nzOverlayClassName?: string;
   @Input('coPopoverOrigin') specificOrigin?: ElementRef<HTMLElement>;
+  @Output() readonly coCatecoryActived = new EventEmitter<any>();
+
+  protected readonly hoverTriggerDisposables: Array<() => void> = [];
+  private hoverDelayTimer?: any;
 
   componentFactory: ComponentFactory<CoSubmenuComponent> = this.resolver.resolveComponentFactory(CoSubmenuComponent);
 
@@ -45,6 +52,83 @@ export class CoSubmenuDirective extends NzTooltipBaseDirective {
     @Host() @Optional() public noAnimation?: NzNoAnimationDirective
   ) {
     super(elementRef, hostView, resolver, renderer, noAnimation);
+  }
+
+  show() {
+    super.show();
+    this.registerHoverTriggers();
+  }
+
+  hide() {
+    this.removeHoverTriggerListeners();
+    super.hide();
+  }
+
+  protected registerHoverTriggers(): void {
+    const categoryItemEls = document.querySelectorAll(".portal-menu__submenu-category-item");
+    const submenuEl = document.querySelector(".portal-menu__submenu");
+
+    this.removeHoverTriggerListeners();
+
+    categoryItemEls.forEach(el => {
+      this.hoverTriggerDisposables.push(
+        this.renderer.listen(el, 'mouseenter', () => {
+          this.delayHoverEnterLeave(el, true, true, this.nzMouseEnterDelay);
+        })
+      );
+      this.hoverTriggerDisposables.push(
+        this.renderer.listen(el, 'mouseleave', () => {
+          this.delayHoverEnterLeave(el, true, false, 0);
+          if (submenuEl) {
+            this.hoverTriggerDisposables.push(
+              this.renderer.listen(submenuEl, 'mouseenter', () => {
+                this.delayHoverEnterLeave(submenuEl, false, true);
+              })
+            );
+            this.hoverTriggerDisposables.push(
+              this.renderer.listen(submenuEl, 'mouseleave', () => {
+                this.delayHoverEnterLeave(el, false, false);
+              })
+            );
+          }
+        })
+      );
+    })
+  }
+
+  private delayHoverEnterLeave(elem: any, isOrigin: boolean, isEnter: boolean, delay: number = -1): void {
+    if (this.hoverDelayTimer) {
+      this.clearHoverTogglingTimer();
+    } else if (delay > 0) {
+
+      this.hoverDelayTimer = setTimeout(() => {
+        this.hoverDelayTimer = undefined;
+        isEnter && this.active(elem);
+      }, delay * 1000);
+    } else {
+      (isEnter && isOrigin) && this.active(elem);
+    }
+  }
+
+  private removeHoverTriggerListeners(): void {
+    this.hoverTriggerDisposables.forEach(dispose => dispose());
+    this.hoverTriggerDisposables.length = 0;
+  }
+
+  private clearHoverTogglingTimer(): void {
+    if (this.hoverDelayTimer) {
+      clearTimeout(this.hoverDelayTimer);
+      this.hoverDelayTimer = undefined;
+    }
+  }
+
+  active(elem: any): void {
+
+    this.coCatecoryActived.emit(elem && elem.getAttribute("data"));
+  }
+
+  ngOnDestroy() {
+    this.removeHoverTriggerListeners();
   }
 }
 
@@ -94,9 +178,6 @@ export class CoSubmenuDirective extends NzTooltipBaseDirective {
 export class CoSubmenuComponent extends NzTooltipBaseComponent {
   _prefix = 'co-submenu-placement';
 
-  protected readonly triggerDisposables: Array<() => void> = [];
-
-  private delayTimer?: any;
 
   constructor(cdr: ChangeDetectorRef, protected renderer: Renderer2, @Host() @Optional() public noAnimation?: NzNoAnimationDirective) {
     super(cdr, noAnimation);
@@ -112,72 +193,6 @@ export class CoSubmenuComponent extends NzTooltipBaseComponent {
       this.overlay.overlayRef.overlayElement.style.overflow = "auto";
       this.overlay.overlayRef.overlayElement.style.top = "44px";
       this.overlay.overlayRef.overlayElement.style.bottom = "0px";
-
-      this.registerTriggers();
     }
   }
-
-
-  protected registerTriggers(): void {
-    const categoryItemEls = document.querySelectorAll(".portal-menu__category-item");
-    const submenuEl = document.querySelector(".portal-menu__submenu");
-
-    this.removeTriggerListeners();
-
-    categoryItemEls.forEach(el => {
-      this.triggerDisposables.push(
-        this.renderer.listen(el, 'mouseenter', () => {
-          this.delayEnterLeave(true, true, this.nzMouseEnterDelay);
-        })
-      );
-      this.triggerDisposables.push(
-        this.renderer.listen(el, 'mouseleave', () => {
-          this.delayEnterLeave(true, false, 0);
-          if (submenuEl) {
-            this.triggerDisposables.push(
-              this.renderer.listen(submenuEl, 'mouseenter', () => {
-                this.delayEnterLeave(false, true);
-              })
-            );
-            this.triggerDisposables.push(
-              this.renderer.listen(submenuEl, 'mouseleave', () => {
-                this.delayEnterLeave(false, false);
-              })
-            );
-          }
-        })
-      );
-    })
-  }
-
-  private delayEnterLeave(isOrigin: boolean, isEnter: boolean, delay: number = -1): void {
-    if (this.delayTimer) {
-      this.clearTogglingTimer();
-    } else if (delay > 0) {
-
-      this.delayTimer = setTimeout(() => {
-        this.delayTimer = undefined;
-        isEnter && this.active();
-      }, delay * 1000);
-    } else {
-      (isEnter && isOrigin) && this.active();
-    }
-  }
-
-  private removeTriggerListeners(): void {
-    this.triggerDisposables.forEach(dispose => dispose());
-    this.triggerDisposables.length = 0;
-  }
-
-  private clearTogglingTimer(): void {
-    if (this.delayTimer) {
-      clearTimeout(this.delayTimer);
-      this.delayTimer = undefined;
-    }
-  }
-
-  active(): void {
-    console.log('active');
-  }
-
 }

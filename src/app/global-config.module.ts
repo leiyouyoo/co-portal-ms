@@ -3,18 +3,25 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { throwIfAlreadyLoaded } from '@core';
 import { CoMockModule } from '@co/mock';
-import { CoConfig, CO_CONFIG } from '@co/core';
+import { CoConfig, CO_CONFIG, CoConfigManager } from '@co/core';
 import { CoACLModule } from '@co/acl';
 import { CoAuthModule, SimpleInterceptor } from '@co/auth';
 
+debugger
 const coConfig: CoConfig = {
   st: { modal: { size: 'lg' } },
   auth: {
-    login_url: '/passport/login',
+    login_url: CoConfigManager.getValue("loginUrl"),
     token_send_place: 'header',
     token_send_key: 'Authorization',
     token_send_template: 'Bearer ${token}'
   },
+  common: {
+    httpClient: {
+      SERVER_URL: CoConfigManager.getValue("serverUrl"),
+      LOGIN_URL: CoConfigManager.getValue("loginUrl")
+    }
+  }
 };
 
 const coModules = [CoACLModule.forRoot(), CoMockModule.forRoot(), CoAuthModule];

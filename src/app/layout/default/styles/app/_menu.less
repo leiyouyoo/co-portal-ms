@@ -19,10 +19,11 @@
 
     &__item {
       margin: 4px 20px;
-      padding: 8px;
+      padding: 0px 8px;
       list-style: none;
       font-size: 12px;
       height: 36px;
+      line-height: 36px;
       border-radius: 4px;
       cursor: pointer;
 
@@ -43,7 +44,7 @@
       &-arrow {
         font-size: 14px;
         float: right;
-        margin-top: 4px;
+        margin-top: 10px;
       }
 
 
@@ -63,7 +64,6 @@
 
 
     &__submenu {
-      height: 100%;
       width: 100%;
       // column-count: 2;
       // column-width: 120px;
@@ -76,6 +76,7 @@
 
       &-category {
         background-color: #39373A;
+        width: 200px;
 
         &-item {
           margin: 0px;
@@ -87,8 +88,10 @@
           color: #FFFFFFD9;
           cursor: pointer;
 
-          &:hover {
+          &:hover,
+          &-actived {
             background-color: #2E2B2E;
+            color: #2F6E9B;
           }
 
           &-icon {
@@ -109,7 +112,7 @@
         }
 
         .ant-divider-horizontal {
-          width: 180px;
+          width: 120px;
           min-width: 24px;
           margin: auto;
           background-color: #585858;
@@ -144,7 +147,7 @@
         cursor: pointer;
 
         &:hover {
-          background-color: #1B8EFF;
+          color: #2F6E9B;
         }
       }
 
@@ -236,6 +239,7 @@
       margin: 0px;
       padding: 16px 8px;
       height: auto;
+      line-height: 24px !important;
       border-radius: 0px;
 
       &-active {
