@@ -7,7 +7,6 @@ import { CoConfig, CO_CONFIG, CoConfigManager } from '@co/core';
 import { CoACLModule } from '@co/acl';
 import { CoAuthModule, SimpleInterceptor } from '@co/auth';
 
-debugger
 const coConfig: CoConfig = {
   st: { modal: { size: 'lg' } },
   auth: {

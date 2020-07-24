@@ -109,7 +109,6 @@ export class loginMainComponent implements OnInit {
     let tenantId = map[obj.userName] ? map[obj.userName] : 1;
 
     this.loading = true;
-    debugger;
     this.loginService
       .login(obj.userName, obj.password, obj.remember)
       .finally(() => (this.loading = false))

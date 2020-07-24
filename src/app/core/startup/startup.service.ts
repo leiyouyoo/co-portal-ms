@@ -90,8 +90,6 @@ export class StartupService {
 
       this.httpClient.get(`assets/i18n/${this.i18n.defaultLang}.json`).subscribe((langData) => {
 
-        debugger
-
         // 设置语言数据
         this.translate.setTranslation(this.i18n.defaultLang, langData);
         this.translate.use(this.i18n.defaultLang);
@@ -110,7 +108,6 @@ export class StartupService {
           )
           .subscribe(
             (appData) => {
-              debugger
               // 缓存会话数据
               const res: any = appData;
               if (res) {
@@ -156,8 +153,6 @@ export class StartupService {
                 key: "favorites",
                 children: this.convertMenus(favoritesMenus)
               }]);
-
-              debugger
 
             },
             () => { },
