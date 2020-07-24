@@ -9,3 +9,5 @@ export * from './shared.module';
 
 // Types
 export * from './types';
+
+export * from './utils/debounce';
