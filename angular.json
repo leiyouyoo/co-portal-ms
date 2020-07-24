@@ -186,6 +186,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": false,
             "vendorChunk": false,
+            "optimization": true,
             "assets": [
               "src/favicon.ico",
               "src/platform.config.js",
