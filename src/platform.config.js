@@ -10,7 +10,7 @@ var apiUrlPrefix = serverUrlPrefix+':'+apiPort;
 
 window.CO_PLATFORM={
   "name": "co.portal",
-  "version": "0.0.1",
+  "environment":"dev",
   "serverUrl": apiUrlPrefix,
   "signalRUrl": serverUrlPrefix+':'+signalRPort,
   "storeUrl": apiUrlPrefix,

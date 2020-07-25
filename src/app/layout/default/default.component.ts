@@ -108,7 +108,8 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
 
       // 注册配置中的应用
       // tslint:disable-next-line:quotemark
-      this.planet.registerApps(window["CO_PLATFORM"].apps);
+      const apps: any[] = CoConfigManager.getSection("apps");
+      this.planet.registerApps(apps);
 
       // 启动
       this.planet.start();
