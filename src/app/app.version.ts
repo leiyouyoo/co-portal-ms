@@ -43,7 +43,7 @@ export function setupVersion(planet: any) {
 
     //获取前台配置
     versionInfo.fontendPlugins.push({
-      name: _.padEnd('co.portal', 20),
+      name: _.padEnd('co-portal', 20),
       version: _.padEnd(process.env.APP_VERSION, 20),
       releaseDate: _.padEnd(new Date(process.env.APP_RELEASEDATE), 20)
     });
