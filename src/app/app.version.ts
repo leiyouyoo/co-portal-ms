@@ -24,22 +24,24 @@ export function setupVersion(planet: any) {
 
     //获取后台配置
     const backendPlatformStr = localStorage.getItem("co.session");
-    if (!!backendPlatformStr) {
-      const backPlatformInfo = JSON.parse(backendPlatformStr)?.session?.platform;
-      versionInfo.backendPlugins.push({
-        name: _.padEnd('CO.Platform', 20),
-        version: _.padEnd(backPlatformInfo.version, 20),
-        releaseDate: _.padEnd(backPlatformInfo.releaseDate, 20)
-      });
-
-      backPlatformInfo.pluginVersions.forEach(element => {
-        versionInfo.backendPlugins.push({
-          name: _.padEnd(_.join(_.split(element.name, '.', 2), '.'), 20),
-          version: _.padEnd(element.version, 20),
-          releaseDate: _.padEnd(element.releaseDate, 20)
-        });
-      });
+    if (!backendPlatformStr) {
+      return;
     }
+
+    const backPlatformInfo = JSON.parse(backendPlatformStr)?.session?.platform;
+    versionInfo.backendPlugins.push({
+      name: _.padEnd('CO.Platform', 20),
+      version: _.padEnd(backPlatformInfo.version, 20),
+      releaseDate: _.padEnd(backPlatformInfo.releaseDate, 20)
+    });
+
+    backPlatformInfo.pluginVersions.forEach(element => {
+      versionInfo.backendPlugins.push({
+        name: _.padEnd(_.join(_.split(element.name, '.', 2), '.'), 20),
+        version: _.padEnd(element.version, 20),
+        releaseDate: _.padEnd(element.releaseDate, 20)
+      });
+    });
 
     //获取前台配置
     versionInfo.fontendPlugins.push({
