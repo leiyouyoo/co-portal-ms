@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": ["node"]
+  },
+  "files": [
+    "apps/fcm/main.ts",
+    "apps/fcm/polyfills.ts"
+  ],
+  "include": [
+    "apps/fcm/**/*.d.ts"
+  ],
+  "exclude": [
+    "apps/fcm/test.ts",
+    "apps/fcm/**/*.spec.ts"
+  ]
+}

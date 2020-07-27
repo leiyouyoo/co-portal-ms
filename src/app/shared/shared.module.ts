@@ -25,6 +25,8 @@ const THIRDMODULES = [CountdownModule, DragDropModule];
 // #region your componets & directives
 import { DEFAULT_SHARED_COMPONENTS } from '../layout/default';
 import { environment } from '@env/environment';
+import { CoSTWidgetRegistry, PortOfficePickerComponent, SalespersonPickerComponent, CarrierPickerComponent } from '@co/cbc';
+import { LookShipmentSpeedComponent } from 'apps/fcm/app/routes/fcm/order/order-list/look-shipment-speed/look-shipment-speed.component';
 environment.SERVER_URL = CoConfigManager.getValue('serverUrl');
 
 const COMPONENTS_ENTRY = [];
@@ -74,4 +76,11 @@ const DIRECTIVES = [];
     ...DIRECTIVES,
   ],
 })
-export class SharedModule {}
+export class SharedModule {
+  constructor(widgetRegistry: CoSTWidgetRegistry) {
+    widgetRegistry.register(LookShipmentSpeedComponent.Timeline, LookShipmentSpeedComponent);
+    widgetRegistry.register(PortOfficePickerComponent.SELECTOR, PortOfficePickerComponent);
+    widgetRegistry.register(SalespersonPickerComponent.SELECTOR, SalespersonPickerComponent);
+    widgetRegistry.register(CarrierPickerComponent.SELECTOR, CarrierPickerComponent);
+  }
+}

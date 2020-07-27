@@ -373,7 +373,7 @@
             "outputPath": "dist/apps/fcm",
             "index": "apps/fcm/index.html",
             "main": "apps/fcm/main.ts",
-            "tsConfig": "apps/fcm/tsconfig.app.json",
+            "tsConfig": "tsconfig.fcm.json",
             "assets": [ "apps/fcm/assets"],
             "styles": ["apps/fcm/styles.less"],
             "scripts": [],
