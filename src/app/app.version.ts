@@ -35,7 +35,7 @@ export function setupVersion(planet: any) {
       releaseDate: _.padEnd(backPlatformInfo.releaseDate, 20)
     });
 
-    backPlatformInfo.pluginVersions.forEach(element => {
+    backPlatformInfo.pluginVersions?.forEach(element => {
       versionInfo.backendPlugins.push({
         name: _.padEnd(_.join(_.split(element.name, '.', 2), '.'), 20),
         version: _.padEnd(element.version, 20),
