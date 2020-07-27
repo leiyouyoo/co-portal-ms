@@ -203,7 +203,7 @@ export class StartupService {
                   items: [],
                 },
                 {
-                  name: 'PLATFORM_POSITION',
+                  name: 'FCM_ORDER',
                   icon: 'iconsetting',
                   displayName: '电商物流',
                   order: 20,
@@ -215,7 +215,7 @@ export class StartupService {
                   items: [],
                 },
                 {
-                  name: 'PLATFORM_POSITION',
+                  name: 'FCM_BILL',
                   icon: 'iconsetting',
                   displayName: '账单管理',
                   order: 20,
@@ -254,7 +254,7 @@ export class StartupService {
                   items: [],
                 },
                 {
-                  name: 'PLATFORM_FCM',
+                  name: 'FCM_ORDER',
                   icon: 'iconsetting',
                   displayName: '电商物流',
                   order: 20,
@@ -266,7 +266,7 @@ export class StartupService {
                   items: [],
                 },
                 {
-                  name: 'PLATFORM_POSITION',
+                  name: 'FCM_BILL',
                   icon: 'iconsetting',
                   displayName: '账单管理',
                   order: 20,

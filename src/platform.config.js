@@ -38,8 +38,9 @@
         routerPathPrefix: '/fcm',
         selector: 'fcm-root',
         resourcePathPrefix: '/apps/fcm/',
-        preload: true,
+        preload: false,
         scripts: ['main.js'],
+        styles: ['styles.css'],
       },
     ],
   };
