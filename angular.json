@@ -178,7 +178,7 @@
             "outputPath": "dist/apps/platform",
             "index": "apps/platform/index.html",
             "main": "apps/platform/main.ts",
-            "tsConfig": "tsconfig.platform.json",
+            "tsConfig": "apps/platform/tsconfig.app.json",
             "assets": [ "apps/platform/assets"],
             "styles": ["apps/platform/styles.less"],
             "scripts": [],
