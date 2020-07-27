@@ -5,14 +5,14 @@
     "types": ["node"]
   },
   "files": [
-    "apps/platform/main.ts",
-    "apps/platform/polyfills.ts"
+    "apps/fcm/main.ts",
+    "apps/fcm/polyfills.ts"
   ],
   "include": [
-    "apps/platform/**/*.d.ts"
+    "apps/fcm/**/*.d.ts"
   ],
   "exclude": [
-    "apps/platform/test.ts",
-    "apps/platform/**/*.spec.ts"
+    "apps/fcm/test.ts",
+    "apps/fcm/**/*.spec.ts"
   ]
 }

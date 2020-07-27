@@ -33,18 +33,6 @@
       ],
       "@im": [
         "src/app/shared/im/index"
-      ],
-      "@platform-shared": [
-        "apps/platform/app/shared/index"
-      ],
-      "@platform-core": [
-        "apps/platform/app/core/index"
-      ],
-      "@platform-env/*": [
-        "apps/platform/environments/*"
-      ],
-      "@platform-layout": [
-        "apps/platform/app/layout/default/index"
       ]
     },
     "typeRoots": [

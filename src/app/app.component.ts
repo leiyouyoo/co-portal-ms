@@ -7,8 +7,8 @@ import { VERSION as VERSION_ZORRO } from 'ng-zorro-antd/version';
 import { filter } from 'rxjs/operators';
 
 import { TitleService } from '@co/common';
-import { Planet, SwitchModes } from '@co/cms';
-import { ReuseTabService } from '@co/cbc';
+import { Planet } from '@co/cms';
+import { setupVersion } from './app.version';
 
 // import { GetUserSigService } from '@im';
 
@@ -29,15 +29,16 @@ export class AppComponent implements OnInit {
     private router: Router,
     private titleSrv: TitleService,
     private modalSrv: NzModalService,
-    private reuseTabService: ReuseTabService,
   ) {
     renderer.setAttribute(el.nativeElement, 'ng-zorro-version', VERSION_ZORRO.full);
   }
 
   ngOnInit() {
     this.router.events.pipe(filter((evt) => evt instanceof NavigationEnd)).subscribe(() => {
-      this.titleSrv.setTitle();
+      this.titleSrv.setTitle('City Ocean');
       this.modalSrv.closeAll();
     });
+
+    setupVersion(this.planet);
   }
 }

@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserLockComponent } from './passport/lock/lock.component';
 
 import { EmptyComponent } from '@co/cms';
+import { CoConfigManager } from '@co/core';
 import { LoginComponent } from './passport/login.component';
 
 const routes: Routes = [
@@ -45,7 +46,7 @@ const routes: Routes = [
   { path: '**', component: EmptyComponent },
 ];
 
-const apps: any[] = window["CO_PLATFORM"].apps;
+const apps: any[] = CoConfigManager.getSection("apps");
 apps.forEach(a => {
   routes[0].children.push({
     path: a.name,

@@ -19,12 +19,11 @@ import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@a
 import { ReuseTabService } from '@co/cbc';
 import { ScrollService, _HttpClient, SettingsService } from '@co/common';
 import { updateHostClass, CoConfigManager } from '@co/core';
-import { environment } from '@env/environment';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
-import { Planet, SwitchModes } from '@co/cms';
+import { Planet, SwitchModes, GlobalEventDispatcher } from '@co/cms';
 
 import { DefaultLayoutService } from './default.service';
 import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
@@ -90,6 +89,7 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
     @Inject(DOCUMENT) private doc: any, // private cdr: ChangeDetectorRef
     private planet: Planet,
+    private globalEventDispatcher: GlobalEventDispatcher,
     private reuseTabService: ReuseTabService,
   ) {
     if (window.localStorage.getItem('_token') != null) {
@@ -108,7 +108,8 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
 
       // 注册配置中的应用
       // tslint:disable-next-line:quotemark
-      this.planet.registerApps(window["CO_PLATFORM"].apps);
+      const apps: any[] = CoConfigManager.getSection("apps");
+      this.planet.registerApps(apps);
 
       // 启动
       this.planet.start();
@@ -193,6 +194,8 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
   change(lang) {
     this.i18n.use(lang);
     this.settingsService.setLayout('lang', lang);
+
+    this.globalEventDispatcher.dispatch("change-lang", lang);
   }
 
   ngOnInit() {
