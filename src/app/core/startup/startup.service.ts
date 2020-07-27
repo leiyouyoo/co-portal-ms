@@ -136,6 +136,7 @@ export class StartupService {
               const favoritesMenus = [
                 { "name": "PLATFORM_JOB", "icon": "iconsetting", "displayName": "职务管理", "order": 20, "url": "/platform/job", "customData": { "type": 0, "id": "5fa265c8-54ed-4568-d313-08d7e2a23614" }, "target": null, "isEnabled": true, "isVisible": true, "items": [] },
                 { "name": "PLATFORM_POSITION", "icon": "iconsetting", "displayName": "职位管理", "order": 20, "url": "/platform/position", "customData": { "type": 0, "id": "5fa265c8-54ed-4568-d313-08d7e2a23614" }, "target": null, "isEnabled": true, "isVisible": true, "items": [] },
+                { "name": "fcm_POSITION", "icon": "iconsetting", "displayName": "订单管理", "order": 20, "url": "/fcm/order", "customData": { "type": 0, "id": "5fa265c8-54ed-4568-d313-08d7e2a23614" }, "target": null, "isEnabled": true, "isVisible": true, "items": [] },
               ]
 
               this.menuService.add([{

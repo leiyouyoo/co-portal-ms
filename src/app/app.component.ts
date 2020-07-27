@@ -39,7 +39,6 @@ export class AppComponent implements OnInit {
       this.modalSrv.closeAll();
     });
 
-    debugger;
     setupVersion(this.planet);
   }
 }

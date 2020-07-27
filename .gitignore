@@ -10,6 +10,7 @@ delon-builds
 scripts/var.less
 src/assets/style.dark.css
 src/assets/style.compact.css
+.scannerwork
 
 # dependencies
 /node_modules
