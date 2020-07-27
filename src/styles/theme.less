@@ -18,7 +18,7 @@
 @input-border-color: rgba(0, 0, 0, 0.15);
 
 //次标题颜色 部分icon颜色
-@SubtitleColor: #717a83;
+@SubtitleColor    : #717a83;
 //控件内顶部栏颜⾊和选中时交互底⾊ 部分阴影⾊
 @Interaction-color: #eff6ff;
 
@@ -32,7 +32,7 @@
 //table
 //--
 //表格表⾏hover背景⾊
-@table-row-hover-bg: #f6f8fa;
+@table-row-hover-bg     : #f6f8fa;
 // TimePicker
 // ---
 @time-picker-selected-bg: @primary-color;
@@ -42,8 +42,8 @@
 @progress-default-color: @primary-color;
 
 //botton
-@btn-danger-color: @errorBorder;
-@btn-danger-bg: #fff;
+@btn-danger-color : @errorBorder;
+@btn-danger-bg    : #fff;
 @btn-danger-border: @errorBorder;
 
 html {
@@ -53,17 +53,17 @@ html {
   }
 
   nz-tabset {
-    height: 100%;
-    display: flex;
+    height        : 100%;
+    display       : flex;
     flex-direction: column;
 
     .ant-tabs-content {
-      flex: 1;
+      flex    : 1;
       overflow: hidden;
 
       .ant-tabs-tabpane-active {
         overflow: hidden;
-        height: 100%;
+        height  : 100%;
       }
     }
   }
@@ -74,19 +74,19 @@ html {
 
   //输入框
   .ant-input {
-    position: relative;
-    display: inline-block;
-    box-sizing: border-box;
-    width: 100%;
-    color: #17191a;
-    font-size: 14px;
-    font-variant: tabular-nums;
-    list-style: none;
+    position        : relative;
+    display         : inline-block;
+    box-sizing      : border-box;
+    width           : 100%;
+    color           : #17191a;
+    font-size       : 14px;
+    font-variant    : tabular-nums;
+    list-style      : none;
     background-color: #fff;
     background-image: none;
-    border-radius: 4px;
+    border-radius   : 4px;
 
-    transition: all 0.3s;
+    transition           : all 0.3s;
     font-feature-settings: 'tnum';
   }
 
@@ -96,43 +96,43 @@ html {
 
   //下拉框
   .ant-select {
-    position: relative;
-    display: inline-block;
-    box-sizing: border-box;
-    padding: 0;
-    color: #17191a;
-    font-size: 14px;
-    font-variant: tabular-nums;
-    line-height: 1.5;
-    list-style: none;
-    outline: 0;
+    position             : relative;
+    display              : inline-block;
+    box-sizing           : border-box;
+    padding              : 0;
+    color                : #17191a;
+    font-size            : 14px;
+    font-variant         : tabular-nums;
+    line-height          : 1.5;
+    list-style           : none;
+    outline              : 0;
     font-feature-settings: 'tnum';
   }
 
   //单选框
   .ant-radio-group {
-    display: inline-block;
-    box-sizing: border-box;
-    padding: 4px 0;
-    color: #17191a;
-    font-size: 14px;
-    font-variant: tabular-nums;
-    list-style: none;
+    display              : inline-block;
+    box-sizing           : border-box;
+    padding              : 4px 0;
+    color                : #17191a;
+    font-size            : 14px;
+    font-variant         : tabular-nums;
+    list-style           : none;
     font-feature-settings: 'tnum';
   }
 
   .ant-btn {
     font-weight: 400;
-    font-size: 14px;
+    font-size  : 14px;
   }
 
   .ant-btn-primary {
-    font-size: 14px;
-    background-color: @primary-color !important;
+    font-size       : 14px;
+    background-color: @primary-color  !important;
   }
 
   .ant-select-selection {
-    border: 1px solid @input-border-color;
+    border       : 1px solid @input-border-color;
     border-radius: 4px;
   }
 
@@ -148,9 +148,9 @@ html {
     }
 
     .ant-form-item-control {
-      position: relative;
+      position   : relative;
       line-height: 25px;
-      zoom: 1;
+      zoom       : 1;
     }
 
     .ant-input {
@@ -191,20 +191,20 @@ html {
 
   //按钮样式(primary)
   .ant-btn-primary {
-    position: relative;
-    font-size: 14px;
-    background-color: @primary-color !important;
+    position        : relative;
+    font-size       : 14px;
+    background-color: @primary-color  !important;
 
     &::before {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      display: block;
+      position  : absolute;
+      top       : 0;
+      right     : 0;
+      bottom    : 0;
+      left      : 0;
+      display   : block;
       background: @primary-color;
-      opacity: 0;
-      content: '';
+      opacity   : 0;
+      content   : '';
     }
 
     &:not([disabled]):hover::before {
@@ -216,34 +216,34 @@ html {
     }
 
     &[disabled] {
-      color: #fff;
+      color     : #fff;
       background: rgba(24, 144, 255, 1);
       box-shadow: 0 5px 20px 0 rgba(24, 144, 255, 0.2);
-      opacity: 0.5;
+      opacity   : 0.5;
     }
   }
 
   .ant-btn-default,
   .ant-btn-default:focus {
     position: relative;
-    color: rgba(0, 0, 0, 0.65);
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    color   : rgba(0, 0, 0, 0.65);
+    border  : 1px solid rgba(0, 0, 0, 0.15);
 
     &::before {
-      position: absolute;
-      top: -1px;
-      right: -1px;
-      bottom: -1px;
-      left: -1px;
-      display: block;
+      position  : absolute;
+      top       : -1px;
+      right     : -1px;
+      bottom    : -1px;
+      left      : -1px;
+      display   : block;
       background: @primary-color;
-      opacity: 0;
-      content: '';
+      opacity   : 0;
+      content   : '';
     }
 
     &:hover,
     &:active {
-      color: rgba(0, 0, 0, 0.65);
+      color : rgba(0, 0, 0, 0.65);
       border: 1px solid rgba(0, 0, 0, 0.15);
     }
 
@@ -257,34 +257,34 @@ html {
 
     &[disabled] {
       background: rgba(0, 0, 0, 0.04);
-      border: 1px solid rgba(0, 0, 0, 0.15);
+      border    : 1px solid rgba(0, 0, 0, 0.15);
     }
   }
 
   a.ant-btn {
-    position: relative;
-    height: initial;
-    padding: 0;
-    color: @primary-color;
-    line-height: initial;
+    position     : relative;
+    height       : initial;
+    padding      : 0;
+    color        : @primary-color;
+    line-height  : initial;
     border-radius: 0;
 
     &:hover span {
-      color: @primary-color;
+      color          : @primary-color;
       text-decoration: underline !important;
     }
 
     &:active span {
-      color: @primary-color;
+      color          : @primary-color;
       text-decoration: underline !important;
     }
 
     &::before {
-      position: absolute;
-      display: block;
+      position  : absolute;
+      display   : block;
       background: @primary-color;
-      opacity: 0;
-      content: '';
+      opacity   : 0;
+      content   : '';
     }
 
     &:not([disabled]):hover::before {
@@ -296,47 +296,47 @@ html {
     }
 
     &[disabled] {
-      color: @primary-color !important;
+      color  : @primary-color  !important;
       opacity: 0.4;
     }
   }
 
   //幽灵按钮样式
   .ghostButton {
-    margin-right: 8px;
-    margin-left: 8px;
-    color: @primary-color;
+    margin-right    : 8px;
+    margin-left     : 8px;
+    color           : @primary-color;
     background-color: #fff;
-    border-color: #9cb2cd;
+    border-color    : #9cb2cd;
   }
 
   .ghostButton:hover {
-    color: @primary-color;
+    color           : @primary-color;
     background-color: #fff;
-    border-color: #d8e5f4;
+    border-color    : #d8e5f4;
   }
 
   .ghostButton:active {
-    color: @primary-color;
+    color           : @primary-color;
     background-color: #fff;
-    border-color: #8396ad;
+    border-color    : #8396ad;
   }
 
   //下拉框选中鼠标悬浮样式
   .ant-select-dropdown-menu-item:hover:not(.ant-select-dropdown-menu-item-disabled) {
-    color: @text-color;
-    font-weight: 600;
+    color           : @text-color;
+    font-weight     : 600;
     background-color: @Interaction-color;
   }
 
   //下拉框组得样式
   .ant-select-dropdown-menu-item-group-title {
-    height: 32px;
-    padding: 0 12px;
-    color: rgba(0, 0, 0, 0.45);
-    color: @SubtitleColor;
+    height     : 32px;
+    padding    : 0 12px;
+    color      : rgba(0, 0, 0, 0.45);
+    color      : @SubtitleColor;
     font-weight: bold;
-    font-size: 14px;
+    font-size  : 14px;
     line-height: 32px;
   }
 
@@ -354,7 +354,7 @@ html {
   //下拉框指标
   .ant-select-arrow svg {
     display: inline-block;
-    color: #17191a;
+    color  : #17191a;
   }
 
   //table
@@ -362,55 +362,55 @@ html {
     border: none;
   }
 
-  .ant-table-thead > tr > th {
-    overflow: hidden;
-    white-space: nowrap;
-    text-align: left;
+  .ant-table-thead>tr>th {
+    overflow        : hidden;
+    white-space     : nowrap;
+    text-align      : left;
     background-color: #f5f5f5ff;
-    border: 0;
+    border          : 0;
   }
 
-  .ant-table-thead > tr:first-child > th:last-child {
+  .ant-table-thead>tr:first-child>th:last-child {
     text-align: left !important;
   }
 
-  .ant-table-tbody > tr {
+  .ant-table-tbody>tr {
     border: 0;
   }
 
-  .ant-table-tbody > tr > td {
-    max-height: 64px;
-    margin: 0;
-    overflow: hidden;
+  .ant-table-tbody>tr>td {
+    max-height : 64px;
+    margin     : 0;
+    overflow   : hidden;
     white-space: nowrap;
     white-space: nowrap;
-    text-align: left;
+    text-align : left;
 
     ul {
-      height: 35px;
-      margin: 0;
-      padding: 0;
+      height     : 35px;
+      margin     : 0;
+      padding    : 0;
       line-height: 35px;
-      list-style: none;
+      list-style : none;
 
       li {
-        max-width: 100%;
-        height: 20px;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        line-height: 20px;
-        white-space: nowrap;
+        max-width    : 100%;
+        height       : 20px;
+        margin       : 0;
+        padding      : 0;
+        overflow     : hidden;
+        line-height  : 20px;
+        white-space  : nowrap;
         text-overflow: ellipsis;
       }
     }
   }
 
-  .ant-table-thead > tr > th .ant-table-header-column .ant-table-column-sorters:hover::before {
+  .ant-table-thead>tr>th .ant-table-header-column .ant-table-column-sorters:hover::before {
     background: #fafafa !important;
   }
 
-  .ant-table-thead > tr > th.ant-table-column-has-actions.ant-table-column-has-sorters:hover {
+  .ant-table-thead>tr>th.ant-table-column-has-actions.ant-table-column-has-sorters:hover {
     background: #fafafa;
   }
 
@@ -421,7 +421,7 @@ html {
   }
 
   //鼠标移上去小手样式
-  .ant-table-tbody > tr > td:hover {
+  .ant-table-tbody>tr>td:hover {
     cursor: pointer;
   }
 
@@ -435,7 +435,7 @@ html {
 
   .ant-btn {
     font-weight: 600;
-    font-size: 12px;
+    font-size  : 12px;
   }
 
   .ant-form-explain {
@@ -443,7 +443,7 @@ html {
   }
 
   .page_footer {
-    display: flex;
+    display       : flex;
     flex-direction: row-reverse;
   }
 
@@ -453,18 +453,18 @@ html {
 
   .rate-table-edit {
     .ant-btn {
-      color: #6198ff;
+      color       : #6198ff;
       border-color: #6198ff;
     }
   }
 
   .inner-content {
-    height: 100%;
+    height  : 100%;
     overflow: auto;
 
     .main-container {
-      background: rgba(255, 255, 255, 1);
-      box-shadow: 0px 0px 10px 0px rgba(230, 233, 243, 0.5);
+      background   : rgba(255, 255, 255, 1);
+      box-shadow   : 0px 0px 10px 0px rgba(230, 233, 243, 0.5);
       border-radius: 10px;
     }
   }
@@ -495,14 +495,14 @@ html {
   }
 
   .ql-toolbar {
-    border-top: none !important;
-    border-right: none !important;
+    border-top         : none !important;
+    border-right       : none !important;
     border-bottom-color: #e4e4e4 !important;
-    border-left: none !important;
+    border-left        : none !important;
   }
 }
 
-.ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner {
+.ant-table-thead>tr>th .ant-table-column-sorter .ant-table-column-sorter-inner {
   height: initial;
 }
 
@@ -543,7 +543,7 @@ html {
 .ant-select-dropdown-menu-item {
   div {
     font-weight: 400 !important;
-    opacity: 0.85 !important;
+    opacity    : 0.85 !important;
   }
 }
 
@@ -581,21 +581,21 @@ html {
 }
 
 .nz-radio-group-pill {
-  padding: 0;
+  padding      : 0;
   border-radius: 8px;
 
   .ant-radio-button-wrapper {
-    min-width: 60px;
-    height: 22px;
-    color: rgba(24, 144, 255, 1);
-    line-height: 22px;
-    text-align: center;
-    border: none;
+    min-width    : 60px;
+    height       : 22px;
+    color        : rgba(24, 144, 255, 1);
+    line-height  : 22px;
+    text-align   : center;
+    border       : none;
     border-radius: 8px;
   }
 
   .ant-radio-button-wrapper-checked {
-    color: #fff !important;
+    color     : #fff !important;
     background: rgba(24, 144, 255, 1);
   }
 
@@ -626,24 +626,24 @@ html {
 }
 
 .nz-radio-group-button {
-  display: inline-flex;
-  padding: 2px;
-  color: rgba(0, 0, 0, 0.25);
-  font-size: 14px;
+  display      : inline-flex;
+  padding      : 2px;
+  color        : rgba(0, 0, 0, 0.25);
+  font-size    : 14px;
   border-radius: 8px;
 
   .ant-radio-button-wrapper {
-    flex: 1;
-    height: 28px;
-    color: rgba(191, 191, 191, 1);
-    text-align: center;
-    border: none;
+    flex         : 1;
+    height       : 28px;
+    color        : rgba(191, 191, 191, 1);
+    text-align   : center;
+    border       : none;
     border-radius: 8px;
   }
 
   .ant-radio-button-wrapper-checked {
-    color: #fff !important;
-    background: @primary-color !important;
+    color     : #fff !important;
+    background: @primary-color  !important;
     box-shadow: 0 5px 20px 0 rgba(24, 144, 255, 0.2) !important;
   }
 
@@ -655,7 +655,7 @@ html {
   nz-select {
     height: 28px;
 
-    & > div {
+    &>div {
       height: 28px;
       border: none;
     }
@@ -671,7 +671,7 @@ html {
   }
 
   .select-checked .ant-select-selection {
-    color: #fff;
+    color     : #fff;
     background: @primary-color;
 
     & .ant-select-selection__clear {
@@ -691,7 +691,7 @@ html {
 .ant-calendar-picker {
   width: 100%;
 
-  & > nz-picker {
+  &>nz-picker {
     width: 100%;
   }
 }
@@ -726,17 +726,17 @@ html {
 }
 
 .nz-table-radius {
-  overflow: hidden;
-  border: 1px solid rgba(240, 243, 247, 1);
+  overflow     : hidden;
+  border       : 1px solid rgba(240, 243, 247, 1);
   border-radius: 10px;
 
   th,
   td {
-    padding-top: 0 !important;
+    padding-top   : 0 !important;
     padding-bottom: 0 !important;
-    color: rgba(0, 0, 0, 0.65) !important;
-    font-weight: 400 !important;
-    line-height: 36px !important;
+    color         : rgba(0, 0, 0, 0.65) !important;
+    font-weight   : 400 !important;
+    line-height   : 36px !important;
   }
 
   td {
@@ -744,7 +744,7 @@ html {
   }
 }
 
-.ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner:hover {
+.ant-table-thead>tr>th .ant-table-column-sorter .ant-table-column-sorter-inner:hover {
   color: rgba(0, 0, 0, 0.65);
 }
 
@@ -757,25 +757,26 @@ html {
 }
 
 .ant-modal {
-  top: 10% !important;
-  display: flex;
-  max-width: 70% !important;
+  top       : 10% !important;
+  display   : flex;
+  max-width : 70% !important;
   max-height: 80% !important;
 
-  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  @media all and (-ms-high-contrast: none),
+  (-ms-high-contrast: active) {
     height: 100%;
   }
 
   overflow: hidden !important;
 
   .ant-modal-content {
-    width: 100%;
-    overflow: hidden;
-    display: flex;
+    width         : 100%;
+    overflow      : hidden;
+    display       : flex;
     flex-direction: column;
 
     .ant-modal-body {
-      flex: 1;
+      flex    : 1;
       overflow: auto;
     }
   }
@@ -785,18 +786,18 @@ html {
   position: relative;
 
   &:before {
-    content: '';
+    content : '';
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
+    top     : 0;
+    bottom  : 0;
+    left    : 0;
 
-    width: 4px;
+    width : 4px;
     height: 28px;
 
-    margin: auto;
+    margin    : auto;
     background: rgba(24, 144, 255, 1);
-    display: flex;
+    display   : flex;
   }
 }
 
@@ -806,7 +807,7 @@ html {
   }
 
   .ant-modal {
-    height: 600px !important;
+    height    : 600px !important;
     max-height: 600px !important;
   }
 
@@ -819,28 +820,28 @@ html {
   position: relative;
 
   &:before {
-    content: '';
+    content : '';
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
+    top     : 0;
+    bottom  : 0;
+    left    : 0;
 
-    width: 4px;
+    width : 4px;
     height: 28px;
 
-    margin: auto;
+    margin    : auto;
     background: rgba(24, 144, 255, 1);
-    display: flex;
+    display   : flex;
   }
 }
 
 .flex_between {
-  display: flex;
+  display        : flex;
   justify-content: space-between;
 }
 
 nz-table-title-footer {
-  padding-left: 0 !important;
+  padding-left : 0 !important;
   padding-right: 0 !important;
 }
 
@@ -863,19 +864,26 @@ nz-table-inner-scroll {
   border-radius: 4px !important;
 }
 
-.ant-form-item-label > label.ant-form-item-required::before {
+.ant-form-item-label>label.ant-form-item-required::before {
   content: '' !important;
 }
 
-.ant-form-item-label > label.ant-form-item-required::after {
-  display: inline-block !important;
+.ant-form-item-label>label.ant-form-item-required::after {
+  display     : inline-block !important;
   margin-right: 4px;
-  color: #ff4d4f;
-  font-size: 14px;
-  font-family: SimSun, sans-serif;
-  line-height: 1;
-  content: '*';
+  color       : #ff4d4f;
+  font-size   : 14px;
+  font-family : SimSun, sans-serif;
+  line-height : 1;
+  content     : '*';
 }
+
 .job-list-trbg {
   background-color: #e6f7ff !important;
+}
+
+.editor-left {
+  nz-select-top-control {
+    height: 64px !important;
+  }
 }
