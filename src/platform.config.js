@@ -31,16 +31,16 @@
         scripts: ['main.js'],
         styles: ['styles.css'],
       },
-      // {
-      //   name: 'fcm',
-      //   hostParent: '#app-host-container',
-      //   hostClass: 'fcm-layout',
-      //   routerPathPrefix: '/fcm',
-      //   selector: 'fcm-root',
-      //   resourcePathPrefix: '/apps/fcm/',
-      //   preload: true,
-      //   scripts: ['main.js'],
-      // },
+      {
+        name: 'fcm',
+        hostParent: '#app-host-container',
+        hostClass: 'fcm-layout',
+        routerPathPrefix: '/fcm',
+        selector: 'fcm-root',
+        resourcePathPrefix: '/apps/fcm/',
+        preload: true,
+        scripts: ['main.js'],
+      },
     ],
   };
 })();
