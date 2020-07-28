@@ -181,8 +181,12 @@
             "index": "apps/platform/index.html",
             "main": "apps/platform/main.ts",
             "tsConfig": "apps/platform/tsconfig.json",
-            "assets": [ "apps/platform/assets"],
-            "styles": ["apps/platform/styles.less"],
+            "assets": [
+              "apps/platform/assets"
+            ],
+            "styles": [
+              "apps/platform/styles.less"
+            ],
             "scripts": [],
             "aot": false,
             "extractCss": true,
@@ -399,12 +403,16 @@
             "index": "apps/fcm/index.html",
             "main": "apps/fcm/main.ts",
             "tsConfig": "apps/fcm/tsconfig.json",
-            "assets": [ "apps/fcm/assets"],
-            "styles": ["apps/fcm/styles.less"],
+            "assets": [
+              "apps/fcm/assets"
+            ],
+            "styles": [
+              "apps/fcm/styles.less"
+            ],
             "scripts": [],
             "aot": false,
             "extractCss": true,
-            "namedChunks": false,
+            "namedChunks": true,
             "vendorChunk": false
           },
           "configurations": {
