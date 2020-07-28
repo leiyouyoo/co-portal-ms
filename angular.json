@@ -28,7 +28,7 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
+            "tsConfig": "tsconfig.json",
             "aot": false,
             "vendorChunk": false,
             "optimization": false,
@@ -133,7 +133,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "tsconfig.app.json",
+              "tsconfig.json",
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
