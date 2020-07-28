@@ -38,6 +38,7 @@
         routerPathPrefix: '/fcm',
         selector: 'fcm-root',
         resourcePathPrefix: '/apps/fcm/',
+        manifest: '/apps/fcm/manifest.json',
         preload: true,
         scripts: ['main.js'],
         styles: ['styles.css'],
