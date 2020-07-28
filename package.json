@@ -11,6 +11,7 @@
   "scripts": {
     "start:all": "concurrently \"npm run serve:portal\" \"npm run serve:platform\" \"npm run serve:fcm\"",
     "start:ms": "concurrently \"npm run serve:portal\" \"npm run serve:platform\"",
+    "start:fcm": "concurrently \"npm run serve:portal\" \"npm run serve:fcm\"",
     "serve:portal": "ng run portal:serve --port 3000",
     "build:portal:dev": "node --max_old_space_size=5120 ./node_modules/@angular/cli/bin/ng run portal:build",
     "build:portal:prod": "node --max_old_space_size=5120 ./node_modules/@angular/cli/bin/ng build portal --prod",
