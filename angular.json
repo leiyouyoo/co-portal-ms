@@ -19,21 +19,28 @@
           "options": {
             "customWebpackConfig": {
               "path": "./src/extra-webpack.config.js",
-              "mergeStrategies": { "externals": "replace" }
+              "mergeStrategies": {
+                "externals": "replace"
+              }
             },
             "baseHref": "/",
             "outputPath": "dist/portal",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
+            "tsConfig": "tsconfig.json",
             "aot": false,
             "vendorChunk": false,
             "optimization": false,
             "assets": [
               "src/favicon.ico",
               "src/platform.config.js",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/ckeditor4/",
+                "output": "/assets/js/ckeditor/"
+              }
             ],
             "styles": [
               "src/styles.less"
@@ -57,7 +64,7 @@
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "aot":true,
+              "aot": true,
               "buildOptimizer": true,
               "assets": [
                 "src/favicon.ico",
@@ -131,7 +138,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "tsconfig.app.json",
+              "tsconfig.json",
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
@@ -178,9 +185,13 @@
             "outputPath": "dist/apps/platform",
             "index": "apps/platform/index.html",
             "main": "apps/platform/main.ts",
-            "tsConfig": "apps/platform/tsconfig.app.json",
-            "assets": [ "apps/platform/assets"],
-            "styles": ["apps/platform/styles.less"],
+            "tsConfig": "apps/platform/tsconfig.json",
+            "assets": [
+              "apps/platform/assets"
+            ],
+            "styles": [
+              "apps/platform/styles.less"
+            ],
             "scripts": [],
             "aot": false,
             "extractCss": true,
@@ -240,16 +251,25 @@
             "polyfills": "apps/platform/polyfills.ts",
             "tsConfig": "apps/platform/tsconfig.spec.json",
             "karmaConfig": "apps/platform/karma.conf.js",
-            "styles": ["apps/platform/styles.less"],
+            "styles": [
+              "apps/platform/styles.less"
+            ],
             "scripts": [],
-            "assets": [ "apps/platform/assets"]
+            "assets": [
+              "apps/platform/assets"
+            ]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["tsconfig.platform.json", "apps/platform/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "tsconfig.platform.json",
+              "apps/platform/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -274,8 +294,13 @@
             "main": "apps/platform/main-dev.ts",
             "polyfills": "apps/platform/polyfills.ts",
             "tsConfig": "tsconfig.platform.json",
-            "assets": [ "apps/platform/assets", "apps/platform/favicon.ico"],
-            "styles": ["apps/platform/styles.less"],
+            "assets": [
+              "apps/platform/assets",
+              "apps/platform/favicon.ico"
+            ],
+            "styles": [
+              "apps/platform/styles.less"
+            ],
             "aot": false,
             "vendorChunk": false,
             "scripts": [
@@ -335,16 +360,25 @@
             "polyfills": "apps/platform/polyfills.ts",
             "tsConfig": "apps/platform/tsconfig.spec.json",
             "karmaConfig": "apps/platform/karma.conf.js",
-            "styles": ["apps/platform/styles.less"],
+            "styles": [
+              "apps/platform/styles.less"
+            ],
             "scripts": [],
-            "assets": [ "apps/platform/assets"]
+            "assets": [
+              "apps/platform/assets"
+            ]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["tsconfig.platform.json", "apps/platform/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "tsconfig.platform.json",
+              "apps/platform/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -373,11 +407,17 @@
             "outputPath": "dist/apps/fcm",
             "index": "apps/fcm/index.html",
             "main": "apps/fcm/main.ts",
-            "tsConfig": "tsconfig.fcm.json",
-            "assets": [ "apps/fcm/assets"],
-            "styles": ["apps/fcm/styles.less"],
+            "tsConfig": "apps/fcm/tsconfig.json",
+            "assets": [
+              "apps/fcm/assets"
+            ],
+            "styles": [
+              "apps/fcm/styles.less"
+            ],
             "scripts": [],
             "aot": false,
+            "extractCss": true,
+            "namedChunks": true,
             "vendorChunk": false
           },
           "configurations": {
@@ -433,16 +473,25 @@
             "polyfills": "apps/fcm/polyfills.ts",
             "tsConfig": "apps/fcm/tsconfig.spec.json",
             "karmaConfig": "apps/fcm/karma.conf.js",
-            "styles": ["apps/fcm/styles.less"],
+            "styles": [
+              "apps/fcm/styles.less"
+            ],
             "scripts": [],
-            "assets": [ "apps/fcm/assets"]
+            "assets": [
+              "apps/fcm/assets"
+            ]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/fcm/tsconfig.app.json", "apps/fcm/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "apps/fcm/tsconfig.app.json",
+              "apps/fcm/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -467,8 +516,13 @@
             "main": "apps/fcm/main-dev.ts",
             "polyfills": "apps/fcm/polyfills.ts",
             "tsConfig": "apps/fcm/tsconfig.app.json",
-            "assets": [ "apps/fcm/assets", "apps/fcm/favicon.ico"],
-            "styles": ["apps/fcm/styles.less"],
+            "assets": [
+              "apps/fcm/assets",
+              "apps/fcm/favicon.ico"
+            ],
+            "styles": [
+              "apps/fcm/styles.less"
+            ],
             "aot": false,
             "vendorChunk": false,
             "scripts": [
@@ -528,16 +582,25 @@
             "polyfills": "apps/fcm/polyfills.ts",
             "tsConfig": "apps/fcm/tsconfig.spec.json",
             "karmaConfig": "apps/fcm/karma.conf.js",
-            "styles": ["apps/fcm/styles.less"],
+            "styles": [
+              "apps/fcm/styles.less"
+            ],
             "scripts": [],
-            "assets": [ "apps/fcm/assets"]
+            "assets": [
+              "apps/fcm/assets"
+            ]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/fcm/tsconfig.app.json", "apps/fcm/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "apps/fcm/tsconfig.app.json",
+              "apps/fcm/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
