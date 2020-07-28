@@ -1,19 +1,28 @@
 <ng-template #sideTpl>
-  <nz-sider [nzTrigger]="null" [nzCollapsible]="true" [nzCollapsed]="isMobile ? false : pro.collapsed"
-    [nzWidth]="pro.width" [nzCollapsedWidth]="pro.widthInCollapsed" class="portal__sider" style="max-width: 200px;"
-    [ngClass]="{ 'portal__sider-fixed': pro.fixSiderbar }">
+  <nz-sider
+    [nzTrigger]="null"
+    [nzCollapsible]="true"
+    [nzCollapsed]="isMobile ? false : pro.collapsed"
+    [nzWidth]="pro.width"
+    [nzCollapsedWidth]="pro.widthInCollapsed"
+    class="portal__sider"
+    style="max-width: 200px;"
+    [ngClass]="{ 'portal__sider-fixed': pro.fixSiderbar }"
+  >
     <div class="portal__sider-header">
       <!--Logo-->
-      <default-layout-logo class="portal__sider-logo">
-      </default-layout-logo>
+      <default-layout-logo class="portal__sider-logo"> </default-layout-logo>
 
       <!--头像区域-->
       <div class="portal__sider-avatar">
-        <nz-avatar [nzSrc]="
+        <nz-avatar
+          [nzSrc]="
             userInfo?.profilePictureId
               ? imgUrl + '/Storage/File/GetDownLoadFile?fileId=' + userInfo?.profilePictureId + '&Handler=image'
               : '/assets/images/avatar.png'
-          " class="user-avatar"></nz-avatar>
+          "
+          class="user-avatar"
+        ></nz-avatar>
         <div class="user-desc">
           <h3>{{ user && user.session.user.name }} <i nz-icon nztype="down"></i></h3>
           <p>
@@ -60,7 +69,8 @@
             <i nz-icon nzIconfont="iconsetting"></i>
             <span class="title">
               设置
-            </span></a>
+            </span></a
+          >
         </li>
       </ul>
     </div>
@@ -73,8 +83,15 @@
 
 <div class="ant-layout ant-layout-has-sider" style="height: 100vh;">
   <ng-container *ngIf="pro.menu === 'side' || isMobile">
-    <nz-drawer *ngIf="isMobile" [nzWidth]="pro.width" nzWrapClassName="portal__drawer" [nzVisible]="!pro.collapsed"
-      [nzClosable]="false" nzPlacement="left" (nzOnClose)="pro.setCollapsed(true)">
+    <nz-drawer
+      *ngIf="isMobile"
+      [nzWidth]="pro.width"
+      nzWrapClassName="portal__drawer"
+      [nzVisible]="!pro.collapsed"
+      [nzClosable]="false"
+      nzPlacement="left"
+      (nzOnClose)="pro.setCollapsed(true)"
+    >
       <ng-template [ngTemplateOutlet]="sideTpl"></ng-template>
     </nz-drawer>
     <ng-container *ngIf="!isMobile">
@@ -83,20 +100,31 @@
   </ng-container>
   <div class="ant-layout portal__main" [ngStyle]="getLayoutStyle" style="height: 100vh;">
     <!-- <default-layout-header></default-layout-header> -->
-    <div class="ant-layout-content portal__body" [class.portal__fetching]="isFetching" [ngStyle]="getContentStyle"
-      style="display: flex; flex-direction: column;">
+    <div
+      class="ant-layout-content portal__body"
+      [class.portal__fetching]="isFetching"
+      [ngStyle]="getContentStyle"
+      style="display: flex; flex-direction: column;"
+    >
       <div class="portal__header-item portal__header-trigger" (click)="pro.setCollapsed()">
         <i nz-icon nzType="menu-{{ pro.collapsed ? 'unfold' : 'fold' }}" class="portal__header-item-icon"></i>
       </div>
       <nz-spin class="portal__fetching-icon" nzSpinning></nz-spin>
 
-      <reuse-tab #reuseTab [tabBarExtraContent]="headerWidgets" tabType="card" class="icp-nav"></reuse-tab>
+      <reuse-tab
+        #reuseTab
+        [tabBarExtraContent]="headerWidgets"
+        tabType="card"
+        class="icp-nav"
+        style="box-shadow: 0px 0px 5px 0px #999999;"
+      ></reuse-tab>
 
-      <nz-content style="flex: auto; margin: 12px; background: #fff; border-radius: 10px; overflow: hidden;">
+      <nz-content
+        style="flex: auto; margin: 12px; background: #fff; overflow: hidden; box-shadow: 0px 0px 20px 0px #999; border-radius: 5px;"
+      >
         <router-outlet></router-outlet>
         <div id="app-host-container" class="app-layout"></div>
       </nz-content>
-
     </div>
   </div>
 </div>
