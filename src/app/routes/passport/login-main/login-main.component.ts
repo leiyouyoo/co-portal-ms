@@ -35,9 +35,8 @@ export class loginMainComponent implements OnInit {
     private message: NzMessageService,
     private activatedRoute: ActivatedRoute,
     private aclService: ACLService,
-    private menuService: MenuService,
-    // private getUserSigService: GetUserSigService,
-  ) { }
+    private menuService: MenuService, // private getUserSigService: GetUserSigService,
+  ) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -164,11 +163,10 @@ export class loginMainComponent implements OnInit {
     return a.order - b.order;
   }
 
-
   setupAclData(sessionData: any) {
-    const positions: any[] = sessionData?.session?.user?.positions.map(p => p.positionName);
-    const jobs: any[] = sessionData?.session?.user?.positions.map(p => p.jobName);
-    const organizationUnits: any[] = sessionData?.session?.user?.positions.map(p => p.organizationUnitName);
+    const positions: any[] = sessionData?.session?.user?.positions.map((p) => p.positionName);
+    const jobs: any[] = sessionData?.session?.user?.positions.map((p) => p.jobName);
+    const organizationUnits: any[] = sessionData?.session?.user?.positions.map((p) => p.organizationUnitName);
     const roles: any[] = sessionData?.session?.user?.roles;
     const abilities: any[] = sessionData?.auth?.grantedFunctionPermissions;
     const acls: ACLType = {
@@ -176,9 +174,9 @@ export class loginMainComponent implements OnInit {
       abilities,
       positions,
       jobs,
-      organizationUnits
-    }
-    this.aclService.set(acls)
+      organizationUnits,
+    };
+    this.aclService.set(acls);
   }
 
   doRedirect(option: { isRedirectByQueryParam?: boolean; isLoginIm?: boolean } = {}) {
@@ -200,39 +198,195 @@ export class loginMainComponent implements OnInit {
         // 初始化菜单
         // const menus = this.convertMenus(appData.nav.menus.MainMenu.items as any[])
         // this.menuService.add(menus);
+        // 初始化菜单
+        // const menus = this.convertMenus(appData.nav.menus.MainMenu.items as any[])
+        // this.menuService.add(menus);
         const frmMenus = [
-          { "name": "FRM_OceanFees", "icon": "iconsetting", "displayName": "海运运价", "order": 20, "url": "/rates/#/ocean", "customData": { "type": 0, "id": "5fa265c8-54ed-4568-d313-08d7e2a23614" }, "target": null, "isEnabled": true, "isVisible": true, "items": [] },
-          { "name": "FRM_TruckFees", "icon": "iconsetting", "displayName": "拖车价格", "order": 21, "url": "/rates/#/truckingRates", "customData": { "type": 0, "id": "ba8e5590-d305-4e41-d314-08d7e2a23614" }, "target": null, "isEnabled": true, "isVisible": true, "items": [] },
-          { "name": "FRM_LocalFees", "icon": "iconsetting", "displayName": "本地费用", "order": 22, "url": "/rates/#/localfee", "customData": { "type": 0, "id": "343bc33d-f1fd-4c28-d315-08d7e2a23614" }, "target": null, "isEnabled": true, "isVisible": true, "items": [] },
-          { "name": "FRM_Quotes", "icon": "iconsetting", "displayName": "询价", "order": 23, "url": "/rates/#/enquiry", "customData": { "type": 0, "id": "4e103430-9069-41cc-d316-08d7e2a23614" }, "target": null, "isEnabled": true, "isVisible": true, "items": [] },
-          { "name": "FRM_CustomerInquiries", "icon": "iconsetting", "displayName": "运价", "order": 25, "url": "/rates/#/inquiriesRates", "customData": { "type": 0, "id": "03a83907-2996-4f69-99c8-f83aeabf647e" }, "target": null, "isEnabled": true, "isVisible": true, "items": [] }
-        ]
+          {
+            name: 'FRM_OceanFees',
+            icon: 'iconsetting',
+            displayName: '海运运价',
+            order: 20,
+            url: '/rates/#/ocean',
+            customData: { type: 0, id: '5fa265c8-54ed-4568-d313-08d7e2a23614' },
+            target: null,
+            isEnabled: true,
+            isVisible: true,
+            items: [],
+          },
+          {
+            name: 'FRM_TruckFees',
+            icon: 'iconsetting',
+            displayName: '拖车价格',
+            order: 21,
+            url: '/rates/#/truckingRates',
+            customData: { type: 0, id: 'ba8e5590-d305-4e41-d314-08d7e2a23614' },
+            target: null,
+            isEnabled: true,
+            isVisible: true,
+            items: [],
+          },
+          {
+            name: 'FRM_LocalFees',
+            icon: 'iconsetting',
+            displayName: '本地费用',
+            order: 22,
+            url: '/rates/#/localfee',
+            customData: { type: 0, id: '343bc33d-f1fd-4c28-d315-08d7e2a23614' },
+            target: null,
+            isEnabled: true,
+            isVisible: true,
+            items: [],
+          },
+          {
+            name: 'FRM_Quotes',
+            icon: 'iconsetting',
+            displayName: '询价',
+            order: 23,
+            url: '/rates/#/enquiry',
+            customData: { type: 0, id: '4e103430-9069-41cc-d316-08d7e2a23614' },
+            target: null,
+            isEnabled: true,
+            isVisible: true,
+            items: [],
+          },
+          {
+            name: 'FRM_CustomerInquiries',
+            icon: 'iconsetting',
+            displayName: '运价',
+            order: 25,
+            url: '/rates/#/inquiriesRates',
+            customData: { type: 0, id: '03a83907-2996-4f69-99c8-f83aeabf647e' },
+            target: null,
+            isEnabled: true,
+            isVisible: true,
+            items: [],
+          },
+        ];
 
         const crmMenus = [
-          { "name": "PLATFORM_JOB", "icon": "iconsetting", "displayName": "职务管理", "order": 20, "url": "/platform/job", "customData": { "type": 0, "id": "5fa265c8-54ed-4568-d313-08d7e2a23614" }, "target": null, "isEnabled": true, "isVisible": true, "items": [] },
-          { "name": "PLATFORM_POSITION", "icon": "iconsetting", "displayName": "职位管理", "order": 20, "url": "/platform/position", "customData": { "type": 0, "id": "5fa265c8-54ed-4568-d313-08d7e2a23614" }, "target": null, "isEnabled": true, "isVisible": true, "items": [] },
-        ]
+          {
+            name: 'PLATFORM_JOB',
+            icon: 'iconsetting',
+            displayName: '职务管理',
+            order: 20,
+            url: '/platform/job',
+            customData: { type: 0, id: '5fa265c8-54ed-4568-d313-08d7e2a23614' },
+            target: null,
+            isEnabled: true,
+            isVisible: true,
+            items: [],
+          },
+          {
+            name: 'PLATFORM_POSITION',
+            icon: 'iconsetting',
+            displayName: '职位管理',
+            order: 20,
+            url: '/platform/position',
+            customData: { type: 0, id: '5fa265c8-54ed-4568-d313-08d7e2a23614' },
+            target: null,
+            isEnabled: true,
+            isVisible: true,
+            items: [],
+          },
+          {
+            name: 'FCM_ORDER',
+            icon: 'iconsetting',
+            displayName: '电商物流',
+            order: 20,
+            url: '/fcm/order',
+            customData: { type: 0, id: '5fa265c8-54ed-4568-d313-08d7e2a23614' },
+            target: null,
+            isEnabled: true,
+            isVisible: true,
+            items: [],
+          },
+          {
+            name: 'FCM_BILL',
+            icon: 'iconsetting',
+            displayName: '账单管理',
+            order: 20,
+            url: '/fcm/bill',
+            customData: { type: 0, id: '5fa265c8-54ed-4568-d313-08d7e2a23614' },
+            target: null,
+            isEnabled: true,
+            isVisible: true,
+            items: [],
+          },
+        ];
 
         const favoritesMenus = [
-          { "name": "PLATFORM_JOB", "icon": "iconsetting", "displayName": "职务管理", "order": 20, "url": "/platform/job", "customData": { "type": 0, "id": "5fa265c8-54ed-4568-d313-08d7e2a23614" }, "target": null, "isEnabled": true, "isVisible": true, "items": [] },
-          { "name": "PLATFORM_POSITION", "icon": "iconsetting", "displayName": "职位管理", "order": 20, "url": "/platform/position", "customData": { "type": 0, "id": "5fa265c8-54ed-4568-d313-08d7e2a23614" }, "target": null, "isEnabled": true, "isVisible": true, "items": [] },
-        ]
+          {
+            name: 'PLATFORM_JOB',
+            icon: 'iconsetting',
+            displayName: '职务管理',
+            order: 20,
+            url: '/platform/job',
+            customData: { type: 0, id: '5fa265c8-54ed-4568-d313-08d7e2a23614' },
+            target: null,
+            isEnabled: true,
+            isVisible: true,
+            items: [],
+          },
+          {
+            name: 'PLATFORM_POSITION',
+            icon: 'iconsetting',
+            displayName: '职位管理',
+            order: 20,
+            url: '/platform/position',
+            customData: { type: 0, id: '5fa265c8-54ed-4568-d313-08d7e2a23614' },
+            target: null,
+            isEnabled: true,
+            isVisible: true,
+            items: [],
+          },
+          {
+            name: 'FCM_ORDER',
+            icon: 'iconsetting',
+            displayName: '电商物流',
+            order: 20,
+            url: '/fcm/order',
+            customData: { type: 0, id: '5fa265c8-54ed-4568-d313-08d7e2a23614' },
+            target: null,
+            isEnabled: true,
+            isVisible: true,
+            items: [],
+          },
+          {
+            name: 'FCM_BILL',
+            icon: 'iconsetting',
+            displayName: '账单管理',
+            order: 20,
+            url: '/fcm/bill',
+            customData: { type: 0, id: '5fa265c8-54ed-4568-d313-08d7e2a23614' },
+            target: null,
+            isEnabled: true,
+            isVisible: true,
+            items: [],
+          },
+        ];
 
-        this.menuService.add([{
-          key: "menus",
-          children: [{
-            key: 'FRM',
-            text: "运价管理",
-            children: this.convertMenus(frmMenus)
-          }, {
-            key: 'PLATFORM',
-            text: "平台管理",
-            children: this.convertMenus(crmMenus)
-          }]
-        }, {
-          key: "favorites",
-          children: this.convertMenus(favoritesMenus)
-        }]);
+        this.menuService.add([
+          {
+            key: 'menus',
+            children: [
+              {
+                key: 'FRM',
+                text: '运价管理',
+                children: this.convertMenus(frmMenus),
+              },
+              {
+                key: 'PLATFORM',
+                text: '平台管理',
+                children: this.convertMenus(crmMenus),
+              },
+            ],
+          },
+          {
+            key: 'favorites',
+            children: this.convertMenus(favoritesMenus),
+          },
+        ]);
 
         // location.href = data.nav.menus.MainMenu.items[0].url;
         if (option.isLoginIm) {
@@ -252,13 +406,10 @@ export class loginMainComponent implements OnInit {
     );
   }
 
-
   /**
    * 递归访问整个树
    */
-  convertMenus(
-    menus: NzSafeAny[]
-  ): any[] {
+  convertMenus(menus: NzSafeAny[]): any[] {
     const inFn = (data: NzSafeAny[], parent: NzSafeAny, newMenus: any[]) => {
       for (const item of data) {
         const newMenu = {
@@ -266,7 +417,7 @@ export class loginMainComponent implements OnInit {
           il8N: item.displayName,
           link: item.url,
           icon: item.icon,
-          children: []
+          children: [],
         };
 
         const childrenVal = item.items;
