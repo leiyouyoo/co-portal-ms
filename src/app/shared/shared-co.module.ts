@@ -8,11 +8,14 @@ import {
   CoDatetimeRangePickerModule,
   CustomerPickerModule,
   CommodityPickerModule,
-  PortPickerModule, CoLayoutComponentsModule,
+  PortPickerModule,
+  CoLayoutComponentsModule,
 } from '@co/cbc';
 import { CoCmsModule } from '@co/cms';
+import { DelonImModule } from './im/public_api';
 
 export const SHARED_CO_MODULES = [
+  DelonImModule,
   CoCommonModule,
   PageHeaderModule,
   CoNoticeIconModule,
@@ -24,5 +27,5 @@ export const SHARED_CO_MODULES = [
   CustomerPickerModule,
   CommodityPickerModule,
   PortPickerModule,
-  CoLayoutComponentsModule
+  CoLayoutComponentsModule,
 ];

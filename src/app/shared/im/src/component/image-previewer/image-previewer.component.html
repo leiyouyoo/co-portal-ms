@@ -1,0 +1,20 @@
+<div
+  data-im-input-show
+  class="image-previewer-wrapper"
+  *ngIf="imgUrlList.length"
+  (mousewheel)="handleMouseWheel($event)"
+>
+  <div data-im-input-show class="image-wrapper">
+    <img data-im-input-show class="image-preview" [src]="previewUrl()" (click)="close()" />
+  </div>
+  <i data-im-input-show nz-icon class="close-button" nzType="close" (click)="close()" nzTheme="outline"></i>
+  <!-- <i class="el-icon-back prev-button" (click)="goPrev()"></i>
+  <i class="el-icon-right next-button" (click)="goNext()"></i>
+  <div class="actions-bar">
+    <i class="el-icon-zoom-out" (click)="zoomOut()"></i>
+    <i class="el-icon-zoom-in" (click)="zoomIn()"></i>
+    <i class="el-icon-refresh-left" (click)="rotateLeft()"></i>
+    <i class="el-icon-refresh-right" (click)="rotateRight()"></i>
+    <span class="image-counter">{{ index + 1 }} / {{ imgUrlList.length }}</span>
+  </div> -->
+</div>

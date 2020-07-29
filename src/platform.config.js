@@ -17,7 +17,10 @@
     downloadUrl: apiUrlPrefix + '/Storage/File/GetDownLoadFile',
     iconSrv: 'https://at.alicdn.com/t/font_1909561_klqzxqh6z5.js',
     mapbox: {},
-    im: {},
+    im: {
+      ImImageUrl: `${serverUrlPrefix}:${apiPort}`,
+      ImEnable: false,
+    },
     apps: [
       {
         name: 'platform',

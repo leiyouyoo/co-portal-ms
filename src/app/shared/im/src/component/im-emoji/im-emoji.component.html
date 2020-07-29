@@ -1,0 +1,5 @@
+<div data-im-input-show class="emojis">
+  <div data-im-input-show *ngFor="let item of emojiName" class="emoji" (click)="chooseEmoji(item)">
+    <img data-im-input-show [src]="emojiUrl + emojiMap[item]" />
+  </div>
+</div>

@@ -5,13 +5,12 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { VERSION as VERSION_ZORRO } from 'ng-zorro-antd/version';
 
 import { filter } from 'rxjs/operators';
+import { CoConfigManager } from '@co/core';
 
 import { TitleService } from '@co/common';
 import { Planet } from '@co/cms';
 import { setupVersion } from './app.version';
-
-// import { GetUserSigService } from '@im';
-
+import { GetUserSigService } from '../app/shared/im';
 /**
  * 应用入口组件
  */
@@ -29,6 +28,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private titleSrv: TitleService,
     private modalSrv: NzModalService,
+    private getUserSigService: GetUserSigService,
   ) {
     renderer.setAttribute(el.nativeElement, 'ng-zorro-version', VERSION_ZORRO.full);
   }
@@ -38,6 +38,13 @@ export class AppComponent implements OnInit {
       this.titleSrv.setTitle('City Ocean');
       this.modalSrv.closeAll();
     });
+
+    try {
+      const im = CoConfigManager.getValue('im');
+      im.ImEnable && this.getUserSigService.imLogin();
+    } catch (e) {
+      console.error(e);
+    }
 
     setupVersion(this.planet);
   }
