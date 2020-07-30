@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild, AfterViewInit, Renderer2, ElementRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  Renderer2,
+  ElementRef,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Menu, MenuService } from '@co/common';
 import { Subject } from 'rxjs';
@@ -20,22 +31,31 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
   activedCategory: string;
   allMenus: Menu[];
   childMenus: Menu[] = [];
-  constructor(public elementRef: ElementRef, private menuSrv: MenuService, private router: Router, public pro: DefaultLayoutService, private cdr: ChangeDetectorRef, protected renderer: Renderer2) { }
+  constructor(
+    public elementRef: ElementRef,
+    private menuSrv: MenuService,
+    private router: Router,
+    public pro: DefaultLayoutService,
+    private cdr: ChangeDetectorRef,
+    protected renderer: Renderer2,
+  ) {}
 
   public get favoritesMenus() {
-    const favorites = this.allMenus.find(m => m.key === 'favorites');
+    const favorites = this.allMenus.find((m) => m.key === 'favorites');
     return favorites?.children;
   }
 
-
   public get defaultMenus() {
-    const favorites = this.allMenus.find(m => m.key === 'menus');
+    const favorites = this.allMenus.find((m) => m.key === 'menus');
     return favorites?.children;
   }
 
   private genMenus(data: Menu[]) {
-    this.allMenus = this.menuSrv.menus;
+    // this.allMenus = this.menuSrv.menus;
+    debugger;
+    this.allMenus = data;
     this.genChildMenus(this.defaultMenus[0].key);
+
     this.cdr.markForCheck();
   }
 
@@ -51,7 +71,7 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
   }
 
   private genChildMenus(category: any) {
-    const menuCategory = this.defaultMenus.find(m => m.key === category);
+    const menuCategory = this.defaultMenus.find((m) => m.key === category);
     this.childMenus = menuCategory?.children;
     this.cdr.markForCheck();
   }

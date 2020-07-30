@@ -16,8 +16,12 @@
     uploadUrl: apiUrlPrefix + '/Storage/File/Upload',
     downloadUrl: apiUrlPrefix + '/Storage/File/GetDownLoadFile',
     iconSrv: 'https://at.alicdn.com/t/font_1909561_klqzxqh6z5.js',
+    excelDownloadUrl: apiUrlPrefix+'/Storage/Excel/DownloadExcel',
     mapbox: {},
-    im: {},
+    im: {
+      ImImageUrl: `${serverUrlPrefix}:${apiPort}`,
+      ImEnable: false,
+    },
     apps: [
       {
         name: 'platform',
@@ -38,6 +42,7 @@
         routerPathPrefix: '/fcm',
         selector: 'fcm-root',
         resourcePathPrefix: '/apps/fcm/',
+        manifest: '/apps/fcm/manifest.json',
         preload: true,
         scripts: ['main.js'],
         styles: ['styles.css'],

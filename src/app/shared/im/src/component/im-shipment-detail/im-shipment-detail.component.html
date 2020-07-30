@@ -1,0 +1,41 @@
+<div class="detail-route">
+  <h4>Shipment Details</h4>
+  <div class="state" *ngIf="isShare === false">
+    <div class="location" *ngIf="state == ShipmentStatusEnum.SellerLocation">
+      {{ "Seller's Location / Booked" | translate }}
+    </div>
+    <div class="location" *ngIf="state == ShipmentStatusEnum.InTransitToDeparturePort">
+      {{ 'In Transit to Departure Port' | translate }}
+    </div>
+    <div class="location" *ngIf="state == ShipmentStatusEnum.DeparturePort">{{ 'Departure Port' | translate }}</div>
+    <div class="location" *ngIf="state == ShipmentStatusEnum.InTransitToArrivalPort">
+      {{ 'In Transit to Arrival Port' | translate }}
+    </div>
+    <div class="location" *ngIf="state == ShipmentStatusEnum.ArrivalPort">{{ 'Arrival port' | translate }}</div>
+    <div class="location" *ngIf="state == ShipmentStatusEnum.InTransitToFinalDestination">
+      {{ 'In Transit to Final Destination' | translate }}
+    </div>
+    <div class="location" *ngIf="state == ShipmentStatusEnum.FinalDestination">
+      {{ 'Final destination' | translate }}
+    </div>
+  </div>
+  <div class="date" *ngIf="isShare === false">
+    <div class="title">{{ 'Expected Delivery Date' | translate }}:{{ ExpectedDeliveryDate | date: 'yyyy-MM-dd hh:mm:ss' }}</div>
+  </div>
+
+  <div #map class="map" [style.height.px]="mapHeight" *ngIf="!sample">
+    <!-- <share-amap
+      *ngIf="mapHeight"
+      [height]="mapHeight"
+      [markers]="icons"
+      [mode]="route?.freightMethodType === FreightMethodType.Ocean ? 'ocean' : 'air'"
+      [paths]="dashedLines && dashedLines"
+      [pathRectMargin]="{ left: 32, right: 32, top: 32, bottom: 32 }"
+      [currentPositions]="currentPositions"
+    ></share-amap> -->
+  </div>
+  <div class="route-list" *ngIf="route">
+    <div class="title" style="margin-bottom: 14px;">{{ 'Route Detail' | translate }}</div>
+    <im-shipment-step [shipment]="route"> </im-shipment-step>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="im-schedule-wrap">
+  <p>{{ messageContent.Title }}</p>
+  <p>
+    {{ 'Start time' }}:{{ messageContent.RemindStartTime | date: 'yyyy-MM-dd HH:mm' }} {{ 'End time' }}:{{
+      messageContent.RemindEndTime | date: 'yyyy-MM-dd HH:mm'
+    }}
+  </p>
+  <p>{{ messageContent.AdvanceTime }}分钟前提醒</p>
+  <h5 *ngIf="messageContent.Content">备注</h5>
+  <p>{{ messageContent.Content }}</p>
+</div>

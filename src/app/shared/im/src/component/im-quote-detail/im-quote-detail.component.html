@@ -1,0 +1,233 @@
+<section class="im-quote-detail">
+  <div class="title-status">
+    <h4>Quote</h4>
+    <span [ngClass]="{ 'rejected-status': quotesDetail?.status == 4 }" class="status"
+      ><ng-container *ngIf="quotesDetail?.status == 0">
+        NoSet
+      </ng-container>
+      <ng-container *ngIf="quotesDetail?.status == 1">
+        {{ (quotesDetail.action == 1 ? 'Quoted' : 'Active') | translate }}
+      </ng-container>
+      <ng-container *ngIf="quotesDetail?.status == 2">
+        {{ 'Accepted' | translate }}
+      </ng-container>
+      <ng-container *ngIf="quotesDetail?.status == 3">
+        {{ 'Expired' | translate }}
+      </ng-container>
+      <ng-container *ngIf="quotesDetail?.status == 4">
+        {{ 'Rejected' | translate }}
+      </ng-container></span
+    >
+  </div>
+  <div>
+    <i class="iconfont icon-quote1"></i>
+    <h4>{{ quotesDetail?.quoteNo }}</h4>
+  </div>
+  <div *ngIf="quotesDetail?.quoteReplys.length">
+    <label>{{ 'Expires' | translate }}：</label>
+    <span
+      >{{ getTime((quotesDetail?.quoteReplys)[0]?.validStartDate, 'MMM,D,YYYY') }}-{{
+        getTime((quotesDetail?.quoteReplys)[0]?.validEndDate, 'MMM, D, YYYY')
+      }}</span
+    >
+  </div>
+  <div *ngIf="(quotesDetail?.quoteReplys)[0]?.creationTime">
+    <label>{{ 'Quote Time' | translate }}：</label>
+    <span>{{ getTime((quotesDetail?.quoteReplys)[0]?.creationTime) }} Current</span>
+  </div>
+
+  <section *ngIf="quotesDetail?.quoteReplys.length" class="content-wrap">
+    <div class="charge-group">
+      <div class="freight-wrap">
+        <p>
+          <span class="logo-group">
+            <label>Ocean Freight/<br />Total charge </label>
+          </span>
+
+          <span>
+            <ng-container *ngFor="let item of quotesDetail?.totalChargeArr">
+              {{ item.Name }}:
+              <strong>{{ item.Total }}</strong>
+            </ng-container>
+          </span>
+        </p>
+        <p *ngFor="let freight of freightList">
+          <span
+            >{{ freight.unitPrice }}X{{ freight.quantity }}
+            <ng-container *ngIf="freight.unitType == 1">({{ freight.containerCode }})</ng-container>
+            <ng-container *ngIf="freight.unitType == 2">Total</ng-container>
+            <ng-container *ngIf="freight.unitType == 3 && freight.computeFormula == 1">
+              <!-- 实际体积 -->
+              KG
+            </ng-container>
+            <ng-container *ngIf="freight.unitType == 3 && freight.computeFormula == 4">
+              <!-- 计费吨 -->
+              RT
+            </ng-container>
+            <ng-container *ngIf="freight.unitType == 3 && freight.computeFormula == 2">
+              <!-- 计费吨 -->
+              KG
+            </ng-container>
+            <ng-container *ngIf="freight.unitType == 4 && freight.computeFormula == 3">
+              <!-- 实际重量 -->
+              CBM</ng-container
+            >
+            <ng-container *ngIf="freight.unitType == 4 && freight.computeFormula == 4">
+              <!-- 计费吨 -->
+              RT</ng-container
+            >
+          </span>
+          <span
+            ><strong>{{ freight.unitPrice }} </strong>{{ freight.currencyName }}</span
+          >
+        </p>
+      </div>
+      <div *ngIf="OriginList.length" class="origin-wrap">
+        <label for=""
+          >{{ 'Origin' | translate
+          }}<i
+            (click)="controlOriginOpen = !controlOriginOpen"
+            *ngIf="OriginList.length > 0"
+            [ngStyle]="{ transform: controlOriginOpen ? 'rotate(180deg)' : '' }"
+            class="iconfont icon-zhankai"
+          ></i
+        ></label>
+        <ng-container *ngIf="controlOriginOpen">
+          <p *ngFor="let Origin of OriginList; let i = index">
+            <span class="chargingCodeWrap"
+              >{{ Origin.chargingCodeName }}
+              <span *ngIf="Origin.unitType == 1">CHARGE {{ Origin.unitPrice }}({{ Origin.containerCode }})</span>
+            </span>
+            <span class="last-span"
+              ><strong>{{ Origin.totalPrice }} </strong>{{ Origin.currencyName }}</span
+            >
+          </p>
+        </ng-container>
+      </div>
+      <div *ngIf="DestinationList.length" class="destination-wrap">
+        <label for=""
+          >{{ 'Destination' | translate
+          }}<i
+            (click)="controlDestinationOpen = !controlDestinationOpen"
+            *ngIf="DestinationList.length > 0"
+            class="iconfont icon-zhankai"
+            [ngStyle]="{ transform: controlDestinationOpen ? 'rotate(180deg)' : '' }"
+          ></i
+        ></label>
+        <ng-container *ngIf="controlDestinationOpen">
+          <p *ngFor="let Destination of DestinationList; let i = index">
+            <span class="chargingCodeWrap"
+              >{{ Destination.chargingCodeName }}
+              <span *ngIf="Destination.unitType == 1"
+                >CHARGE {{ Destination.unitPrice }}({{ Destination.containerCode }})</span
+              >
+            </span>
+            <span class="last-span"
+              ><strong>{{ Destination.totalPrice }} </strong>{{ Destination.currencyName }}
+            </span>
+          </p>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+  <section class="route-info">
+    <div *ngFor="let item of routeLocations">
+      <i [class]="item.icon"></i>
+      <span>{{ item.showName }}</span>
+    </div>
+  </section>
+  <section class="content-wrap">
+    <h5>
+      {{ 'Cargo' | translate }}
+      <i
+        (click)="controlCargoOpen = !controlCargoOpen"
+        [ngStyle]="{ transform: controlCargoOpen ? 'rotate(180deg)' : '' }"
+        class="iconfont icon-zhankai"
+      ></i>
+    </h5>
+    <div class="detail">
+      <div *ngIf="controlCargoOpen">
+        <p>
+          <i class="iconfont icon-cargo"></i>
+          <ng-container *ngIf="quotesDetail?.tradeType == 1">
+            General
+          </ng-container>
+          <ng-container *ngIf="quotesDetail?.tradeType == 2">
+            FBA
+          </ng-container>
+          <ng-container *ngIf="quotesDetail?.tradeType == 3">
+            FBM
+          </ng-container>
+        </p>
+
+        <ng-container *ngIf="quotesDetail?.freightMethodType == FreightMethodType.Ocean">
+          <p>
+            <i class="iconfont icon-CYCY"></i>
+            <ng-container *ngIf="quotesDetail?.freightType == 1">
+              CY-CY
+            </ng-container>
+            <ng-container *ngIf="quotesDetail?.freightType == 2">
+              CY-DOOR
+            </ng-container>
+            <ng-container *ngIf="quotesDetail?.freightType == 3">
+              DOOR-CY
+            </ng-container>
+            <ng-container *ngIf="quotesDetail?.freightType == 4">
+              DOOR-DOOR
+            </ng-container>
+          </p>
+          <p *ngIf="getContainerType().length">
+            <i class="iconfont icon-Container"></i>
+            <ng-container *ngFor="let e of getContainerType()">{{ e }}</ng-container>
+          </p>
+        </ng-container>
+        <p
+          *ngIf="quotesDetail?.totalWeightDisplay || quotesDetail?.totalVolumeDisplay || quotesDetail?.quantityDisplay"
+        >
+          <i class="iconfont icon-Container"></i>
+          <span>{{ quotesDetail?.totalWeightDisplay }}</span>
+          <span>{{ quotesDetail?.quantityDisplay }}</span>
+          <span>{{ quotesDetail?.totalVolumeDisplay }}</span>
+        </p>
+      </div>
+      <h5
+        *ngIf="
+          quotesDetail?.specialInstructions || quotesDetail?.containsSpecialGoodsTypes || quotesDetail?.description
+        "
+      >
+        {{ 'Specifics' | translate }}
+        <i
+          class="iconfont icon-zhankai"
+          [ngStyle]="{ transform: controlSpecialGoodsOpen ? 'rotate(180deg)' : '' }"
+          (click)="controlSpecialGoodsOpen = !controlSpecialGoodsOpen"
+        ></i>
+      </h5>
+      <ng-container
+        *ngIf="
+          controlSpecialGoodsOpen &&
+          (getContainsSpecialGoodsTypes().length || quotesDetail?.description || quotesDetail?.specialInstructions)
+        "
+      >
+        <div class="special">
+          <ng-container *ngIf="quotesDetail?.description">
+            <label class="destination">{{ 'Description Of Products' | translate }}</label>
+            <span>{{ quotesDetail?.description }}</span>
+          </ng-container>
+          <ng-container *ngIf="quotesDetail?.specialInstructions">
+            <label class="destination">{{ 'Special Instructions' | translate }}</label>
+            <span>{{ quotesDetail?.specialInstructions }}</span>
+          </ng-container>
+          <div *ngIf="quotesDetail?.containsSpecialGoodsTypes" class="specialGoodsName">
+            <label
+              nz-checkbox
+              nzDisabled
+              *ngFor="let item of quotesDetail?.containsSpecialGoodsTypesArr"
+              [ngModel]="true"
+              >{{ item.Name }}</label
+            >
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </section>
+</section>
