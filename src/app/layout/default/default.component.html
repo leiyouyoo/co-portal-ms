@@ -115,13 +115,12 @@
         #reuseTab
         [tabBarExtraContent]="headerWidgets"
         tabType="card"
+        mode="URL"
         class="icp-nav"
-        style="box-shadow: 0px 0px 5px 0px #999999;"
+        style="box-shadow: 0 0 5px 0 #999;"
       ></reuse-tab>
 
-      <nz-content
-        style="flex: auto; margin: 12px; background: #fff; overflow: hidden; box-shadow: 0px 0px 20px 0px #999; border-radius: 5px;"
-      >
+      <nz-content style="flex: auto; margin: 12px; overflow: hidden; background: #fff; border-radius: 5px; box-shadow: 0 0 20px 0 #999;">
         <router-outlet></router-outlet>
         <div id="app-host-container" class="app-layout"></div>
       </nz-content>
