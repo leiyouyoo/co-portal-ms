@@ -265,18 +265,7 @@ export class StartupService {
                   isVisible: true,
                   items: [],
                 },
-                {
-                  name: 'FCM_BILL',
-                  icon: 'iconsetting',
-                  displayName: '账单管理',
-                  order: 20,
-                  url: '/fcm/bill/billlist',
-                  customData: { type: 0, id: '5fa265c8-54ed-4568-d313-08d7e2a23614' },
-                  target: null,
-                  isEnabled: true,
-                  isVisible: true,
-                  items: [],
-                },
+
               ];
 
               this.menuService.add([
