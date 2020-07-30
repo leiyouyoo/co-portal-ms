@@ -15,10 +15,10 @@
     loginUrl: '/#/passport/login',
     uploadUrl: apiUrlPrefix + '/Storage/File/Upload',
     downloadUrl: apiUrlPrefix + '/Storage/File/GetDownLoadFile',
-    iconSrv: 'https://at.alicdn.com/t/font_1909561_klqzxqh6z5.js',
+    iconSrv: 'https://at.alicdn.com/t/font_1909561_d2031t1h5oj.js',
     mapbox: {},
     im: {
-      ImImageUrl: `${serverUrlPrefix}:${apiPort}`,
+      ImImageUrl: apiUrlPrefix,
       ImEnable: false,
     },
     apps: [
