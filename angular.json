@@ -39,7 +39,7 @@
               {
                 "glob": "**/*",
                 "input": "./node_modules/ckeditor4/",
-                "output": "./src/assets/js/ckeditor/"
+                "output": "/apps/fcm/assets/js/ckeditor/"
               }
             ],
             "styles": [
@@ -409,7 +409,12 @@
             "main": "apps/fcm/main.ts",
             "tsConfig": "apps/fcm/tsconfig.json",
             "assets": [
-              "apps/fcm/assets"
+              "apps/fcm/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/ckeditor4/",
+                "output": "/apps/fcm/assets/js/ckeditor/"
+              }
             ],
             "styles": [
               "apps/fcm/styles.less"

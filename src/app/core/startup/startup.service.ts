@@ -265,7 +265,6 @@ export class StartupService {
                   isVisible: true,
                   items: [],
                 },
-
               ];
 
               this.menuService.add([
