@@ -292,7 +292,7 @@ export class loginMainComponent implements OnInit {
           {
             name: 'FCM_ORDER',
             icon: 'iconsetting',
-            displayName: '电商物流',
+            displayName: '订单管理',
             order: 20,
             url: '/fcm/order',
             customData: { type: 0, id: '5fa265c8-54ed-4568-d313-08d7e2a23614' },
@@ -343,7 +343,7 @@ export class loginMainComponent implements OnInit {
           {
             name: 'FCM_ORDER',
             icon: 'iconsetting',
-            displayName: '电商物流',
+            displayName: '订单管理',
             order: 20,
             url: '/fcm/order/orderlist',
             customData: { type: 0, id: '5fa265c8-54ed-4568-d313-08d7e2a23614' },
