@@ -54,7 +54,10 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
     // this.allMenus = this.menuSrv.menus;
     debugger;
     this.allMenus = data;
-    this.genChildMenus(this.defaultMenus[0].key);
+
+    if (this.defaultMenus && this.defaultMenus.length > 0) {
+      this.genChildMenus(this.defaultMenus[0].key);
+    }
 
     this.cdr.markForCheck();
   }
