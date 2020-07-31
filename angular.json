@@ -47,7 +47,12 @@
             ],
             "scripts": [
               "node_modules/ajv/dist/ajv.bundle.js"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles/global"
+              ]
+            }
           },
           "configurations": {
             "production": {
@@ -193,6 +198,11 @@
               "apps/platform/styles.less"
             ],
             "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "apps/platform/styles/global"
+              ]
+            },
             "aot": false,
             "extractCss": true,
             "namedChunks": false,
