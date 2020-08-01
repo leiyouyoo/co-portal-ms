@@ -1,15 +1,16 @@
-// 请参考：https://ng-alain.com/docs/i18n
 import { registerLocaleData } from '@angular/common';
 import ngEn from '@angular/common/locales/en';
 import ngZh from '@angular/common/locales/zh';
 import { Injectable } from '@angular/core';
-import { CoI18NService } from '@co/core';
-import { CoLocaleService, en_US as delonEnUS, SettingsService, zh_CN as coZhCn } from '@co/common';
+
 import { TranslateService } from '@ngx-translate/core';
 import { enUS as dfEn, zhCN as dfZhCn, zhTW as dfZhTw } from 'date-fns/locale';
 import { en_US as zorroEnUS, NzI18nService, zh_CN as zorroZhCN, zh_TW as zorroZhTW } from 'ng-zorro-antd/i18n';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
+
+import { CoI18NService } from '@co/core';
+import { CoLocaleService, en_US as delonEnUS, SettingsService, zh_CN as coZhCn } from '@co/common';
 
 interface LangData {
   text: string;
@@ -40,6 +41,9 @@ const LANGS: { [key: string]: LangData } = {
   },
 };
 
+/**
+ * 本地化服务
+ */
 @Injectable({ providedIn: 'root' })
 export class I18NService implements CoI18NService {
   private _default = DEFAULT;
@@ -56,7 +60,6 @@ export class I18NService implements CoI18NService {
     private coLocaleService: CoLocaleService,
     private translate: TranslateService,
   ) {
-    // `@ngx-translate/core` 预先知道支持哪些语言
     const lans = this._langs.map((item) => item.code);
     translate.addLangs(lans);
 
@@ -68,23 +71,18 @@ export class I18NService implements CoI18NService {
     this.updateLangData(this._default);
   }
 
-  private getDefaultLang(): string | undefined {
-    if (this.settings.layout.lang) {
-      return this.settings.layout.lang;
-    }
-    return (navigator.languages ? navigator.languages[0] : null) || navigator.language;
-  }
-
-  private updateLangData(lang: string) {
-    const item = LANGS[lang];
-    registerLocaleData(item.ng);
-    this.nzI18nService.setLocale(item.zorro);
-    this.nzI18nService.setDateLocale(item.date);
-    this.coLocaleService.setLocale(item.co);
-  }
-
   get change(): Observable<string> {
     return this.change$.asObservable().pipe(filter((w) => w != null)) as Observable<string>;
+  }
+
+  /** 默认语言 */
+  get defaultLang() {
+    return this._default;
+  }
+
+  /** 当前语言 */
+  get currentLang() {
+    return this.translate.currentLang || this.translate.getDefaultLang() || this._default;
   }
 
   use(lang: string): void {
@@ -106,13 +104,18 @@ export class I18NService implements CoI18NService {
     return this.translate.instant(key, interpolateParams);
   }
 
-  /** 默认语言 */
-  get defaultLang() {
-    return this._default;
+  private getDefaultLang(): string | undefined {
+    if (this.settings.layout.lang) {
+      return this.settings.layout.lang;
+    }
+    return (navigator.languages ? navigator.languages[0] : null) || navigator.language;
   }
 
-  /** 当前语言 */
-  get currentLang() {
-    return this.translate.currentLang || this.translate.getDefaultLang() || this._default;
+  private updateLangData(lang: string) {
+    const item = LANGS[lang];
+    registerLocaleData(item.ng);
+    this.nzI18nService.setLocale(item.zorro);
+    this.nzI18nService.setDateLocale(item.date);
+    this.coLocaleService.setLocale(item.co);
   }
 }

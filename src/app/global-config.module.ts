@@ -1,31 +1,38 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { throwIfAlreadyLoaded } from '@core';
 import { CoMockModule } from '@co/mock';
 import { CoConfig, CO_CONFIG, CoConfigManager } from '@co/core';
 import { CoACLModule } from '@co/acl';
 import { CoAuthModule, SimpleInterceptor } from '@co/auth';
+import { throwIfAlreadyLoaded } from '@core';
+
+//#region co-libs 全局配置
 
 const coConfig: CoConfig = {
   st: { modal: { size: 'lg' } },
   auth: {
-    login_url: CoConfigManager.getValue("loginUrl"),
+    login_url: CoConfigManager.getValue('loginUrl'),
     token_send_place: 'header',
     token_send_key: 'Authorization',
-    token_send_template: 'Bearer ${token}'
+    token_send_template: 'Bearer ${token}',
   },
   common: {
     httpClient: {
-      SERVER_URL: CoConfigManager.getValue("serverUrl"),
-      LOGIN_URL: CoConfigManager.getValue("loginUrl")
-    }
-  }
+      SERVER_URL: CoConfigManager.getValue('serverUrl'),
+      LOGIN_URL: CoConfigManager.getValue('loginUrl'),
+    },
+  },
 };
 
 const coModules = [CoACLModule.forRoot(), CoMockModule.forRoot(), CoAuthModule];
 
-const coProvides = [{ provide: CO_CONFIG, useValue: coConfig }, { provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true }];
+const coProvides = [
+  { provide: CO_CONFIG, useValue: coConfig },
+  { provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true },
+];
+
+//#endregion
 
 // #region mock配置
 
@@ -48,7 +55,6 @@ coProvides.push({
 } as any);
 
 // #endregion
-
 
 // #region NG-ZORRO 配置
 

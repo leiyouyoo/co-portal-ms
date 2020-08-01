@@ -2,7 +2,24 @@
   "extends": "./tsconfig.common.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": ["node"]
+    "types": ["node"],
+    "paths": {
+      "@shared": [
+        "src/app/shared/index"
+      ],
+      "@core": [
+        "src/app/core/index"
+      ],
+      "@env/*": [
+        "src/environments/*"
+      ],
+      "@layout": [
+        "src/app/layout/default/index"
+      ],
+      "@im": [
+        "src/app/shared/im/index"
+      ]
+    }
   },
   "files": [
     "src/main.ts",

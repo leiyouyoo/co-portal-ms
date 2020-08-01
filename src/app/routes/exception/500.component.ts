@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
+/**
+ * 500 页
+ */
 @Component({
   selector: 'exception-500',
   template: ` <span type="500" style="min-height: 500px; height: 80%;"></span> `,
