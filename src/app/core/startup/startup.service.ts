@@ -76,7 +76,7 @@ export class StartupService {
               const favoritesMenus = [
                 {
                   name: 'FCM_ORDERS',
-                  icon: 'iconmenu-default',
+                  icon: 'icon-menu-default',
                   displayName: '订单管理',
                   order: 20,
                   url: '/fcm/order/orderlist',
