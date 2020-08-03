@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { SocialService } from '@co/auth';
 import { SettingsService } from '@co/common';
 
+/**
+ * 回调页
+ */
 @Component({
-  selector: 'app-callback',
+  selector: 'portal-callback',
   template: ``,
   providers: [SocialService],
 })
 export class CallbackComponent implements OnInit {
   type: string;
 
-  constructor(
-    private socialService: SocialService,
-    private settingsSrv: SettingsService,
-    private route: ActivatedRoute,
-  ) { }
+  constructor(private socialService: SocialService, private settingsSrv: SettingsService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.type = this.route.snapshot.params.type;
@@ -25,7 +25,7 @@ export class CallbackComponent implements OnInit {
   private mockModel() {
     const info = {
       token: '123456789',
-      name: 'cipchk',
+      name: 'cityocean',
       email: `${this.type}@${this.type}.com`,
       id: 10000,
       time: +new Date(),

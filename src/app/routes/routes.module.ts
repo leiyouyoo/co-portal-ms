@@ -29,6 +29,9 @@ const COMPONENTS = [
 ];
 const COMPONENTS_NOROUNT = [];
 
+/**
+ * 门户路由模块
+ */
 @NgModule({
   imports: [SharedModule, RouteRoutingModule],
   declarations: [...COMPONENTS, ...COMPONENTS_NOROUNT],

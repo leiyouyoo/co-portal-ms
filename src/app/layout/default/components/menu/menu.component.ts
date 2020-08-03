@@ -1,20 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  AfterViewInit,
-  Renderer2,
-  ElementRef,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Renderer2, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Menu, MenuService } from '@co/common';
+import { log } from '@co/core';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { CoSubmenuComponent } from './submenu.directive';
 import { DefaultLayoutService } from '../../default.service';
 
 @Component({
@@ -27,7 +16,7 @@ import { DefaultLayoutService } from '../../default.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
-  private unsubscribe$ = new Subject<void>();
+  unsubscribe$ = new Subject<void>();
   activedCategory: string;
   allMenus: Menu[];
   childMenus: Menu[] = [];
@@ -50,18 +39,6 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
     return favorites?.children;
   }
 
-  private genMenus(data: Menu[]) {
-    // this.allMenus = this.menuSrv.menus;
-    debugger;
-    this.allMenus = data;
-
-    if (this.defaultMenus && this.defaultMenus.length > 0) {
-      this.genChildMenus(this.defaultMenus[0].key);
-    }
-
-    this.cdr.markForCheck();
-  }
-
   ngOnInit() {
     const { unsubscribe$ } = this;
     this.menuSrv.change.pipe(takeUntil(unsubscribe$)).subscribe((res) => this.genMenus(res));
@@ -73,14 +50,27 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
     unsubscribe$.complete();
   }
 
+  onCatecoryActived(category: string) {
+    log(`Active Category:${category}`);
+
+    this.activedCategory = category;
+    this.genChildMenus(category);
+  }
+
+  private genMenus(data: Menu[]) {
+    // this.allMenus = this.menuSrv.menus;
+    this.allMenus = data;
+
+    if (this.defaultMenus && this.defaultMenus.length > 0) {
+      this.genChildMenus(this.defaultMenus[0].key);
+    }
+
+    this.cdr.markForCheck();
+  }
+
   private genChildMenus(category: any) {
     const menuCategory = this.defaultMenus.find((m) => m.key === category);
     this.childMenus = menuCategory?.children;
     this.cdr.markForCheck();
-  }
-
-  onCatecoryActived(category: string) {
-    this.activedCategory = category;
-    this.genChildMenus(category);
   }
 }
