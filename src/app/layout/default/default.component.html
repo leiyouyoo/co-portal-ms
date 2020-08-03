@@ -52,7 +52,7 @@
       <ul>
         <li>
           <a nz-dropdown [nzDropdownMenu]="menu" nzSize="small">
-            <i nz-icon nzIconfont="iconsetting"></i>
+            <i nz-icon nzType="global" nzTheme="outline" style="font-size: 14px;"></i>
             <span class="title">
               {{ 'menu.lang' | translate }}
             </span>
@@ -66,7 +66,7 @@
         </li>
         <li>
           <a nz-button nzSize="small" nzType="link" (click)="logout()" style="cursor: pointer;">
-            <i nz-icon nzIconfont="iconsetting"></i>
+            <i nz-icon nzType="setting" nzTheme="outline" style="font-size: 14px;"></i>
             <span class="title">
               {{ 'Setting' | translate }}
             </span></a
