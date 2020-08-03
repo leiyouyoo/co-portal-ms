@@ -1,5 +1,7 @@
 {
   "menu.search.placeholder": "Search for people, file, photos...",
   "menu.fullscreen": "Fullscreen",
-  "portal.menu":"Menu"
+  "portal.menu": "Menu",
+  "menu.lang": "Language",
+  "Setting": "Setting"
 }
