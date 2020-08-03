@@ -6,24 +6,24 @@
     &__wrap {
       display: flex;
       flex-direction: column;
-      padding-left: 0px;
+      padding-left: 0;
 
       .ant-divider-horizontal {
-        top: 0px;
+        top: 0;
         width: 160px;
         min-width: 24px;
-        margin: 0px 20px;
+        margin: 0 20px;
         background-color: #585858;
       }
     }
 
     &__item {
-      margin: 4px 20px;
-      padding: 0px 8px;
-      list-style: none;
-      font-size: 12px;
       height: 36px;
+      margin: 4px 20px;
+      padding: 0 8px;
+      font-size: 12px;
       line-height: 36px;
+      list-style: none;
       border-radius: 4px;
       cursor: pointer;
 
@@ -32,9 +32,9 @@
       }
 
       >a {
+        display: block;
         color: #FFFFFFD9;
         cursor: pointer;
-        display: block;
       }
 
       &-icon {
@@ -42,9 +42,9 @@
       }
 
       &-arrow {
-        font-size: 14px;
         float: right;
         margin-top: 10px;
+        font-size: 14px;
       }
 
 
@@ -65,33 +65,31 @@
 
     &__submenu {
       width: 100%;
-      // column-count: 2;
-      // column-width: 120px;
-      // column-gap: 24px;
-      // column-fill: auto;
       margin-bottom: 4px;
       padding: 8px 16px;
-      background-color: #2E2B2E;
       color: #9F9C9F;
+      background-color: #2E2B2E;
 
       &-category {
-        background-color: #39373A;
         width: 200px;
+        background-color: #39373A;
 
         &-item {
-          margin: 0px;
-          padding: 0px 24px;
-          list-style: none;
-          font-size: 12px;
           height: 56px;
-          line-height: 56px;
+          margin: 0;
+          padding: 0 24px;
           color: #FFFFFFD9;
+          font-size: 12px;
+          line-height: 56px;
+          list-style: none;
           cursor: pointer;
+
+
 
           &:hover,
           &-actived {
-            background-color: #2E2B2E;
             color: #2F6E9B;
+            background-color: #2E2B2E;
           }
 
           &-icon {
@@ -99,10 +97,10 @@
           }
 
           &-arrow {
-            font-size: 14px;
-            color: #6F6F6F;
             float: right;
             margin: 20px 4px;
+            color: #6F6F6F;
+            font-size: 14px;
           }
 
           &-title {
@@ -122,18 +120,18 @@
       &-group {
         width: 120px;
         height: 32px;
+        color: #6F6F6F;
         font-size: 14px;
         line-height: 32px;
-        color: #6F6F6F;
 
         >i {
           display: inline-block;
-          height: 14px;
           width: 4px;
-          border-radius: 2px;
-          background-color: #1B8EFF;
+          height: 14px;
           margin-right: 8px;
           margin-bottom: -2px;
+          background-color: #1B8EFF;
+          border-radius: 2px;
         }
       }
 
@@ -143,11 +141,18 @@
         padding-left: 12px;
         font-size: 12px;
         line-height: 32px;
-        break-inside: avoid;
         cursor: pointer;
+        break-inside: avoid;
 
         &:hover {
-          color: #2F6E9B;
+          >a {
+            display: block;
+            color: #2F6E9B;
+          }
+        }
+
+        >a {
+          color: #FFFFFFD9;
         }
       }
 
@@ -180,47 +185,18 @@
         }
 
         .ant-popover-inner-content {
-          padding: 0px !important;
+          padding: 0 !important;
         }
       }
 
       .ant-divider-horizontal {
         // width: 120px;
         min-width: 24px;
-        margin: 8px 0px;
+        margin: 8px 0;
         background-color: #585858;
       }
     }
   }
-
-
-  //   &__side-nav {
-  //     @{co-portal-prefix}__menu {
-  //       &-title {
-  //         display: flex;
-  //         align-items: center;
-
-  //         &-text {
-  //           flex: 1;
-  //         }
-  //       }
-  //     }
-
-  //     .@{ant-prefix}-menu-inline-collapsed {
-  //       @{co-portal-prefix}__menu-title-badge {
-  //         position: absolute;
-  //         top: 0;
-  //         right: -16px;
-  //         width: 8px;
-  //         height: 8px;
-
-  //         >em {
-  //           display: none;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
 }
 
 
@@ -231,16 +207,16 @@
     &__wrap {
       .ant-divider-horizontal {
         width: 24px;
-        margin: 0px auto;
+        margin: 0 auto;
       }
     }
 
     &__item {
-      margin: 0px;
-      padding: 16px 8px;
       height: auto;
+      margin: 0;
+      padding: 16px 8px;
       line-height: 24px !important;
-      border-radius: 0px;
+      border-radius: 0;
 
       &-active {
         background-color: #383838;
@@ -263,7 +239,7 @@
       }
 
       &-main {
-        margin-bottom: 0px;
+        margin-bottom: 0;
       }
 
       &-title {
