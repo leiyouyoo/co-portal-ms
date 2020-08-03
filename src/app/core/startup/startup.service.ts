@@ -75,17 +75,6 @@ export class StartupService {
 
               const favoritesMenus = [
                 {
-                  name: 'FCM_BILLS',
-                  icon: 'iconmenu-default',
-                  displayName: '账单管理',
-                  order: 20,
-                  url: '/fcm/bill/billlist',
-                  target: null,
-                  isEnabled: true,
-                  isVisible: true,
-                  items: [],
-                },
-                {
                   name: 'FCM_ORDERS',
                   icon: 'iconmenu-default',
                   displayName: '订单管理',
