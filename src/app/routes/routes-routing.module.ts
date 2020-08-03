@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from '@layout';
-import { environment } from '@env/environment';
+
 import { LayoutPassportComponent } from '../layout/passport/passport.component';
 import { CallbackComponent } from './callback/callback.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -46,21 +46,23 @@ const routes: Routes = [
   { path: '**', component: EmptyComponent },
 ];
 
-const apps: any[] = CoConfigManager.getSection("apps");
-apps.forEach(a => {
+const apps: any[] = CoConfigManager.getSection('apps');
+apps.forEach((a) => {
   routes[0].children.push({
     path: a.name,
     component: EmptyComponent,
     children: [
       {
         path: '**',
-        component: EmptyComponent
-      }
-    ]
+        component: EmptyComponent,
+      },
+    ],
   });
 });
 
-
+/**
+ * 门户路由模块
+ */
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
@@ -70,4 +72,4 @@ apps.forEach(a => {
   ],
   exports: [RouterModule],
 })
-export class RouteRoutingModule { }
+export class RouteRoutingModule {}

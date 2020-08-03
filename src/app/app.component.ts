@@ -11,6 +11,7 @@ import { TitleService } from '@co/common';
 import { Planet } from '@co/cms';
 import { setupVersion } from './app.version';
 import { GetUserSigService } from '../app/shared/im';
+
 /**
  * 应用入口组件
  */

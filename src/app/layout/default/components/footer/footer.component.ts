@@ -11,5 +11,5 @@ export class DefaultLayoutFooterComponent {
     return this.setting.app.year;
   }
 
-  constructor(private setting: SettingsService) { }
+  constructor(private setting: SettingsService) {}
 }

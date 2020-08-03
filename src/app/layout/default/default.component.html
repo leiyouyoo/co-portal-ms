@@ -71,14 +71,8 @@
 </ng-template>
 
 <div class="ant-layout ant-layout-has-sider" style="height: 100vh;">
-  <ng-container *ngIf="pro.menu === 'side' || isMobile">
-    <nz-drawer *ngIf="isMobile" [nzWidth]="pro.width" nzWrapClassName="portal__drawer" [nzVisible]="!pro.collapsed"
-      [nzClosable]="false" nzPlacement="left" (nzOnClose)="pro.setCollapsed(true)">
-      <ng-template [ngTemplateOutlet]="sideTpl"></ng-template>
-    </nz-drawer>
-    <ng-container *ngIf="!isMobile">
-      <ng-template [ngTemplateOutlet]="sideTpl"></ng-template>
-    </ng-container>
+  <ng-container>
+    <ng-template [ngTemplateOutlet]="sideTpl"></ng-template>
   </ng-container>
   <div class="ant-layout portal__main" [ngStyle]="getLayoutStyle" style="height: 100vh;">
     <!-- <default-layout-header></default-layout-header> -->
