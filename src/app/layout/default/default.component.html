@@ -54,7 +54,7 @@
           <a nz-dropdown [nzDropdownMenu]="menu" nzSize="small">
             <i nz-icon nzIconfont="iconsetting"></i>
             <span class="title">
-              简体中文
+              {{ 'menu.lang' | translate }}
             </span>
           </a>
           <nz-dropdown-menu #menu="nzDropdownMenu">
@@ -68,7 +68,7 @@
           <a nz-button nzSize="small" nzType="link" (click)="logout()" style="cursor: pointer;">
             <i nz-icon nzIconfont="iconsetting"></i>
             <span class="title">
-              设置
+              {{ 'Setting' | translate }}
             </span></a
           >
         </li>
