@@ -7,8 +7,8 @@
   height: 100%;
   min-height: 100vh;
   overflow: hidden;
-  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
   background-color: #474747;
+  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
 
   &-header {
     // height: 40px;
@@ -18,10 +18,10 @@
   }
 
   &-search {
-    padding: 16px;
-    margin: 0px 4px;
-    color: #02010140;
     height: 52px;
+    margin: 0 4px;
+    padding: 16px;
+    color: #02010140;
 
     >.ant-input-affix-wrapper {
       border-radius: 4px !important;
@@ -33,9 +33,9 @@
   }
 
   &-avatar {
-    height: 60px;
     display: flex;
     flex-direction: row;
+    height: 60px;
     padding-left: 8px;
     background-color: #626262;
 
@@ -49,32 +49,32 @@
       line-height: 1em;
 
       h3 {
+        margin-bottom: 0;
         color: #E8E8E8;
-        margin-bottom: 0px;
-        text-align: left;
         font-size: 14px;
+        text-align: left;
       }
 
       >p {
         margin-bottom: 4px;
-        text-align: left;
-        font-size: 12px;
         color: #B4B4B4;
+        font-size: 12px;
+        text-align: left;
       }
     }
   }
 
   &-footer {
-    font-size: 12px;
     height: 40px;
+    color: #FFFFFFA6;
+    font-size: 12px;
     // line-height: 40px;
     text-align: center;
-    color: #FFFFFFA6;
 
     >ul {
       display: flex;
       flex-direction: row;
-      padding-left: 0px;
+      padding-left: 0;
 
 
       li {
@@ -83,10 +83,10 @@
         }
 
         flex: 1;
-        list-style: none;
-        margin: 8px 0px;
         height: 12px;
+        margin: 8px 0;
         line-height: 12px;
+        list-style: none;
 
         &>a.ant-btn {
           height: 12px;
@@ -134,12 +134,12 @@
     }
 
     .title-item {
-      height: 0.7em;
-      line-height: 0.8em;
       display: inline-block;
-      border-right: 2px solid #fff;
+      height: 0.7em;
       margin-right: 4px;
       padding-right: 4px;
+      line-height: 0.8em;
+      border-right: 2px solid #fff;
     }
   }
 
@@ -201,14 +201,14 @@
 
       li {
         height: 20px;
-        line-height: 20px;
         font-size: 20px;
+        line-height: 20px;
         border-right: none;
 
         &>a.ant-btn {
           height: 20px;
-          line-height: 20px;
           font-size: 20px;
+          line-height: 20px;
         }
       }
     }
