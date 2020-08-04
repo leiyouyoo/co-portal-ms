@@ -12,6 +12,7 @@ import { ACLService, ACLType } from '@co/acl';
 import { ICONS } from '../../../style-icons';
 import { ICONS_AUTO } from '../../../style-icons-auto';
 import { I18NService } from '../i18n/i18n.service';
+import { GetUserSigService } from '@im';
 
 /**
  * 用于应用启动时
@@ -26,6 +27,7 @@ export class StartupService {
     @Inject(CO_I18N_TOKEN) private i18n: I18NService,
     private httpClient: HttpClient,
     private menuService: MenuService,
+    private getUserSigService: GetUserSigService,
   ) {
     iconSrv.addIcon(...ICONS_AUTO, ...ICONS);
     this.iconSrv.fetchFromIconfont({
@@ -62,7 +64,8 @@ export class StartupService {
               if (res) {
                 window.localStorage.setItem('co.session', JSON.stringify(res));
               }
-
+              const im = CoConfigManager.getValue('im');
+              im.ImEnable && this.getUserSigService.imLogin();
               //设置权限数据
               this.setupAclData(appData);
 
