@@ -16,7 +16,7 @@
       {{ 'Chinese'  | translate }}</li>
     <li nz-menu-item nz-popconfirm nzPopconfirmTitle="{{ 'Are you sure switch to english?'  | translate }}"
       (nzOnConfirm)="onChangeLang('en-US')" nzCancelText="{{'Cancel' | translate }}"
-      nzOkText="{{'Confirm' | translate }}" nzPopconfirmPlacement="bottom" [nzDisabled]="currentLang=='zh-CN'"
+      nzOkText="{{'Confirm' | translate }}" nzPopconfirmPlacement="bottom" [nzDisabled]="currentLang=='en-US'"
       [ngClass]="{'default-layout-langs__menu-item-selected ':currentLang=='en-US'}"> {{ 'English'  | translate }}</li>
   </ul>
 </nz-dropdown-menu>
