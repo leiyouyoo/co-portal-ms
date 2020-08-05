@@ -1,10 +1,14 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
-import { Layout, SettingsService } from '@co/common';
-import { environment } from '@env/environment';
 import { BehaviorSubject } from 'rxjs';
+import { Layout, SettingsService } from '@co/common';
+
+import { environment } from '@env/environment';
 import { DefaultLayout } from './default.types';
 
+/**
+ * 默认布局服务
+ */
 @Injectable({ providedIn: 'root' })
 export class DefaultLayoutService {
   private notify$ = new BehaviorSubject<string>(null);

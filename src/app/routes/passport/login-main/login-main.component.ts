@@ -4,7 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { _HttpClient, CoAuthService } from '@co/common';
 import { StartupService } from '@core';
 
-import { NzNotificationService, NzMessageService } from 'ng-zorro-antd';
+import { NzNotificationService, NzMessageService, NzModalService } from 'ng-zorro-antd';
+import { logOut, GetUserSigService } from '@im';
+import { LangsComponent } from 'src/app/layout/default/components/lang/langs.component';
 // import { GetUserSigService, logOut } from '@im';
 @Component({
   selector: 'user-login-main',
@@ -28,11 +30,13 @@ export class loginMainComponent implements OnInit {
     private fb: FormBuilder,
     public loginService: CoAuthService,
     private router: Router,
+    private nzModalService: NzModalService,
     public httpService: _HttpClient,
     private notification: NzNotificationService,
     private message: NzMessageService,
     private activatedRoute: ActivatedRoute,
     private startupService: StartupService,
+    private getUserSigService: GetUserSigService,
   ) {}
 
   ngOnInit(): void {
@@ -169,14 +173,14 @@ export class loginMainComponent implements OnInit {
       (data: any) => {
         if (option.isLoginIm) {
           try {
-            // logOut();
+            logOut();
           } catch (ex) {
             console.error(ex);
           }
-
-          // await this.getUserSigService.imLogin();
-          location.href = '#/dashboard';
         }
+
+        this.getUserSigService.imLogin();
+        location.href = '#/dashboard';
       },
       (err) => {
         this.notification.error('Error', err || 'Get User Configuration Failed.');
@@ -193,5 +197,28 @@ export class loginMainComponent implements OnInit {
       obj[arr1[0]] = arr1[1];
     });
     return obj;
+  }
+
+  onLangClick() {
+    this.nzModalService.create({
+      nzContent: LangsComponent,
+      nzFooter: null,
+      nzClosable: false,
+      nzWrapClassName: 'd-flex align-items-center justify-content-center',
+      /* nzBodyStyle: {
+         width: '200px',
+         height: '166px',
+       },*/
+      nzStyle: {
+        width: '200px',
+        height: '166px',
+        top: '0',
+      },
+      nzClassName: 'modal-content-transparent',
+      nzMaskStyle: {
+        background: 'transparent',
+      },
+      nzNoAnimation: true,
+    });
   }
 }

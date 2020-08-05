@@ -28,15 +28,16 @@ import { Planet, SwitchModes, GlobalEventDispatcher } from '@co/cms';
 import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 
 import { DefaultLayoutService } from './default.service';
-import { SettingService as CoSettingService } from '../../services/platform';
 import { I18NService } from 'src/app/core/i18n/i18n.service';
-// import { logOut } from '@im';
+import { PlatformSettingService } from '@co/cds';
+import { logOut } from '@im';
+
 @Component({
   selector: 'layout-default',
   styleUrls: ['./default.component.less'],
   templateUrl: './default.component.html',
 })
-export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DefaultLayoutComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   private queryCls: string;
   imgUrl = CoConfigManager.getValue('serverUrl');
@@ -83,7 +84,7 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
     msg: NzMessageService,
     scroll: ScrollService,
     reuseTabSrv: ReuseTabService,
-    private settingSrv: CoSettingService,
+    private settingSrv: PlatformSettingService,
     private renderer: Renderer2,
     private modal: NzModalService,
     public pro: DefaultLayoutService,
@@ -166,8 +167,6 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
     });
   }
 
-  ngAfterViewInit(): void {}
-
   ngOnInit() {
     const { pro, unsubscribe$ } = this;
     pro.notify.pipe(takeUntil(unsubscribe$)).subscribe(() => {
@@ -201,11 +200,14 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
 
   onLogout() {
     this.tokenService.clear();
+    this.planet.unregisterApp('platform');
+    this.planet.unregisterApp('fcm');
     try {
-      // logOut();
+      logOut();
     } catch (e) {
       console.log('im logout error');
     }
+    window.location.href = `/#/passport/login`;
   }
 
   private getUserHead() {
