@@ -5,13 +5,14 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { TranslateService } from '@ngx-translate/core';
 import { NzIconService } from 'ng-zorro-antd/icon';
 
-import { CO_I18N_TOKEN, CoConfigManager } from '@co/core';
+import { CO_I18N_TOKEN, CoConfigManager, ArrayService } from '@co/core';
 import { MenuService } from '@co/common';
 import { ACLService, ACLType } from '@co/acl';
 
 import { ICONS } from '../../../style-icons';
 import { ICONS_AUTO } from '../../../style-icons-auto';
 import { I18NService } from '../i18n/i18n.service';
+import { GetUserSigService } from '@im';
 
 /**
  * 用于应用启动时
@@ -25,7 +26,9 @@ export class StartupService {
     private aclService: ACLService,
     @Inject(CO_I18N_TOKEN) private i18n: I18NService,
     private httpClient: HttpClient,
+    private arrayService: ArrayService,
     private menuService: MenuService,
+    private getUserSigService: GetUserSigService,
   ) {
     iconSrv.addIcon(...ICONS_AUTO, ...ICONS);
     this.iconSrv.fetchFromIconfont({
@@ -34,76 +37,74 @@ export class StartupService {
   }
 
   load(): Promise<any> {
-    // only works with promises
-    // https://github.com/angular/angular/issues/15088
+    var lang = window.localStorage.getItem('language') || navigator.language;
+    const langMap = {
+      'zh-CN': 'zh-Hans',
+      'en-US': 'en',
+    };
+
     return new Promise((resolve) => {
-      debugger;
-      this.httpClient.get(`assets/i18n/${this.i18n.defaultLang}.json`).subscribe((langData) => {
-        // 设置语言数据
-        this.translate.setTranslation(this.i18n.defaultLang, langData);
-        this.translate.use(this.i18n.defaultLang);
-        this.translate.setDefaultLang(this.i18n.defaultLang);
+      this.httpClient
+        .get(CoConfigManager.getValue('serverUrl') + '/platform/Session/GetCurrentUserConfiguration?client=ICP_Web', {
+          headers: { '.AspNetCore.Culture': langMap[lang], 'Accept-Language': langMap[lang] },
+        })
+        .pipe(
+          // 接收其他拦截器后产生的异常消息
+          catchError((res) => {
+            window.localStorage.removeItem('_token');
+            console.warn(`StartupService.load: Network request failed`, res);
+            resolve(null);
+            return [];
+          }),
+        )
+        .subscribe(
+          (appData) => {
+            // 缓存会话数据
+            const res: any = appData;
+            if (res) {
+              window.localStorage.setItem('co.session', JSON.stringify(res));
+              const im = CoConfigManager.getValue('im');
+              im.ImEnable && this.getUserSigService.imLogin();
+            }
 
-        this.httpClient
-          .get(CoConfigManager.getValue('serverUrl') + '/platform/Session/GetCurrentUserConfiguration?client=ICP_Web')
-          .pipe(
-            // 接收其他拦截器后产生的异常消息
-            catchError((res) => {
-              window.localStorage.removeItem('_token');
-              console.warn(`StartupService.load: Network request failed`, res);
-              resolve(null);
-              return [];
-            }),
-          )
-          .subscribe(
-            (appData) => {
-              // 缓存会话数据
-              const res: any = appData;
-              if (res) {
-                window.localStorage.setItem('co.session', JSON.stringify(res));
-              }
+            //设置权限数据
+            this.setupAclData(appData);
 
-              //设置权限数据
-              this.setupAclData(appData);
+            // 初始化菜单
+            let menus = [];
 
-              // 初始化菜单
-              let menus = [];
+            if (appData.nav?.menus?.MainMenu?.items?.length > 0) {
+              menus = this.convertMenus(appData.nav.menus.MainMenu.items[0].items as any[]);
+            }
 
-              if (appData.nav?.menus?.MainMenu?.items?.length > 0) {
-                menus = this.convertMenus(appData.nav.menus.MainMenu.items[0].items as any[]);
-              }
-
-              const favoritesMenus = [
-                {
-                  name: 'FCM_ORDERS',
-                  icon: 'iconmenu-default',
-                  displayName: '订单管理',
-                  order: 20,
-                  url: '/fcm/order/orderlist',
-                  target: null,
-                  isEnabled: true,
-                  isVisible: true,
-                  items: [],
-                },
-              ];
-
-              this.menuService.add([
-                {
-                  key: 'menus',
-                  children: menus,
-                },
-                {
-                  key: 'favorites',
-                  children: this.convertMenus(favoritesMenus),
-                },
-              ]);
-            },
-            () => {},
-            () => {
-              resolve(null);
-            },
-          );
-      });
+            const ms = this.arrayService.treeToArr(menus, { clearChildren: false });
+            this.menuService.add([
+              {
+                key: 'menus',
+                children: menus,
+              },
+              {
+                key: 'favorites',
+                children: ms.filter((m) => !!m.link),
+              },
+            ]);
+          },
+          () => {},
+          () => {
+            this.httpClient.get(`assets/i18n/${lang}.json`).subscribe(
+              (langData) => {
+                // 设置语言数据
+                this.translate.setTranslation(lang, langData);
+                this.translate.use(lang);
+                this.translate.setDefaultLang(lang);
+              },
+              () => {},
+              () => {
+                resolve(null);
+              },
+            );
+          },
+        );
     });
   }
 

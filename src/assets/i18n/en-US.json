@@ -3,5 +3,8 @@
   "menu.fullscreen": "Fullscreen",
   "portal.menu": "Menu",
   "menu.lang": "Language",
-  "Setting": "Setting"
+  "Setting": "Setting",
+  "app.home":"Home",
+  "en-US":"English",
+  "zh-CN":"Chinese"
 }

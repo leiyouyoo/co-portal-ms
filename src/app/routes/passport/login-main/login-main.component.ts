@@ -167,13 +167,6 @@ export class loginMainComponent implements OnInit {
 
     this.startupService.load().then(
       (data: any) => {
-        // // 缓存会话数据
-        // const res: any = data;
-        // if (res) {
-        //   window.localStorage.setItem('co.session', JSON.stringify(res));
-        // }
-        // location.href = data.nav.menus.MainMenu.items[0].url;
-
         if (option.isLoginIm) {
           try {
             // logOut();

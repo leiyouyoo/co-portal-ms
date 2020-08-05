@@ -18,29 +18,28 @@ import {
 import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
 import { ReuseTabService } from '@co/cbc';
 import { ScrollService, _HttpClient, SettingsService } from '@co/common';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { updateHostClass, CoConfigManager } from '@co/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
 import { Planet, SwitchModes, GlobalEventDispatcher } from '@co/cms';
+import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 
 import { DefaultLayoutService } from './default.service';
-import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
+import { SettingService as CoSettingService } from '../../services/platform';
 import { I18NService } from 'src/app/core/i18n/i18n.service';
 // import { logOut } from '@im';
 @Component({
   selector: 'layout-default',
   styleUrls: ['./default.component.less'],
   templateUrl: './default.component.html',
-  // NOTICE: If all pages using OnPush mode, you can turn it on and all `cdr.detectChanges()` codes
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
-
   private queryCls: string;
-  imgUrl = CoConfigManager.getValue("serverUrl");
+  imgUrl = CoConfigManager.getValue('serverUrl');
   user: any;
   userInfo: any;
   @ViewChild('settingHost', { read: ViewContainerRef, static: false }) private settingHost: ViewContainerRef;
@@ -69,19 +68,24 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
     };
   }
 
+  get currentLang(): string {
+    return window.localStorage.getItem('language') || navigator.language;
+  }
+
   private get body(): HTMLElement {
     return this.doc.body;
   }
 
   constructor(
-    appRef: ApplicationRef,
     bm: BreakpointObserver,
     mediaMatcher: MediaMatcher,
     router: Router,
     msg: NzMessageService,
     scroll: ScrollService,
     reuseTabSrv: ReuseTabService,
+    private settingSrv: CoSettingService,
     private renderer: Renderer2,
+    private modal: NzModalService,
     public pro: DefaultLayoutService,
     public httpClient: _HttpClient,
     public i18n: I18NService,
@@ -96,27 +100,27 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
       // 设置微服务选项
       this.planet.setOptions({
         switchMode: SwitchModes.coexist,
-        errorHandler: error => {
+        errorHandler: (error) => {
           console.error(`Failed to load resource, error:`, error);
-        }
+        },
       });
 
       // 设置门户应用数据
       this.planet.setPortalAppData({
-        data: this.reuseTabService
+        data: this.reuseTabService,
       });
 
       // 注册配置中的应用
       // tslint:disable-next-line:quotemark
-      const apps: any[] = CoConfigManager.getSection("apps");
+      const apps: any[] = CoConfigManager.getSection('apps');
       this.planet.registerApps(apps);
 
       // 启动
       this.planet.start();
 
       // 订阅子应用加载事件
-      this.planet.appsLoadingStart.subscribe(event => {
-        const activeAppNames = event.shouldLoadApps.map(item => item.name);
+      this.planet.appsLoadingStart.subscribe((event) => {
+        const activeAppNames = event.shouldLoadApps.map((item) => item.name);
         console.log(`激活子应用: ${activeAppNames.join(',')}`);
       });
     }
@@ -162,48 +166,13 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
     });
   }
 
-  private setClass() {
-    const { body, renderer, queryCls, pro } = this;
-    updateHostClass(body, renderer, {
-      ['color-weak']: pro.layout.colorWeak,
-      [`layout-fixed`]: pro.layout.fixed,
-      [`aside-collapsed`]: pro.collapsed,
-      ['co-portal']: true,
-      [queryCls]: true,
-      [`co-portal__content-${pro.layout.contentWidth}`]: true,
-      [`co-portal__fixed`]: pro.layout.fixedHeader,
-      [`co-portal__wide`]: pro.isFixed,
-      [`co-portal__dark`]: pro.theme === 'dark',
-      [`co-portal__light`]: pro.theme === 'light',
-      [`co-portal__menu-side`]: pro.isSideMenu,
-      [`co-portal__menu-top`]: pro.isTopMenu,
-    });
-  }
-
-  ngAfterViewInit(): void {
-    // Setting componet for only developer
-    // if (!environment.production) {
-    //   setTimeout(() => {
-    //     const settingFactory = this.resolver.resolveComponentFactory(ProSettingDrawerComponent);
-    //     this.settingHost.createComponent(settingFactory);
-    //   }, 22);
-    // }
-
-  }
-
-  change(lang) {
-    this.i18n.use(lang);
-    this.settingsService.setLayout('lang', lang);
-
-    this.globalEventDispatcher.dispatch("change-lang", lang);
-  }
+  ngAfterViewInit(): void {}
 
   ngOnInit() {
     const { pro, unsubscribe$ } = this;
     pro.notify.pipe(takeUntil(unsubscribe$)).subscribe(() => {
       this.setClass();
     });
-
 
     this.user = JSON.parse(window.localStorage.getItem('co.session'));
     this.getUserHead();
@@ -222,22 +191,44 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
     );
   }
 
-  getUserHead() {
-    // this.httpClient.get('SSO/User/GetUserDetail', this.user.id).subscribe((res: any) => {
-    //   this.userInfo = res ? res : {};
-    // });
+  onChangeLang(lang) {
+    this.settingSrv.setCurrentUserSetting({ name: 'Platform.LanguageSettingNames.CurrentLanguage', value: lang }).subscribe(() => {
+      window.localStorage.setItem('language', lang);
+      window.location.reload();
+      // this.globalEventDispatcher.dispatch('change-lang', lang);
+    });
   }
 
-  logout() {
+  onLogout() {
     this.tokenService.clear();
     try {
       // logOut();
     } catch (e) {
       console.log('im logout error');
     }
-    // window.location.href = '/#/passport/login';
+  }
+
+  private getUserHead() {
+    // this.httpClient.get('SSO/User/GetUserDetail', this.user.id).subscribe((res: any) => {
+    //   this.userInfo = res ? res : {};
+    // });
+  }
+
+  private setClass() {
+    const { body, renderer, queryCls, pro } = this;
+    updateHostClass(body, renderer, {
+      ['color-weak']: pro.layout.colorWeak,
+      [`layout-fixed`]: pro.layout.fixed,
+      [`aside-collapsed`]: pro.collapsed,
+      ['co-portal']: true,
+      [queryCls]: true,
+      [`co-portal__content-${pro.layout.contentWidth}`]: true,
+      [`co-portal__fixed`]: pro.layout.fixedHeader,
+      [`co-portal__wide`]: pro.isFixed,
+      [`co-portal__dark`]: pro.theme === 'dark',
+      [`co-portal__light`]: pro.theme === 'light',
+      [`co-portal__menu-side`]: pro.isSideMenu,
+      [`co-portal__menu-top`]: pro.isTopMenu,
+    });
   }
 }
-
-
-
