@@ -1,24 +1,9 @@
 import { BreakpointObserver, MediaMatcher } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
-import {
-  AfterViewInit,
-  ApplicationRef,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ComponentFactoryResolver,
-  ElementRef,
-  Inject,
-  OnDestroy,
-  OnInit,
-  Renderer2,
-  ViewChild,
-  ViewContainerRef,
-} from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
 import { ReuseTabService } from '@co/cbc';
 import { ScrollService, _HttpClient, SettingsService } from '@co/common';
-import { NzModalService } from 'ng-zorro-antd/modal';
 import { updateHostClass, CoConfigManager } from '@co/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject } from 'rxjs';
@@ -27,24 +12,24 @@ import { takeUntil, filter } from 'rxjs/operators';
 import { Planet, SwitchModes, GlobalEventDispatcher } from '@co/cms';
 import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 
+import { I18NService } from '../../core/i18n/i18n.service';
 import { DefaultLayoutService } from './default.service';
-import { I18NService } from 'src/app/core/i18n/i18n.service';
-import { PlatformSettingService } from '@co/cds';
+
 // import { logOut } from '@im';
 @Component({
   selector: 'layout-default',
   styleUrls: ['./default.component.less'],
   templateUrl: './default.component.html',
 })
-export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DefaultLayoutComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   private queryCls: string;
   imgUrl = CoConfigManager.getValue('serverUrl');
   user: any;
   userInfo: any;
-  @ViewChild('settingHost', { read: ViewContainerRef, static: false }) private settingHost: ViewContainerRef;
-
   isFetching = false;
+
+  // @ViewChild('mainTab', { read: ViewContainerRef, static: false }) public mainTab: ViewContainerRef;
 
   get isMobile() {
     return this.pro.isMobile;
@@ -68,10 +53,6 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
     };
   }
 
-  get currentLang(): string {
-    return window.localStorage.getItem('language') || navigator.language;
-  }
-
   private get body(): HTMLElement {
     return this.doc.body;
   }
@@ -82,20 +63,17 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
     router: Router,
     msg: NzMessageService,
     scroll: ScrollService,
-    reuseTabSrv: ReuseTabService,
-    private settingSrv: PlatformSettingService,
     private renderer: Renderer2,
-    private modal: NzModalService,
+    private planet: Planet,
+    private reuseTabService: ReuseTabService,
     public pro: DefaultLayoutService,
     public httpClient: _HttpClient,
     public i18n: I18NService,
     public settingsService: SettingsService,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
-    @Inject(DOCUMENT) private doc: any, // private cdr: ChangeDetectorRef
-    private planet: Planet,
-    private globalEventDispatcher: GlobalEventDispatcher,
-    private reuseTabService: ReuseTabService,
+    @Inject(DOCUMENT) private doc: any,
   ) {
+    debugger;
     if (window.localStorage.getItem('_token') != null) {
       // 设置微服务选项
       this.planet.setOptions({
@@ -140,8 +118,9 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
         return;
       }
       this.isFetching = false;
+
       // If have already cached router, should be don't need scroll to top
-      if (!reuseTabSrv.exists(evt.url)) {
+      if (!reuseTabService.exists(evt.url)) {
         scroll.scrollToTop();
       }
     });
@@ -166,8 +145,6 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
     });
   }
 
-  ngAfterViewInit(): void {}
-
   ngOnInit() {
     const { pro, unsubscribe$ } = this;
     pro.notify.pipe(takeUntil(unsubscribe$)).subscribe(() => {
@@ -189,14 +166,6 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
       `co-portal__dark`,
       `co-portal__light`,
     );
-  }
-
-  onChangeLang(lang) {
-    this.settingSrv.setCurrentUserSetting({ name: 'Platform.LanguageSettingNames.CurrentLanguage', value: lang }).subscribe(() => {
-      window.localStorage.setItem('language', lang);
-      window.location.reload();
-      // this.globalEventDispatcher.dispatch('change-lang', lang);
-    });
   }
 
   onLogout() {

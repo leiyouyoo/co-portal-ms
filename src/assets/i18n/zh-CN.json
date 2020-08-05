@@ -7,8 +7,13 @@
   "menu.lang": "语言",
   "Setting": "设置",
   "app.home": "首页",
-  "zh-CN":"简体中文",
-  "Are you sure switch to":"确定切换到",
+  "zh-CN":"中文",
+  "en-US":"英文",
+  "Chinese":"中文",
+  "English":"英文",
+  "Are you sure switch to chinese?":"确定切换到中文",
+  "Are you sure switch to english?":"确定切换到英文",
   "Change Language":"切换语言",
-  "en-US":"英文"
+  "Confirm":"确认",
+  "Cancel":"取消"
 }

@@ -9,7 +9,7 @@ export * from './default.component';
 // #region widgets
 
 import { DefaultLayoutWidgetNotifyComponent } from './components/notify/notify.component';
-// import { LayoutProWidgetQuickComponent } from './components/quick/quick.component';
+import { DefaultLayoutLangsComponent } from './components/langs/langs.component';
 import { DefaultLayoutWidgetSearchComponent } from './components/search/search.component';
 import { LayoutProWidgetUserComponent } from './components/user/user.component';
 
@@ -41,6 +41,7 @@ import { DefaultLayoutComponent } from './default.component';
 
 export const DEFAULT_LAYOUT_COMPONENTS = [
   DefaultLayoutComponent,
+  DefaultLayoutLangsComponent,
   DefaultLayoutMenuComponent,
   DefaultLayoutLogoComponent,
   DefaultLayoutHeaderComponent,
