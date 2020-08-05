@@ -71,7 +71,7 @@
     "axios": "^0.19.2",
     "ckeditor4": "^4.14.1",
     "ckeditor4-angular": "^1.2.2",
-    "co-cli": "0.0.65",
+    "co-cli": "0.0.69",
     "cos-js-sdk-v5": "^0.5.27",
     "cropperjs": "^1.5.7",
     "element-closest": "^3.0.2",
