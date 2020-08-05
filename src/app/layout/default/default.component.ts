@@ -14,12 +14,13 @@ import {
   Renderer2,
   ViewChild,
   ViewContainerRef,
+  Injector,
 } from '@angular/core';
 import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
 import { ReuseTabService } from '@co/cbc';
 import { ScrollService, _HttpClient, SettingsService } from '@co/common';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { updateHostClass, CoConfigManager } from '@co/core';
+import { updateHostClass, CoConfigManager, CoPageBase } from '@co/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
@@ -37,7 +38,7 @@ import { logOut } from '@im';
   styleUrls: ['./default.component.less'],
   templateUrl: './default.component.html',
 })
-export class DefaultLayoutComponent implements OnInit, OnDestroy {
+export class DefaultLayoutComponent extends CoPageBase {
   private unsubscribe$ = new Subject<void>();
   private queryCls: string;
   imgUrl = CoConfigManager.getValue('serverUrl');
@@ -46,7 +47,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   @ViewChild('settingHost', { read: ViewContainerRef, static: false }) private settingHost: ViewContainerRef;
 
   isFetching = false;
-
+  event = false;
   get isMobile() {
     return this.pro.isMobile;
   }
@@ -78,12 +79,12 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    bm: BreakpointObserver,
-    mediaMatcher: MediaMatcher,
-    router: Router,
-    msg: NzMessageService,
-    scroll: ScrollService,
-    reuseTabSrv: ReuseTabService,
+    private bm: BreakpointObserver,
+    private mediaMatcher: MediaMatcher,
+    private router: Router,
+    private msg: NzMessageService,
+    private scroll: ScrollService,
+    private reuseTabSrv: ReuseTabService,
     private settingSrv: PlatformSettingService,
     private renderer: Renderer2,
     private modal: NzModalService,
@@ -96,7 +97,23 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     private planet: Planet,
     private globalEventDispatcher: GlobalEventDispatcher,
     private reuseTabService: ReuseTabService,
+    injector: Injector,
   ) {
+    super(injector);
+    this.initTab();
+  }
+
+  coOnInit() {
+    const { pro, unsubscribe$ } = this;
+    pro.notify.pipe(takeUntil(unsubscribe$)).subscribe(() => {
+      this.setClass();
+    });
+
+    this.user = JSON.parse(window.localStorage.getItem('co.session'));
+    this.getUserHead();
+  }
+
+  initTab() {
     if (window.localStorage.getItem('_token') != null) {
       // 设置微服务选项
       this.planet.setOptions({
@@ -127,14 +144,14 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     }
 
     // scroll to top in change page
-    router.events.pipe(takeUntil(this.unsubscribe$)).subscribe((evt) => {
+    this.router.events.pipe(takeUntil(this.unsubscribe$)).subscribe((evt) => {
       if (!this.isFetching && evt instanceof RouteConfigLoadStart) {
         this.isFetching = true;
-        scroll.scrollToTop();
+        this.scroll.scrollToTop();
       }
       if (evt instanceof NavigationError) {
         this.isFetching = false;
-        msg.error(`无法加载${evt.url}路由`, { nzDuration: 1000 * 3 });
+        this.msg.error(`无法加载${evt.url}路由`, { nzDuration: 1000 * 3 });
         return;
       }
       if (!(evt instanceof NavigationEnd)) {
@@ -142,8 +159,8 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       }
       this.isFetching = false;
       // If have already cached router, should be don't need scroll to top
-      if (!reuseTabSrv.exists(evt.url)) {
-        scroll.scrollToTop();
+      if (!this.reuseTabSrv.exists(evt.url)) {
+        this.scroll.scrollToTop();
       }
     });
 
@@ -155,29 +172,21 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       'screen-lg': '(min-width: 992px) and (max-width: 1199px)',
       'screen-xl': '(min-width: 1200px)',
     };
-    bm.observe([
-      '(min-width: 1200px)',
-      '(min-width: 992px) and (max-width: 1199px)',
-      '(min-width: 768px) and (max-width: 991px)',
-      '(min-width: 576px) and (max-width: 767px)',
-      '(max-width: 575px)',
-    ]).subscribe(() => {
-      this.queryCls = Object.keys(query).find((key) => mediaMatcher.matchMedia(query[key]).matches);
-      this.setClass();
-    });
+    this.bm
+      .observe([
+        '(min-width: 1200px)',
+        '(min-width: 992px) and (max-width: 1199px)',
+        '(min-width: 768px) and (max-width: 991px)',
+        '(min-width: 576px) and (max-width: 767px)',
+        '(max-width: 575px)',
+      ])
+      .subscribe(() => {
+        this.queryCls = Object.keys(query).find((key) => this.mediaMatcher.matchMedia(query[key]).matches);
+        this.setClass();
+      });
   }
 
-  ngOnInit() {
-    const { pro, unsubscribe$ } = this;
-    pro.notify.pipe(takeUntil(unsubscribe$)).subscribe(() => {
-      this.setClass();
-    });
-
-    this.user = JSON.parse(window.localStorage.getItem('co.session'));
-    this.getUserHead();
-  }
-
-  ngOnDestroy() {
+  coOnDestroy() {
     const { unsubscribe$, body, pro } = this;
     unsubscribe$.next();
     unsubscribe$.complete();
