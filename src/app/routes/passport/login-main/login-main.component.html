@@ -14,8 +14,10 @@
       <div class="ipt-label d-flex justify-content-between">
         <span>{{ 'USERNAME' | translate }}</span>
         <div>
-          <span><i class="iconfont icon-Visitors" [title]="'Visitor Mode' | translate" (click)="visitor()"></i></span>
-          <!-- <span><i class="iconfont icon-ENPC" [title]="'Language'" (click)="onLangClick()"></i></span> -->
+          <!-- <span (click)="visitor()"
+            ><i class="iconfont icon-Visitors" [title]="'Visitor Mode' | translate"></i>{{ 'Guest mode' | translate }}</span
+          > -->
+          <span (click)="onLangClick()"><i class="iconfont icon-ENPC" [title]="'Language'"></i>{{ 'menu.lang' | translate }}</span>
         </div>
       </div>
       <div class="ipt-box">
@@ -25,8 +27,6 @@
               nz-input
               type="text"
               autocomplete="off"
-              formControlName="userName"
-              name="lastname_74758209201093747"
               formControlName="userName"
               [placeholder]="'Username' | translate"
               (keyup)="onUsernameKeyup($event)"
