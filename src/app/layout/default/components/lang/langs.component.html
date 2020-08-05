@@ -1,0 +1,5 @@
+<div class="d-flex flex-column align-items-center justify-content-center">
+  <div *ngFor="let item of langs" [class.active]="item.code === curLangCode" class="lang-option" (click)="change(item.code)">
+    {{ item.text }}
+  </div>
+</div>

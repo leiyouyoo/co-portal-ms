@@ -9,7 +9,7 @@ export * from './default.component';
 // #region widgets
 
 import { DefaultLayoutWidgetNotifyComponent } from './components/notify/notify.component';
-// import { LayoutProWidgetQuickComponent } from './components/quick/quick.component';
+import { DefaultLayoutLangsComponent } from './components/langs/langs.component';
 import { DefaultLayoutWidgetSearchComponent } from './components/search/search.component';
 import { LayoutProWidgetUserComponent } from './components/user/user.component';
 
@@ -38,13 +38,16 @@ import { DefaultLayoutLogoComponent } from './components/logo/logo.component';
 import { DefaultLayoutMenuComponent } from './components/menu/menu.component';
 import { CoSubmenuDirective, CoSubmenuComponent } from './components/menu/submenu.directive';
 import { DefaultLayoutComponent } from './default.component';
+import { LangsComponent } from './components/lang/langs.component';
 
 export const DEFAULT_LAYOUT_COMPONENTS = [
   DefaultLayoutComponent,
+  DefaultLayoutLangsComponent,
   DefaultLayoutMenuComponent,
   DefaultLayoutLogoComponent,
   DefaultLayoutHeaderComponent,
   DefaultLayoutFooterComponent,
+  LangsComponent,
   CoSubmenuComponent,
   CoSubmenuDirective,
   ...DEFAULT_LAYOUT_ENTRYCOMPONENTS,
