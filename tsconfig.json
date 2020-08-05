@@ -26,10 +26,10 @@
     "src/polyfills.ts"
   ],
   "include": [
-    // "src/**/*.d.ts",
-    "src/**/*"
+    "src/**/*.d.ts"
   ],
   "exclude": [
+    ".scannerwork/**/*",
     "dist/**/*",
     "apps/**/*",
     "src/test.ts",
