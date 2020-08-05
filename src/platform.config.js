@@ -34,6 +34,7 @@
         preload: true,
         scripts: ['main.js'],
         styles: ['styles.css'],
+        
       },
       {
         name: 'fcm',

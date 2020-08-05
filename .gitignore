@@ -3,6 +3,7 @@
 # compiled output
 /dist
 /tmp
+/apps
 /out-tsc
 /src/assets/alain-*.less
 delon-builds
