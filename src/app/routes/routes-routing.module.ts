@@ -47,7 +47,7 @@ const routes: Routes = [
 ];
 
 const apps: any[] = CoConfigManager.getSection('apps');
-apps.forEach((a) => {
+apps?.forEach((a) => {
   routes[0].children.push({
     path: a.name,
     component: EmptyComponent,

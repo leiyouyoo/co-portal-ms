@@ -51,15 +51,57 @@
     <div class="portal__sider-footer">
       <ul>
         <li>
-          <default-layout-langs> </default-layout-langs>
+          <a nz-dropdown [nzDropdownMenu]="menu" nzSize="small" nzType="link">
+            <i nz-icon nzType="global" nzTheme="outline" style="font-size: 14px;"></i>
+            <!-- <i nz-icon [nzIconfont]="currentLang=='zh-CN'?'icon-cn':'icon-en'" style="font-size: 14px;"></i> -->
+            <span class="title">
+              {{ currentLang | translate }}
+            </span>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li
+                nz-popconfirm
+                [nzPopconfirmTitle]="('Are you sure switch to chinese' | translate) + '?'"
+                [nzCancelText]="'Cancel' | translate"
+                [nzOkText]="'OK' | translate"
+                (nzOnConfirm)="onChangeLang('zh-CN')"
+                nzPopconfirmPlacement="bottom"
+                nz-menu-item
+              >
+                简体中文
+              </li>
+              <li
+                nz-menu-item
+                nz-popconfirm
+                [nzPopconfirmTitle]="('Are you sure switch to english' | translate) + '?'"
+                (nzOnConfirm)="onChangeLang('en-US')"
+                [nzCancelText]="'Cancel' | translate"
+                [nzOkText]="'OK' | translate"
+                nzPopconfirmPlacement="bottom"
+              >
+                English
+              </li>
+            </ul>
+          </nz-dropdown-menu>
         </li>
         <li>
-          <a nz-button nzSize="small" nzType="link" (click)="onLogout()" style="cursor: pointer;">
-            <i nz-icon nzType="setting" nzTheme="outline" style="font-size: 14px;"></i>
-            <span class="title">
-              {{ 'Setting' | translate }}
-            </span></a
+          <a
+            nz-button
+            nz-popconfirm
+            nzType="link"
+            [nzPopconfirmTitle]="('Are you sure logout' | translate) + '?'"
+            [nzCancelText]="'Cancel' | translate"
+            [nzOkText]="'OK' | translate"
+            (nzOnConfirm)="onLogout()"
+            nzPopconfirmPlacement="top"
+            style="cursor: pointer;"
           >
+            <i nz-icon nzType="logout" nzTheme="outline" style="font-size: 14px; color: #e55354;"></i>
+            <span class="title" style="color: #e55354;">
+              {{ 'Logout' | translate }}
+            </span>
+          </a>
         </li>
       </ul>
     </div>

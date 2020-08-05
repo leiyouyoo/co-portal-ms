@@ -1,9 +1,24 @@
 import { BreakpointObserver, MediaMatcher } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  AfterViewInit,
+  ApplicationRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ComponentFactoryResolver,
+  ElementRef,
+  Inject,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
 import { ReuseTabService } from '@co/cbc';
 import { ScrollService, _HttpClient, SettingsService } from '@co/common';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { updateHostClass, CoConfigManager } from '@co/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject } from 'rxjs';
@@ -12,10 +27,11 @@ import { takeUntil, filter } from 'rxjs/operators';
 import { Planet, SwitchModes, GlobalEventDispatcher } from '@co/cms';
 import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 
-import { I18NService } from '../../core/i18n/i18n.service';
 import { DefaultLayoutService } from './default.service';
+import { I18NService } from 'src/app/core/i18n/i18n.service';
+import { PlatformSettingService } from '@co/cds';
+import { logOut } from '@im';
 
-// import { logOut } from '@im';
 @Component({
   selector: 'layout-default',
   styleUrls: ['./default.component.less'],
@@ -27,9 +43,9 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   imgUrl = CoConfigManager.getValue('serverUrl');
   user: any;
   userInfo: any;
-  isFetching = false;
+  @ViewChild('settingHost', { read: ViewContainerRef, static: false }) private settingHost: ViewContainerRef;
 
-  // @ViewChild('mainTab', { read: ViewContainerRef, static: false }) public mainTab: ViewContainerRef;
+  isFetching = false;
 
   get isMobile() {
     return this.pro.isMobile;
@@ -53,6 +69,10 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     };
   }
 
+  get currentLang(): string {
+    return window.localStorage.getItem('language') || navigator.language;
+  }
+
   private get body(): HTMLElement {
     return this.doc.body;
   }
@@ -63,17 +83,20 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     router: Router,
     msg: NzMessageService,
     scroll: ScrollService,
+    reuseTabSrv: ReuseTabService,
+    private settingSrv: PlatformSettingService,
     private renderer: Renderer2,
-    private planet: Planet,
-    private reuseTabService: ReuseTabService,
+    private modal: NzModalService,
     public pro: DefaultLayoutService,
     public httpClient: _HttpClient,
     public i18n: I18NService,
     public settingsService: SettingsService,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
-    @Inject(DOCUMENT) private doc: any,
+    @Inject(DOCUMENT) private doc: any, // private cdr: ChangeDetectorRef
+    private planet: Planet,
+    private globalEventDispatcher: GlobalEventDispatcher,
+    private reuseTabService: ReuseTabService,
   ) {
-    debugger;
     if (window.localStorage.getItem('_token') != null) {
       // 设置微服务选项
       this.planet.setOptions({
@@ -118,9 +141,8 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
         return;
       }
       this.isFetching = false;
-
       // If have already cached router, should be don't need scroll to top
-      if (!reuseTabService.exists(evt.url)) {
+      if (!reuseTabSrv.exists(evt.url)) {
         scroll.scrollToTop();
       }
     });
@@ -168,13 +190,24 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     );
   }
 
+  onChangeLang(lang) {
+    this.settingSrv.setCurrentUserSetting({ name: 'Platform.LanguageSettingNames.CurrentLanguage', value: lang }).subscribe(() => {
+      window.localStorage.setItem('language', lang);
+      window.location.reload();
+      // this.globalEventDispatcher.dispatch('change-lang', lang);
+    });
+  }
+
   onLogout() {
     this.tokenService.clear();
+    this.planet.unregisterApp('platform');
+    this.planet.unregisterApp('fcm');
     try {
-      // logOut();
+      logOut();
     } catch (e) {
       console.log('im logout error');
     }
+    window.location.href = `/#/passport/login`;
   }
 
   private getUserHead() {
