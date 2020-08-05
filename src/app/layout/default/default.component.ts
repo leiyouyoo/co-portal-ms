@@ -28,8 +28,8 @@ import { Planet, SwitchModes, GlobalEventDispatcher } from '@co/cms';
 import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 
 import { DefaultLayoutService } from './default.service';
-import { SettingService as CoSettingService } from '../../services/platform';
 import { I18NService } from 'src/app/core/i18n/i18n.service';
+import { PlatformSettingService } from '@co/cds';
 // import { logOut } from '@im';
 @Component({
   selector: 'layout-default',
@@ -83,7 +83,7 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit, OnDestroy 
     msg: NzMessageService,
     scroll: ScrollService,
     reuseTabSrv: ReuseTabService,
-    private settingSrv: CoSettingService,
+    private settingSrv: PlatformSettingService,
     private renderer: Renderer2,
     private modal: NzModalService,
     public pro: DefaultLayoutService,
