@@ -21,11 +21,16 @@
   "LOGIN": "登录",
   "Password":"密码",
   "OK": "确定",
-  "Cancel": "取消",
   "Guest mode": "访客模式",
   "PASSWORD": "密码",
   "Logout": "注销",
   "SIGN UP": "注册",
   "USERNAME": "用户名",
-  "en-US": "英文"
+  "en-US":"英文",
+  "Chinese":"中文",
+  "English":"英文",
+  "Are you sure switch to chinese?":"确定切换到中文",
+  "Are you sure switch to english?":"确定切换到英文",
+  "Confirm":"确认",
+  "Cancel":"取消"
 }
