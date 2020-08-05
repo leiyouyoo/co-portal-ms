@@ -28,7 +28,7 @@ import { Planet, SwitchModes, GlobalEventDispatcher } from '@co/cms';
 import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 
 import { DefaultLayoutService } from './default.service';
-import { SettingService as CoSettingService } from '../../services/platform';
+import { PlatformSettingService as CoSettingService } from '@co/cds';
 import { I18NService } from 'src/app/core/i18n/i18n.service';
 // import { logOut } from '@im';
 @Component({
