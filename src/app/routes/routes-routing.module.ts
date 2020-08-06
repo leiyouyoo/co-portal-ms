@@ -17,7 +17,11 @@ const routes: Routes = [
     component: DefaultLayoutComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent, data: { titleI18n: 'app.home', reuse: true, icon: 'snippets' } },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        data: { titleI18n: 'app.home', reuse: true, icon: 'icon-logo', reuseClosable: false },
+      },
       {
         path: 'exception',
         loadChildren: () => import('./exception/exception.module').then((m) => m.ExceptionModule),

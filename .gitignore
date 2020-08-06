@@ -2,6 +2,7 @@
 
 # compiled output
 /dist
+/apps
 /tmp
 /out-tsc
 /src/assets/alain-*.less
