@@ -1,18 +1,28 @@
 <ng-template #sideTpl>
-  <nz-sider [nzTrigger]="null" [nzCollapsible]="true" [nzCollapsed]="isMobile ? false : pro.collapsed"
-    [nzWidth]="pro.width" [nzCollapsedWidth]="pro.widthInCollapsed" class="portal__sider" style="max-width: 200px;"
-    [ngClass]="{ 'portal__sider-fixed': pro.fixSiderbar }">
+  <nz-sider
+    [nzTrigger]="null"
+    [nzCollapsible]="true"
+    [nzCollapsed]="isMobile ? false : pro.collapsed"
+    [nzWidth]="pro.width"
+    [nzCollapsedWidth]="pro.widthInCollapsed"
+    class="portal__sider"
+    style="max-width: 200px;"
+    [ngClass]="{ 'portal__sider-fixed': pro.fixSiderbar }"
+  >
     <div class="portal__sider-header">
       <!--Logo-->
       <default-layout-logo class="portal__sider-logo"> </default-layout-logo>
 
       <!--头像区域-->
       <div class="portal__sider-avatar">
-        <nz-avatar [nzSrc]="
+        <nz-avatar
+          [nzSrc]="
             userInfo?.profilePictureId
               ? imgUrl + '/Storage/File/GetDownLoadFile?fileId=' + userInfo?.profilePictureId + '&Handler=image'
               : '/assets/images/avatar.png'
-          " class="user-avatar"></nz-avatar>
+          "
+          class="user-avatar"
+        ></nz-avatar>
         <div class="user-desc">
           <h3>{{ user && user.session.user.name }} <i nz-icon nztype="down"></i></h3>
           <p>
@@ -44,10 +54,18 @@
           <default-layout-langs></default-layout-langs>
         </li>
         <li>
-          <a nz-button nz-popconfirm nzType="link" [nzPopconfirmTitle]="('Are you sure logout' | translate) + '?'"
-            [nzCancelText]="'Cancel' | translate" [nzOkText]="'OK' | translate" (nzOnConfirm)="onLogout()"
-            nzPopconfirmPlacement="top" style="cursor: pointer;">
-            <i nz-icon nzType="logout" nzTheme="outline" style=" color: #e55354;font-size: 14px;"></i>
+          <a
+            nz-button
+            nz-popconfirm
+            nzType="link"
+            [nzPopconfirmTitle]="('Are you sure logout' | translate) + '?'"
+            [nzCancelText]="'Cancel' | translate"
+            [nzOkText]="'OK' | translate"
+            (nzOnConfirm)="onLogout()"
+            nzPopconfirmPlacement="top"
+            style="cursor: pointer;"
+          >
+            <i nz-icon nzType="logout" nzTheme="outline" style="color: #e55354; font-size: 14px;"></i>
             <span class="title" style="color: #e55354;">
               {{ 'Logout' | translate }}
             </span>
@@ -68,18 +86,29 @@
   </ng-container>
   <div class="ant-layout portal__main" [ngStyle]="getLayoutStyle" style="height: 100vh;">
     <!-- <default-layout-header></default-layout-header> -->
-    <div class="ant-layout-content portal__body" [class.portal__fetching]="isFetching" [ngStyle]="getContentStyle"
-      style="display: flex; flex-direction: column;">
+    <div
+      class="ant-layout-content portal__body"
+      [class.portal__fetching]="isFetching"
+      [ngStyle]="getContentStyle"
+      style="display: flex; flex-direction: column;"
+    >
       <div class="portal__header-item portal__header-trigger" (click)="pro.setCollapsed()">
         <i nz-icon nzType="menu-{{ pro.collapsed ? 'unfold' : 'fold' }}" class="portal__header-item-icon"></i>
       </div>
       <nz-spin class="portal__fetching-icon" nzSpinning></nz-spin>
 
-      <reuse-tab #mainTab [tabBarExtraContent]="headerWidgets" tabType="card" mode="URL" class="icp-nav"
-        [tabMaxWidth]="100" debug="true" style="box-shadow: 0 0 5px 0 #999;"></reuse-tab>
+      <reuse-tab
+        #mainTab
+        [tabBarExtraContent]="headerWidgets"
+        tabType="card"
+        mode="URL"
+        class="co-portal-nav"
+        [tabMaxWidth]="100"
+        debug="true"
+        style="box-shadow: 0 0 5px 0 #999;"
+      ></reuse-tab>
 
-      <nz-content
-        style="flex: auto; margin: 12px; overflow: hidden; background: #fff; border-radius: 5px; box-shadow: 0 0 20px 0 #999;">
+      <nz-content style="flex: auto; margin: 12px; overflow: hidden; background: #fff; border-radius: 5px; box-shadow: 0 0 20px 0 #999;">
         <router-outlet></router-outlet>
         <div id="app-host-container" class="app-layout"></div>
       </nz-content>

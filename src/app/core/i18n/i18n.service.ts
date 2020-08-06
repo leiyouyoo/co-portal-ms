@@ -24,7 +24,7 @@ interface LangData {
 const DEFAULT = 'zh-CN';
 const LANGS: { [key: string]: LangData } = {
   'zh-CN': {
-    text: '简体中文',
+    text: '中文',
     ng: ngZh,
     zorro: zorroZhCN,
     date: dfZhCn,

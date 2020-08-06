@@ -1,7 +1,6 @@
 import { BreakpointObserver, MediaMatcher } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
 import {
-  AfterViewInit,
   ApplicationRef,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -14,13 +13,11 @@ import {
   Renderer2,
   ViewChild,
   ViewContainerRef,
-  Injector,
 } from '@angular/core';
 import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
 import { ReuseTabService } from '@co/cbc';
 import { ScrollService, _HttpClient, SettingsService } from '@co/common';
-import { NzModalService } from 'ng-zorro-antd/modal';
-import { updateHostClass, CoConfigManager, CoPageBase } from '@co/core';
+import { updateHostClass, CoConfigManager } from '@co/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
@@ -38,7 +35,7 @@ import { logOut } from '@im';
   styleUrls: ['./default.component.less'],
   templateUrl: './default.component.html',
 })
-export class DefaultLayoutComponent extends CoPageBase {
+export class DefaultLayoutComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   private queryCls: string;
   imgUrl = CoConfigManager.getValue('serverUrl');
@@ -47,7 +44,7 @@ export class DefaultLayoutComponent extends CoPageBase {
   @ViewChild('settingHost', { read: ViewContainerRef, static: false }) private settingHost: ViewContainerRef;
 
   isFetching = false;
-  event = false;
+
   get isMobile() {
     return this.pro.isMobile;
   }
@@ -79,41 +76,23 @@ export class DefaultLayoutComponent extends CoPageBase {
   }
 
   constructor(
-    private bm: BreakpointObserver,
-    private mediaMatcher: MediaMatcher,
-    private router: Router,
-    private msg: NzMessageService,
-    private scroll: ScrollService,
-    private reuseTabSrv: ReuseTabService,
+    bm: BreakpointObserver,
+    mediaMatcher: MediaMatcher,
+    router: Router,
+    msg: NzMessageService,
+    scroll: ScrollService,
     private settingSrv: PlatformSettingService,
+    private cdr: ChangeDetectorRef,
     private renderer: Renderer2,
-    private modal: NzModalService,
     public pro: DefaultLayoutService,
     public httpClient: _HttpClient,
     public i18n: I18NService,
     public settingsService: SettingsService,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
-    @Inject(DOCUMENT) private doc: any, // private cdr: ChangeDetectorRef
+    @Inject(DOCUMENT) private doc: any,
     private planet: Planet,
-    private globalEventDispatcher: GlobalEventDispatcher,
     private reuseTabService: ReuseTabService,
-    injector: Injector,
   ) {
-    super(injector);
-    this.initTab();
-  }
-
-  coOnInit() {
-    const { pro, unsubscribe$ } = this;
-    pro.notify.pipe(takeUntil(unsubscribe$)).subscribe(() => {
-      this.setClass();
-    });
-
-    this.user = JSON.parse(window.localStorage.getItem('co.session'));
-    this.getUserHead();
-  }
-
-  initTab() {
     if (window.localStorage.getItem('_token') != null) {
       // 设置微服务选项
       this.planet.setOptions({
@@ -144,14 +123,14 @@ export class DefaultLayoutComponent extends CoPageBase {
     }
 
     // scroll to top in change page
-    this.router.events.pipe(takeUntil(this.unsubscribe$)).subscribe((evt) => {
+    router.events.pipe(takeUntil(this.unsubscribe$)).subscribe((evt: any) => {
       if (!this.isFetching && evt instanceof RouteConfigLoadStart) {
         this.isFetching = true;
-        this.scroll.scrollToTop();
+        scroll.scrollToTop();
       }
       if (evt instanceof NavigationError) {
         this.isFetching = false;
-        this.msg.error(`无法加载${evt.url}路由`, { nzDuration: 1000 * 3 });
+        msg.error(`无法加载${evt.url}路由`, { nzDuration: 1000 * 3 });
         return;
       }
       if (!(evt instanceof NavigationEnd)) {
@@ -159,8 +138,8 @@ export class DefaultLayoutComponent extends CoPageBase {
       }
       this.isFetching = false;
       // If have already cached router, should be don't need scroll to top
-      if (!this.reuseTabSrv.exists(evt.url)) {
-        this.scroll.scrollToTop();
+      if (!reuseTabService.exists(evt.url)) {
+        scroll.scrollToTop();
       }
     });
 
@@ -172,21 +151,29 @@ export class DefaultLayoutComponent extends CoPageBase {
       'screen-lg': '(min-width: 992px) and (max-width: 1199px)',
       'screen-xl': '(min-width: 1200px)',
     };
-    this.bm
-      .observe([
-        '(min-width: 1200px)',
-        '(min-width: 992px) and (max-width: 1199px)',
-        '(min-width: 768px) and (max-width: 991px)',
-        '(min-width: 576px) and (max-width: 767px)',
-        '(max-width: 575px)',
-      ])
-      .subscribe(() => {
-        this.queryCls = Object.keys(query).find((key) => this.mediaMatcher.matchMedia(query[key]).matches);
-        this.setClass();
-      });
+    bm.observe([
+      '(min-width: 1200px)',
+      '(min-width: 992px) and (max-width: 1199px)',
+      '(min-width: 768px) and (max-width: 991px)',
+      '(min-width: 576px) and (max-width: 767px)',
+      '(max-width: 575px)',
+    ]).subscribe(() => {
+      this.queryCls = Object.keys(query).find((key) => mediaMatcher.matchMedia(query[key]).matches);
+      this.setClass();
+    });
   }
 
-  coOnDestroy() {
+  ngOnInit() {
+    const { pro, unsubscribe$ } = this;
+    pro.notify.pipe(takeUntil(unsubscribe$)).subscribe(() => {
+      this.setClass();
+    });
+
+    this.user = JSON.parse(window.localStorage.getItem('co.session'));
+    this.getUserHead();
+  }
+
+  ngOnDestroy() {
     const { unsubscribe$, body, pro } = this;
     unsubscribe$.next();
     unsubscribe$.complete();
@@ -209,14 +196,16 @@ export class DefaultLayoutComponent extends CoPageBase {
 
   onLogout() {
     this.tokenService.clear();
-    this.planet.unregisterApp('platform');
-    this.planet.unregisterApp('fcm');
+    this.reuseTabService.clear(true);
+    this.planet.clear();
+
     try {
       logOut();
     } catch (e) {
       console.log('im logout error');
     }
     window.location.href = `/#/passport/login`;
+    // window.location.reload();
   }
 
   private getUserHead() {
