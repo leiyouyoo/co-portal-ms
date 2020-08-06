@@ -29,6 +29,7 @@
     "src/**/*.d.ts"
   ],
   "exclude": [
+    ".scannerwork/**/*",
     "dist/**/*",
     "apps/**/*",
     "src/test.ts",

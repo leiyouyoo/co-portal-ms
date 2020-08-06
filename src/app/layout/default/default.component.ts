@@ -1,7 +1,6 @@
 import { BreakpointObserver, MediaMatcher } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
 import {
-  AfterViewInit,
   ApplicationRef,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -18,7 +17,6 @@ import {
 import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
 import { ReuseTabService } from '@co/cbc';
 import { ScrollService, _HttpClient, SettingsService } from '@co/common';
-import { NzModalService } from 'ng-zorro-antd/modal';
 import { updateHostClass, CoConfigManager } from '@co/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject } from 'rxjs';
@@ -83,18 +81,16 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     router: Router,
     msg: NzMessageService,
     scroll: ScrollService,
-    reuseTabSrv: ReuseTabService,
     private settingSrv: PlatformSettingService,
+    private cdr: ChangeDetectorRef,
     private renderer: Renderer2,
-    private modal: NzModalService,
     public pro: DefaultLayoutService,
     public httpClient: _HttpClient,
     public i18n: I18NService,
     public settingsService: SettingsService,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
-    @Inject(DOCUMENT) private doc: any, // private cdr: ChangeDetectorRef
+    @Inject(DOCUMENT) private doc: any,
     private planet: Planet,
-    private globalEventDispatcher: GlobalEventDispatcher,
     private reuseTabService: ReuseTabService,
   ) {
     if (window.localStorage.getItem('_token') != null) {
@@ -127,7 +123,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     }
 
     // scroll to top in change page
-    router.events.pipe(takeUntil(this.unsubscribe$)).subscribe((evt) => {
+    router.events.pipe(takeUntil(this.unsubscribe$)).subscribe((evt: any) => {
       if (!this.isFetching && evt instanceof RouteConfigLoadStart) {
         this.isFetching = true;
         scroll.scrollToTop();
@@ -142,7 +138,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       }
       this.isFetching = false;
       // If have already cached router, should be don't need scroll to top
-      if (!reuseTabSrv.exists(evt.url)) {
+      if (!reuseTabService.exists(evt.url)) {
         scroll.scrollToTop();
       }
     });
@@ -200,14 +196,16 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
 
   onLogout() {
     this.tokenService.clear();
-    this.planet.unregisterApp('platform');
-    this.planet.unregisterApp('fcm');
+    this.reuseTabService.clear(true);
+    this.planet.clear();
+
     try {
       logOut();
     } catch (e) {
       console.log('im logout error');
     }
     window.location.href = `/#/passport/login`;
+    // window.location.reload();
   }
 
   private getUserHead() {

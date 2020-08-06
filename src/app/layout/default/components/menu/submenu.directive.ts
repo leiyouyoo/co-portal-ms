@@ -78,6 +78,7 @@ export class CoSubmenuDirective extends NzTooltipBaseDirective {
     const submenuItemEls = document.querySelectorAll('.portal-menu__submenu-item');
     submenuItemEls.forEach((el) => {
       this.renderer.listen(el, 'click', () => {
+        debugger;
         this.hide();
       });
     });

@@ -1,7 +1,25 @@
 @{co-portal-prefix} {
+  &__body {
+    position: relative;
+  }
+
+  &__tab-content {
+    flex: auto;
+    margin: 12px;
+    overflow: hidden;
+    background: #f0f0f0;
+    border-radius: 4px;
+    // box-shadow: 0 0 20px 0 #999;
+  }
+
   &__main {
     min-height: 100vh;
     background-color: @co-portal-main-bg;
+
+
+    .app-layout {
+      height: 100%;
+    }
 
     >.ant-layout-header {
       height: @co-portal-header-height;

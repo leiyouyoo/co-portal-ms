@@ -1,9 +1,9 @@
 <!--底部栏-->
 <ul class="portal-menu__wrap" #mainMenu>
-  <li class="portal-menu__item portal-menu__item-active portal-menu__item-main">
-    <a co-submenu #submenu [nzContent]="submenuTemplate" [coPopoverOrigin]="mainMenu" coPopoverTrigger="click"
+  <li class="portal-menu__item  portal-menu__item-main">
+    <a co-submenu #submenu [nzContent]="submenuTemplate" [coPopoverOrigin]="mainMenu" coPopoverTrigger="hover"
       coPopoverPlacement="rightTop" (coCatecoryActived)="onCatecoryActived($event)">
-      <i nz-icon nzType="menu" nzTheme="outline"></i>
+      <i nz-icon nzType="menu"></i>
       <span *ngIf="!pro.onlyIcon" class="portal-menu__item-title">
         {{ 'portal.menu' | translate }}
       </span>
@@ -17,7 +17,7 @@
         <div *ngFor="let menu of defaultMenus">
           <div class="portal-menu__submenu-category-item" [attr.data]="menu.key"
             [ngClass]="{ 'portal-menu__submenu-category-item-actived': activedCategory === menu.key }">
-            <i nz-icon nzType="menu" nzTheme="outline"></i>
+            <!-- <i nz-icon nzType="menu" nzTheme="outline"></i> -->
             <span *ngIf="!pro.onlyIcon" class="portal-menu__submenu-category-item-title"> {{ menu.text }} </span>
             <i nz-icon nzType="right" class="portal-menu__submenu-category-item-arrow"></i>
           </div>
@@ -28,7 +28,7 @@
         <h3 class="portal-menu__submenu-group"><i></i>默认</h3>
         <div class="portal-menu__submenu-item" *ngFor="let menu of childMenus">
           <a [routerLink]="menu.link">
-            <i nz-icon nzType="book" nzTheme="outline"></i>
+            <!-- <i nz-icon nzType="book" nzTheme="outline"></i> -->
             {{ menu.text }}
           </a>
         </div>
@@ -40,11 +40,14 @@
   <!--用户常用收藏菜单-->
   <div *ngFor="let menu of favoritesMenus">
     <nz-divider></nz-divider>
-    <li class="portal-menu__item" [nzTooltipTitle]="menu.text" nzTooltipPlacement="right" nz-tooltip>
-      <a [routerLink]="menu.link">
-        <i nz-icon [nzIconfont]="menu.icon.value" class="portal-menu__item-icon"></i>
-        <span class="portal-menu__item-title"> {{ menu.text }} </span>
-      </a>
-    </li>
+    <div [ngClass]="{'portal-menu__item-active':menu.key===activedMenuName}" nzTooltipPlacement="right"
+      [nz-tooltip]="menu.text">
+      <li class="portal-menu__item">
+        <a [routerLink]="menu.link">
+          <i nz-icon [nzIconfont]="menu.icon.value" class="portal-menu__item-icon"></i>
+          <span class="portal-menu__item-title"> {{ menu.text }} </span>
+        </a>
+      </li>
+    </div>
   </div>
 </ul>
