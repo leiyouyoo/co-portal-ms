@@ -17,7 +17,7 @@
         <div *ngFor="let menu of defaultMenus">
           <div class="portal-menu__submenu-category-item" [attr.data]="menu.key"
             [ngClass]="{ 'portal-menu__submenu-category-item-actived': activedCategory === menu.key }">
-            <!-- <i nz-icon nzType="menu" nzTheme="outline"></i> -->
+            <i nz-icon nzType="menu" nzTheme="outline"></i>
             <span *ngIf="!pro.onlyIcon" class="portal-menu__submenu-category-item-title"> {{ menu.text }} </span>
             <i nz-icon nzType="right" class="portal-menu__submenu-category-item-arrow"></i>
           </div>
