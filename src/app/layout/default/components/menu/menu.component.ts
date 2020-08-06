@@ -27,7 +27,24 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
     public pro: DefaultLayoutService,
     private cdr: ChangeDetectorRef,
     protected renderer: Renderer2,
-  ) {}
+  ) {
+    this.router.url;
+  }
+
+  private getMenu(url: string) {
+    const menus = this.menuSrv.getPathByUrl(url);
+    if (!menus || menus.length === 0) return null;
+    return menus.pop();
+  }
+
+  public get collapsed() {
+    return this.pro.collapsed;
+  }
+
+  public get activedMenuName() {
+    const menu = this.getMenu(this.router.url);
+    return menu?.key;
+  }
 
   public get favoritesMenus() {
     const favorites = this.allMenus.find((m) => m.key === 'favorites');
@@ -58,7 +75,6 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
   }
 
   private genMenus(data: Menu[]) {
-    // this.allMenus = this.menuSrv.menus;
     this.allMenus = data;
 
     if (this.defaultMenus && this.defaultMenus.length > 0) {
