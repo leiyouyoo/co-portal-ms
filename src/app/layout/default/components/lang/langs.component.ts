@@ -3,7 +3,7 @@ import { NzModalRef } from 'ng-zorro-antd';
 import { PlatformSettingService } from '@co/cds';
 import { I18NService } from 'src/app/core/i18n/i18n.service';
 import { TranslateService } from '@ngx-translate/core';
-
+import { SettingsService } from '@co/common';
 @Component({
   selector: 'langs',
   templateUrl: './langs.component.html',
@@ -50,6 +50,7 @@ export class LangsComponent {
   constructor(
     private translate: TranslateService,
     private modalRef: NzModalRef,
+    private setting: SettingsService,
     private settingSrv: PlatformSettingService,
     public i18n: I18NService,
   ) {}
@@ -57,7 +58,12 @@ export class LangsComponent {
   change(lang) {
     window.localStorage.setItem('language', lang);
     this.translate.use(lang);
+    this.i18n.use(lang);
     this.translate.setDefaultLang(lang);
     this.modalRef.close();
+    this.setting.setLayout('lang', lang);
+    this.settingSrv.setCurrentUserSetting({ name: 'Platform.LanguageSettingNames.CurrentLanguage', value: lang }).subscribe(() => {
+      window.localStorage.setItem('language', lang);
+    });
   }
 }

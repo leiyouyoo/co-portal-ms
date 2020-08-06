@@ -1,5 +1,4 @@
-<a nz-dropdown [nzDropdownMenu]="menu" nzSize="small" nzType="link" nzOverlayClassName="default-layout-langs__menu"
-  nzTrigger="click">
+<a nz-dropdown [nzDropdownMenu]="menu" nzSize="small" nzType="link" nzOverlayClassName="default-layout-langs__menu" nzTrigger="click">
   <i nz-icon nzType="global" nzTheme="outline" style="font-size: 14px;"></i>
   <!-- <i nz-icon [nzIconfont]="currentLang=='zh-CN'?'icon-cn':'icon-en'" style="font-size: 14px;"></i> -->
   <span class="title">
@@ -8,15 +7,10 @@
 </a>
 
 <nz-dropdown-menu #menu="nzDropdownMenu">
-  <ul nz-menu nzSelectable>
-    <li nz-menu-item nz-popconfirm nzPopconfirmTitle="{{ 'Are you sure switch to chinese?'  | translate }}"
-      [nzDisabled]="currentLang=='zh-CN'" nzCancelText="{{'Cancel' | translate }}" nzOkText="{{'Confirm' | translate }}"
-      (nzOnConfirm)="onChangeLang('zh-CN')" nzPopconfirmPlacement="bottom"
-      [ngClass]="{'default-layout-langs__menu-item-selected':currentLang=='zh-CN'}">
-      {{ 'Chinese'  | translate }}</li>
-    <li nz-menu-item nz-popconfirm nzPopconfirmTitle="{{ 'Are you sure switch to english?'  | translate }}"
-      (nzOnConfirm)="onChangeLang('en-US')" nzCancelText="{{'Cancel' | translate }}"
-      nzOkText="{{'Confirm' | translate }}" nzPopconfirmPlacement="bottom" [nzDisabled]="currentLang=='en-US'"
-      [ngClass]="{'default-layout-langs__menu-item-selected ':currentLang=='en-US'}"> {{ 'English'  | translate }}</li>
-  </ul>
+  <div nz-menu class="width-sm">
+    <li nz-menu-item *ngFor="let item of langs" [nzSelected]="item.code === currentLang" (click)="onChangeLang(item.code)">
+      <span role="img" [attr.aria-label]="item.text" class="pr-xs">{{ item.abbr }}</span>
+      {{ item.text }}
+    </li>
+  </div>
 </nz-dropdown-menu>

@@ -1,5 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { PlatformSettingService } from '@co/cds';
+import { I18NService } from 'src/app/core/i18n/i18n.service';
+import { SettingsService } from '@co/common';
 
 /**
  * 语言切换组件
@@ -18,21 +20,26 @@ export class DefaultLayoutLangsComponent {
     return window.localStorage.getItem('language') || navigator.language;
   }
 
+  get langs() {
+    return this.i18n.getLangs();
+  }
+
   /**
    * 构造函数
    * @param settingSrv
    */
-  constructor(private settingSrv: PlatformSettingService) {}
+  constructor(public i18n: I18NService, private settingSrv: PlatformSettingService, private setting: SettingsService) {}
 
   /**
    * 切换语言
    * @param lang
    */
   onChangeLang(lang) {
+    debugger;
     if (lang == this.currentLang) return;
-
+    this.i18n.use(lang);
+    this.setting.setLayout('lang', lang);
     this.settingSrv.setCurrentUserSetting({ name: 'Platform.LanguageSettingNames.CurrentLanguage', value: lang }).subscribe(() => {
-      window.localStorage.setItem('layout', JSON.stringify({ lang: lang }));
       window.localStorage.setItem('language', lang);
       window.location.reload();
     });
