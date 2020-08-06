@@ -32,6 +32,7 @@ export class DefaultLayoutLangsComponent {
     if (lang == this.currentLang) return;
 
     this.settingSrv.setCurrentUserSetting({ name: 'Platform.LanguageSettingNames.CurrentLanguage', value: lang }).subscribe(() => {
+      window.localStorage.setItem('layout', JSON.stringify({ lang: lang }));
       window.localStorage.setItem('language', lang);
       window.location.reload();
     });

@@ -1,7 +1,7 @@
 <!--底部栏-->
 <ul class="portal-menu__wrap" #mainMenu>
   <li class="portal-menu__item portal-menu__item-active portal-menu__item-main">
-    <a co-submenu #submenu [nzContent]="submenuTemplate" [coPopoverOrigin]="mainMenu" coPopoverTrigger="click"
+    <a co-submenu #submenu [nzContent]="submenuTemplate" [coPopoverOrigin]="mainMenu" coPopoverTrigger="hover"
       coPopoverPlacement="rightTop" (coCatecoryActived)="onCatecoryActived($event)">
       <i nz-icon nzType="menu" nzTheme="outline"></i>
       <span *ngIf="!pro.onlyIcon" class="portal-menu__item-title">
