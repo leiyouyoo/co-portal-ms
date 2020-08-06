@@ -29,7 +29,7 @@ const LANGS: { [key: string]: LangData } = {
     zorro: zorroZhCN,
     date: dfZhCn,
     co: coZhCn,
-    abbr: '🇨🇳',
+    abbr: 'CN',
   },
   'en-US': {
     text: 'English',
@@ -37,7 +37,7 @@ const LANGS: { [key: string]: LangData } = {
     zorro: zorroEnUS,
     date: dfEn,
     co: delonEnUS,
-    abbr: '🇬🇧',
+    abbr: 'EN',
   },
 };
 
