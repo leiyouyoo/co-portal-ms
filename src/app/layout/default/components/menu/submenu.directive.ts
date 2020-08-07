@@ -20,7 +20,6 @@ import { NzNoAnimationDirective } from 'ng-zorro-antd/core/no-animation';
 import { NzTSType } from 'ng-zorro-antd/core/types';
 
 import { isTooltipEmpty, NzTooltipBaseDirective, NzTooltipBaseComponent, NzTooltipTrigger } from 'ng-zorro-antd/tooltip';
-import { basename } from 'path';
 
 @Directive({
   selector: '[co-submenu]',
