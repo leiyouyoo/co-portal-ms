@@ -1,9 +1,9 @@
-<!--底部栏-->
 <ul class="portal-menu__wrap" #mainMenu>
+  <!--主菜单-->
   <li class="portal-menu__item  portal-menu__item-main">
     <a co-submenu #submenu [nzContent]="submenuTemplate" [coPopoverOrigin]="mainMenu" coPopoverTrigger="hover"
       coPopoverPlacement="rightTop" (coCatecoryActived)="onCatecoryActived($event)">
-      <i nz-icon nzType="menu"></i>
+      <i nz-icon nzType="menu" class="portal-menu__item-icon"></i>
       <span *ngIf="!pro.onlyIcon" class="portal-menu__item-title">
         {{ 'portal.menu' | translate }}
       </span>
@@ -11,6 +11,7 @@
     </a>
   </li>
 
+  <!--弹出子菜单模板-->
   <ng-template #submenuTemplate>
     <div nz-row style="height: 100%;">
       <div nz-col [nzSpan]="12" class="portal-menu__submenu-category">
@@ -28,7 +29,6 @@
         <h3 class="portal-menu__submenu-group"><i></i>默认</h3>
         <div class="portal-menu__submenu-item" *ngFor="let menu of childMenus">
           <a [routerLink]="menu.link">
-            <!-- <i nz-icon nzType="book" nzTheme="outline"></i> -->
             {{ menu.text }}
           </a>
         </div>
@@ -40,7 +40,7 @@
   <!--用户常用收藏菜单-->
   <div *ngFor="let menu of favoritesMenus">
     <nz-divider></nz-divider>
-    <div [ngClass]="{'portal-menu__item-active':menu.key===activedMenuName}" nzTooltipPlacement="right"
+    <div [ngClass]="{'portal-menu__item-active':menu.key===activedMenuKey}" nzTooltipPlacement="right"
       [nz-tooltip]="menu.text">
       <li class="portal-menu__item">
         <a [routerLink]="menu.link">

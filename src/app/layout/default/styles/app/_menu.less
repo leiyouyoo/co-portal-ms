@@ -142,6 +142,7 @@
         }
 
         .ant-divider-horizontal {
+          top: 0;
           width: 120px;
           min-width: 24px;
           margin: auto;
@@ -257,9 +258,20 @@
       }
 
       &:hover {
-        background-color: #383838;
+        // background-color: #383838;
 
         @{co-portal-prefix}-menu__item-icon {
+          color: #1890ffff !important;
+          opacity: 1;
+        }
+      }
+
+      &-main {
+        margin-bottom: 0;
+        font-size: 20px;
+        background-color: transparent;
+
+        @{co-portal-prefix}-menu__item-icon:hover {
           color: #1890ffff !important;
           opacity: 1;
         }
@@ -288,16 +300,7 @@
         opacity: 0.6;
       }
 
-      &-main {
-        margin-bottom: 0;
-        font-size: 20px;
-        background-color: transparent;
 
-        &:hover {
-          color: #1890ffff !important;
-          opacity: 1;
-        }
-      }
 
       &-title {
         display: none;
