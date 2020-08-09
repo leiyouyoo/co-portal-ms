@@ -8,8 +8,7 @@ import { filter } from 'rxjs/operators';
 import { CoConfigManager } from '@co/core';
 
 import { TitleService } from '@co/common';
-import { Planet } from '@co/cms';
-import { ReuseTabService } from '@co/cbc';
+import { Planet, ReuseTabService } from '@co/cms';
 import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 
 import { setupVersion } from './app.version';

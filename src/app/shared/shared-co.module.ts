@@ -3,7 +3,6 @@ import {
   CoNoticeIconModule,
   FullContentModule,
   PageHeaderModule,
-  ReuseTabModule,
   CoSTModule,
   CoDatetimeRangePickerModule,
   CustomerPickerModule,
@@ -11,7 +10,7 @@ import {
   PortPickerModule,
   CoLayoutComponentsModule,
 } from '@co/cbc';
-import { CoCmsModule } from '@co/cms';
+import { ReuseTabModule, CoCmsModule } from '@co/cms';
 import { DelonImModule } from './im/public_api';
 
 export const SHARED_CO_MODULES = [
