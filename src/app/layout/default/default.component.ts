@@ -15,20 +15,21 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
-import { ReuseTabService } from '@co/cbc';
 import { ScrollService, _HttpClient, SettingsService } from '@co/common';
 import { updateHostClass, CoConfigManager } from '@co/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
-import { Planet, SwitchModes, GlobalEventDispatcher } from '@co/cms';
+import { Planet, SwitchModes, ReuseTabService } from '@co/cms';
 import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 
 import { DefaultLayoutService } from './default.service';
 import { I18NService } from 'src/app/core/i18n/i18n.service';
 import { PlatformSettingService } from '@co/cds';
 import { logOut } from '@im';
+
+declare const window: any;
 
 @Component({
   selector: 'layout-default',
@@ -41,7 +42,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   imgUrl = CoConfigManager.getValue('serverUrl');
   user: any;
   userInfo: any;
-  @ViewChild('settingHost', { read: ViewContainerRef, static: false }) private settingHost: ViewContainerRef;
+  @ViewChild('mainTab', { read: ViewContainerRef, static: false }) private mainTab: ViewContainerRef;
 
   isFetching = false;
 
@@ -114,6 +115,10 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
 
       // 启动
       this.planet.start();
+
+      //多路由服务挂载在全局planet上
+      window.planet.mainTabService = reuseTabService;
+      window.planet.mainTab = this.mainTab;
 
       // 订阅子应用加载事件
       this.planet.appsLoadingStart.subscribe((event) => {
