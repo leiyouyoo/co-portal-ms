@@ -111,7 +111,6 @@ export class loginMainComponent implements OnInit {
     this.loading = true;
     this.loginService
       .login(obj.userName, obj.password, obj.remember)
-      .finally(() => (this.loading = false))
       .then((res: any) => {
         if (res.access_token) {
           this.doRedirect({ isRedirectByQueryParam: true, isLoginIm: true });
@@ -120,7 +119,7 @@ export class loginMainComponent implements OnInit {
         }
       })
       .catch((e: any) => {
-        console.log(e);
+        this.loading = false;
         this.errorTip = e.error.error_description;
         console.log(this.errorTip, 'errorTip');
       });

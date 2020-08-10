@@ -27,8 +27,10 @@ import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 
 import { DefaultLayoutService } from './default.service';
 import { I18NService } from 'src/app/core/i18n/i18n.service';
-import { PlatformSettingService } from '@co/cds';
+import { PlatformSettingService, PlatformNotificationService } from '@co/cds';
 import { logOut } from '@im';
+import { NzNotificationService } from 'ng-zorro-antd';
+import { TranslateService } from '@ngx-translate/core';
 
 declare const window: any;
 

@@ -1,3 +1,75 @@
-<co-notice-icon btnClass="portal__header-item" btnIconClass="portal__header-item-icon" [data]="data" [count]="count"
-  [loading]="loading" (select)="select($event)" (clear)="clear($event)" (popoverVisibleChange)="loadData()">
-</co-notice-icon>
+<button
+  nz-button
+  nzType="link"
+  nz-popover
+  [nzPopoverTitle]="nofificationTitle"
+  [(nzPopoverVisible)]="visible"
+  (nzPopoverVisibleChange)="change($event)"
+  nzPopoverTrigger="click"
+  nzPopoverPlacement="bottomRight"
+  [nzPopoverContent]="contentTemplate"
+>
+  <nz-badge [nzCount]="unreadCount" [nzStyle]="{ 'box-shadow': 'none' }">
+    <i nz-icon nzType="bell" [ngClass]="'portal__header-item-icon'"></i>
+  </nz-badge>
+</button>
+
+<ng-template #contentTemplate>
+  <nz-card nzBordered="false" nzSize="small" class="ant-card__body-nopadding" style="width: 350px; margin-bottom: 0 !important;">
+    <div>
+      <cdk-virtual-scroll-viewport itemSize="73" class="notifications">
+        <nz-list>
+          <nz-list-item *cdkVirtualFor="let item of ds">
+            <nz-skeleton *ngIf="!item" [nzAvatar]="true" [nzParagraph]="{ rows: 1 }"></nz-skeleton>
+            <nz-list-item-meta *ngIf="item" [nzAvatar]="userHeader" [nzDescription]="userName">
+              <nz-list-item-meta-title>
+                <span nz-tooltip [nzTooltipTitle]="item.notification.data.message" [nzTooltipMouseEnterDelay]="0.75">{{
+                  item.notification.data.message
+                }}</span>
+                <div *ngIf="!item.read" class="set-read">
+                  <button nz-button nzSize="small" *ngIf="item.state === 0" (click)="setNotificationAsRead(item)">
+                    {{ 'Set as read' | translate }}
+                  </button>
+
+                  <button nz-button nzSize="small" *ngIf="item.state === 1" disabled>
+                    {{ 'Reviewed' | translate }}
+                  </button>
+                </div>
+              </nz-list-item-meta-title>
+            </nz-list-item-meta>
+
+            <ng-template #userHeader>
+              <div *ngIf="item.state === 0" class="userHeader">
+                <nz-badge nzDot [nzOffset]="[-5, 5]"><i nz-icon nzType="bell" nzTheme="outline"></i></nz-badge>
+              </div>
+
+              <div *ngIf="item.state === 1" class="userHeader">
+                <i nz-icon nzType="bell" nzTheme="outline"></i>
+              </div>
+            </ng-template>
+            <ng-template #userName>
+              <div class="item-time">
+                <span class="item-time-user">{{
+                  item.notification.data.properties.senderFullName || ('System notification' | translate)
+                }}</span>
+                <span style="font-size: 12px; color: #00000045;">{{
+                  item.notification.creationTime | date: 'HH:mm,MMM dd yyyy':'':'en-US'
+                }}</span>
+              </div>
+            </ng-template>
+          </nz-list-item>
+        </nz-list>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </nz-card>
+</ng-template>
+
+<ng-template #nofificationTitle>
+  <div class="notifications_title">
+    <span>{{ 'Notifications' | translate }}</span>
+
+    <button nz-button (click)="setAsAllRead()">
+      {{ 'Make all read' | translate }}
+    </button>
+  </div>
+</ng-template>
