@@ -14,9 +14,9 @@
               : '/assets/images/avatar.png'
           " class="user-avatar"></nz-avatar>
         <div class="user-desc">
-          <h3>{{ user && user.session.user.name }} <i nz-icon nztype="down"></i></h3>
+          <h3>{{  user?.name }} <i nz-icon nztype="down"></i></h3>
           <p>
-            {{ user && user.session.user.emailAddress }}
+            {{ user?.emailAddress }}
           </p>
         </div>
       </div>
