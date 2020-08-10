@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Renderer2, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { Menu, MenuService } from '@co/common';
 import { log } from '@co/core';
 import { Subject } from 'rxjs';
@@ -19,6 +19,7 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
   unsubscribe$ = new Subject<void>();
   activedCategory: string;
   allMenus: Menu[];
+  currentMenu: Menu;
   childMenus: Menu[] = [];
   constructor(
     public elementRef: ElementRef,
@@ -28,6 +29,28 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     protected renderer: Renderer2,
   ) {}
+
+  ngOnInit() {
+    const { unsubscribe$ } = this;
+    this.menuSrv.change.pipe(takeUntil(unsubscribe$)).subscribe((res) => {
+      this.genMenus(res);
+    });
+
+    this.router.events.pipe(filter((evt: any) => evt instanceof NavigationEnd)).subscribe((evt: any) => {
+      this.currentMenu = this.getMenu(this.router.url);
+      this.cdr.markForCheck();
+    });
+  }
+
+  ngOnDestroy() {
+    const { unsubscribe$ } = this;
+    unsubscribe$.next();
+    unsubscribe$.complete();
+  }
+
+  public get activedMenuKey() {
+    return this.currentMenu?.key;
+  }
 
   public get favoritesMenus() {
     const favorites = this.allMenus.find((m) => m.key === 'favorites');
@@ -39,17 +62,6 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
     return favorites?.children;
   }
 
-  ngOnInit() {
-    const { unsubscribe$ } = this;
-    this.menuSrv.change.pipe(takeUntil(unsubscribe$)).subscribe((res) => this.genMenus(res));
-  }
-
-  ngOnDestroy() {
-    const { unsubscribe$ } = this;
-    unsubscribe$.next();
-    unsubscribe$.complete();
-  }
-
   onCatecoryActived(category: string) {
     log(`Active Category:${category}`);
 
@@ -58,7 +70,6 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
   }
 
   private genMenus(data: Menu[]) {
-    // this.allMenus = this.menuSrv.menus;
     this.allMenus = data;
 
     if (this.defaultMenus && this.defaultMenus.length > 0) {
@@ -72,5 +83,11 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
     const menuCategory = this.defaultMenus.find((m) => m.key === category);
     this.childMenus = menuCategory?.children;
     this.cdr.markForCheck();
+  }
+
+  private getMenu(url: string) {
+    const menus = this.menuSrv.getPathByUrl(url);
+    if (!menus || menus.length === 0) return null;
+    return menus.pop();
   }
 }

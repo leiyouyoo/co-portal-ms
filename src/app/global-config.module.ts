@@ -47,7 +47,7 @@ if (!environment.production) {
 // #region  路由复用配置
 
 import { RouteReuseStrategy } from '@angular/router';
-import { ReuseTabService, ReuseTabStrategy, ReuseTabMatchMode } from '@co/cbc';
+import { ReuseTabService, ReuseTabStrategy, ReuseTabMatchMode } from '@co/cms';
 coProvides.push({
   provide: RouteReuseStrategy,
   useClass: ReuseTabStrategy,
@@ -73,7 +73,7 @@ const zorroProvides = [{ provide: NZ_CONFIG, useValue: ngZorroConfig }];
 export class GlobalConfigModule {
   constructor(@Optional() @SkipSelf() parentModule: GlobalConfigModule, reuseTabService: ReuseTabService) {
     throwIfAlreadyLoaded(parentModule, 'GlobalConfigModule');
-    reuseTabService.mode = ReuseTabMatchMode.MenuForce;
+    // reuseTabService.mode = ReuseTabMatchMode.MenuForce;
     reuseTabService.init();
   }
 

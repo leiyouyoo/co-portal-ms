@@ -58,15 +58,21 @@
     top: 12px !important;
   }
 
-  .reuse-tab__icon {
+
+  &__icon {
     position: absolute;
     top: 8px;
     left: 4px;
     margin-right: 8px;
+    color: #1890FFFF !important;
+    opacity: 0.6;
 
     +.reuse-tab__name {
       padding-left: 8px;
     }
-  }
 
+    .ant-tabs-tab-active & {
+      opacity: 1;
+    }
+  }
 }
