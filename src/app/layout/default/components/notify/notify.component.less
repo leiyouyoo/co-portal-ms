@@ -1,14 +1,120 @@
-.notifications_title {
-    display        : flex;
-    justify-content: space-between;
-    margin         : 5px 0;
+@import '~@co/theme/index';
 
-    span {
-        font-size  : 16px;
-        font-weight: 600;
+::ng-deep {
+    .notifications_title {
+        display        : flex;
+        justify-content: space-between;
+        margin         : 5px 0;
+
+        span {
+            font-size : 12px;
+            align-self: center;
+        }
     }
-}
 
-.set-read {
-    text-align: right;
+    .set-read {
+        text-align: right;
+    }
+
+    .notify {
+        word-wrap      : break-word;
+        word-break     : break-all;
+        padding        : 12px !important;
+        display        : flex;
+        justify-content: space-between;
+
+        .notify-left {
+            margin-right: 10px;
+
+            i {
+                color        : #fff;
+                font-size    : 25px;
+                background   : #1890ff;
+                padding      : 10px;
+                border-radius: 100%;
+            }
+        }
+
+        .notify-right {
+            overflow: hidden;
+
+            .item-time {
+                color          : #00000045;
+                display        : flex;
+                justify-content: space-between;
+
+                .item-time-user {
+                    color: #00000065;
+                }
+            }
+        }
+
+        .ant-notification-notice-close {
+            display: none;
+            top    : 5px !important;
+            right  : 10px !important;
+        }
+    }
+
+    .notifications {
+        height: 450px;
+
+        nz-list {
+            nz-list-item {
+                padding: 0 8px;
+            }
+
+            nz-list-item:hover {
+                background: #f2f2f2;
+            }
+
+            nz-list-item-meta {
+                width   : 100%;
+                overflow: hidden;
+
+                nz-list-item-meta-avatar {
+                    align-self: center;
+                }
+            }
+
+            nz-list-item-meta-title {
+                h4 {
+                    span {
+                        flex         : 1;
+                        white-space  : nowrap;
+                        overflow     : hidden;
+                        text-overflow: ellipsis;
+                    }
+
+                    display      : flex;
+                    white-space  : nowrap;
+                    overflow     : hidden;
+                    text-overflow: ellipsis;
+                    align-items  : center;
+                }
+            }
+
+            .ant-list-item-meta-content {
+                overflow: hidden;
+            }
+        }
+
+        .item-time {
+            color          : #00000045;
+            display        : flex;
+            justify-content: space-between;
+
+            .item-time-user {
+                color: #00000065;
+            }
+        }
+
+        .userHeader i {
+            color        : #fff;
+            font-size    : 25px;
+            background   : #1890ff;
+            padding      : 10px;
+            border-radius: 100%;
+        }
+    }
 }

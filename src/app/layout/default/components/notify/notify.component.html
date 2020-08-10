@@ -73,3 +73,22 @@
     </button>
   </div>
 </ng-template>
+
+<ng-template let-data="data" #notify>
+  <div class="notify-left">
+    <nz-badge nzDot [nzOffset]="[-5, 5]"><i nz-icon nzType="bell" nzTheme="outline"></i></nz-badge>
+  </div>
+
+  <div class="notify-right">
+    <div class="item-time">
+      <span class="item-time-user">{{ data.notification.data.properties.senderFullName || ('System notification' | translate) }}</span>
+      <span style="font-size: 12px; color: #00000045;">{{ data.notification.creationTime | date: 'HH:mm,MMM dd yyyy':'':'en-US' }}</span>
+    </div>
+    <div>{{ data.notification.data.message }}</div>
+    <div style="text-align: right;">
+      <button nz-button nzSize="small" *ngIf="data.state === 0" (click)="setNotificationAsRead(data); notification.remove()">
+        {{ 'Set as read' | translate }}
+      </button>
+    </div>
+  </div>
+</ng-template>
