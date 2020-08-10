@@ -3,7 +3,7 @@ import { CoConfigManager } from '@co/core';
 
 declare var window;
 
-export function setupVersion(planet: any) {
+export function setupVersion(platformInfo: any) {
   const environment = CoConfigManager.getValue('environment');
 
   if (environment === 'prod') return;
@@ -22,12 +22,11 @@ export function setupVersion(planet: any) {
     };
 
     //获取后台配置
-    const backendPlatformStr = localStorage.getItem('co.session');
-    if (!backendPlatformStr) {
+    if (!platformInfo) {
       return;
     }
 
-    const backPlatformInfo = JSON.parse(backendPlatformStr)?.session?.platform;
+    const backPlatformInfo = platformInfo;
     versionInfo.backendPlugins.push({
       name: _.padEnd('CO.Platform', 20),
       version: _.padEnd(backPlatformInfo.version, 20),
