@@ -65,9 +65,11 @@ export class StartupService {
           (appData) => {
             // 缓存会话数据
             this.sessionService.set(appData);
-            this.authService.startRefreshTokenTimer();
-            const im = CoConfigManager.getValue('im');
-            im.ImEnable && this.getUserSigService.imLogin();
+
+            try {
+              const im = CoConfigManager.getValue('im');
+              im.ImEnable && this.getUserSigService.imLogin();
+            } catch {}
 
             //设置权限数据
             this.setupAclData(appData);
@@ -80,6 +82,15 @@ export class StartupService {
             }
 
             const ms = this.arrayService.treeToArr(menus, { clearChildren: false });
+            const favorites = [];
+            favorites.push({
+              key: 'home',
+              text: '首页',
+              il8N: 'app.home',
+              link: '/dashboard',
+              icon: 'icon-logo',
+            });
+            favorites.push(...ms.filter((m) => !!m.link));
             this.menuService.add([
               {
                 key: 'menus',
@@ -87,7 +98,7 @@ export class StartupService {
               },
               {
                 key: 'favorites',
-                children: ms.filter((m) => !!m.link),
+                children: favorites,
               },
             ]);
           },
