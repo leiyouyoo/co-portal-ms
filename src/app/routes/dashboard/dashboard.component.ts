@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { PlatformNotificationService } from '@co/cds';
 
 /**
  * 仪表盘
@@ -10,6 +11,23 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
-  constructor() {}
+  constructor(public platformNotificationService: PlatformNotificationService) {}
   ngOnInit() {}
+
+  sendMessage() {
+    this.platformNotificationService
+      .sendMessage({
+        targetUsers: [
+          {
+            tenantId: 1,
+            userId: 1585,
+          },
+        ],
+        message: 'zzzz',
+        severity: 0,
+      })
+      .subscribe((res) => {
+        debugger;
+      });
+  }
 }

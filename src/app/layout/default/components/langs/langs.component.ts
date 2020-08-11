@@ -35,7 +35,6 @@ export class DefaultLayoutLangsComponent {
    * @param lang
    */
   onChangeLang(lang) {
-    debugger;
     if (lang == this.currentLang) return;
     this.i18n.use(lang);
     this.setting.setLayout('lang', lang);

@@ -3,13 +3,10 @@ import { NavigationEnd, Router } from '@angular/router';
 
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { VERSION as VERSION_ZORRO } from 'ng-zorro-antd/version';
-
 import { filter } from 'rxjs/operators';
-import { CoConfigManager } from '@co/core';
 
+import { CoConfigManager, CO_SESSIONSERVICE_TOKEN, ISessionService } from '@co/core';
 import { TitleService } from '@co/common';
-import { Planet, ReuseTabService } from '@co/cms';
-import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 
 import { setupVersion } from './app.version';
 import { GetUserSigService } from '../app/shared/im';
@@ -27,11 +24,11 @@ export class AppComponent implements OnInit {
   constructor(
     el: ElementRef,
     renderer: Renderer2,
-    private planet: Planet,
     private router: Router,
     private titleSrv: TitleService,
     private modalSrv: NzModalService,
     private getUserSigService: GetUserSigService,
+    @Inject(CO_SESSIONSERVICE_TOKEN) private sessionService: ISessionService,
   ) {
     renderer.setAttribute(el.nativeElement, 'ng-zorro-version', VERSION_ZORRO.full);
   }
@@ -49,6 +46,6 @@ export class AppComponent implements OnInit {
       console.error(e);
     }
 
-    setupVersion(this.planet);
+    setupVersion(this.sessionService?.platform);
   }
 }

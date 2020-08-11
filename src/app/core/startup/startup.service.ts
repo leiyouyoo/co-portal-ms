@@ -5,8 +5,8 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { TranslateService } from '@ngx-translate/core';
 import { NzIconService } from 'ng-zorro-antd/icon';
 
-import { CO_I18N_TOKEN, CoConfigManager, ArrayService } from '@co/core';
-import { MenuService } from '@co/common';
+import { CO_I18N_TOKEN, CoConfigManager, ArrayService, CO_SESSIONSERVICE_TOKEN, ISessionService } from '@co/core';
+import { MenuService, CoSessionService } from '@co/common';
 import { ACLService, ACLType } from '@co/acl';
 
 import { ICONS } from '../../../style-icons';
@@ -28,6 +28,7 @@ export class StartupService {
     private httpClient: HttpClient,
     private arrayService: ArrayService,
     private menuService: MenuService,
+    @Inject(CO_SESSIONSERVICE_TOKEN) private sessionService: ISessionService,
     private getUserSigService: GetUserSigService,
   ) {
     iconSrv.addIcon(...ICONS_AUTO, ...ICONS);
@@ -60,12 +61,10 @@ export class StartupService {
         .subscribe(
           (appData) => {
             // 缓存会话数据
-            const res: any = appData;
-            if (res) {
-              window.localStorage.setItem('co.session', JSON.stringify(res));
-              const im = CoConfigManager.getValue('im');
-              im.ImEnable && this.getUserSigService.imLogin();
-            }
+            this.sessionService.set(appData);
+
+            const im = CoConfigManager.getValue('im');
+            im.ImEnable && this.getUserSigService.imLogin();
 
             //设置权限数据
             this.setupAclData(appData);

@@ -15,19 +15,22 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
-import { ScrollService, _HttpClient, SettingsService } from '@co/common';
-import { updateHostClass, CoConfigManager } from '@co/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
+import { updateHostClass, CoConfigManager, CO_SESSIONSERVICE_TOKEN, ISessionService } from '@co/core';
+
+import { ScrollService, _HttpClient, SettingsService } from '@co/common';
 import { Planet, SwitchModes, ReuseTabService } from '@co/cms';
 import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 
 import { DefaultLayoutService } from './default.service';
 import { I18NService } from 'src/app/core/i18n/i18n.service';
-import { PlatformSettingService } from '@co/cds';
+import { PlatformSettingService, PlatformNotificationService } from '@co/cds';
 import { logOut } from '@im';
+import { NzNotificationService } from 'ng-zorro-antd';
+import { TranslateService } from '@ngx-translate/core';
 
 declare const window: any;
 
@@ -89,12 +92,13 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     public httpClient: _HttpClient,
     public i18n: I18NService,
     public settingsService: SettingsService,
+    @Inject(CO_SESSIONSERVICE_TOKEN) private sessionService: ISessionService,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
     @Inject(DOCUMENT) private doc: any,
     private planet: Planet,
     private reuseTabService: ReuseTabService,
   ) {
-    if (window.localStorage.getItem('_token') != null) {
+    if (sessionService.user != null) {
       // 设置微服务选项
       this.planet.setOptions({
         switchMode: SwitchModes.coexist,
@@ -174,7 +178,8 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       this.setClass();
     });
 
-    this.user = JSON.parse(window.localStorage.getItem('co.session'));
+    // this.user = JSON.parse(window.localStorage.getItem('co.session'));
+    this.user = this.sessionService.user;
     this.getUserHead();
   }
 
@@ -189,14 +194,6 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       `co-portal__dark`,
       `co-portal__light`,
     );
-  }
-
-  onChangeLang(lang) {
-    this.settingSrv.setCurrentUserSetting({ name: 'Platform.LanguageSettingNames.CurrentLanguage', value: lang }).subscribe(() => {
-      window.localStorage.setItem('language', lang);
-      window.location.reload();
-      // this.globalEventDispatcher.dispatch('change-lang', lang);
-    });
   }
 
   onLogout() {
