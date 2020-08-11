@@ -48,7 +48,6 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
       .build();
 
     connection.on('getNotification', (data) => {
-      debugger;
       this.notification
         .blank(this.transalte.instant('Notification'), data.notification.data.message, {
           nzClass: 'notify',

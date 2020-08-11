@@ -1,6 +1,6 @@
 <ul class="portal-menu__wrap" #mainMenu>
   <!--主菜单-->
-  <li class="portal-menu__item  portal-menu__item-main">
+  <li *ngIf="!hideMainMenu" class="portal-menu__item  portal-menu__item-main">
     <a co-submenu #submenu [nzContent]="submenuTemplate" [coPopoverOrigin]="mainMenu" coPopoverTrigger="hover"
       coPopoverPlacement="rightTop" (coCatecoryActived)="onCatecoryActived($event)" class="portal-menu__item-inner">
       <i nz-icon nzType="menu" class="portal-menu__item-icon"></i>

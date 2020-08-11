@@ -9,6 +9,7 @@
   window.CO_PLATFORM = {
     name: 'co.portal',
     environment: 'dev',
+    debug: true,
     serverUrl: apiUrlPrefix,
     signalRUrl: serverUrlPrefix + ':' + signalRPort,
     storeUrl: apiUrlPrefix,
