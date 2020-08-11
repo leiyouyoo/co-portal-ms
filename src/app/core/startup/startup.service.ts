@@ -63,8 +63,10 @@ export class StartupService {
             // 缓存会话数据
             this.sessionService.set(appData);
 
-            const im = CoConfigManager.getValue('im');
-            im.ImEnable && this.getUserSigService.imLogin();
+            try {
+              const im = CoConfigManager.getValue('im');
+              im.ImEnable && this.getUserSigService.imLogin();
+            } catch {}
 
             //设置权限数据
             this.setupAclData(appData);

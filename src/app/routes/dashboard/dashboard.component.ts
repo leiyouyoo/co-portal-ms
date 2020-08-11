@@ -26,8 +26,6 @@ export class DashboardComponent implements OnInit {
         message: 'zzzz',
         severity: 0,
       })
-      .subscribe((res) => {
-        debugger;
-      });
+      .subscribe((res) => {});
   }
 }

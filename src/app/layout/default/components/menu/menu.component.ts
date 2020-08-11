@@ -40,7 +40,6 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
 
     this.currentMenu = this.getMenu('/dashboard');
     this.router.events.pipe(filter((evt: any) => evt instanceof NavigationEnd)).subscribe((evt: any) => {
-      debugger;
       this.currentMenu = this.getMenu(this.router.url);
       this.cdr.markForCheck();
     });
