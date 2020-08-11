@@ -18,6 +18,8 @@ import { DefaultLayoutService } from '../../default.service';
 export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
   unsubscribe$ = new Subject<void>();
   activedCategory: string;
+  hideMainMenu: boolean = true;
+
   allMenus: Menu[];
   currentMenu: Menu;
   childMenus: Menu[] = [];
@@ -36,7 +38,9 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
       this.genMenus(res);
     });
 
+    this.currentMenu = this.getMenu('/dashboard');
     this.router.events.pipe(filter((evt: any) => evt instanceof NavigationEnd)).subscribe((evt: any) => {
+      debugger;
       this.currentMenu = this.getMenu(this.router.url);
       this.cdr.markForCheck();
     });

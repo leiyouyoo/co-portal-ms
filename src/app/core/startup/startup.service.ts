@@ -77,6 +77,15 @@ export class StartupService {
             }
 
             const ms = this.arrayService.treeToArr(menus, { clearChildren: false });
+            const favorites = [];
+            favorites.push({
+              key: 'home',
+              text: '首页',
+              il8N: 'app.home',
+              link: '/dashboard',
+              icon: 'icon-logo',
+            });
+            favorites.push(...ms.filter((m) => !!m.link));
             this.menuService.add([
               {
                 key: 'menus',
@@ -84,7 +93,7 @@ export class StartupService {
               },
               {
                 key: 'favorites',
-                children: ms.filter((m) => !!m.link),
+                children: favorites,
               },
             ]);
           },
