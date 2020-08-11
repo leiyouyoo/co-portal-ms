@@ -2,6 +2,9 @@
   <div class="login-head">
     <!-- <div [ngClass]="'active'">Login</div>
     <div>Register</div> -->
+
+    <span (click)="onLangClick()"><i nz-icon nzType="global" nzTheme="outline"></i>{{ 'menu.lang' | translate }}</span>
+
     <div class="login-btn" (click)="tip()">
       {{ 'SIGN UP' | translate }}
     </div>
@@ -17,7 +20,6 @@
           <!-- <span (click)="visitor()"
             ><i class="iconfont icon-Visitors" [title]="'Visitor Mode' | translate"></i>{{ 'Guest mode' | translate }}</span
           > -->
-          <span (click)="onLangClick()"><i class="iconfont icon-ENPC" [title]="'Language'"></i>{{ 'menu.lang' | translate }}</span>
         </div>
       </div>
       <div class="ipt-box">
@@ -86,7 +88,19 @@
     <button nz-button class="login-form-button mar-top-15 w100" [nzType]="'primary'" nzBlock [nzLoading]="loading" (click)="login()">
       {{ 'LOGIN' | translate }}
     </button>
-    <!-- <p *ngIf="errorTip != ''" style="color:red">{{ errorTip }}</p> -->
-    <!-- <div class="warn-box">{{ 'Or connect with socials' | translate }}</div> -->
+
+    <div class="warn-box">{{ 'Or connect with socials' | translate }}</div>
+
+    <div class="form-moreLogin">
+      <span (click)="loginService.faceBookLogin()">
+        <i><img src="/assets/images/icon_facebook.png" alt="" /></i>
+      </span>
+      <span style="margin: 0px 10px;" (click)="loginService.wechatLogin()">
+        <i><img src="/assets/images/icon_weixin.png" alt="" /></i>
+      </span>
+      <span (click)="loginService.workWechatLogin()">
+        <i><img src="/assets/images/qiyeweixin.png" alt="" /></i>
+      </span>
+    </div>
   </form>
 </div>

@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NzIconService } from 'ng-zorro-antd/icon';
 
 import { CO_I18N_TOKEN, CoConfigManager, ArrayService, CO_SESSIONSERVICE_TOKEN, ISessionService } from '@co/core';
-import { MenuService, CoSessionService } from '@co/common';
+import { MenuService, CoSessionService, CoAuthService } from '@co/common';
 import { ACLService, ACLType } from '@co/acl';
 
 import { ICONS } from '../../../style-icons';
@@ -21,9 +21,11 @@ import { GetUserSigService } from '@im';
 @Injectable({ providedIn: 'root' })
 export class StartupService {
   constructor(
+    private authService: CoAuthService, // for refresh token
     private iconSrv: NzIconService,
     private translate: TranslateService,
     private aclService: ACLService,
+    private loginService: CoAuthService,
     @Inject(CO_I18N_TOKEN) private i18n: I18NService,
     private httpClient: HttpClient,
     private arrayService: ArrayService,
@@ -35,6 +37,7 @@ export class StartupService {
     this.iconSrv.fetchFromIconfont({
       scriptUrl: CoConfigManager.getValue('iconSrv'),
     });
+    this.loginService.fbLibrary();
   }
 
   load(): Promise<any> {
@@ -62,7 +65,7 @@ export class StartupService {
           (appData) => {
             // 缓存会话数据
             this.sessionService.set(appData);
-
+            this.authService.startRefreshTokenTimer();
             const im = CoConfigManager.getValue('im');
             im.ImEnable && this.getUserSigService.imLogin();
 
