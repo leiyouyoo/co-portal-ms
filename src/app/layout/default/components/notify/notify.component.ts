@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Injector } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Injector, ViewChild, TemplateRef } from '@angular/core';
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { PlatformNotificationService } from '@co/cds';
 import { differenceInWeeks } from 'date-fns';
@@ -19,15 +19,17 @@ import { TranslateService } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
+  @ViewChild('notify', { static: false }) template?: TemplateRef<{}>;
   visible = false;
   public count: number;
   skipCount = 0;
   maxResultCount = 10;
   unreadCount: number;
   ds: any;
+  data: any;
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    private notification: NzNotificationService,
+    public notification: NzNotificationService,
     private transalte: TranslateService,
     private platformNotificationService: PlatformNotificationService,
     injector: Injector,
@@ -49,9 +51,10 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
 
     connection.on('getNotification', (data) => {
       this.notification
-        .blank(this.transalte.instant('Notification'), data.notification.data.message, {
+        .template(this.template!, {
           nzClass: 'notify',
           nzDuration: 3500,
+          nzData: data,
         })
         .onClick.subscribe(() => {});
       this.unreadCount++;

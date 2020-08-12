@@ -220,4 +220,16 @@ export class loginMainComponent implements OnInit {
       nzNoAnimation: true,
     });
   }
+
+  faceBookLogin() {
+    this.loginService.faceBookLogin();
+  }
+
+  wechatLoginClick() {
+    this.loginService.wechatLogin();
+  }
+
+  WorkWechatLoginClick() {
+    this.loginService.workWechatLogin();
+  }
 }
