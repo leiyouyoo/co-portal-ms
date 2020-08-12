@@ -13,6 +13,8 @@ import { ICONS } from '../../../style-icons';
 import { ICONS_AUTO } from '../../../style-icons-auto';
 import { I18NService } from '../i18n/i18n.service';
 import { GetUserSigService } from '@im';
+import { DA_SERVICE_TOKEN, ITokenService } from '@co/auth';
+import { Planet, ReuseTabService } from '@co/cms';
 
 /**
  * 用于应用启动时
@@ -21,7 +23,6 @@ import { GetUserSigService } from '@im';
 @Injectable({ providedIn: 'root' })
 export class StartupService {
   constructor(
-    private authService: CoAuthService, // for refresh token
     private iconSrv: NzIconService,
     private translate: TranslateService,
     private aclService: ACLService,
@@ -56,7 +57,6 @@ export class StartupService {
           // 接收其他拦截器后产生的异常消息
           catchError((res) => {
             window.localStorage.removeItem('_token');
-            console.warn(`StartupService.load: Network request failed`, res);
             resolve(null);
             return [];
           }),
