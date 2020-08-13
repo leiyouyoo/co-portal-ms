@@ -8,74 +8,74 @@
 @import './styles/theme';
 
 .modal-content-transparent {
-    .ant-modal-content {
-        background   : rgba(0, 0, 0, 0.5);
-        border-radius: 12px;
-    }
+  .ant-modal-content {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+  }
 }
 
 cdk-virtual-scroll-viewport .cdk-virtual-scroll-content-wrapper {
-    width: 100%;
+  width: 100%;
 }
 
 .notifications {
-    height: 450px;
+  height: 450px;
 
-    nz-list {
-        nz-list-item {
-            padding: 0 8px;
-        }
-
-        nz-list-item:hover {
-            background: #f2f2f2;
-        }
-
-        nz-list-item-meta {
-            width   : 100%;
-            overflow: hidden;
-
-            nz-list-item-meta-avatar {
-                align-self: center;
-            }
-        }
-
-        nz-list-item-meta-title {
-            h4 {
-                span {
-                    flex         : 1;
-                    white-space  : nowrap;
-                    overflow     : hidden;
-                    text-overflow: ellipsis;
-                }
-
-                display      : flex;
-                white-space  : nowrap;
-                overflow     : hidden;
-                text-overflow: ellipsis;
-                align-items  : center;
-            }
-        }
-
-        .ant-list-item-meta-content {
-            overflow: hidden;
-        }
+  nz-list {
+    nz-list-item {
+      padding: 0 8px;
     }
 
-    .item-time {
-        color          : #00000045;
-        display        : flex;
-        justify-content: space-between;
+    nz-list-item:hover {
+      background: #f2f2f2;
+    }
 
-        .item-time-user {
-            color: #00000065;
+    nz-list-item-meta {
+      width: 100%;
+      overflow: hidden;
+
+      nz-list-item-meta-avatar {
+        align-self: center;
+      }
+    }
+
+    nz-list-item-meta-title {
+      h4 {
+        span {
+          flex: 1;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
+
+        display : flex;
+        align-items : center;
+        overflow : hidden;
+        white-space : nowrap;
+        text-overflow: ellipsis;
+      }
     }
 
-    .userHeader i {
-        color        : #fff;
-        font-size    : 25px;
-        background   : #1890ff;
-        padding      : 10px;
-        border-radius: 100%;
+    .ant-list-item-meta-content {
+      overflow: hidden;
     }
+  }
+
+  .item-time {
+    display: flex;
+    justify-content: space-between;
+    color: #00000045;
+
+    .item-time-user {
+      color: #00000065;
+    }
+  }
+
+  .userHeader i {
+    padding: 10px;
+    color: #fff;
+    font-size: 25px;
+    background: #1890ff;
+    border-radius: 100%;
+  }
 }
