@@ -6,13 +6,15 @@ import { TranslateService } from '@ngx-translate/core';
 import { NzIconService } from 'ng-zorro-antd/icon';
 
 import { CO_I18N_TOKEN, CoConfigManager, ArrayService, CO_SESSIONSERVICE_TOKEN, ISessionService } from '@co/core';
-import { MenuService, CoSessionService } from '@co/common';
+import { MenuService, CoSessionService, CoAuthService } from '@co/common';
 import { ACLService, ACLType } from '@co/acl';
 
 import { ICONS } from '../../../style-icons';
 import { ICONS_AUTO } from '../../../style-icons-auto';
 import { I18NService } from '../i18n/i18n.service';
 import { GetUserSigService } from '@im';
+import { DA_SERVICE_TOKEN, ITokenService } from '@co/auth';
+import { Planet, ReuseTabService } from '@co/cms';
 
 /**
  * 用于应用启动时
@@ -24,6 +26,7 @@ export class StartupService {
     private iconSrv: NzIconService,
     private translate: TranslateService,
     private aclService: ACLService,
+    private loginService: CoAuthService,
     @Inject(CO_I18N_TOKEN) private i18n: I18NService,
     private httpClient: HttpClient,
     private arrayService: ArrayService,
@@ -35,6 +38,7 @@ export class StartupService {
     this.iconSrv.fetchFromIconfont({
       scriptUrl: CoConfigManager.getValue('iconSrv'),
     });
+    this.loginService.fbLibrary();
   }
 
   load(): Promise<any> {
@@ -53,7 +57,6 @@ export class StartupService {
           // 接收其他拦截器后产生的异常消息
           catchError((res) => {
             window.localStorage.removeItem('_token');
-            console.warn(`StartupService.load: Network request failed`, res);
             resolve(null);
             return [];
           }),

@@ -16,6 +16,10 @@ const coConfig: CoConfig = {
     token_send_place: 'header',
     token_send_key: 'Authorization',
     token_send_template: 'Bearer ${token}',
+    wechat_appid: 'wx4e58692b24a58d6d',
+    work_wechat_id: 'wwfa5cf6ff34bcf1d2',
+    work_agent_id: 1000048,
+    facebook_appid: '288368845636560',
   },
   common: {
     httpClient: {
