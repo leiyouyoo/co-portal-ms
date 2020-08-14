@@ -91,16 +91,18 @@ export async function login(UserID: string, UserSig: string) {
 export class GetUserSigService {
   constructor(private _HttpClient: _HttpClient) {}
   imLogin() {
-    // 监听事件，例如：
-    // 收到离线消息和会话列表同步完毕通知，接入侧可以调用 sendMessage 等需要鉴权的接口
-    // event.name - TIM.EVENT.SDK_READY
-    this._HttpClient
-      .get('/IM/IMCommonService/GetUserSig', {
-        Identifier: JSON.parse(localStorage.getItem('co.session') || 'null').session.user.id.toString(),
-      })
-      .subscribe(async (r: any) => {
-        this.onImLogin(r);
-      });
+    if (localStorage.getItem('co.session') && JSON.parse(localStorage.getItem('co.session') || 'null')?.session) {
+      // 监听事件，例如：
+      // 收到离线消息和会话列表同步完毕通知，接入侧可以调用 sendMessage 等需要鉴权的接口
+      // event.name - TIM.EVENT.SDK_READY
+      this._HttpClient
+        .get('/IM/IMCommonService/GetUserSig', {
+          Identifier: JSON.parse(localStorage.getItem('co.session') || 'null').session.user.id.toString(),
+        })
+        .subscribe(async (r: any) => {
+          this.onImLogin(r);
+        });
+    }
   }
   async onImLogin(r) {
     options.SDKAppID = r.imAppID;
@@ -122,8 +124,8 @@ export class GetUserSigService {
 /*登出 */
 export function logOut(): void {
   subject && subject.complete();
-  let promise = tim.logout();
   try {
+    let promise = tim.logout();
     promise.then((imResponse) => {
       console.log(imResponse.data);
     });

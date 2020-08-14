@@ -197,6 +197,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
+    localStorage.removeItem('co.session');
     this.tokenService.clear();
     this.reuseTabService.clear(true);
     this.planet.clear();

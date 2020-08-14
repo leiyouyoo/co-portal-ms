@@ -13,9 +13,7 @@ import { ICONS } from '../../../style-icons';
 import { ICONS_AUTO } from '../../../style-icons-auto';
 import { I18NService } from '../i18n/i18n.service';
 import { GetUserSigService } from '@im';
-import { DA_SERVICE_TOKEN, ITokenService } from '@co/auth';
-import { Planet, ReuseTabService } from '@co/cms';
-
+import { SettingsService } from '@co/common';
 /**
  * 用于应用启动时
  * 一般用来获取应用所需要的基础数据等
@@ -33,16 +31,22 @@ export class StartupService {
     private menuService: MenuService,
     @Inject(CO_SESSIONSERVICE_TOKEN) private sessionService: ISessionService,
     private getUserSigService: GetUserSigService,
+    private settingsService: SettingsService,
   ) {
     iconSrv.addIcon(...ICONS_AUTO, ...ICONS);
-    this.iconSrv.fetchFromIconfont({
-      scriptUrl: CoConfigManager.getValue('iconSrv'),
-    });
     this.loginService.fbLibrary();
+    if (CoConfigManager.getValue('iconSrv')) {
+      this.iconSrv.fetchFromIconfont({
+        scriptUrl: CoConfigManager.getValue('iconSrv'),
+      });
+    }
   }
 
   load(): Promise<any> {
     var lang = window.localStorage.getItem('language') || navigator.language;
+    this.i18n.use(lang);
+    this.settingsService.setLayout('lang', lang);
+
     const langMap = {
       'zh-CN': 'zh-Hans',
       'en-US': 'en',

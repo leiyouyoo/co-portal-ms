@@ -34,7 +34,6 @@
             "optimization": false,
             "assets": [
               "src/favicon.ico",
-              "src/platform.config.js",
               "src/assets",
               {
                 "glob": "**/*",

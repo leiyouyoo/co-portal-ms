@@ -41,6 +41,7 @@ export class AppComponent implements OnInit {
 
     try {
       const im = CoConfigManager.getValue('im');
+      console.log(im);
       im.ImEnable && this.getUserSigService.imLogin();
     } catch (e) {
       console.error(e);
