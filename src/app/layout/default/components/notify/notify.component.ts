@@ -97,6 +97,7 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
   setAsAllRead() {
     this.platformNotificationService.setAllNotificationsAsRead({}).subscribe(() => {
       this.ds = null;
+      this.changeDetectorRef.detectChanges();
       this.initData();
     });
   }

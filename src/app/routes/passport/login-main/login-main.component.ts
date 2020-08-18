@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { _HttpClient, CoAuthService } from '@co/common';
 import { StartupService } from '@core';
 
@@ -29,7 +29,6 @@ export class loginMainComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public loginService: CoAuthService,
-    private router: Router,
     private nzModalService: NzModalService,
     public httpService: _HttpClient,
     private notification: NzNotificationService,
