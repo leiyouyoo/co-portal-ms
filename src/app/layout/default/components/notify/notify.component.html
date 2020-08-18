@@ -17,7 +17,7 @@
 <ng-template #contentTemplate>
   <nz-card nzBordered="false" nzSize="small" class="ant-card__body-nopadding" style="width: 350px; margin-bottom: 0 !important;">
     <div>
-      <cdk-virtual-scroll-viewport itemSize="73" class="notifications">
+      <cdk-virtual-scroll-viewport itemSize="55" class="notifications">
         <nz-list>
           <nz-list-item *cdkVirtualFor="let item of ds">
             <nz-skeleton *ngIf="!item" [nzAvatar]="true" [nzParagraph]="{ rows: 1 }"></nz-skeleton>
