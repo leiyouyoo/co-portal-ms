@@ -88,9 +88,27 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
     this.cdr.markForCheck();
   }
 
-  private getMenu(url: string) {
-    const menus = this.menuSrv.getPathByUrl(url);
-    if (!menus || menus.length === 0) return null;
-    return menus.pop();
+  private getMenu(url: string, recursive = true): Menu | null {
+    let item: Menu | null = null;
+
+    const menus = this.menuSrv.menus;
+
+    while (!item && url) {
+      this.menuSrv.visit(menus, (i) => {
+        if (i.link != null && i.link.startsWith(url)) {
+          item = i;
+        }
+      });
+
+      if (!recursive) break;
+
+      if (/[?;]/g.test(url)) {
+        url = url.split(/[?;]/g)[0];
+      } else {
+        url = url.split('/').slice(0, -1).join('/');
+      }
+    }
+
+    return item;
   }
 }

@@ -13,7 +13,9 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link rel="stylesheet" href="/assets/icon/iconfont.css">
-
+  <script>
+    document.write("<script src='./platform.config.js?"+Math.random()+"'><\/script>");
+  </script>
   <style type="text/css">
     .preloader {
       position: fixed;
@@ -41,18 +43,7 @@
     }
 
   </style>
-  <script type="text/javascript">
-    function loadScript(path) {
-      var script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = path;
-      script.async = false;
-      document.head.appendChild(script);
-    }
 
-    loadScript("platform.config.js?hash=" + new Date().getTime());
-
-  </script>
 </head>
 
 <body theme-name="pro">
@@ -66,4 +57,5 @@
   </div>
 </body>
 
+<script src="./assets/ckeditor/ckeditor.js"></script>
 </html>

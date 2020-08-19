@@ -168,7 +168,13 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       '(max-width: 575px)',
     ]).subscribe(() => {
       this.queryCls = Object.keys(query).find((key) => mediaMatcher.matchMedia(query[key]).matches);
-      this.setClass();
+      if (this.queryCls.indexOf('screen-lg') > -1 || this.queryCls.indexOf('screen-xl') > -1) {
+        this.pro.setCollapsed(false);
+      } else {
+        this.pro.setCollapsed(true);
+      }
+      // this.setClass();
+      this.cdr.markForCheck();
     });
   }
 
@@ -197,6 +203,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
+    localStorage.removeItem('co.session');
     this.tokenService.clear();
     this.reuseTabService.clear(true);
     this.planet.clear();
