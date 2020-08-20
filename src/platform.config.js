@@ -37,6 +37,18 @@
         styles: ['styles.css'],
       },
       {
+        name: 'crm',
+        hostParent: '#app-host-container',
+        hostClass: 'crm-layout',
+        routerPathPrefix: '/crm',
+        selector: 'crm-root',
+        resourcePathPrefix: '/apps/crm/',
+        manifest: '/apps/crm/manifest.json',
+        preload: false,
+        scripts: ['main.js'],
+        styles: ['styles.css'],
+      },
+      {
         name: 'fcm',
         hostParent: '#app-host-container',
         hostClass: 'fcm-layout',
