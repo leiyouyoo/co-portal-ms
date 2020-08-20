@@ -35,12 +35,7 @@
             "assets": [
               "src/favicon.ico",
               "src/platform.config.js",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/ckeditor4/",
-                "output": "/apps/fcm/assets/js/ckeditor/"
-              }
+              "src/assets"
             ],
             "styles": [
               "src/styles.less"
@@ -602,6 +597,233 @@
             "tsConfig": [
               "apps/fcm/tsconfig.app.json",
               "apps/fcm/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "crm": {
+      "root": "apps/crm",
+      "sourceRoot": "apps/crm",
+      "projectType": "application",
+      "prefix": "crm",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "customWebpackConfig": {
+              "path": "./apps/crm/extra-webpack.config.js",
+              "mergeStrategies": {
+                "module.rules": "prepend"
+              },
+              "replaceDuplicatePlugins": true
+            },
+            "outputPath": "dist/apps/crm",
+            "index": "apps/crm/index.html",
+            "main": "apps/crm/main.ts",
+            "tsConfig": "apps/crm/tsconfig.json",
+            "assets": [
+              "apps/crm/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/ckeditor4/",
+                "output": "./assets/js/ckeditor/"
+              }
+            ],
+            "styles": [
+              "apps/crm/styles.less"
+            ],
+            "scripts": [],
+            "aot": false,
+            "extractCss": true,
+            "namedChunks": true,
+            "vendorChunk": false
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/crm/environments/environment.ts",
+                  "with": "apps/crm/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": true,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "20mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "crm:build",
+            "port": 3001,
+            "vendorChunk": false
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "crm:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "crm:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/crm/test.ts",
+            "polyfills": "apps/crm/polyfills.ts",
+            "tsConfig": "apps/crm/tsconfig.spec.json",
+            "karmaConfig": "apps/crm/karma.conf.js",
+            "styles": [
+              "apps/crm/styles.less"
+            ],
+            "scripts": [],
+            "assets": [
+              "apps/crm/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/crm/tsconfig.app.json",
+              "apps/crm/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "crm-dev": {
+      "root": "apps/crm",
+      "sourceRoot": "apps/crm",
+      "projectType": "application",
+      "prefix": "crm",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "baseHref": "/",
+            "outputPath": "dist/apps/crm",
+            "index": "apps/crm/index.html",
+            "main": "apps/crm/main-dev.ts",
+            "polyfills": "apps/crm/polyfills.ts",
+            "tsConfig": "apps/crm/tsconfig.app.json",
+            "assets": [
+              "apps/crm/assets",
+              "apps/crm/favicon.ico"
+            ],
+            "styles": [
+              "apps/crm/styles.less"
+            ],
+            "aot": false,
+            "vendorChunk": false,
+            "scripts": [
+              "node_modules/ajv/dist/ajv.bundle.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/crm/environments/environment.ts",
+                  "with": "apps/crm/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "20mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "crm-dev:build",
+            "port": 13001,
+            "vendorChunk": false
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "crm-dev:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "crm-dev:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/crm/test.ts",
+            "polyfills": "apps/crm/polyfills.ts",
+            "tsConfig": "apps/crm/tsconfig.spec.json",
+            "karmaConfig": "apps/crm/karma.conf.js",
+            "styles": [
+              "apps/crm/styles.less"
+            ],
+            "scripts": [],
+            "assets": [
+              "apps/crm/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/crm/tsconfig.app.json",
+              "apps/crm/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
