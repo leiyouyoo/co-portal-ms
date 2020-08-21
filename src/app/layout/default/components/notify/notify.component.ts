@@ -44,28 +44,31 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
     } catch (e) {
       console.error('Cannot get token for SignalR');
     }
-    const signlarUrl = CoConfigManager.getValue('signalRUrl');
-    let connection = new signalR.HubConnectionBuilder()
-      .withUrl(signlarUrl + '/signalr?enc_auth_token=' + encodeURIComponent(encryptedAuthToken), 1)
-      .build();
 
-    connection.on('getNotification', (data) => {
-      this.notification
-        .template(this.template!, {
-          nzClass: 'notify',
-          nzDuration: 3500,
-          nzData: data,
-        })
-        .onClick.subscribe(() => {});
-      this.unreadCount++;
-      this.changeDetectorRef.detectChanges();
-    });
+    if (encryptedAuthToken) {
+      const signlarUrl = CoConfigManager.getValue('signalRUrl');
+      let connection = new signalR.HubConnectionBuilder()
+        .withUrl(signlarUrl + '/signalr?enc_auth_token=' + encodeURIComponent(encryptedAuthToken), 1)
+        .build();
 
-    connection.start().then(() => {
-      connection.invoke('register').then(function () {
-        console.log('通知连接成功');
+      connection.on('getNotification', (data) => {
+        this.notification
+          .template(this.template!, {
+            nzClass: 'notify',
+            nzDuration: 3500,
+            nzData: data,
+          })
+          .onClick.subscribe(() => {});
+        this.unreadCount++;
+        this.changeDetectorRef.detectChanges();
       });
-    });
+
+      connection.start().then(() => {
+        connection.invoke('register').then(function () {
+          console.log('通知连接成功');
+        });
+      });
+    }
 
     this.initData();
   }
