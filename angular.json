@@ -607,7 +607,7 @@
           }
         }
       }
-    },
+    }
   },
   "defaultProject": "portal",
   "cli": {
