@@ -60,6 +60,18 @@
         scripts: ['main.js'],
         styles: ['styles.css'],
       },
+      {
+        name: 'frm',
+        hostParent: '#app-host-container',
+        hostClass: 'frm-layout',
+        routerPathPrefix: '/frm',
+        selector: 'frm-root',
+        resourcePathPrefix: '/apps/frm/',
+        manifest: '/apps/frm/manifest.json',
+        preload: true,
+        scripts: ['main.js'],
+        styles: ['styles.css'],
+      },
     ],
   };
 })();
