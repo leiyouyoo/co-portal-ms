@@ -20,7 +20,7 @@
     loginUrl: '/#/passport/login',
     uploadUrl: apiUrlPrefix + '/Storage/File/Upload',
     downloadUrl: apiUrlPrefix + '/Storage/File/GetDownLoadFile',
-    iconSrv: 'http://at.alicdn.com/t/font_1909561_ezgwtdkwuzi.js',
+    iconSrv: '//at.alicdn.com/t/font_1909561_v5v8ac210mc.js',
     excelDownloadUrl: apiUrlPrefix + '/Storage/Excel/DownloadExcel',
     mapbox: {},
     im: {
