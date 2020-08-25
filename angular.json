@@ -35,12 +35,7 @@
             "assets": [
               "src/favicon.ico",
               "src/platform.config.js",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/ckeditor4/",
-                "output": "/apps/fcm/assets/js/ckeditor/"
-              }
+              "src/assets"
             ],
             "styles": [
               "src/styles.less"
@@ -274,115 +269,6 @@
         }
       }
     },
-    "platform-dev": {
-      "root": "apps/platform",
-      "sourceRoot": "apps/platform",
-      "projectType": "application",
-      "prefix": "platform",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "less"
-        }
-      },
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "baseHref": "/",
-            "outputPath": "dist/apps/platform",
-            "index": "apps/platform/index.html",
-            "main": "apps/platform/main-dev.ts",
-            "polyfills": "apps/platform/polyfills.ts",
-            "tsConfig": "tsconfig.platform.json",
-            "assets": [
-              "apps/platform/assets",
-              "apps/platform/favicon.ico"
-            ],
-            "styles": [
-              "apps/platform/styles.less"
-            ],
-            "aot": false,
-            "vendorChunk": false,
-            "scripts": [
-              "node_modules/ajv/dist/ajv.bundle.js"
-            ]
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/platform/environments/environment.ts",
-                  "with": "apps/platform/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "5mb",
-                  "maximumError": "20mb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "platform-dev:build",
-            "port": 13001,
-            "vendorChunk": false
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "platform-dev:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "platform-dev:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "apps/platform/test.ts",
-            "polyfills": "apps/platform/polyfills.ts",
-            "tsConfig": "apps/platform/tsconfig.spec.json",
-            "karmaConfig": "apps/platform/karma.conf.js",
-            "styles": [
-              "apps/platform/styles.less"
-            ],
-            "scripts": [],
-            "assets": [
-              "apps/platform/assets"
-            ]
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.platform.json",
-              "apps/platform/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "fcm": {
       "root": "apps/fcm",
       "sourceRoot": "apps/fcm",
@@ -409,12 +295,7 @@
             "main": "apps/fcm/main.ts",
             "tsConfig": "apps/fcm/tsconfig.json",
             "assets": [
-              "apps/fcm/assets",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/ckeditor4/",
-                "output": "./assets/js/ckeditor/"
-              }
+              "apps/fcm/assets"
             ],
             "styles": [
               "apps/fcm/styles.less"
@@ -501,11 +382,11 @@
         }
       }
     },
-    "fcm-dev": {
-      "root": "apps/fcm",
-      "sourceRoot": "apps/fcm",
+    "crm": {
+      "root": "apps/crm",
+      "sourceRoot": "apps/crm",
       "projectType": "application",
-      "prefix": "fcm",
+      "prefix": "crm",
       "schematics": {
         "@schematics/angular:component": {
           "style": "less"
@@ -513,40 +394,44 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "baseHref": "/",
-            "outputPath": "dist/apps/fcm",
-            "index": "apps/fcm/index.html",
-            "main": "apps/fcm/main-dev.ts",
-            "polyfills": "apps/fcm/polyfills.ts",
-            "tsConfig": "apps/fcm/tsconfig.app.json",
+            "customWebpackConfig": {
+              "path": "./apps/crm/extra-webpack.config.js",
+              "mergeStrategies": {
+                "module.rules": "prepend"
+              },
+              "replaceDuplicatePlugins": true
+            },
+            "outputPath": "dist/apps/crm",
+            "index": "apps/crm/index.html",
+            "main": "apps/crm/main.ts",
+            "tsConfig": "apps/crm/tsconfig.json",
             "assets": [
-              "apps/fcm/assets",
-              "apps/fcm/favicon.ico"
+              "apps/crm/assets"
             ],
             "styles": [
-              "apps/fcm/styles.less"
+              "apps/crm/styles.less"
             ],
+            "scripts": [],
             "aot": false,
-            "vendorChunk": false,
-            "scripts": [
-              "node_modules/ajv/dist/ajv.bundle.js"
-            ]
+            "extractCss": true,
+            "namedChunks": true,
+            "vendorChunk": false
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/fcm/environments/environment.ts",
-                  "with": "apps/fcm/environments/environment.prod.ts"
+                  "replace": "apps/crm/environments/environment.ts",
+                  "with": "apps/crm/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
-              "namedChunks": false,
+              "namedChunks": true,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -562,37 +447,37 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "fcm-dev:build",
-            "port": 13001,
+            "browserTarget": "crm:build",
+            "port": 3001,
             "vendorChunk": false
           },
           "configurations": {
             "production": {
-              "browserTarget": "fcm-dev:build:production"
+              "browserTarget": "crm:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "fcm-dev:build"
+            "browserTarget": "crm:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "apps/fcm/test.ts",
-            "polyfills": "apps/fcm/polyfills.ts",
-            "tsConfig": "apps/fcm/tsconfig.spec.json",
-            "karmaConfig": "apps/fcm/karma.conf.js",
+            "main": "apps/crm/test.ts",
+            "polyfills": "apps/crm/polyfills.ts",
+            "tsConfig": "apps/crm/tsconfig.spec.json",
+            "karmaConfig": "apps/crm/karma.conf.js",
             "styles": [
-              "apps/fcm/styles.less"
+              "apps/crm/styles.less"
             ],
             "scripts": [],
             "assets": [
-              "apps/fcm/assets"
+              "apps/crm/assets"
             ]
           }
         },
@@ -600,8 +485,121 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "apps/fcm/tsconfig.app.json",
-              "apps/fcm/tsconfig.spec.json"
+              "apps/crm/tsconfig.app.json",
+              "apps/crm/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "frm": {
+      "root": "apps/frm",
+      "sourceRoot": "apps/frm",
+      "projectType": "application",
+      "prefix": "frm",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "customWebpackConfig": {
+              "path": "./apps/frm/extra-webpack.config.js",
+              "mergeStrategies": {
+                "module.rules": "prepend"
+              },
+              "replaceDuplicatePlugins": true
+            },
+            "outputPath": "dist/apps/frm",
+            "index": "apps/frm/index.html",
+            "main": "apps/frm/main.ts",
+            "tsConfig": "apps/frm/tsconfig.json",
+            "assets": [
+              "apps/frm/assets"
+            ],
+            "styles": [
+              "apps/frm/styles.less"
+            ],
+            "scripts": [],
+            "aot": false,
+            "extractCss": true,
+            "namedChunks": true,
+            "vendorChunk": false
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/frm/environments/environment.ts",
+                  "with": "apps/frm/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": true,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "20mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "frm:build",
+            "port": 3004,
+            "vendorChunk": false
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "frm:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "frm:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/frm/test.ts",
+            "polyfills": "apps/frm/polyfills.ts",
+            "tsConfig": "apps/frm/tsconfig.spec.json",
+            "karmaConfig": "apps/frm/karma.conf.js",
+            "styles": [
+              "apps/frm/styles.less"
+            ],
+            "scripts": [],
+            "assets": [
+              "apps/frm/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/frm/tsconfig.app.json",
+              "apps/frm/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

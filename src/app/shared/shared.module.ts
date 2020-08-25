@@ -25,7 +25,7 @@ const THIRDMODULES = [CountdownModule, DragDropModule];
 // #region your componets & directives
 import { DEFAULT_SHARED_COMPONENTS } from '../layout/default';
 import { environment } from '@env/environment';
-import { CoSTWidgetRegistry, PortOfficePickerComponent, SalespersonPickerComponent, CarrierPickerComponent } from '@co/cbc';
+import { CoSTWidgetRegistry } from '@co/cbc';
 environment.SERVER_URL = CoConfigManager.getValue('serverUrl');
 
 const COMPONENTS_ENTRY = [];
