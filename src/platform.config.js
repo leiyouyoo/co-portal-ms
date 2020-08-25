@@ -21,7 +21,7 @@
     mapbox: {},
     im: {
       ImImageUrl: apiUrlPrefix,
-      ImEnable: true,
+      ImEnable: false,
     },
     apps: [
       {
