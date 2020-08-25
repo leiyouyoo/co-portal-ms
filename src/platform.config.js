@@ -1,8 +1,12 @@
 (function () {
+  // var protocol = 'http';
+  // var serverHost = 'dev-api.cityocean.com';
+  // var apiPort = '20001';
+  // var signalRPort = '20002';
   var protocol = 'http';
-  var serverHost = 'dev-api.cityocean.com';
-  var apiPort = '20001';
-  var signalRPort = '20002';
+  var serverHost = '192.168.1.5';
+  var apiPort = '8000';
+  var signalRPort = '8002';
   var serverUrlPrefix = protocol + '://' + serverHost;
   var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
 
@@ -36,18 +40,18 @@
         scripts: ['main.js'],
         styles: ['styles.css'],
       },
-      {
-        name: 'fcm',
-        hostParent: '#app-host-container',
-        hostClass: 'fcm-layout',
-        routerPathPrefix: '/fcm',
-        selector: 'fcm-root',
-        resourcePathPrefix: '/apps/fcm/',
-        manifest: '/apps/fcm/manifest.json',
-        preload: true,
-        scripts: ['main.js'],
-        styles: ['styles.css'],
-      },
+      // {
+      //   name: 'fcm',
+      //   hostParent: '#app-host-container',
+      //   hostClass: 'fcm-layout',
+      //   routerPathPrefix: '/fcm',
+      //   selector: 'fcm-root',
+      //   resourcePathPrefix: '/apps/fcm/',
+      //   manifest: '/apps/fcm/manifest.json',
+      //   preload: true,
+      //   scripts: ['main.js'],
+      //   styles: ['styles.css'],
+      // },
     ],
   };
 })();
