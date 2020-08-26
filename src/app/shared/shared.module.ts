@@ -25,12 +25,12 @@ const THIRDMODULES = [CountdownModule, DragDropModule];
 // #region your componets & directives
 import { DEFAULT_SHARED_COMPONENTS } from '../layout/default';
 import { environment } from '@env/environment';
-import { CoSTWidgetRegistry } from '@co/cbc';
+import { CoSTWidgetRegistry, SearchByExtraKeyDirective } from '@co/cbc';
 environment.SERVER_URL = CoConfigManager.getValue('serverUrl');
 
 const COMPONENTS_ENTRY = [];
 const COMPONENTS = [...COMPONENTS_ENTRY, ...DEFAULT_SHARED_COMPONENTS];
-const DIRECTIVES = [];
+const DIRECTIVES = [SearchByExtraKeyDirective];
 // #endregion
 
 @NgModule({
