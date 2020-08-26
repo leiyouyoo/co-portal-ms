@@ -68,9 +68,9 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
           console.log('通知连接成功');
         });
       });
-    }
 
-    this.initData();
+      this.initData();
+    }
   }
 
   initData() {
