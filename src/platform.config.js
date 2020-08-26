@@ -1,8 +1,12 @@
 (function () {
+  // var protocol = 'http';
+  // var serverHost = 'dev-api.cityocean.com';
+  // var apiPort = '20001';
+  // var signalRPort = '20002';
   var protocol = 'http';
-  var serverHost = 'dev-api.cityocean.com';
-  var apiPort = '20001';
-  var signalRPort = '20002';
+  var serverHost = '192.168.1.5';
+  var apiPort = '8000';
+  var signalRPort = '8002';
   var serverUrlPrefix = protocol + '://' + serverHost;
   var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
 
@@ -16,7 +20,7 @@
     loginUrl: '/#/passport/login',
     uploadUrl: apiUrlPrefix + '/Storage/File/Upload',
     downloadUrl: apiUrlPrefix + '/Storage/File/GetDownLoadFile',
-    iconSrv: 'http://at.alicdn.com/t/font_1909561_ezgwtdkwuzi.js',
+    iconSrv: '//at.alicdn.com/t/font_1909561_v5v8ac210mc.js',
     excelDownloadUrl: apiUrlPrefix + '/Storage/Excel/DownloadExcel',
     mapbox: {},
     im: {
