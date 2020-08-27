@@ -9,7 +9,7 @@
   },
   "homepage": "https://icp.cityocean.com",
   "scripts": {
-    "start:all": "concurrently \"npm run serve:portal\" \"npm run serve:platform\" \"npm run serve:fcm\" \"npm run serve:frm\"  \"npm run serve:crm\"",
+    "start": "concurrently \"npm run serve:portal\" \"npm run serve:platform\" \"npm run serve:fcm\" \"npm run serve:frm\"  \"npm run serve:crm\"",
     "start:ms": "concurrently \"npm run serve:portal\" \"npm run serve:platform\"",
     "start:fcm": "concurrently \"npm run serve:portal\" \"npm run serve:fcm\"",
     "start:frm": "concurrently \"npm run serve:portal\" \"npm run serve:frm\"",
