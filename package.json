@@ -62,20 +62,6 @@
     "@angular/router": "~9.1.11",
     "@antv/data-set": "^0.11.4",
     "@aspnet/signalr": "^1.1.4",
-<<<<<<< HEAD
-    "@co/acl": "^0.2.9",
-    "@co/auth": "^0.2.9",
-    "@co/cache": "^0.2.9",
-    "@co/cbc": "^0.2.9",
-    "@co/cds": "^0.2.9",
-    "@co/chart": "^0.2.9",
-    "@co/cms": "^0.2.9",
-    "@co/common": "^0.2.9",
-    "@co/core": "^0.2.9",
-    "@co/form": "^0.2.9",
-    "@co/mock": "^0.2.9",
-    "@co/theme": "^0.2.9",
-=======
     "@co/acl": "^0.2.16",
     "@co/auth": "^0.2.16",
     "@co/cache": "^0.2.16",
@@ -88,7 +74,6 @@
     "@co/form": "^0.2.16",
     "@co/mock": "^0.2.16",
     "@co/theme": "^0.2.16",
->>>>>>> 0438876190dcf42890218006649b06d65d665d9c
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^4.0.0",
     "ajv": "^6.12.3",

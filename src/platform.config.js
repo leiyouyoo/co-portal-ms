@@ -4,19 +4,9 @@
   // var apiPort = '20001';
   // var signalRPort = '20002';
   var protocol = 'http';
-<<<<<<< HEAD
-  // var serverHost = 'dev-api.cityocean.com';
-  // var apiPort = '20001';
-  // var signalRPort = '20002';
- 
-  var serverHost = 'test-api.cityocean.com';
-  var apiPort = '20006';
-  var signalRPort = '20002';
-=======
   var serverHost = '192.168.1.6';
   var apiPort = '8000';
   var signalRPort = '8002';
->>>>>>> 0438876190dcf42890218006649b06d65d665d9c
   var serverUrlPrefix = protocol + '://' + serverHost;
   var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
 
