@@ -18,7 +18,7 @@ import { DefaultLayoutService } from '../../default.service';
 export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
   unsubscribe$ = new Subject<void>();
   activedCategory: string;
-  hideMainMenu: boolean = true;
+  hideMainMenu: boolean = false;
 
   allMenus: Menu[];
   currentMenu: Menu;
@@ -38,7 +38,7 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
       this.genMenus(res);
     });
 
-    this.currentMenu = this.getMenu('/dashboard');
+    this.currentMenu = this.getMenu(window.location.hash.replace('#', ''));
     this.router.events.pipe(filter((evt: any) => evt instanceof NavigationEnd)).subscribe((evt: any) => {
       this.currentMenu = this.getMenu(this.router.url);
       this.cdr.markForCheck();
