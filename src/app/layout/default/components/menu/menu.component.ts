@@ -18,7 +18,7 @@ import { DefaultLayoutService } from '../../default.service';
 export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
   unsubscribe$ = new Subject<void>();
   activedCategory: string;
-  hideMainMenu: boolean = true;
+  hideMainMenu: boolean = false;
 
   allMenus: Menu[];
   currentMenu: Menu;

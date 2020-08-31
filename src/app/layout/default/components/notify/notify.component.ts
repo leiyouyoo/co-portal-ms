@@ -9,6 +9,18 @@ import * as signalR from '@aspnet/signalr';
 import { NzNotificationService } from 'ng-zorro-antd';
 import { TranslateService } from '@ngx-translate/core';
 
+declare enum BusinessType {
+  Quote = 0,
+  Booking = 1,
+  Shipment = 2,
+  Order = 3,
+  Product = 4,
+  Billing = 5,
+  Customer = 6,
+  RatesQuote = 7,
+  RatesBaseItem = 8,
+}
+
 /**
  * 菜单通知
  */
@@ -44,30 +56,33 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
     } catch (e) {
       console.error('Cannot get token for SignalR');
     }
-    const signlarUrl = CoConfigManager.getValue('signalRUrl');
-    let connection = new signalR.HubConnectionBuilder()
-      .withUrl(signlarUrl + '/signalr?enc_auth_token=' + encodeURIComponent(encryptedAuthToken), 1)
-      .build();
 
-    connection.on('getNotification', (data) => {
-      this.notification
-        .template(this.template!, {
-          nzClass: 'notify',
-          nzDuration: 3500,
-          nzData: data,
-        })
-        .onClick.subscribe(() => {});
-      this.unreadCount++;
-      this.changeDetectorRef.detectChanges();
-    });
+    if (encryptedAuthToken) {
+      const signlarUrl = CoConfigManager.getValue('signalRUrl');
+      let connection = new signalR.HubConnectionBuilder()
+        .withUrl(signlarUrl + '/signalr?enc_auth_token=' + encodeURIComponent(encryptedAuthToken), 1)
+        .build();
 
-    connection.start().then(() => {
-      connection.invoke('register').then(function () {
-        console.log('通知连接成功');
+      connection.on('getNotification', (data) => {
+        this.notification
+          .template(this.template!, {
+            nzClass: 'notify',
+            nzDuration: 3500,
+            nzData: data,
+          })
+          .onClick.subscribe(() => {});
+        this.unreadCount++;
+        this.changeDetectorRef.detectChanges();
       });
-    });
 
-    this.initData();
+      connection.start().then(() => {
+        connection.invoke('register').then(function () {
+          console.log('通知连接成功');
+        });
+      });
+
+      this.initData();
+    }
   }
 
   initData() {
@@ -116,6 +131,51 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
           item.loading = false;
         },
       );
+  }
+
+  navigate(item) {
+    this.setNotificationAsRead(item);
+    switch (item.notification.data.properties.businessType) {
+      case BusinessType.Quote:
+        this.$navigate(['/crm/quotes/quotesDetail/', item.notification.data.properties.id], {
+          queryParams: {
+            _title: `${item}`,
+          },
+        });
+        break;
+      case BusinessType.Booking:
+        this.$navigate(['/crm/bookings/bookingDetail/', item.notification.data.properties.id], {
+          queryParams: {
+            _title: `${item}`,
+          },
+        });
+        break;
+      case BusinessType.Customer:
+        this.$navigate(['/crm/customers/customerdetails/', item.notification.data.properties.id], {
+          queryParams: {
+            _title: `${item}`,
+          },
+        });
+        break;
+      case BusinessType.RatesBaseItem:
+        this.$navigate(['/crm/inquiries/', item.notification.data.properties.id], {
+          queryParams: {
+            _title: `${item}`,
+          },
+        });
+        break;
+      case BusinessType.RatesQuote:
+        this.$navigate(['/frm/enquiries/', item.notification.data.properties.id], {
+          queryParams: {
+            _title: `${item}`,
+            id: item.notification.data.properties.id,
+            type: item.notification.data.properties.RateType,
+            message: 'quote',
+          },
+        });
+        break;
+      default:
+    }
   }
 }
 
