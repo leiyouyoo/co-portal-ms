@@ -21,13 +21,18 @@
         <nz-list>
           <nz-list-item *cdkVirtualFor="let item of ds">
             <nz-skeleton *ngIf="!item" [nzAvatar]="true" [nzParagraph]="{ rows: 1 }"></nz-skeleton>
-            <nz-list-item-meta *ngIf="item" [nzAvatar]="userHeader" [nzDescription]="userName">
+            <nz-list-item-meta *ngIf="item" [nzAvatar]="userHeader" [nzDescription]="userName" (click)="navigate(item)">
               <nz-list-item-meta-title>
                 <span nz-tooltip [nzTooltipTitle]="item.notification.data.message" [nzTooltipMouseEnterDelay]="0.75">{{
                   item.notification.data.message
                 }}</span>
                 <div *ngIf="!item.read" class="set-read">
-                  <button nz-button nzSize="small" *ngIf="item.state === 0" (click)="setNotificationAsRead(item)">
+                  <button
+                    nz-button
+                    nzSize="small"
+                    *ngIf="item.state === 0"
+                    (click)="setNotificationAsRead(item); $event.preventDefault(); $event.stopPropagation()"
+                  >
                     {{ 'Set as read' | translate }}
                   </button>
 
