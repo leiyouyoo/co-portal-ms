@@ -4,7 +4,7 @@
   // var apiPort = '20001';
   // var signalRPort = '20002';
   var protocol = 'http';
-  var serverHost = '192.168.1.5';
+  var serverHost = '192.168.1.6';
   var apiPort = '8000';
   var signalRPort = '8002';
   var serverUrlPrefix = protocol + '://' + serverHost;
