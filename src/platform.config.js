@@ -1,12 +1,8 @@
 (function () {
-  // var protocol = 'http';
-  // var serverHost = 'dev-api.cityocean.com';
-  // var apiPort = '20001';
-  // var signalRPort = '20002';
   var protocol = 'http';
-  var serverHost = '192.168.1.6';
-  var apiPort = '8000';
-  var signalRPort = '8002';
+  var serverHost = 'test-api.cityocean.com';
+  var apiPort = '20001';
+  var signalRPort = '20002';
   var serverUrlPrefix = protocol + '://' + serverHost;
   var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
 
@@ -22,6 +18,8 @@
     downloadUrl: apiUrlPrefix + '/Storage/File/GetDownLoadFile',
     iconSrv: '//at.alicdn.com/t/font_1909561_i75zyq2dx4i.js',
     excelDownloadUrl: apiUrlPrefix + '/Storage/Excel/DownloadExcel',
+    appCityoceanUrl: 'https://test-app.cityocean.com',
+    googleApiUrl: 'https://test-api.cityocean.com:10001',
     mapbox: {},
     im: {
       ImImageUrl: apiUrlPrefix,
