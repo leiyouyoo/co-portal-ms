@@ -91,6 +91,7 @@
     "ng-zorro-antd": "~9.3.0",
     "ngx-clipboard": "^13.0.1",
     "ngx-image-gallery": "^2.0.4",
+    "ngx-moveable": "^0.14.4",
     "ngx-tethys": "^8.0.4",
     "ngx-trend": "^5.0.1",
     "perfect-scrollbar": "^1.5.0",

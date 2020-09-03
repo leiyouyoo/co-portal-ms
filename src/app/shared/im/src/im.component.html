@@ -13,7 +13,7 @@
     <i class="iconfont icon-Customerservice"></i>
   </div>
   <app-image-previewer [imgUrlList]="imgUrlList" *ngIf="showPreviewer"></app-image-previewer>
-  <div class="imInput">
+  <div #target class="imInput">
     <p class="min-window-control" data-im-input-show (click)="showImLayout()" *ngIf="!isVisible">
       <img data-im-input-show src="assets/images/im/IM-icon.png" alt="" />
       <span *ngIf="getTotalUnreadCount()" class="total-unread-count"></span>
@@ -24,7 +24,15 @@
       <span data-im-input-show>{{ selectedItem?.userProfile?.nick || selectedItem?.groupProfile?.name }}</span>
     </span>
   </div>
-
+  <ngx-moveable
+    [target]="target"
+    [draggable]="true"
+    [origin]="false"
+    [throttleDrag]="0"
+    (dragStart)="onDragStart($event)"
+    (drag)="onDrag($event)"
+    (dragEnd)="onDragEnd($event)"
+  ></ngx-moveable>
   <div class="chat" *ngIf="isChat">
     <div class="chatWindow">
       <div class="add-member-content-wrap" *ngIf="showAddMemberContent">
