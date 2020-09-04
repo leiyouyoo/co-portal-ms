@@ -5,15 +5,17 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { TranslateService } from '@ngx-translate/core';
 import { NzIconService } from 'ng-zorro-antd/icon';
 
+import _ from 'lodash';
 import { CO_I18N_TOKEN, CoConfigManager, ArrayService, CO_SESSIONSERVICE_TOKEN, ISessionService } from '@co/core';
 import { MenuService, CoSessionService, CoAuthService } from '@co/common';
-import { ACLService, ACLType } from '@co/acl';
 
+import { ACLService, ACLType } from '@co/acl';
 import { ICONS } from '../../../style-icons';
 import { ICONS_AUTO } from '../../../style-icons-auto';
 import { I18NService } from '../i18n/i18n.service';
 import { GetUserSigService } from '@im';
 import { SettingsService } from '@co/common';
+
 /**
  * 用于应用启动时
  * 一般用来获取应用所需要的基础数据等
@@ -94,7 +96,12 @@ export class StartupService {
               link: '/dashboard',
               icon: 'icon-logo',
             });
-            favorites.push(...ms.filter((m) => !!m.link));
+            favorites.push(
+              ..._.take(
+                ms.filter((m) => !!m.link),
+                10,
+              ),
+            );
             this.menuService.add([
               {
                 key: 'menus',
