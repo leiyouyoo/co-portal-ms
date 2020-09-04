@@ -1,18 +1,28 @@
 // 下拉菜单
 .dd {
+
   // 按钮
   &-btn {
-    display: block;
-    width: 24px;
-    height: 24px;
-    color: @grey-6;
-    line-height: 24px;
-    text-align: center;
+    display      : block;
+    width        : 24px;
+    height       : 24px;
+    color        : @grey-6;
+    line-height  : 24px;
+    text-align   : center;
     border-radius: 50%;
-    cursor: pointer;
+    cursor       : pointer;
+
     &:hover {
       background: @antd-dd-hover-background;
-      border: 1px solid @border-color-split;
+      border    : 1px solid @border-color-split;
     }
+  }
+}
+
+
+//  结果选择输入框光标问题
+.selectIptNoPadding {
+  input {
+    padding-left: 0px !important;
   }
 }

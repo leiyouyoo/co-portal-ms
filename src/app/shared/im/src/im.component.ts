@@ -155,6 +155,30 @@ export class ImComponent implements OnInit {
       this.isSelectItem = true;
     }
   }
+  frame = {
+    translate: [0, 0],
+  };
+  onDragStart({ set }) {
+    set(this.frame.translate);
+  }
+  onDrag({ target, beforeTranslate }) {
+    this.frame.translate = beforeTranslate;
+    target.style.transform = `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)`;
+  }
+  onDragEnd({ target, isDrag, clientX, clientY }) {
+    if (this.frame.translate[0] + document.body.clientWidth < 200 * target.childElementCount) {
+      this.frame.translate[0] = 200 * target.childElementCount - document.body.clientWidth;
+    } else if (this.frame.translate[0] > 0) {
+      this.frame.translate[0] = 0;
+    }
+    if (this.frame.translate[1] + document.body.clientHeight < 32) {
+      this.frame.translate[1] = 32 - document.body.clientHeight;
+    } else if (this.frame.translate[1] > 0) {
+      this.frame.translate[1] = 0;
+    }
+    target.style.transform = `translate(${this.frame.translate[0]}px, ${this.frame.translate[1]}px)`;
+    !isDrag && this.showImLayout();
+  }
   ngOnInit() {
     this.imBroadcastService.on('shipment').subscribe((res: any) => {
       this.customerserviceType = res.customerserviceType;
