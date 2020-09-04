@@ -22,6 +22,7 @@ import { takeUntil, filter } from 'rxjs/operators';
 import { updateHostClass, CoConfigManager, CO_SESSIONSERVICE_TOKEN, ISessionService } from '@co/core';
 
 import { ScrollService, _HttpClient, SettingsService } from '@co/common';
+import { ACLService } from '@co/acl';
 import { Planet, SwitchModes, ReuseTabService } from '@co/cms';
 import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 
@@ -91,6 +92,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     public pro: DefaultLayoutService,
     public httpClient: _HttpClient,
     public i18n: I18NService,
+    public aclService: ACLService,
     public settingsService: SettingsService,
     @Inject(CO_SESSIONSERVICE_TOKEN) private sessionService: ISessionService,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
@@ -110,6 +112,8 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       // 设置门户应用数据
       this.planet.setPortalAppData({
         data: this.reuseTabService,
+        reuseTabService: this.reuseTabService,
+        aclService: this.aclService,
       });
 
       // 注册配置中的应用
