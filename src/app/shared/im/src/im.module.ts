@@ -27,6 +27,7 @@ import { ScheduleMessageComponent } from './component/schedule-message/schedule-
 import { ImageCropperComponent } from './component/image-cropper/image-cropper.component';
 import { ImTranslatePipe } from './service/pipe/im-translate.pipe';
 import { ImBroadcastService } from './service/im-broadcast.service';
+import { NgxMoveableModule } from 'ngx-moveable';
 
 const components = [
   ImagePreviewerComponent,
@@ -51,7 +52,7 @@ const pipe = [CustomerLifeCyclePipe, IMArrayJoinPipe, ImTranslatePipe];
 const service = [ImBroadcastService];
 @NgModule({
   declarations: [...components, ...directive, ...pipe],
-  imports: [CommonModule, TranslateModule, NgZorroAntdModule, FormsModule],
+  imports: [CommonModule, TranslateModule, NgZorroAntdModule, FormsModule, NgxMoveableModule],
   exports: [...components, ...directive, ...pipe],
   providers: [ImService],
 })
