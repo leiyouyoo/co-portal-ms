@@ -115,7 +115,7 @@ export class StartupService {
           },
           () => {},
           () => {
-            this.httpClient.get(`assets/i18n/${lang}.json`).subscribe(
+            this.httpClient.get(`assets/i18n/${lang}.json?hash=` + new Date().getTime()).subscribe(
               (langData) => {
                 // 设置语言数据
                 this.translate.setTranslation(lang, langData);
