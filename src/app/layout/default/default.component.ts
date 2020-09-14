@@ -23,15 +23,13 @@ import { updateHostClass, CoConfigManager, CO_SESSIONSERVICE_TOKEN, ISessionServ
 
 import { ScrollService, _HttpClient, SettingsService } from '@co/common';
 import { ACLService } from '@co/acl';
-import { Planet, SwitchModes, ReuseTabService } from '@co/cms';
+import { Planet, SwitchModes, ReuseTabService, ReuseTabComponent } from '@co/cms';
 import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 
 import { DefaultLayoutService } from './default.service';
 import { I18NService } from 'src/app/core/i18n/i18n.service';
 import { PlatformSettingService, PlatformNotificationService } from '@co/cds';
 import { logOut } from '@im';
-import { NzNotificationService } from 'ng-zorro-antd';
-import { TranslateService } from '@ngx-translate/core';
 
 declare const window: any;
 
@@ -46,8 +44,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   imgUrl = CoConfigManager.getValue('serverUrl');
   user: any;
   userInfo: any;
-  @ViewChild('mainTab', { read: ViewContainerRef, static: false }) private mainTab: ViewContainerRef;
-
+  @ViewChild('mainTab', { read: ReuseTabComponent, static: true }) private mainTab: ReuseTabComponent;
   isFetching = false;
 
   get isMobile() {
@@ -126,7 +123,6 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
 
       //多路由服务挂载在全局planet上
       window.planet.mainTabService = reuseTabService;
-      window.planet.mainTab = this.mainTab;
 
       // 订阅子应用加载事件
       this.planet.appsLoadingStart.subscribe((event) => {
@@ -187,6 +183,9 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     pro.notify.pipe(takeUntil(unsubscribe$)).subscribe(() => {
       this.setClass();
     });
+
+    //多路由服务挂载在全局planet上
+    window.planet.mainTab = this.mainTab;
 
     // this.user = JSON.parse(window.localStorage.getItem('co.session'));
     this.user = this.sessionService.user;
