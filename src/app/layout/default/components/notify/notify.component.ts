@@ -9,7 +9,7 @@ import * as signalR from '@aspnet/signalr';
 import { NzNotificationService } from 'ng-zorro-antd';
 import { TranslateService } from '@ngx-translate/core';
 
-declare enum BusinessType {
+enum BusinessType {
   Quote = 0,
   Booking = 1,
   Shipment = 2,
@@ -37,6 +37,7 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
   skipCount = 0;
   maxResultCount = 10;
   unreadCount: number;
+
   ds: any;
   data: any;
   constructor(
