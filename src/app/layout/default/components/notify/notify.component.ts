@@ -158,15 +158,8 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
           },
         });
         break;
-      case BusinessType.RatesBaseItem:
-        this.$navigate(['/crm/inquiries/', item.notification.data.properties.id], {
-          queryParams: {
-            _title: `${item.notification.data.message}`,
-          },
-        });
-        break;
       case BusinessType.RatesQuote:
-        this.$navigate(['/frm/enquiries/', item.notification.data.properties.id], {
+        this.$navigate(['/frm/enquiries/'], {
           queryParams: {
             _title: `${item}`,
             id: item.notification.data.properties.id,
