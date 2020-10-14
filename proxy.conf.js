@@ -24,5 +24,9 @@ PROXY_CONFIG['/apps/frm'] = {
     changeOrigin: false
 };
 
-
+PROXY_CONFIG['/apps/fam'] = {
+    target: 'http://localhost:3005',
+    secure: false,
+    changeOrigin: false
+};
 module.exports = PROXY_CONFIG;
