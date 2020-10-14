@@ -54,7 +54,6 @@ export class loginMainComponent implements OnInit {
       this.thirdLogin('WorkWechat', this.getQueryString()['code']);
     } else if (this.getQueryString()['errorText']) {
       let msg = this.getQueryString()['errorText'].replace(/["]/g, ' ');
-      console.log(msg, 'msg');
       this.message.error(msg.replace(/[%20,%22]/g, ' '));
     }
   }
