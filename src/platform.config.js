@@ -1,4 +1,10 @@
 (function () {
+  // var protocol = 'http';
+  // var serverHost = 'dev-api.cityocean.com';
+  // var apiPort = '20001';
+  // var signalRPort = '20002';
+  // var serverUrlPrefix = protocol + '://' + serverHost;
+  // var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
   var protocol = 'http';
   var serverHost = 'test-api.cityocean.com';
   var apiPort = '20001';
@@ -70,6 +76,18 @@
         selector: 'frm-root',
         resourcePathPrefix: '/apps/frm/',
         manifest: '/apps/frm/manifest.json',
+        preload: true,
+        scripts: ['main.js'],
+        styles: ['styles.css'],
+      },
+      {
+        name: 'fam',
+        hostParent: '#app-host-container',
+        hostClass: 'fam-layout',
+        routerPathPrefix: '/fam',
+        selector: 'fam-root',
+        resourcePathPrefix: '/apps/fam/',
+        manifest: '/apps/fam/manifest.json',
         preload: true,
         scripts: ['main.js'],
         styles: ['styles.css'],
