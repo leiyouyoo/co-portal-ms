@@ -1,6 +1,7 @@
 // #region exports
 
-import { FeedbackComponent } from '../../../../apps/platform/app/shared/components/feedback/feedback.component';
+
+import { FeedbackComponent } from './components/feedback/feedback.component';
 
 export * from './default.types';
 export * from './default.service';

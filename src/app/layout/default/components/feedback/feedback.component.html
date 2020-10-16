@@ -1,0 +1,56 @@
+<button nz-button nzType="primary" nzSize="small" class="feedback-fab" (click)="open()">
+  {{'Feed back'|translate}}
+</button>
+
+<div class="feedback-modal" [class.show]="isOpen">
+  <div class="feedback-modal-header">
+    <div>{{'User Feedback'|translate}}</div>
+    <button (click)="close()" aria-label="Close" class="feedback-modal-close">
+      <i nz-icon nzType="close"></i>
+    </button>
+  </div>
+  <div class="feedback-modal-body">
+    <nz-radio-group
+      [nzButtonStyle]="'solid'"
+      [(ngModel)]="form.feedbackTypeId"
+      class="nz-radio-group-button"
+    >
+      <label nz-radio-button [nzValue]="type.id" *ngFor="let type of feedbackTypes">{{type.text}}</label>
+    </nz-radio-group>
+    <div style="margin-top: 14px;position: relative;display: inline-flex;">
+      <img [src]="snapShots[snapShots.length - 1]">
+      <button (click)="fullscreen()" nz-button nzSize="small" nzType="primary" class="feedback-modal-fullscreen">
+        <i nz-icon nzType="expand" nzTheme="outline"></i>
+        {{'Fullscreen'|translate}}
+      </button>
+      <div class="feedback-modal-sign" (click)="fullscreen()">
+        {{'Annotate'|translate}}
+      </div>
+    </div>
+    <nz-form-item style="margin-top: 12px;">
+      <nz-form-label nzSpan="24" nzNoColon>{{'Description'|translate}}</nz-form-label>
+      <nz-form-control>
+        <textarea rows="4" nz-input [placeholder]="'Please describe'|translate" [(ngModel)]="form.contents"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <div class="feedback-modal-footer">
+    <button nz-button nzType="primary" (click)="submit()">{{ 'Submit' | translate }}</button>
+  </div>
+</div>
+
+<div class="feedback-capture" [class.show]="showCaptureBox">
+  <button (click)="closeFullscreen()" aria-label="Close" class="feedback-modal-close feedback-capture-close">
+    <i nz-icon nzType="close"></i>
+  </button>
+  <div class="capture_box" #capture_box>
+    <div class="feedback-capture-toolbar">
+      <i nz-icon nzType="border" nzTheme="outline" (click)="startDrawSquare('drawingSquare')"></i>
+      <i nz-icon (click)="startDrawSquare('drawingEllipse')">
+        <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="info-circle" aria-hidden="true"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path></svg>
+      </i>
+      <i nz-icon nzType="rollback" nzTheme="outline" (click)="undo()"></i>
+      <i nz-icon nzType="check" nzTheme="outline" (click)="editDone()"></i>
+    </div>
+  </div>
+</div>
