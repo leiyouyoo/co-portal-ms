@@ -43,5 +43,13 @@
   "Shortcut search": "快捷键搜索",
   "Dimensions/Carton(cm)": "尺寸/纸箱（厘米）",
   "System notification": "系统通知",
-  "Cancel": "取消"
+  "Cancel": "取消",
+  "Description":"描述",
+  "Please describe":"请描述问题",
+  "Submit":"提交",
+  "User Feedback": "用户反馈",
+  "Feed back": "用户反馈",
+  "Submit successfully,thanks for your feedback": "用户反馈",
+  "Fullscreen": "全屏",
+  "Annotate": "标注"
 }
