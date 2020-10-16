@@ -62,11 +62,13 @@ export class FeedbackComponent implements OnInit {
   }
 
   close() {
-    this.canvas?.parentElement.removeChild(this.canvas);
-    this.isOpen = false;
-    this.drawingEllipse = false;
-    this.drawingSquare = false;
-    this.snapShots = [];
+    if (this.isOpen) {
+      this.canvas?.parentElement.removeChild(this.canvas);
+      this.drawingEllipse = false;
+      this.drawingSquare = false;
+      this.snapShots = [];
+      this.isOpen = false;
+    }
   }
 
   fullscreen() {
