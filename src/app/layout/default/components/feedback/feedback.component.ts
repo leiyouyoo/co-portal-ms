@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 import html2canvas from 'html2canvas';
 import { NzModalService } from 'ng-zorro-antd';
 import { TranslateService } from '@ngx-translate/core';
@@ -31,13 +31,20 @@ export class FeedbackComponent implements OnInit {
 
   constructor(private renderer2: Renderer2, private modal: NzModalService, private translate: TranslateService,
               private feedbackService: FeedbackService, private storageFileService: StorageFileService,
-              private msg: I18nMessageService) {
+              private msg: I18nMessageService, private el: ElementRef<HTMLElement>) {
   }
 
   ngOnInit(): void {
     this.feedbackService.getFeedTypeList().subscribe(value => {
       this.feedbackTypes = Object.entries(value).map(([key, value]) => ({ id: key, text: value }));
     });
+  }
+
+  @HostListener('document:click', ['$event.target'])
+  onBackClick(el: HTMLElement) {
+    if (!this.el.nativeElement.contains(el)) {
+      this.close();
+    }
   }
 
   open() {
