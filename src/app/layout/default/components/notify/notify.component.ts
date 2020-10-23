@@ -8,6 +8,7 @@ import { BehaviorSubject, Subscription, Observable } from 'rxjs';
 import * as signalR from '@aspnet/signalr';
 import { NzNotificationService } from 'ng-zorro-antd';
 import { TranslateService } from '@ngx-translate/core';
+import { ACLService } from '@co/acl';
 
 enum BusinessType {
   Quote = 0,
@@ -44,6 +45,7 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
     private changeDetectorRef: ChangeDetectorRef,
     public notification: NzNotificationService,
     private transalte: TranslateService,
+    private aCLService: ACLService,
     private platformNotificationService: PlatformNotificationService,
     injector: Injector,
   ) {
@@ -159,6 +161,7 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
         });
         break;
       case BusinessType.RatesQuote:
+        if (!this.aCLService.can(['j:商务员'])) return;
         this.$navigate(['/frm/enquiries/'], {
           queryParams: {
             _title: `${item.notification.data.message}`,
