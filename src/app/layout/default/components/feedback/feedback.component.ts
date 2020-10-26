@@ -16,6 +16,7 @@ export class FeedbackComponent implements OnInit {
   @ViewChild('capture_box', { static: true }) captureBox: ElementRef<HTMLElement>;
 
   isOpen = false;
+  loading = false;
   showCaptureBox = false;
   form = {
     feedbackTypeId: '1',
@@ -50,6 +51,7 @@ export class FeedbackComponent implements OnInit {
   open() {
     if (!this.isOpen) {
       this.isOpen = true;
+      this.loading = true;
       html2canvas(document.body).then(canvas => {
         this.renderer2.setStyle(canvas, 'width', '100%');
         this.renderer2.setStyle(canvas, 'height', '100%');
@@ -57,6 +59,7 @@ export class FeedbackComponent implements OnInit {
         this.snapShots = [canvas.toDataURL('image/png')];
         const captureBox = this.captureBox.nativeElement;
         captureBox.insertBefore(this.canvas, captureBox.lastChild);
+        this.loading = false;
       });
     }
   }

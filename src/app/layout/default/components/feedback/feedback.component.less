@@ -17,13 +17,19 @@ img {
     text-align: center;
   }
 }
-
+::ng-deep .ant-spin-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
 .feedback-modal {
   position: fixed;
   right: 29px;
   bottom: 40px;
   width: 350px;
-  height: calc(100% - 104px);
+  height: calc(100% - 204px);
   background: #FFFFFF;
   display: none;
   flex-direction: column;
@@ -31,6 +37,7 @@ img {
   box-shadow: -2px -2px 5px 2px #00000008;
   border: 1px solid #d9d9d9;
   border-radius: 2px;
+  z-index: 99;
 
   &.show {
     display: flex;
