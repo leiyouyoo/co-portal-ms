@@ -1,8 +1,7 @@
 <button nz-button nzType="primary" nzSize="small" class="feedback-fab" (click)="open()">
   {{'Feed back'|translate}}
 </button>
-
-<div class="feedback-modal" [class.show]="isOpen">
+<nz-spin [nzSpinning]="loading" class="feedback-modal" [class.show]="isOpen">
   <div class="feedback-modal-header">
     <div>{{'User Feedback'|translate}}</div>
     <button (click)="close()" aria-label="Close" class="feedback-modal-close">
@@ -17,7 +16,7 @@
     >
       <label nz-radio-button [nzValue]="type.id" *ngFor="let type of feedbackTypes">{{type.text}}</label>
     </nz-radio-group>
-    <div style="margin-top: 14px;position: relative;display: inline-flex;">
+    <div style="margin-top: 14px;position: relative;display: inline-flex;width: 100%;" [hidden]="loading">
       <img [src]="snapShots[snapShots.length - 1]">
       <button (click)="fullscreen()" nz-button nzSize="small" nzType="primary" class="feedback-modal-fullscreen">
         <i nz-icon nzType="expand" nzTheme="outline"></i>
@@ -30,14 +29,14 @@
     <nz-form-item style="margin-top: 12px;">
       <nz-form-label nzSpan="24" nzNoColon>{{'Description'|translate}}</nz-form-label>
       <nz-form-control>
-        <textarea rows="4" nz-input [placeholder]="'Please describe'|translate" [(ngModel)]="form.contents"></textarea>
+        <textarea rows="4" nz-input [placeholder]="'Please input'|translate" [(ngModel)]="form.contents"></textarea>
       </nz-form-control>
     </nz-form-item>
   </div>
   <div class="feedback-modal-footer">
     <button nz-button nzType="primary" (click)="submit()">{{ 'Submit' | translate }}</button>
   </div>
-</div>
+</nz-spin>
 
 <div class="feedback-capture" [class.show]="showCaptureBox">
   <button (click)="closeFullscreen()" aria-label="Close" class="feedback-modal-close feedback-capture-close">
