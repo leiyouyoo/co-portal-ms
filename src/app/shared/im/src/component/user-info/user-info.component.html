@@ -5,15 +5,17 @@
       <i
         [ngStyle]="{ transform: legalInfo ? 'rotate(180deg)' : 'rotate(0deg)' }"
         (click)="controlShowDetail('legal')"
+        nz-icon
+        [nzIconfont]="'icon-zhankai'"
         class="iconfont icon-zhankai"
       ></i>
     </h5>
     <ng-container *ngIf="legalInfo">
       <p class="user-info-content">
-        <i class="iconfont icon-qiye1"></i> <span>{{ customerInfo?.localizationShortName }}</span>
+        <i nz-icon [nzIconfont]="'icon-qiye1'" class="iconfont icon-qiye1"></i> <span>{{ customerInfo?.localizationShortName }}</span>
       </p>
       <p class="user-info-content">
-        <i class="iconfont icon-weizhi"></i>
+        <i nz-icon [nzIconfont]="'icon-weizhi'" class="iconfont icon-weizhi"></i>
         <span>{{ customerInfo?.address }}</span>
       </p>
     </ng-container>
@@ -25,18 +27,20 @@
       <i
         [ngStyle]="{ transform: contactsInfo ? 'rotate(180deg)' : 'rotate(0deg)' }"
         (click)="controlShowDetail('contacts')"
+        nz-icon
+        [nzIconfont]="'icon-zhankai'"
         class="iconfont icon-zhankai"
       ></i>
     </h5>
     <ng-container *ngIf="contactsInfo">
       <p *ngIf="userDetail?.user?.phoneNumber" class="user-info-content">
-        <i class="iconfont icon-phone"></i> <span>{{ userDetail?.user?.phoneNumber }}</span>
+        <i nz-icon [nzIconfont]="'icon-phone'" class="iconfont icon-phone"></i> <span>{{ userDetail?.user?.phoneNumber }}</span>
       </p>
       <p *ngIf="userDetail?.user?.emailAddress" class="user-info-content">
-        <i class="iconfont icon-Email"></i> <span>{{ userDetail?.user?.emailAddress }} </span>
+        <i nz-icon [nzIconfont]="'icon-email'" class="iconfont icon-email"></i> <span>{{ userDetail?.user?.emailAddress }} </span>
       </p>
       <p *ngIf="customerInfo?.fax" class="user-info-content">
-        <i class="iconfont icon-chuanzhen"></i> <span>{{ customerInfo?.fax }}</span>
+        <i nz-icon [nzIconfont]="'icon-chuanzhen'" class="iconfont icon-chuanzhen"></i> <span>{{ customerInfo?.fax }}</span>
       </p>
     </ng-container>
   </div>
@@ -47,6 +51,8 @@
       <i
         [ngStyle]="{ transform: customerSourceInfo ? 'rotate(180deg)' : 'rotate(0deg)' }"
         (click)="controlShowDetail('customerSource')"
+        nz-icon
+        [nzIconfont]="'icon-zhankai'"
         class="iconfont icon-zhankai"
       ></i>
     </h5>
@@ -66,7 +72,7 @@
       <nz-timeline>
         <nz-timeline-item *ngFor="let item of customerInfo?.customerLifeCycles" nzColor="#8ACAF2">
           <div>{{ item.status | customerLifeCycle: item.remark }}</div>
-          <div style="color:#00000065">{{ item.creationTime | date: 'yyyy-MM-dd' }}</div>
+          <div style="color: #00000065;">{{ item.creationTime | date: 'yyyy-MM-dd' }}</div>
           <p *ngIf="item.status == 0">{{ 'Founder:' | translate }} + {{ item.remark }}</p>
         </nz-timeline-item>
       </nz-timeline>

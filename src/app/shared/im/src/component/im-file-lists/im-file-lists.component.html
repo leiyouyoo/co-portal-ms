@@ -5,7 +5,7 @@
       <strong>{{ item.fileName }}.{{ item.extensionName }}</strong>
       <span>{{ getTime(item.creationTime) }}</span>
     </p>
-    <i (click)="downloadFile(item)" class="iconfont icon-download"></i>
+    <i (click)="downloadFile(item)" nz-icon [nzIconfont]="'icon-download'" class="iconfont icon-download"></i>
   </div>
   <div *ngIf="fileList.length < pageInfo.total" class="more">
     <span (click)="getFileLists()">{{ 'Show More' | translate }}</span>

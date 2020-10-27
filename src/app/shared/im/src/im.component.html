@@ -10,7 +10,7 @@
 <lib-image-cropper data-im-input-show (emitFile)="onEmitFile($event)" [showCropper]="showCropper" [file]="imageFile"></lib-image-cropper>
 <section class="im-container" #ImContainer>
   <div (click)="onCustomerservice()" *ngIf="showCustomerservice" class="icon-Customerservice-wrap">
-    <i class="iconfont icon-Customerservice"></i>
+    <i nz-icon [nzIconfont]="'icon-Customerservice'" class="iconfont icon-Customerservice"></i>
   </div>
   <app-image-previewer [imgUrlList]="imgUrlList" *ngIf="showPreviewer"></app-image-previewer>
   <div #target class="imInput">
@@ -61,7 +61,12 @@
             transform: translateY(-50%);
           "
         >
-          <i class="iconfont icon-zuixiaohua minimization font24" (click)="closeChatDiv($event)"></i>
+          <i
+            class="iconfont icon-zuixiaohua minimization font24"
+            nz-icon
+            [nzIconfont]="'icon-zuixiaohua'"
+            (click)="closeChatDiv($event)"
+          ></i>
           <i
             (click)="cancleChatDiv($event)"
             style="color: #00000025; font-size: 14px;"
@@ -123,7 +128,7 @@
                   ></nz-progress>
                   <span *ngIf="chatMessage.type === 'TIMFileElem'">
                     <div [title]="'Click download' | translate" (click)="downlaodFile(chatMessage)" class="file-element-wrapper">
-                      <i class="icon-liantianwenjianT iconfont"></i>
+                      <i nz-icon [nzIconfont]="'icon-liantianwenjianT'" class="icon-liantianwenjianT iconfont"></i>
                       <div class="file-element">
                         <span class="file-name">{{ chatMessage.msgBody[0].msgContent.FileName }}</span
                         ><span class="file-size" *ngIf="(chatMessage?.msgBody)[0]?.msgContent?.FileSize"
@@ -160,6 +165,8 @@
         <p class="send-group">
           <span>
             <i
+              nz-icon
+              [nzIconfont]="'icon-biaoqin'"
               class="iconfont icon-biaoqin"
               nz-popover
               [(nzVisible)]="emojiContentVisible"
@@ -168,8 +175,8 @@
               nzPopoverTrigger="click"
               [nzPopoverContent]="emojiContentTemplate"
             ></i>
-            <i (click)="imgUpload()" class="iconfont icon-photo"></i>
-            <i (click)="fileUpload()" class="iconfont icon-wenjian"></i>
+            <i (click)="imgUpload()" nz-icon [nzIconfont]="'icon-photo'" class="iconfont icon-photo"></i>
+            <i (click)="fileUpload()" nz-icon [nzIconfont]="'icon-wenjian'" class="iconfont icon-wenjian"></i>
           </span>
           <span (click)="send()" class="send-button">{{ 'Send' | translate }}</span>
         </p>
@@ -184,6 +191,8 @@
           data-im-input-show
           *ngFor="let item of iconList; let i = index"
           [class]="item.class"
+          nz-icon
+          [nzIconfont]="item.class"
           (click)="getData(item.type, i)"
           [ngStyle]="{ color: chooseColor(item.type, i) }"
         ></i>
@@ -216,7 +225,14 @@
                   <div class="edit-group-wrap">
                     <ng-container *ngIf="editGroupName; else editGroupNameTemplate">
                       <span>{{ groupInfo.name }}</span>
-                      <i edit-group data-im-input-show (click)="editGroupName = false" class="iconfont icon-edit1"></i>
+                      <i
+                        edit-group
+                        data-im-input-show
+                        (click)="$event.stopPropagation(); editGroupName = false"
+                        nz-icon
+                        [nzIconfont]="'icon-edit1'"
+                        class="iconfont icon-edit1"
+                      ></i>
                     </ng-container>
                     <ng-template #editGroupNameTemplate>
                       <input
@@ -235,7 +251,9 @@
                     >{{ 'Group notification' | translate }}：<i
                       edit-group
                       data-im-input-show
-                      (click)="editGroupNotification = false"
+                      (click)="$event.stopPropagation(); editGroupNotification = false"
+                      nz-icon
+                      [nzIconfont]="'icon-edit1'"
                       class="iconfont icon-edit1"
                     ></i
                   ></span>
@@ -262,7 +280,7 @@
                     <span>{{ item.nick ? item.nick : item.userID }}</span>
                   </div>
                   <div class="add-member" (click)="showAddMemberContent = true">
-                    <i class="iconfont icon-plus"></i>
+                    <i nz-icon [nzIconfont]="'icon-add-fill'" class="iconfont icon-add-fill"></i>
                     <span>Add member</span>
                   </div>
                 </div>
@@ -456,13 +474,22 @@
           nzPopoverPlacement="bottomRight"
           [nzPopoverContent]="'The current browser does not support, use Google or Firefox' | translate"
           data-im-input-show
+          nz-icon
+          [nzIconfont]="'icon-edit'"
           class="iconfont icon-edit"
         ></i>
-        <i *ngIf="!isIE()" (click)="avtarUploadClick()" data-im-input-show class="iconfont icon-edit"></i>
+        <i
+          *ngIf="!isIE()"
+          (click)="avtarUploadClick()"
+          data-im-input-show
+          nz-icon
+          [nzIconfont]="'icon-edit'"
+          class="iconfont icon-edit"
+        ></i>
       </div>
     </ng-template>
     <div class="right-content">
-      <i class="iconfont icon-zuixiaohua minimization font24" (click)="closeImLayout($event)"></i>
+      <i class="iconfont icon-zuixiaohua minimization font24" nz-icon [nzIconfont]="'icon-zuixiaohua'" (click)="closeImLayout($event)"></i>
       <img
         [src]="myProfile?.avatar ? formatImAvatarUrl(myProfile?.avatar) : 'assets/images/im/avatar-2.png'"
         style="width: 24px; height: 24px;"
@@ -475,19 +502,19 @@
       />
       <i
         (click)="currentWindowShowType = 'chat'"
+        nz-icon
+        [nzIconfont]="currentWindowShowType === 'chat' ? 'icon-xiaoximian' : 'icon-xiaoxixian'"
         [ngClass]="{
-          selected: currentWindowShowType === 'chat',
-          'icon-xiaoximian': currentWindowShowType === 'chat',
-          'icon-xiaoxixian': currentWindowShowType === 'book'
+          selected: currentWindowShowType === 'chat'
         }"
         class="iconfont font24"
       ></i>
       <i
         (click)="selectTXL($event)"
+        nz-icon
+        [nzIconfont]="currentWindowShowType === 'chat' ? 'icon-tongxunluxian' : 'icon-tongxunlumian'"
         [ngClass]="{
-          selected: currentWindowShowType === 'book',
-          'icon-tongxunluxian': currentWindowShowType === 'chat',
-          'icon-tongxunlumian': currentWindowShowType === 'book'
+          selected: currentWindowShowType === 'book'
         }"
         class="iconfont font24"
       ></i>

@@ -542,22 +542,22 @@ export class ImComponent implements OnInit {
       this.fromId = this.selectedItem.groupProfile.groupID;
       this.selectIconType = 'groupBussiness';
       this.iconListUnselected = [
-        { class: 'iconfont icon-guanlianyewu', type: 'groupBussiness' },
-        { class: 'iconfont icon-qunxinxi', type: 'info' },
-        { class: 'iconfont icon-liantianwenjian', type: 'file' },
-        { class: 'iconfont icon-jilu', type: 'history' },
+        { class: 'icon-guanlianyewu', type: 'groupBussiness' },
+        { class: 'icon-qunxinxi', type: 'info' },
+        { class: 'icon-liantianwenjian', type: 'file' },
+        { class: 'icon-jilu', type: 'history' },
       ];
       this.iconList = [
-        { class: 'iconfont icon-guanlianyewuT', type: 'groupBussiness' },
-        { class: 'iconfont icon-qunxinxi', type: 'info' },
-        { class: 'iconfont icon-liantianwenjian', type: 'file' },
-        { class: 'iconfont icon-jilu', type: 'history' },
+        { class: 'icon-guanlianyewuT', type: 'groupBussiness' },
+        { class: 'icon-qunxinxi', type: 'info' },
+        { class: 'icon-liantianwenjian', type: 'file' },
+        { class: 'icon-jilu', type: 'history' },
       ];
       this.iconListSeleted = [
-        { class: 'iconfont icon-guanlianyewuT', type: 'groupBussiness' },
-        { class: 'iconfont icon-qunxinxiT', type: 'info' },
-        { class: 'iconfont icon-liantianwenjianT', type: 'file' },
-        { class: 'iconfont icon-jiluT', type: 'history' },
+        { class: 'icon-guanlianyewuT', type: 'groupBussiness' },
+        { class: 'icon-qunxinxiT', type: 'info' },
+        { class: 'icon-liantianwenjianT', type: 'file' },
+        { class: 'icon-jiluT', type: 'history' },
       ];
       if (this.selectedItem.disbandGroupFlage) {
         this.iconListUnselected.splice(1, 1);
@@ -567,26 +567,26 @@ export class ImComponent implements OnInit {
     } else {
       this.selectIconType = 'info';
       this.iconListUnselected = [
-        { class: 'iconfont icon-geren', type: 'info' },
-        { class: 'iconfont icon-liantianwenjian', type: 'file' },
-        { class: 'iconfont icon-jilu', type: 'history' },
+        { class: 'icon-geren', type: 'info' },
+        { class: 'icon-liantianwenjian', type: 'file' },
+        { class: 'icon-jilu', type: 'history' },
       ];
       this.iconList = [
-        { class: 'iconfont icon-gerenT', type: 'info' },
-        { class: 'iconfont icon-liantianwenjian', type: 'file' },
-        { class: 'iconfont icon-jilu', type: 'history' },
+        { class: 'icon-gerenT', type: 'info' },
+        { class: 'icon-liantianwenjian', type: 'file' },
+        { class: 'icon-jilu', type: 'history' },
       ];
       this.iconListSeleted = [
-        { class: 'iconfont icon-gerenT', type: 'info' },
-        { class: 'iconfont icon-liantianwenjianT', type: 'file' },
-        { class: 'iconfont icon-jiluT', type: 'history' },
+        { class: 'icon-gerenT', type: 'info' },
+        { class: 'icon-liantianwenjianT', type: 'file' },
+        { class: 'icon-jiluT', type: 'history' },
       ];
       if (this.selectedItem.bussinessType === 'order') {
         this.isC2C = false;
         this.fromId = this.selectedItem.groupProfile.groupID;
-        this.iconListUnselected[0] = { class: 'iconfont icon-qunxinxi', type: 'info' };
-        this.iconList[0] = { class: 'iconfont icon-qunxinxiT', type: 'info' };
-        this.iconListSeleted[0] = { class: 'iconfont icon-qunxinxiT', type: 'info' };
+        this.iconListUnselected[0] = { class: 'icon-qunxinxi', type: 'info' };
+        this.iconList[0] = { class: 'icon-qunxinxiT', type: 'info' };
+        this.iconListSeleted[0] = { class: 'icon-qunxinxiT', type: 'info' };
       } else {
         this.isC2C = true;
         this.fromId = this.selectedItem.userProfile.userID;
