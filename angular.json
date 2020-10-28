@@ -33,7 +33,7 @@
             "vendorChunk": false,
             "optimization": false,
             "assets": ["src/favicon.ico", "src/platform.config.js", "src/assets"],
-            "styles": ["src/styles.less"],
+            "styles": ["src/styles.less","node_modules/cropperjs/dist/cropper.min.css"],
             "scripts": ["node_modules/ajv/dist/ajv.bundle.js"]
           },
           "configurations": {
