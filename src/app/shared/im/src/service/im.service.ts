@@ -1,17 +1,17 @@
 import { Injectable, Optional, Inject } from '@angular/core';
 import { _HttpClient } from '@co/common';
-import { ENVIRONMENT, Environment } from './environment';
+import { CoConfigManager } from '@co/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ImService {
-  constructor(private _httpClient: _HttpClient, @Optional() @Inject(ENVIRONMENT) private environment: Environment) {}
+  constructor(private _httpClient: _HttpClient) {}
   getImgUrl(url) {
     if (url.indexOf('data:image/png;base64') != -1 || url.indexOf('http') != -1) {
       return url;
     } else {
-      return this.environment ? this.environment.ImImageUrl + url : 'http://192.168.1.6:8000' + url;
+      return CoConfigManager.getValue('serverUrl') ? CoConfigManager.getValue('serverUrl') + url : 'http://192.168.1.6:8000' + url;
     }
   }
   getOrganizationUnit(param: { ParentId?: string; IsRecursion: boolean }) {
@@ -99,7 +99,7 @@ export class ImService {
   formatImAvatarUrl(impersonatorUserId, handler = 'image') {
     if (impersonatorUserId) {
       return `${
-        this.environment ? this.environment.downloadUrl : 'http://192.168.1.6:8000'
+        CoConfigManager.getValue('serverUrl') ? CoConfigManager.getValue('downloadUrl') : 'http://192.168.1.6:8000'
       }?fileId=${impersonatorUserId}&handler=${handler}`;
     }
     return '';

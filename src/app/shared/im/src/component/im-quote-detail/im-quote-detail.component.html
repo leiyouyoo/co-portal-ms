@@ -20,7 +20,7 @@
     >
   </div>
   <div>
-    <i class="iconfont icon-quote1"></i>
+    <i nz-icon [nzIconfont]="'icon-quote1'" class="iconfont icon-quote1"></i>
     <h4>{{ quotesDetail?.quoteNo }}</h4>
   </div>
   <div *ngIf="quotesDetail?.quoteReplys.length">
@@ -89,6 +89,8 @@
             (click)="controlOriginOpen = !controlOriginOpen"
             *ngIf="OriginList.length > 0"
             [ngStyle]="{ transform: controlOriginOpen ? 'rotate(180deg)' : '' }"
+            nz-icon
+            [nzIconfont]="'icon-zhankai'"
             class="iconfont icon-zhankai"
           ></i
         ></label>
@@ -110,6 +112,8 @@
           }}<i
             (click)="controlDestinationOpen = !controlDestinationOpen"
             *ngIf="DestinationList.length > 0"
+            nz-icon
+            [nzIconfont]="'icon-zhankai'"
             class="iconfont icon-zhankai"
             [ngStyle]="{ transform: controlDestinationOpen ? 'rotate(180deg)' : '' }"
           ></i
@@ -118,9 +122,7 @@
           <p *ngFor="let Destination of DestinationList; let i = index">
             <span class="chargingCodeWrap"
               >{{ Destination.chargingCodeName }}
-              <span *ngIf="Destination.unitType == 1"
-                >CHARGE {{ Destination.unitPrice }}({{ Destination.containerCode }})</span
-              >
+              <span *ngIf="Destination.unitType == 1">CHARGE {{ Destination.unitPrice }}({{ Destination.containerCode }})</span>
             </span>
             <span class="last-span"
               ><strong>{{ Destination.totalPrice }} </strong>{{ Destination.currencyName }}
@@ -132,7 +134,7 @@
   </section>
   <section class="route-info">
     <div *ngFor="let item of routeLocations">
-      <i [class]="item.icon"></i>
+      <i nz-icon [nzIconfont]="item.icon" [class]="item.icon"></i>
       <span>{{ item.showName }}</span>
     </div>
   </section>
@@ -142,13 +144,15 @@
       <i
         (click)="controlCargoOpen = !controlCargoOpen"
         [ngStyle]="{ transform: controlCargoOpen ? 'rotate(180deg)' : '' }"
+        nz-icon
+        [nzIconfont]="'icon-zhankai'"
         class="iconfont icon-zhankai"
       ></i>
     </h5>
     <div class="detail">
       <div *ngIf="controlCargoOpen">
         <p>
-          <i class="iconfont icon-cargo"></i>
+          <i nz-icon [nzIconfont]="'icon-cargo'" class="iconfont icon-cargo"></i>
           <ng-container *ngIf="quotesDetail?.tradeType == 1">
             General
           </ng-container>
@@ -162,7 +166,7 @@
 
         <ng-container *ngIf="quotesDetail?.freightMethodType == FreightMethodType.Ocean">
           <p>
-            <i class="iconfont icon-CYCY"></i>
+            <i nz-icon [nzIconfont]="'icon-CYCY'" class="iconfont icon-CYCY"></i>
             <ng-container *ngIf="quotesDetail?.freightType == 1">
               CY-CY
             </ng-container>
@@ -177,26 +181,22 @@
             </ng-container>
           </p>
           <p *ngIf="getContainerType().length">
-            <i class="iconfont icon-Container"></i>
+            <i nz-icon [nzIconfont]="'icon-Container'" class="iconfont icon-Container"></i>
             <ng-container *ngFor="let e of getContainerType()">{{ e }}</ng-container>
           </p>
         </ng-container>
-        <p
-          *ngIf="quotesDetail?.totalWeightDisplay || quotesDetail?.totalVolumeDisplay || quotesDetail?.quantityDisplay"
-        >
-          <i class="iconfont icon-Container"></i>
+        <p *ngIf="quotesDetail?.totalWeightDisplay || quotesDetail?.totalVolumeDisplay || quotesDetail?.quantityDisplay">
+          <i nz-icon [nzIconfont]="'icon-Container'" class="iconfont icon-Container"></i>
           <span>{{ quotesDetail?.totalWeightDisplay }}</span>
           <span>{{ quotesDetail?.quantityDisplay }}</span>
           <span>{{ quotesDetail?.totalVolumeDisplay }}</span>
         </p>
       </div>
-      <h5
-        *ngIf="
-          quotesDetail?.specialInstructions || quotesDetail?.containsSpecialGoodsTypes || quotesDetail?.description
-        "
-      >
+      <h5 *ngIf="quotesDetail?.specialInstructions || quotesDetail?.containsSpecialGoodsTypes || quotesDetail?.description">
         {{ 'Specifics' | translate }}
         <i
+          nz-icon
+          [nzIconfont]="'icon-zhankai'"
           class="iconfont icon-zhankai"
           [ngStyle]="{ transform: controlSpecialGoodsOpen ? 'rotate(180deg)' : '' }"
           (click)="controlSpecialGoodsOpen = !controlSpecialGoodsOpen"
@@ -218,13 +218,9 @@
             <span>{{ quotesDetail?.specialInstructions }}</span>
           </ng-container>
           <div *ngIf="quotesDetail?.containsSpecialGoodsTypes" class="specialGoodsName">
-            <label
-              nz-checkbox
-              nzDisabled
-              *ngFor="let item of quotesDetail?.containsSpecialGoodsTypesArr"
-              [ngModel]="true"
-              >{{ item.Name }}</label
-            >
+            <label nz-checkbox nzDisabled *ngFor="let item of quotesDetail?.containsSpecialGoodsTypesArr" [ngModel]="true">{{
+              item.Name
+            }}</label>
           </div>
         </div>
       </ng-container>

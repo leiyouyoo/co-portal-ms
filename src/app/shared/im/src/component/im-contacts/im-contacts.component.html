@@ -44,12 +44,7 @@
           <label data-im-input-show for="">本公司</label>
           <p data-im-input-show *ngFor="let item of searchContactResultList">
             <ng-template *ngTemplateOutlet="resultTemplate; context: { result: item }"></ng-template>
-            <label
-              *ngIf="fromAddMember && item.userId && item.isActive"
-              class="my-checkbox"
-              nz-checkbox
-              [(ngModel)]="item.checked"
-            ></label>
+            <label *ngIf="fromAddMember && item.userId && item.isActive" class="my-checkbox" nz-checkbox [(ngModel)]="item.checked"></label>
             <span class="member-not-actice" *ngIf="fromAddMember && (!item.userId || !item.isActive)">未激活</span>
           </p>
         </ng-container>
@@ -58,12 +53,7 @@
           <label data-im-input-show for="">我的客户</label>
           <p data-im-input-show *ngFor="let item of myCustomerContactResultList">
             <ng-template *ngTemplateOutlet="resultTemplate; context: { result: item }"></ng-template>
-            <label
-              *ngIf="fromAddMember && item.userId && item.isActive"
-              class="my-checkbox"
-              nz-checkbox
-              [(ngModel)]="item.checked"
-            ></label>
+            <label *ngIf="fromAddMember && item.userId && item.isActive" class="my-checkbox" nz-checkbox [(ngModel)]="item.checked"></label>
             <span class="member-not-actice" *ngIf="fromAddMember && (!item.userId || !item.isActive)">未激活</span>
           </p>
         </ng-container>
@@ -72,12 +62,7 @@
           <label data-im-input-show for="">合作伙伴</label>
           <p data-im-input-show *ngFor="let item of partnerContactResultList">
             <ng-template *ngTemplateOutlet="resultTemplate; context: { result: item }"></ng-template>
-            <label
-              *ngIf="fromAddMember && item.userId && item.isActive"
-              class="my-checkbox"
-              nz-checkbox
-              [(ngModel)]="item.checked"
-            ></label>
+            <label *ngIf="fromAddMember && item.userId && item.isActive" class="my-checkbox" nz-checkbox [(ngModel)]="item.checked"></label>
             <span class="member-not-actice" *ngIf="fromAddMember && (!item.userId || !item.isActive)">未激活</span>
           </p>
         </ng-container>
@@ -86,12 +71,7 @@
           <label data-im-input-show for="">服务商</label>
           <p data-im-input-show *ngFor="let item of serviceContactResultList">
             <ng-template *ngTemplateOutlet="resultTemplate; context: { result: item }"></ng-template>
-            <label
-              *ngIf="fromAddMember && item.userId && item.isActive"
-              class="my-checkbox"
-              nz-checkbox
-              [(ngModel)]="item.checked"
-            ></label>
+            <label *ngIf="fromAddMember && item.userId && item.isActive" class="my-checkbox" nz-checkbox [(ngModel)]="item.checked"></label>
             <span class="member-not-actice" *ngIf="fromAddMember && (!item.userId || !item.isActive)">未激活</span>
           </p>
         </ng-container>
@@ -121,11 +101,13 @@
         <div class="company-wrap" *ngFor="let item of serviceList">
           <div class="company-content-name">
             <i
+              nz-icon
+              [nzIconfont]="'icon-zhankai'"
               [ngStyle]="{ transform: item.notshow ? 'rotate(-90deg)' : 'rotate(0deg)' }"
               (click)="item.notshow = !item.notshow"
               class="iconfont icon-zhankai"
             ></i>
-            <i class="iconfont icon-fenzu"></i>
+            <i nz-icon [nzIconfont]="'icon-fenzu'" class="iconfont icon-fenzu"></i>
             <h4>{{ item.companyName }}</h4>
           </div>
           <ng-container *ngIf="!item.notshow">
@@ -151,9 +133,7 @@
                   nz-checkbox
                   [(ngModel)]="contact.checked"
                 ></label>
-                <span class="member-not-actice" *ngIf="fromAddMember && (!contact.userId || !contact.isActive)"
-                  >未激活</span
-                >
+                <span class="member-not-actice" *ngIf="fromAddMember && (!contact.userId || !contact.isActive)">未激活</span>
                 <span
                   [ngStyle]="{ color: contact.isActive ? '#007AFF' : 'rgba(0,0,0,0.65)' }"
                   class="isActive-style"
@@ -196,19 +176,17 @@
           >
         </div>
       </ng-container>
-      <ng-container
-        *ngIf="
-          (currentRadio === 'company' && fromType != 'csp') || (currentRadio != 'service' && currentRadio != 'company')
-        "
-      >
+      <ng-container *ngIf="(currentRadio === 'company' && fromType != 'csp') || (currentRadio != 'service' && currentRadio != 'company')">
         <div class="company-wrap" *ngFor="let item of currentShowLists">
           <div class="company-content-name">
             <i
               [ngStyle]="{ transform: !item.show ? 'rotate(-90deg)' : 'rotate(0deg)' }"
               (click)="item.show = !item.show"
+              nz-icon
+              [nzIconfont]="'icon-zhankai'"
               class="iconfont icon-zhankai"
             ></i>
-            <i class="iconfont icon-fenzu"></i>
+            <i class="iconfont icon-fenzu" nz-icon [nzIconfont]="'icon-fenzu'"></i>
             <h4>{{ item.companyName }}</h4>
             <i
               nz-popover
@@ -218,6 +196,8 @@
               [nzPopoverContent]="item.isRegistered ? '已认证' : '未认证'"
               *ngIf="(currentRadio == 'partner' || currentRadio == 'myCustomer') && !fromAddMember"
               [ngStyle]="{ color: item.isRegistered ? '#ffd278' : 'rgba(0,0,0,0.25)' }"
+              nz-icon
+              [nzIconfont]="'icon-kaitong'"
               class="iconfont icon-kaitong"
             ></i>
           </div>
@@ -242,9 +222,7 @@
                 nz-checkbox
                 [(ngModel)]="contact.checked"
               ></label>
-              <span class="member-not-actice" *ngIf="fromAddMember && (!contact.userId || !contact.isActive)"
-                >未激活</span
-              >
+              <span class="member-not-actice" *ngIf="fromAddMember && (!contact.userId || !contact.isActive)">未激活</span>
               <span
                 [ngStyle]="{ color: contact.isActive ? '#007AFF' : '#3F3F3F' }"
                 class="isActive-style"

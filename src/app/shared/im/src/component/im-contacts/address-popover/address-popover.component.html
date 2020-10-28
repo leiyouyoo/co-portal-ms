@@ -13,19 +13,19 @@
 <ng-template #addressTemplate>
   <label data-im-input-show>联系方式</label>
   <p data-im-input-show *ngIf="contact.phoneNumber">
-    <i data-im-input-show class="iconfont icon-phone"></i>
+    <i data-im-input-show nz-icon [nzIconfont]="'icon-phone'" class="iconfont icon-phone"></i>
     <span data-im-input-show>{{ contact.phoneNumber }}</span>
   </p>
   <p data-im-input-show>
-    <i data-im-input-show class="iconfont icon-Email"></i>
+    <i data-im-input-show nz-icon [nzIconfont]="'icon-email'" class="iconfont icon-Email"></i>
     <span data-im-input-show>{{ contact.email ? contact.email : contact.emailAddress }}</span>
   </p>
   <p data-im-input-show *ngIf="fromType == 'csp' && currentRadio == 'service'">
-    <i data-im-input-show class="iconfont icon-qiye1"></i>
+    <i data-im-input-show nz-icon [nzIconfont]="'icon-qiye1'" class="iconfont icon-qiye1"></i>
     <span data-im-input-show>{{ contact.companyName }}</span>
   </p>
   <p data-im-input-show>
-    <i data-im-input-show class="iconfont icon-weizhi"></i>
+    <i data-im-input-show nz-icon [nzIconfont]="'icon-weizhi'" class="iconfont icon-weizhi"></i>
     <ng-container *ngIf="(fromType == 'crm' || fromType == 'frm') && currentRadio == 'company'; else elseTemplate">
       <span data-im-input-show>{{ contact.fullOrganizationUnit }}</span>
     </ng-container>

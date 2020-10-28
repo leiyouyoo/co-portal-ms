@@ -10,14 +10,10 @@
     ></nz-step>
     <nz-step [nzDescription]="description2Template" [nzIcon]="iconTemplate2"></nz-step>
     <nz-step [nzDescription]="description3Template" [nzIcon]="iconTemplate3"></nz-step>
-    <nz-step
-      *ngIf="shipment?.routeDetails?.consigneeDtos.length"
-      [nzDescription]="description4Template"
-      [nzIcon]="iconTemplate4"
-    ></nz-step>
+    <nz-step *ngIf="shipment?.routeDetails?.consigneeDtos.length" [nzDescription]="description4Template" [nzIcon]="iconTemplate4"></nz-step>
     <ng-template #description1Template>
       <div *ngIf="statusHighlight" class="company-name">
-        <i class="iconfont icon-kehugongsi"></i>
+        <i nz-icon [nzIconfont]="'icon-kehugongsi'" class="iconfont icon-kehugongsi"></i>
         {{ getCompanyName('shipperDtos') }}
       </div>
       <nz-collapse [nzBordered]="false" nzExpandIconPosition="right">
@@ -36,9 +32,7 @@
               <div>{{ item.containerNos }}</div>
             </div>
             <div *ngIf="item.cargoReadyDate">
-              <div class="title est-time key">
-                {{ 'Cargo Ready Date' | translate }}:{{ item.cargoReadyDate | date: 'yyyy-MM-dd' }}
-              </div>
+              <div class="title est-time key">{{ 'Cargo Ready Date' | translate }}:{{ item.cargoReadyDate | date: 'yyyy-MM-dd' }}</div>
             </div>
             <div>
               <span class="color-primary">{{ item.containerPickedUpCount || 0 }}</span
@@ -46,57 +40,34 @@
             </div>
           </div>
           <ng-template #expandedIcon1 let-active>
-            <i
-              nz-icon
-              nzType="caret-right"
-              class="ant-collapse-arrow"
-              [nzRotate]="shipperActive.nzActive ? -90 : 90"
-            ></i>
+            <i nz-icon nzType="caret-right" class="ant-collapse-arrow" [nzRotate]="shipperActive.nzActive ? -90 : 90"></i>
           </ng-template>
         </nz-collapse-panel>
       </nz-collapse>
     </ng-template>
     <ng-template #description2Template>
       <nz-collapse [nzBordered]="false" nzExpandIconPosition="right">
-        <nz-collapse-panel
-          #originPortActive
-          [nzHeader]="shipment?.routeDetails.originPort.name"
-          [nzExpandedIcon]="expandedIcon2"
-        >
+        <nz-collapse-panel #originPortActive [nzHeader]="shipment?.routeDetails.originPort.name" [nzExpandedIcon]="expandedIcon2">
           <ng-template #expandedIcon2 let-active>
-            <i
-              nz-icon
-              nzType="caret-right"
-              class="ant-collapse-arrow"
-              [nzRotate]="originPortActive.nzActive ? -90 : 90"
-            ></i>
+            <i nz-icon nzType="caret-right" class="ant-collapse-arrow" [nzRotate]="originPortActive.nzActive ? -90 : 90"></i>
           </ng-template>
           <div class="detail-container">
             <div>{{ 'Port' | translate }} {{ shipment.routeDetails?.originPort.code }}</div>
-            <div
-              *ngIf="
-                shipment?.routeDetails?.actualTruckDeliveryOrignDate ||
-                shipment?.routeDetails?.estTruckDeliveryOrignDate
-              "
-            >
+            <div *ngIf="shipment?.routeDetails?.actualTruckDeliveryOrignDate || shipment?.routeDetails?.estTruckDeliveryOrignDate">
               <div class="key">
                 <ng-template [ngTemplateOutlet]="originPortArrivalText"></ng-template
                 >{{
-                  shipment?.routeDetails?.actualTruckDeliveryOrignDate ||
-                    shipment?.routeDetails?.estTruckDeliveryOrignDate | date: 'yyyy-MM-dd'
+                  shipment?.routeDetails?.actualTruckDeliveryOrignDate || shipment?.routeDetails?.estTruckDeliveryOrignDate
+                    | date: 'yyyy-MM-dd'
                 }}
               </div>
             </div>
-            <div
-              *ngIf="
-                shipment?.routeDetails?.actualDepatureOrginPortDate || shipment?.routeDetails?.estDepatureOrginPortDate
-              "
-            >
+            <div *ngIf="shipment?.routeDetails?.actualDepatureOrginPortDate || shipment?.routeDetails?.estDepatureOrginPortDate">
               <div class="key">
                 <ng-template [ngTemplateOutlet]="originPortDepartureText"></ng-template
                 >{{
-                  shipment?.routeDetails?.actualDepatureOrginPortDate ||
-                    shipment?.routeDetails?.estDepatureOrginPortDate | date: 'yyyy-MM-dd'
+                  shipment?.routeDetails?.actualDepatureOrginPortDate || shipment?.routeDetails?.estDepatureOrginPortDate
+                    | date: 'yyyy-MM-dd'
                 }}
               </div>
             </div>
@@ -113,46 +84,27 @@
     </ng-template>
     <ng-template #description3Template>
       <nz-collapse [nzBordered]="false">
-        <nz-collapse-panel
-          #destPortActive
-          [nzHeader]="shipment?.routeDetails.destinationPort.name"
-          [nzExpandedIcon]="expandedIcon3"
-        >
+        <nz-collapse-panel #destPortActive [nzHeader]="shipment?.routeDetails.destinationPort.name" [nzExpandedIcon]="expandedIcon3">
           <ng-template #expandedIcon3 let-active>
-            <i
-              nz-icon
-              nzType="caret-right"
-              class="ant-collapse-arrow"
-              [nzRotate]="destPortActive.nzActive ? -90 : 90"
-            ></i>
+            <i nz-icon nzType="caret-right" class="ant-collapse-arrow" [nzRotate]="destPortActive.nzActive ? -90 : 90"></i>
           </ng-template>
           <div class="detail-container">
             <div>{{ 'Port' | translate }} {{ shipment.routeDetails?.originPort.code }}</div>
-            <div
-              *ngIf="
-                shipment?.routeDetails?.actualArrivalDestinationPortDate ||
-                shipment?.routeDetails?.estArrivalDestinationPortDate
-              "
-            >
+            <div *ngIf="shipment?.routeDetails?.actualArrivalDestinationPortDate || shipment?.routeDetails?.estArrivalDestinationPortDate">
               <div class="key">
                 <ng-template [ngTemplateOutlet]="destPortArrivalText"></ng-template
                 >{{
-                  shipment?.routeDetails?.actualArrivalDestinationPortDate ||
-                    shipment?.routeDetails?.estArrivalDestinationPortDate | date: 'yyyy-MM-dd'
+                  shipment?.routeDetails?.actualArrivalDestinationPortDate || shipment?.routeDetails?.estArrivalDestinationPortDate
+                    | date: 'yyyy-MM-dd'
                 }}
               </div>
             </div>
-            <div
-              *ngIf="
-                shipment?.routeDetails?.actualPickUpTruckDestinationDate ||
-                shipment?.routeDetails?.estPickUpTruckDestinationDate
-              "
-            >
+            <div *ngIf="shipment?.routeDetails?.actualPickUpTruckDestinationDate || shipment?.routeDetails?.estPickUpTruckDestinationDate">
               <div class="key">
                 <ng-template [ngTemplateOutlet]="destPortDepartureText"></ng-template
                 >{{
-                  shipment?.routeDetails?.actualPickUpTruckDestinationDate ||
-                    shipment?.routeDetails?.estPickUpTruckDestinationDate | date: 'yyyy-MM-dd'
+                  shipment?.routeDetails?.actualPickUpTruckDestinationDate || shipment?.routeDetails?.estPickUpTruckDestinationDate
+                    | date: 'yyyy-MM-dd'
                 }}
               </div>
             </div>
@@ -170,7 +122,7 @@
     </ng-template>
     <ng-template #description4Template>
       <div *ngIf="statusHighlight" class="company-name">
-        <i class="iconfont icon-kehugongsi"></i>
+        <i nz-icon [nzIconfont]="'icon-kehugongsi'" class="iconfont icon-kehugongsi"></i>
         {{ getCompanyName('consigneeDtos') }}
       </div>
       <nz-collapse [nzBordered]="false">
@@ -180,12 +132,7 @@
           [nzExpandedIcon]="expandedIcon4"
         >
           <ng-template #expandedIcon4 let-active>
-            <i
-              nz-icon
-              nzType="caret-right"
-              class="ant-collapse-arrow"
-              [nzRotate]="destDeliveryActive.nzActive ? -90 : 90"
-            ></i>
+            <i nz-icon nzType="caret-right" class="ant-collapse-arrow" [nzRotate]="destDeliveryActive.nzActive ? -90 : 90"></i>
           </ng-template>
           <div class="detail-container" *ngFor="let item of shipment?.routeDetails?.consigneeDtos; let i = index">
             <div *ngIf="i > 1">{{ item.customerName }}</div>
@@ -233,13 +180,33 @@
 </ng-template>
 
 <!-- 图标template -->
-<ng-template #iconTemplate1><i class="iconfont icon-locationim font20"></i></ng-template>
+<ng-template #iconTemplate1><i nz-icon [nzIconfont]="'icon-kehugongsi'" class="iconfont icon-locationim font20"></i></ng-template>
 <ng-template #iconTemplate2>
-  <i class="iconfont icon-portim font20" *ngIf="freightMethodType[shipment.freightMethodType] === 'Ocean'"></i>
-  <i class="iconfont icon-portim font20" *ngIf="freightMethodType[shipment.freightMethodType] === 'Air'"></i>
+  <i
+    class="iconfont icon-portim font20"
+    nz-icon
+    [nzIconfont]="'icon-portim'"
+    *ngIf="freightMethodType[shipment.freightMethodType] === 'Ocean'"
+  ></i>
+  <i
+    class="iconfont icon-portim font20"
+    nz-icon
+    [nzIconfont]="'icon-portim'"
+    *ngIf="freightMethodType[shipment.freightMethodType] === 'Air'"
+  ></i>
 </ng-template>
 <ng-template #iconTemplate3>
-  <i class="iconfont icon-portim font20" *ngIf="freightMethodType[shipment.freightMethodType] === 'Ocean'"></i>
-  <i class="iconfont icon-portim font20" *ngIf="freightMethodType[shipment.freightMethodType] === 'Air'"></i>
+  <i
+    class="iconfont icon-portim font20"
+    nz-icon
+    [nzIconfont]="'icon-portim'"
+    *ngIf="freightMethodType[shipment.freightMethodType] === 'Ocean'"
+  ></i>
+  <i
+    class="iconfont icon-portim font20"
+    nz-icon
+    [nzIconfont]="'icon-portim'"
+    *ngIf="freightMethodType[shipment.freightMethodType] === 'Air'"
+  ></i>
 </ng-template>
-<ng-template #iconTemplate4><i class="iconfont icon-locationim font20"></i></ng-template>
+<ng-template #iconTemplate4><i class="iconfont icon-locationim font20" nz-icon [nzIconfont]="'icon-locationim'"></i></ng-template>
