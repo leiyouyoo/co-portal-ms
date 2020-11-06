@@ -50,9 +50,7 @@ export class StartupService {
       'zh-CN': 'zh-Hans',
       'en-US': 'en',
     };
-    if (langMap[lang]) {
-      lang = langMap[lang];
-    } else {
+    if (!langMap[lang]) {
       lang = 'en-US';
     }
 
