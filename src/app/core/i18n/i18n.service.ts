@@ -115,7 +115,10 @@ export class I18NService implements CoI18NService {
     const langs = {
       zh: 'zh-CN',
       en: 'en-US',
+      'zh-CN': 'zh-CN',
+      'en-US': 'en-US',
     };
+
     if (langs[lang]) {
       lang = langs[lang];
     } else {
@@ -123,6 +126,7 @@ export class I18NService implements CoI18NService {
       window.localStorage.setItem('language', 'en-US');
     }
 
+    debugger;
     const item = LANGS[lang];
     registerLocaleData(item.ng);
     window.localStorage.setItem('language', lang);
