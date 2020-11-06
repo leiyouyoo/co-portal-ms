@@ -46,13 +46,18 @@ export class StartupService {
 
   load(): Promise<any> {
     var lang = window.localStorage.getItem('language') || navigator.language;
-    this.i18n.use(lang);
-    this.settingsService.setLayout('lang', lang);
-
     const langMap = {
       'zh-CN': 'zh-Hans',
       'en-US': 'en',
     };
+    if (langMap[lang]) {
+      lang = langMap[lang];
+    } else {
+      lang = 'en-US';
+    }
+
+    this.i18n.use(lang);
+    this.settingsService.setLayout('lang', lang);
 
     return new Promise((resolve) => {
       this.httpClient
