@@ -50,8 +50,10 @@ export class StartupService {
       'zh-CN': 'zh-Hans',
       'en-US': 'en',
     };
+
     if (!langMap[lang]) {
       lang = 'en-US';
+      window.localStorage.setItem('language', 'en-US');
     }
 
     this.i18n.use(lang);

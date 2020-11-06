@@ -121,6 +121,7 @@ export class I18NService implements CoI18NService {
       lang = langs[lang];
     } else {
       lang = 'en-US';
+      window.localStorage.setItem('language', 'en-US');
     }
 
     const item = LANGS[lang];
