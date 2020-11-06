@@ -126,7 +126,6 @@ export class I18NService implements CoI18NService {
       window.localStorage.setItem('language', 'en-US');
     }
 
-    debugger;
     const item = LANGS[lang];
     registerLocaleData(item.ng);
     window.localStorage.setItem('language', lang);
