@@ -180,7 +180,7 @@ export class ImComponent implements OnInit {
     !isDrag && this.showImLayout();
   }
   ngOnInit() {
-    this.imBroadcastService.on('shipment').subscribe((res: any) => {
+    this.imBroadcastService.on('chatWithGroup').subscribe((res: any) => {
       this.customerserviceType = res.customerserviceType;
       this.customerserviceId = res.customerserviceId;
       this.onCustomerservice();
