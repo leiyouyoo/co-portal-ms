@@ -9,7 +9,6 @@ import { TextElementComponent } from './component/text-element/text-element.comp
 import { ImService } from './service/im.service';
 import { ImgElementComponent } from './component/img-element/img-element.component';
 import { ImEmojiComponent } from './component/im-emoji/im-emoji.component';
-import { ENVIRONMENT, Environment } from './service/environment';
 import { ImContactsComponent } from './component/im-contacts/im-contacts.component';
 import { UserInfoComponent } from './component/user-info/user-info.component';
 import { CustomerLifeCyclePipe } from './service/pipe/customer-life-cycle.pipe';
@@ -56,11 +55,4 @@ const service = [ImBroadcastService];
   exports: [...components, ...directive, ...pipe],
   providers: [ImService],
 })
-export class DelonImModule {
-  static forRoot(config: { environment: Environment }): ModuleWithProviders<DelonImModule> {
-    return {
-      ngModule: DelonImModule,
-      providers: [{ provide: ENVIRONMENT, useValue: config.environment }],
-    };
-  }
-}
+export class DelonImModule {}

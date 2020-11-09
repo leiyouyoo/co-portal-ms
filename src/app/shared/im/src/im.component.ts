@@ -25,7 +25,6 @@ import { cloneDeep } from 'lodash';
 import { ImService } from './service/im.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ImContactsComponent } from './component/im-contacts/im-contacts.component';
-// import Cropper from 'cropperjs';
 import * as _ from 'lodash';
 import { Router, NavigationStart } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -34,7 +33,6 @@ import { NzModalService } from 'ng-zorro-antd';
 import { SocialService } from '@co/auth';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ImBroadcastService } from './service/im-broadcast.service';
-import { AnyCnameRecord } from 'dns';
 const moment = moment_;
 
 @Component({

@@ -14,7 +14,7 @@
   </div>
   <app-image-previewer [imgUrlList]="imgUrlList" *ngIf="showPreviewer"></app-image-previewer>
   <div #target class="imInput">
-    <p class="min-window-control" data-im-input-show (click)="showImLayout()" *ngIf="!isVisible">
+    <p class="min-window-control" data-im-input-show *ngIf="!isVisible">
       <img data-im-input-show src="assets/images/im/IM-icon.png" alt="" />
       <span *ngIf="getTotalUnreadCount()" class="total-unread-count"></span>
       {{ 'Message list' | translate }}
