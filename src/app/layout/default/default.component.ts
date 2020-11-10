@@ -29,7 +29,7 @@ import { ITokenService, DA_SERVICE_TOKEN } from '@co/auth';
 import { DefaultLayoutService } from './default.service';
 import { I18NService } from 'src/app/core/i18n/i18n.service';
 import { PlatformSettingService, PlatformNotificationService } from '@co/cds';
-import { logOut } from '@im';
+import { logOut } from '@co/im';
 
 declare const window: any;
 
