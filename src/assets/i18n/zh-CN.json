@@ -18,6 +18,8 @@
   "Please input your username": "请输入您的用户名",
   "Please input your Password": "请输入您的密码",
   "Remember my username": "记住我的用户名",
+  "Choose Address": "选择地址",
+  "Packing List": "装箱单",
   "Forgot password": "忘记密码",
   "LOGIN": "登录",
   "Password": "密码",
@@ -39,6 +41,15 @@
   "Notification": "通知",
   "Load more": "加载更多",
   "Shortcut search": "快捷键搜索",
+  "Dimensions/Carton(cm)": "尺寸/纸箱（厘米）",
   "System notification": "系统通知",
-  "Cancel": "取消"
+  "Cancel": "取消",
+  "Description":"描述",
+  "Please describe":"请描述问题",
+  "Submit":"提交",
+  "User Feedback": "用户反馈",
+  "Feed back": "用户反馈",
+  "Submit successfully,thanks for your feedback": "用户反馈",
+  "Fullscreen": "全屏",
+  "Annotate": "标注"
 }

@@ -24,7 +24,9 @@
           class="user-avatar"
         ></nz-avatar>
         <div class="user-desc">
-          <h3>{{ user?.name }} <i nz-icon nztype="down"></i></h3>
+          <h3>
+            {{ user?.name }}<span *ngIf="!!user?.surname">({{ user?.surname }})</span> <i nz-icon nztype="down"></i>
+          </h3>
           <p>
             {{ user?.emailAddress }}
           </p>
@@ -116,3 +118,4 @@
   </div>
 </div>
 <app-im [fromType]="'csp'"></app-im>
+<app-feedback data-html2canvas-ignore="true"></app-feedback>

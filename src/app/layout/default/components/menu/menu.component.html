@@ -44,7 +44,7 @@
       nzTooltipPlacement="right" [nz-tooltip]="menu.text">
       <li class="portal-menu__item">
         <a [routerLink]="menu.link" class="portal-menu__item-inner">
-          <i nz-icon [nzIconfont]="menu.icon.value" class="portal-menu__item-icon"></i>
+          <i nz-icon [nzIconfont]="menu?.icon?.value || 'icon-menu-default'" class="portal-menu__item-icon"></i>
           <span class="portal-menu__item-title"> {{ menu.text }} </span>
         </a>
       </li>

@@ -124,7 +124,7 @@ export class ImQuoteDetailComponent implements OnInit, OnChanges {
     if (originPort) {
       this.routeLocations.push(
         Object.assign(originPort, {
-          icon: 'iconfont icon-portim',
+          icon: 'icon-portim',
           showName: `${originPort.name},${originPort.regionName} ${originPort.countryName ? originPort.countryName : ''}`,
         }),
       );
@@ -133,7 +133,7 @@ export class ImQuoteDetailComponent implements OnInit, OnChanges {
     if (destinationPort) {
       this.routeLocations.push(
         Object.assign(destinationPort, {
-          icon: 'iconfont icon-portim',
+          icon: 'icon-portim',
           showName: `${destinationPort.name},${destinationPort.regionName} ${
             destinationPort.countryName ? destinationPort.countryName : ''
           }`,
@@ -145,7 +145,7 @@ export class ImQuoteDetailComponent implements OnInit, OnChanges {
       if (originAddress) {
         this.routeLocations.unshift(
           Object.assign(originAddress, {
-            icon: 'iconfont icon-locationim',
+            icon: 'icon-locationim',
             showName: `${originAddress.streetAddress},${originAddress.city},${originAddress.province}, ${originAddress.country}`,
           }),
         );
@@ -154,7 +154,7 @@ export class ImQuoteDetailComponent implements OnInit, OnChanges {
           Object.assign(
             {},
             {
-              icon: 'iconfont icon-locationim',
+              icon: 'icon-locationim',
               showName: originAddressName,
             },
           ),
@@ -165,7 +165,7 @@ export class ImQuoteDetailComponent implements OnInit, OnChanges {
       if (destinationAddress) {
         this.routeLocations.push(
           Object.assign(destinationAddress, {
-            icon: 'iconfont icon-locationim',
+            icon: 'icon-locationim',
             showName: `${destinationAddress.streetAddress},${destinationAddress.city},${destinationAddress.province}, ${destinationAddress.country}`,
           }),
         );
@@ -174,7 +174,7 @@ export class ImQuoteDetailComponent implements OnInit, OnChanges {
           Object.assign(
             {},
             {
-              icon: 'iconfont icon-locationim',
+              icon: 'icon-locationim',
               showName: destinationAddressName,
             },
           ),

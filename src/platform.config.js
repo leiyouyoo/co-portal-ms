@@ -5,6 +5,12 @@
   var signalRPort = '20002';
   var serverUrlPrefix = protocol + '://' + serverHost;
   var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
+  // var protocol = 'http';
+  // var serverHost = 'test-api.cityocean.com';
+  // var apiPort = '20001';
+  // var signalRPort = '20002';
+  // var serverUrlPrefix = protocol + '://' + serverHost;
+  // var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
 
   window.CO_PLATFORM = {
     name: 'co.portal',
@@ -16,14 +22,14 @@
     loginUrl: '/passport/login',
     uploadUrl: apiUrlPrefix + '/Storage/File/Upload',
     downloadUrl: apiUrlPrefix + '/Storage/File/GetDownLoadFile',
-    iconSrv: '//at.alicdn.com/t/font_1909561_i75zyq2dx4i.js',
+    iconSrv: '//at.alicdn.com/t/font_1909561_a1diw7njpip.js',
     excelDownloadUrl: apiUrlPrefix + '/Storage/Excel/DownloadExcel',
     appCityoceanUrl: 'https://test-app.cityocean.com',
     googleApiUrl: 'https://test-api.cityocean.com:10001',
     mapbox: {},
     im: {
       ImImageUrl: apiUrlPrefix,
-      ImEnable: false,
+      ImEnable: true,
     },
     apps: [
       {
@@ -46,7 +52,7 @@
         selector: 'crm-root',
         resourcePathPrefix: '/apps/crm/',
         manifest: '/apps/crm/manifest.json',
-        preload: false,
+        preload: true,
         scripts: ['main.js'],
         styles: ['styles.css'],
       },
@@ -70,6 +76,18 @@
         selector: 'frm-root',
         resourcePathPrefix: '/apps/frm/',
         manifest: '/apps/frm/manifest.json',
+        preload: true,
+        scripts: ['main.js'],
+        styles: ['styles.css'],
+      },
+      {
+        name: 'fam',
+        hostParent: '#app-host-container',
+        hostClass: 'fam-layout',
+        routerPathPrefix: '/fam',
+        selector: 'fam-root',
+        resourcePathPrefix: '/apps/fam/',
+        manifest: '/apps/fam/manifest.json',
         preload: true,
         scripts: ['main.js'],
         styles: ['styles.css'],

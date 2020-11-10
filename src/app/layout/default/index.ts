@@ -1,5 +1,8 @@
 // #region exports
 
+
+import { FeedbackComponent } from './components/feedback/feedback.component';
+
 export * from './default.types';
 export * from './default.service';
 export * from './default.component';
@@ -52,6 +55,7 @@ export const DEFAULT_LAYOUT_COMPONENTS = [
   CoSubmenuDirective,
   ...DEFAULT_LAYOUT_ENTRYCOMPONENTS,
   ...DEFAULT_LAYOUT_WIDGETS,
+  FeedbackComponent,
 ];
 
 // #endregion
