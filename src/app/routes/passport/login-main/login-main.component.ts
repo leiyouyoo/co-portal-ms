@@ -5,9 +5,8 @@ import { _HttpClient, CoAuthService } from '@co/common';
 import { StartupService } from '@core';
 
 import { NzNotificationService, NzMessageService, NzModalService } from 'ng-zorro-antd';
-import { logOut, GetUserSigService } from '@im';
+import { logOut, GetUserSigService } from '@co/im';
 import { LangsComponent } from 'src/app/layout/default/components/lang/langs.component';
-// import { GetUserSigService, logOut } from '@im';
 @Component({
   selector: 'user-login-main',
   templateUrl: './login-main.component.html',

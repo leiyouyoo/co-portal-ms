@@ -13,7 +13,7 @@ import { ACLService, ACLType } from '@co/acl';
 import { ICONS } from '../../../style-icons';
 import { ICONS_AUTO } from '../../../style-icons-auto';
 import { I18NService } from '../i18n/i18n.service';
-import { GetUserSigService } from '@im';
+import { GetUserSigService } from '@co/im';
 import { SettingsService } from '@co/common';
 
 /**

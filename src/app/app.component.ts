@@ -9,7 +9,7 @@ import { CoConfigManager, CO_SESSIONSERVICE_TOKEN, ISessionService } from '@co/c
 import { TitleService } from '@co/common';
 
 import { setupVersion } from './app.version';
-import { GetUserSigService } from '../app/shared/im';
+import { GetUserSigService } from '@co/im';
 
 /**
  * 应用入口组件
