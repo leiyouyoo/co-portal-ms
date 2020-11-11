@@ -12,7 +12,6 @@ import { StorageFileService } from '@co/cds';
   styleUrls: ['./feedback.component.less'],
 })
 export class FeedbackComponent implements OnInit {
-
   @ViewChild('capture_box', { static: true }) captureBox: ElementRef<HTMLElement>;
 
   isOpen = false;
@@ -30,13 +29,18 @@ export class FeedbackComponent implements OnInit {
   private drawingEllipse = false;
   private startPoint;
 
-  constructor(private renderer2: Renderer2, private modal: NzModalService, private translate: TranslateService,
-              private feedbackService: FeedbackService, private storageFileService: StorageFileService,
-              private msg: I18nMessageService, private el: ElementRef<HTMLElement>) {
-  }
+  constructor(
+    private renderer2: Renderer2,
+    private modal: NzModalService,
+    private translate: TranslateService,
+    private feedbackService: FeedbackService,
+    private storageFileService: StorageFileService,
+    private msg: I18nMessageService,
+    private el: ElementRef<HTMLElement>,
+  ) {}
 
   ngOnInit(): void {
-    this.feedbackService.getFeedTypeList().subscribe(value => {
+    this.feedbackService.getFeedTypeList().subscribe((value) => {
       this.feedbackTypes = Object.entries(value).map(([key, value]) => ({ id: key, text: value }));
     });
   }
@@ -52,7 +56,7 @@ export class FeedbackComponent implements OnInit {
     if (!this.isOpen) {
       this.isOpen = true;
       this.loading = true;
-      html2canvas(document.body).then(canvas => {
+      html2canvas(document.body).then((canvas) => {
         this.renderer2.setStyle(canvas, 'width', '100%');
         this.renderer2.setStyle(canvas, 'height', '100%');
         this.canvas = canvas;
@@ -87,18 +91,18 @@ export class FeedbackComponent implements OnInit {
     const rect = canvas.getBoundingClientRect();
     const scale = canvas.width / rect.width;
     const operation = {
-      drawingSquare: v => this.drawSquare(v),
-      drawingEllipse: v => this.drawEllipse(v),
+      drawingSquare: (v) => this.drawSquare(v),
+      drawingEllipse: (v) => this.drawEllipse(v),
     };
 
-    canvas.onmousedown = e => {
+    canvas.onmousedown = (e) => {
       this[type] = true;
       this.startPoint = {
         x: (e.clientX - rect.left) * scale,
         y: (e.clientY - rect.top) * scale,
       };
     };
-    canvas.onmousemove = e => {
+    canvas.onmousemove = (e) => {
       const point = {
         x: (e.clientX - rect.left) * scale,
         y: (e.clientY - rect.top) * scale,
@@ -132,7 +136,7 @@ export class FeedbackComponent implements OnInit {
     console.log(imgFile);
     this.storageFileService.upload({ file: imgFile }).subscribe((res: any) => {
       const data = {
-        fileId: res.fileId,
+        fileIds: [res.fileId],
         ...this.form,
       };
       this.feedbackService.createOrUpdate(data).subscribe(() => {
