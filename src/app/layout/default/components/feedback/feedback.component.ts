@@ -37,7 +37,7 @@ export class FeedbackComponent implements OnInit {
     private storageFileService: StorageFileService,
     private msg: I18nMessageService,
     private el: ElementRef<HTMLElement>,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.feedbackService.getFeedTypeList().subscribe((value) => {
@@ -137,6 +137,7 @@ export class FeedbackComponent implements OnInit {
     this.storageFileService.upload({ file: imgFile }).subscribe((res: any) => {
       const data = {
         fileIds: [res.fileId],
+        feedbackSource: 'icp',
         ...this.form,
       };
       this.feedbackService.createOrUpdate(data).subscribe(() => {
