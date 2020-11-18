@@ -112,15 +112,23 @@ export class I18NService implements CoI18NService {
   }
 
   private updateLangData(lang: string) {
-    const langs={
-      'zh':'zh-CN',
-      'en':'en-US'
+    const langs = {
+      zh: 'zh-CN',
+      en: 'en-US',
+      'zh-CN': 'zh-CN',
+      'en-US': 'en-US',
+    };
+
+    if (langs[lang]) {
+      lang = langs[lang];
+    } else {
+      lang = 'en-US';
+      window.localStorage.setItem('language', 'en-US');
     }
-    if(langs[lang]){
-      lang=langs[lang];
-    }
+
     const item = LANGS[lang];
     registerLocaleData(item.ng);
+    window.localStorage.setItem('language', lang);
     this.nzI18nService.setLocale(item.zorro);
     this.nzI18nService.setDateLocale(item.date);
     this.coLocaleService.setLocale(item.co);

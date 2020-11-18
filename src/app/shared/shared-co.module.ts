@@ -11,11 +11,11 @@ import {
   CoLayoutComponentsModule,
 } from '@co/cbc';
 import { ReuseTabModule, CoCmsModule } from '@co/cms';
-import { DelonImModule } from './im/public_api';
+import { CoImModule } from '@co/im';
 import { CoEditorModule } from '@co/cbc/basic/editor';
 
 export const SHARED_CO_MODULES = [
-  DelonImModule,
+  CoImModule,
   CoEditorModule,
   CoCommonModule,
   PageHeaderModule,

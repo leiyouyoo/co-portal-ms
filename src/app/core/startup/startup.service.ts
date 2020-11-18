@@ -13,7 +13,7 @@ import { ACLService, ACLType } from '@co/acl';
 import { ICONS } from '../../../style-icons';
 import { ICONS_AUTO } from '../../../style-icons-auto';
 import { I18NService } from '../i18n/i18n.service';
-import { GetUserSigService } from '@im';
+import { GetUserSigService } from '@co/im';
 import { SettingsService } from '@co/common';
 
 /**
@@ -46,13 +46,18 @@ export class StartupService {
 
   load(): Promise<any> {
     var lang = window.localStorage.getItem('language') || navigator.language;
-    this.i18n.use(lang);
-    this.settingsService.setLayout('lang', lang);
-
     const langMap = {
       'zh-CN': 'zh-Hans',
       'en-US': 'en',
     };
+
+    if (!langMap[lang]) {
+      lang = 'en-US';
+      window.localStorage.setItem('language', 'en-US');
+    }
+
+    this.i18n.use(lang);
+    this.settingsService.setLayout('lang', lang);
 
     return new Promise((resolve) => {
       this.httpClient
