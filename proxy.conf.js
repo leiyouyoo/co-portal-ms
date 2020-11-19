@@ -29,4 +29,11 @@ PROXY_CONFIG['/apps/fam'] = {
     secure: false,
     changeOrigin: false
 };
+
+
+PROXY_CONFIG['/apps/wf'] = {
+    target: 'http://localhost:3006',
+    secure: false,
+    changeOrigin: false
+};
 module.exports = PROXY_CONFIG;

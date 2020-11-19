@@ -92,6 +92,18 @@
         scripts: ['main.js'],
         styles: ['styles.css'],
       },
+      {
+        name: 'wf',
+        hostParent: '#app-host-container',
+        hostClass: 'wf-layout',
+        routerPathPrefix: '/wf',
+        selector: 'wf-root',
+        resourcePathPrefix: '/apps/wf/',
+        manifest: '/apps/wf/manifest.json',
+        preload: true,
+        scripts: ['main.js'],
+        styles: ['styles.css'],
+      }
     ],
   };
 })();

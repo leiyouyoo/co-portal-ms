@@ -631,6 +631,106 @@
           }
         }
       }
+    },
+    "wf": {
+      "root": "apps/wf",
+      "sourceRoot": "apps/wf",
+      "projectType": "application",
+      "prefix": "wf",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "customWebpackConfig": {
+              "path": "./apps/wf/extra-webpack.config.js",
+              "mergeStrategies": {
+                "module.rules": "prepend"
+              },
+              "replaceDuplicatePlugins": true
+            },
+            "outputPath": "dist/apps/wf",
+            "index": "apps/wf/index.html",
+            "main": "apps/wf/main.ts",
+            "tsConfig": "apps/wf/tsconfig.json",
+            "assets": ["apps/wf/assets"],
+            "styles": ["apps/wf/styles.less"],
+            "scripts": [],
+            "aot": false,
+            "extractCss": true,
+            "namedChunks": true,
+            "vendorChunk": false
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/wf/environments/environment.ts",
+                  "with": "apps/wf/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": true,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "20mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "wf:build",
+            "port": 3004,
+            "vendorChunk": false
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "wf:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "wf:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/wf/test.ts",
+            "polyfills": "apps/wf/polyfills.ts",
+            "tsConfig": "apps/wf/tsconfig.spec.json",
+            "karmaConfig": "apps/wf/karma.conf.js",
+            "styles": ["apps/wf/styles.less"],
+            "scripts": [],
+            "assets": ["apps/wf/assets"]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/wf/tsconfig.app.json", "apps/wf/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
     }
   },
   "defaultProject": "portal",
