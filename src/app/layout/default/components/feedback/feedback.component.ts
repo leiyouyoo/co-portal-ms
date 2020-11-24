@@ -137,7 +137,7 @@ export class FeedbackComponent implements OnInit {
     this.storageFileService.upload({ file: imgFile }).subscribe((res: any) => {
       const data = {
         fileIds: [res.fileId],
-        feedbackSource: 'icp',
+        feedbackSource: 'ICP',
         ...this.form,
       };
       this.feedbackService.createOrUpdate(data).subscribe(() => {
