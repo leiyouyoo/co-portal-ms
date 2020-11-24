@@ -1,8 +1,8 @@
 (function () {
   var protocol = 'http';
-  var serverHost = '192.168.1.6';
-  var apiPort = '8000';
-  var signalRPort = '8002';
+  var serverHost = 'test-api.cityocean.com';
+  var apiPort = '20001';
+  var signalRPort = '20002';
   var serverUrlPrefix = protocol + '://' + serverHost;
   var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
   // var protocol = 'http';
