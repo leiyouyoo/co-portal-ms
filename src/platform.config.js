@@ -1,5 +1,5 @@
 (function () {
-  var protocol = 'http';
+  var protocol = 'https';
   var serverHost = 'uat-api.cityocean.com';
   var apiPort = '10001';
   var signalRPort = '10002';
