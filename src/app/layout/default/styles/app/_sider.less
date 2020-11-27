@@ -1,12 +1,12 @@
 @sider-prefix: ~'@{co-portal-prefix}__sider';
 
 @{sider-prefix} {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  overflow: hidden;
+  position        : relative;
+  z-index         : 10;
+  width           : 100%;
+  height          : 100%;
+  min-height      : 100vh;
+  overflow        : hidden;
   background-color: #474747;
   // box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
 
@@ -18,10 +18,10 @@
   }
 
   &-search {
-    height: 52px;
-    margin: 0 4px;
+    height : 52px;
+    margin : 0 4px;
     padding: 16px;
-    color: #02010140;
+    color  : #02010140;
 
     >.ant-input-affix-wrapper {
       border-radius: 4px !important;
@@ -33,10 +33,10 @@
   }
 
   &-avatar {
-    display: flex;
-    flex-direction: row;
-    height: 60px;
-    padding-left: 8px;
+    display         : flex;
+    flex-direction  : row;
+    height          : 60px;
+    padding-left    : 8px;
     background-color: #626262;
 
     >.user-avatar {
@@ -44,37 +44,41 @@
     }
 
     >.user-desc {
-      flex: 1;
-      padding: 16px 8px;
-      line-height: 1em;
+      flex         : 1;
+      padding      : 16px 8px;
+      line-height  : 1em;
+      overflow     : hidden;
+      text-overflow: ellipsis;
+      white-space  : nowrap;
+      margin-right : 8px;
 
       h3 {
         margin-bottom: 0;
-        color: #E8E8E8;
-        font-size: 14px;
-        text-align: left;
+        color        : #E8E8E8;
+        font-size    : 14px;
+        text-align   : left;
       }
 
       >p {
         margin-bottom: 4px;
-        color: #B4B4B4;
-        font-size: 12px;
-        text-align: left;
+        color        : #B4B4B4;
+        font-size    : 12px;
+        text-align   : left;
       }
     }
   }
 
   &-footer {
-    height: 40px;
-    color: #FFFFFFA6;
-    font-size: 12px;
+    height        : 40px;
+    color         : #FFFFFFA6;
+    font-size     : 12px;
     // line-height: 40px;
-    text-align: center;
+    text-align    : center;
 
     >ul {
-      display: flex;
+      display       : flex;
       flex-direction: row;
-      padding-left: 0;
+      padding-left  : 0;
 
 
       li {
@@ -82,14 +86,14 @@
           border-right: 1px solid;
         }
 
-        flex: 1;
-        height: 12px;
-        margin: 8px 0;
+        flex       : 1;
+        height     : 12px;
+        margin     : 8px 0;
         line-height: 12px;
-        list-style: none;
+        list-style : none;
 
         &>a.ant-btn {
-          height: 12px;
+          height     : 12px;
           line-height: 12px;
         }
 
@@ -101,57 +105,57 @@
   }
 
   &-main {
-    flex: 1;
-    width: 100%;
+    flex            : 1;
+    width           : 100%;
     background-color: #474747;
   }
 
   &-logo {
-    position: relative;
-    display: block;
-    height: @co-portal-header-height;
+    position    : relative;
+    display     : block;
+    height      : @co-portal-header-height;
     padding-left: (@menu-collapsed-width - 32px) / 4;
-    overflow: hidden;
-    line-height: @co-portal-header-height;
-    background: #00000080;
-    transition: all 0.3s;
+    overflow    : hidden;
+    line-height : @co-portal-header-height;
+    background  : #00000080;
+    transition  : all 0.3s;
 
     img {
-      display: inline-block;
-      height: 32px;
+      display       : inline-block;
+      height        : 32px;
       vertical-align: middle;
     }
 
     h1 {
-      display: inline-block;
-      margin: 0 0 0 8px;
-      color: white;
-      font-weight: 600;
-      font-size: @co-portal-logo-font-size;
-      font-family: @co-portal-logo-font-family;
+      display       : inline-block;
+      margin        : 0 0 0 8px;
+      color         : white;
+      font-weight   : 600;
+      font-size     : @co-portal-logo-font-size;
+      font-family   : @co-portal-logo-font-family;
       vertical-align: middle;
-      transition: all 0.3s;
+      transition    : all 0.3s;
     }
 
     .title-item {
-      display: inline-block;
-      height: 0.7em;
-      margin-right: 4px;
+      display      : inline-block;
+      height       : 0.7em;
+      margin-right : 4px;
       padding-right: 4px;
-      line-height: 0.8em;
-      border-right: 2px solid #fff;
+      line-height  : 0.8em;
+      border-right : 2px solid #fff;
     }
   }
 
   &-fixed {
     position: fixed;
-    top: 0;
-    left: 0;
+    top     : 0;
+    left    : 0;
 
     @{co-portal-prefix}__side-nav-wrap {
-      height :~'calc(100vh - @{co-portal-header-height})';
+      height        :~'calc(100vh - @{co-portal-header-height})';
       padding-bottom: 24px;
-      overflow-y: scroll;
+      overflow-y    : scroll;
     }
   }
 }
@@ -160,13 +164,13 @@
 @{co-portal-prefix}__drawer {
   .@{ant-prefix}-drawer {
     &-wrapper-body {
-      height: 100%;
+      height  : 100%;
       overflow: auto;
     }
 
     &-body {
-      height: 100vh;
-      padding: 0;
+      height    : 100vh;
+      padding   : 0;
       overflow-x: hidden;
     }
   }
@@ -175,9 +179,9 @@
 // 当缩进时隐藏站点名称
 @{aside-collapsed-prefix} {
   @{sider-prefix}-logo {
-    display: flex;
+    display        : flex;
     justify-content: center;
-    padding: 0;
+    padding        : 0;
 
     h1 {
       display: none;
@@ -193,21 +197,21 @@
   }
 
   @{sider-prefix}-footer {
-    height: 80px;
+    height      : 80px;
     // font-size: 12px;
 
     ul {
       flex-direction: column;
 
       li {
-        height: 20px;
-        font-size: 20px;
-        line-height: 20px;
+        height      : 20px;
+        font-size   : 20px;
+        line-height : 20px;
         border-right: none;
 
         &>a.ant-btn {
-          height: 20px;
-          font-size: 20px;
+          height     : 20px;
+          font-size  : 20px;
           line-height: 20px;
         }
       }
@@ -222,7 +226,7 @@
 @{co-portal-prefix}__light {
   @{sider-prefix} {
     background-color: @co-portal-light-color;
-    box-shadow: @co-portal-light-slider-shadow;
+    box-shadow      : @co-portal-light-slider-shadow;
 
     &-logo {
       background: @co-portal-light-color;
@@ -247,20 +251,20 @@
   @{sider-prefix}-fixed @{co-portal-prefix}__side-nav-wrap {
     -webkit-overflow-scrolling: touch;
     // IE
-    -ms-scroll-chaining: chained;
-    -ms-content-zooming: zoom;
-    -ms-scroll-rails: none;
+    -ms-scroll-chaining       : chained;
+    -ms-content-zooming       : zoom;
+    -ms-scroll-rails          : none;
     -ms-content-zoom-limit-min: 100%;
     -ms-content-zoom-limit-max: 500%;
-    -ms-scroll-snap-type: proximity;
-    -ms-scroll-snap-points-x: snaplist(100%, 200%, 300%, 400%, 500%);
-    -ms-overflow-style: none;
+    -ms-scroll-snap-type      : proximity;
+    -ms-scroll-snap-points-x  : snaplist(100%, 200%, 300%, 400%, 500%);
+    -ms-overflow-style        : none;
     // Firefox
-    scrollbar-width: none;
+    scrollbar-width           : none;
 
     // Chrome
     &::-webkit-scrollbar {
-      width: @co-portal-sider-scrollbar-height;
+      width : @co-portal-sider-scrollbar-height;
       height: @co-portal-sider-scrollbar-width;
     }
 
