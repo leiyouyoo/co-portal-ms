@@ -15,6 +15,7 @@
   "Are you sure switch to chinese": "您确定要切换到中文吗",
   "Are you sure switch to english": "您确定要切换到英文吗",
   "Are you sure logout": "您确定要登出吗",
+  "Please input": "请输入",
   "Please input your username": "请输入您的用户名",
   "Please input your Password": "请输入您的密码",
   "Remember my username": "记住我的用户名",
@@ -51,5 +52,6 @@
   "Feed back": "用户反馈",
   "Submit successfully,thanks for your feedback": "用户反馈",
   "Fullscreen": "全屏",
-  "Annotate": "标注"
+  "Delete": "删除",
+  "New Screenshot": "新增截屏"
 }

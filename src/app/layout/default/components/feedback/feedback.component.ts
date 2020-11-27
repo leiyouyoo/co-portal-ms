@@ -1,10 +1,10 @@
 import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { StorageFileService } from '@co/cds';
+import { I18nMessageService } from '@co/common';
+import { TranslateService } from '@ngx-translate/core';
 import html2canvas from 'html2canvas';
 import { NzModalService } from 'ng-zorro-antd';
-import { TranslateService } from '@ngx-translate/core';
 import { FeedbackService } from './feedback.service';
-import { I18nMessageService } from '@co/common';
-import { StorageFileService } from '@co/cds';
 
 @Component({
   selector: 'app-feedback',
@@ -22,9 +22,11 @@ export class FeedbackComponent implements OnInit {
     contents: '',
     id: '00000000-0000-0000-0000-000000000000',
   };
-  snapShots = []; // 储存编辑步骤
+  pics: string[][] = []; // 每张截图编辑步骤，最后一步就是最终截图
+  snapShots: string[] = []; // 当前编辑的截图
+  fileIds: string[] = []; // 截图上传后的文件id
   feedbackTypes = [];
-  private canvas: HTMLCanvasElement;
+  private canvas: HTMLCanvasElement; // 当前编辑canvas
   private drawingSquare = false;
   private drawingEllipse = false;
   private startPoint;
@@ -37,7 +39,8 @@ export class FeedbackComponent implements OnInit {
     private storageFileService: StorageFileService,
     private msg: I18nMessageService,
     private el: ElementRef<HTMLElement>,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.feedbackService.getFeedTypeList().subscribe((value) => {
@@ -45,12 +48,13 @@ export class FeedbackComponent implements OnInit {
     });
   }
 
-  @HostListener('document:click', ['$event.target'])
-  onBackClick(el: HTMLElement) {
-    if (!this.el.nativeElement.contains(el)) {
-      this.close();
-    }
-  }
+  // 点击其他区域，关闭弹窗
+  // @HostListener('document:click', ['$event.target'])
+  // onBackClick(el: HTMLElement) {
+  //   if (!this.el.nativeElement.contains(el)) {
+  //     this.close();
+  //   }
+  // }
 
   open() {
     if (!this.isOpen) {
@@ -59,34 +63,61 @@ export class FeedbackComponent implements OnInit {
       html2canvas(document.body).then((canvas) => {
         this.renderer2.setStyle(canvas, 'width', '100%');
         this.renderer2.setStyle(canvas, 'height', '100%');
-        this.canvas = canvas;
-        this.snapShots = [canvas.toDataURL('image/png')];
-        const captureBox = this.captureBox.nativeElement;
-        captureBox.insertBefore(this.canvas, captureBox.lastChild);
+        const snapShots = [canvas.toDataURL('image/png')];
+        snapShots['canvas'] = canvas;
+        this.pics = [snapShots];
         this.loading = false;
+        this.fullscreen(snapShots);
       });
     }
   }
 
   close() {
     if (this.isOpen) {
-      this.canvas?.parentElement.removeChild(this.canvas);
+      this.canvas?.parentElement?.removeChild(this.canvas);
       this.drawingEllipse = false;
       this.drawingSquare = false;
+      this.pics = [];
       this.snapShots = [];
       this.isOpen = false;
     }
   }
 
-  fullscreen() {
+  fullscreen(snapShots: string[]) {
+    this.canvas = snapShots['canvas'];
+    this.snapShots = snapShots;
+    const captureBox = this.captureBox.nativeElement;
+    captureBox.insertBefore(this.canvas, captureBox.lastChild);
     this.showCaptureBox = true;
   }
 
   closeFullscreen() {
+    const imgFile = new File([this.dataURLtoBlob(this.snapShots[this.snapShots.length - 1])], new Date().getTime().toString() + '.png');
+    this.storageFileService.upload({ file: imgFile }).subscribe((res: any) => {
+      this.snapShots['fileId'] = res.fileId;
+    });
+    this.canvas?.parentElement.removeChild(this.canvas);
     this.showCaptureBox = false;
   }
 
-  startDrawSquare(type: 'drawingSquare' | 'drawingEllipse') {
+  delete(pic) {
+    this.pics = this.pics.filter(i => i !== pic);
+  }
+
+  newCapture() {
+    this.loading = true;
+    html2canvas(document.body).then((canvas) => {
+      this.renderer2.setStyle(canvas, 'width', '100%');
+      this.renderer2.setStyle(canvas, 'height', '100%');
+      const snapShots = [canvas.toDataURL('image/png')];
+      snapShots['canvas'] = canvas;
+      this.pics.unshift(snapShots);
+      this.loading = false;
+      this.fullscreen(snapShots);
+    });
+  }
+
+  startDraw(type: 'drawingSquare' | 'drawingEllipse') {
     const canvas = this.canvas;
     const rect = canvas.getBoundingClientRect();
     const scale = canvas.width / rect.width;
@@ -132,21 +163,18 @@ export class FeedbackComponent implements OnInit {
   }
 
   submit() {
-    const imgFile = new File([this.dataURLtoBlob(this.snapShots[this.snapShots.length - 1])], new Date().getTime().toString() + '.png');
-    console.log(imgFile);
-    this.storageFileService.upload({ file: imgFile }).subscribe((res: any) => {
-      const data = {
-        fileIds: [res.fileId],
-        feedbackSource: 'ICP',
-        ...this.form,
-      };
-      this.feedbackService.createOrUpdate(data).subscribe(() => {
-        this.msg.success(this.translate.instant('Submit successfully,thanks for your feedback'));
-        this.form.contents = null;
-        this.form.id = null;
-        this.form.feedbackTypeId = null;
-        this.close();
-      });
+    const fileIds = this.pics.map(snapShots => snapShots['fileId']).filter(v => !!v);
+    const data = {
+      fileIds: fileIds,
+      feedbackSource: 'ICP',
+      ...this.form,
+    };
+    this.feedbackService.createOrUpdate(data).subscribe(() => {
+      this.msg.success(this.translate.instant('Submit successfully,thanks for your feedback'));
+      this.form.contents = null;
+      this.form.id = null;
+      this.form.feedbackTypeId = null;
+      this.close();
     });
   }
 
