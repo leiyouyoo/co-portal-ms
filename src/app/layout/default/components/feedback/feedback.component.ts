@@ -48,12 +48,13 @@ export class FeedbackComponent implements OnInit {
     });
   }
 
-  @HostListener('document:click', ['$event.target'])
-  onBackClick(el: HTMLElement) {
-    if (!this.el.nativeElement.contains(el)) {
-      this.close();
-    }
-  }
+  // 点击其他区域，关闭弹窗
+  // @HostListener('document:click', ['$event.target'])
+  // onBackClick(el: HTMLElement) {
+  //   if (!this.el.nativeElement.contains(el)) {
+  //     this.close();
+  //   }
+  // }
 
   open() {
     if (!this.isOpen) {
