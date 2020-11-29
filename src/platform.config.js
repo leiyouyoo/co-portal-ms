@@ -1,16 +1,16 @@
 (function () {
-  // var protocol = 'https';
-  // var serverHost = 'uat-api.cityocean.com';
-  // var apiPort = '10001';
-  // var signalRPort = '10002';
-  // var serverUrlPrefix = protocol + '://' + serverHost;
-  // var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
-  var protocol = 'http';
-  var serverHost = 'test-api.cityocean.com';
-  var apiPort = '20001';
-  var signalRPort = '20002';
+  var protocol = 'https';
+  var serverHost = 'uat-api.cityocean.com';
+  var apiPort = '10001';
+  var signalRPort = '10002';
   var serverUrlPrefix = protocol + '://' + serverHost;
   var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
+  // var protocol = 'http';
+  // var serverHost = 'test-api.cityocean.com';
+  // var apiPort = '20001';
+  // var signalRPort = '20002';
+  // var serverUrlPrefix = protocol + '://' + serverHost;
+  // var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
 
   window.CO_PLATFORM = {
     name: 'co.portal',
