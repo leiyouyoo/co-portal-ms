@@ -20,6 +20,7 @@ export class FeedbackComponent implements OnInit {
   form = {
     feedbackTypeId: '1',
     contents: '',
+    navigationUrl: '',
     id: '00000000-0000-0000-0000-000000000000',
   };
   pics: string[][] = []; // 每张截图编辑步骤，最后一步就是最终截图
@@ -58,6 +59,7 @@ export class FeedbackComponent implements OnInit {
 
   open() {
     if (!this.isOpen) {
+      this.form.navigationUrl = window.location.href
       this.isOpen = true;
       this.loading = true;
       html2canvas(document.body).then((canvas) => {
