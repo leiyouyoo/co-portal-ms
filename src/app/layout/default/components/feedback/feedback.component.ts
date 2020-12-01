@@ -175,7 +175,7 @@ export class FeedbackComponent implements OnInit {
       this.msg.success(this.translate.instant('Submit successfully,thanks for your feedback'));
       this.form.contents = null;
       this.form.id = null;
-      this.form.feedbackTypeId = null;
+      this.form.feedbackTypeId = '1';
       this.close();
     });
   }
