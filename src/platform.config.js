@@ -1,8 +1,8 @@
 (function () {
-  var protocol = 'https';
-  var serverHost = 'uat-api.cityocean.com';
-  var apiPort = '10001';
-  var signalRPort = '10002';
+  var protocol = 'http';
+  var serverHost = 'test-api.cityocean.com';
+  var apiPort = '20001';
+  var signalRPort = '20002';
   var serverUrlPrefix = protocol + '://' + serverHost;
   var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
   // var protocol = 'http';
@@ -33,6 +33,30 @@
     },
     apps: [
       {
+        name: 'platform',
+        hostParent: '#app-host-container',
+        hostClass: 'platform-layout',
+        routerPathPrefix: '/platform',
+        selector: 'platform-root',
+        resourcePathPrefix: '/apps/platform/',
+        manifest: '/apps/platform/manifest.json',
+        preload: true,
+        scripts: ['main.js'],
+        styles: ['styles.css'],
+      },
+      {
+        name: 'crm',
+        hostParent: '#app-host-container',
+        hostClass: 'crm-layout',
+        routerPathPrefix: '/crm',
+        selector: 'crm-root',
+        resourcePathPrefix: '/apps/crm/',
+        manifest: '/apps/crm/manifest.json',
+        preload: true,
+        scripts: ['main.js'],
+        styles: ['styles.css'],
+      },
+      {
         name: 'fcm',
         hostParent: '#app-host-container',
         hostClass: 'fcm-layout',
@@ -40,6 +64,18 @@
         selector: 'fcm-root',
         resourcePathPrefix: '/apps/fcm/',
         manifest: '/apps/fcm/manifest.json',
+        preload: true,
+        scripts: ['main.js'],
+        styles: ['styles.css'],
+      },
+      {
+        name: 'frm',
+        hostParent: '#app-host-container',
+        hostClass: 'frm-layout',
+        routerPathPrefix: '/frm',
+        selector: 'frm-root',
+        resourcePathPrefix: '/apps/frm/',
+        manifest: '/apps/frm/manifest.json',
         preload: true,
         scripts: ['main.js'],
         styles: ['styles.css'],
