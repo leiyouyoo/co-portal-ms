@@ -157,18 +157,18 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
         'screen-xs': '(max-width: 575px)',
         'screen-sm': '(min-width: 576px) and (max-width: 767px)',
         'screen-md': '(min-width: 768px) and (max-width: 991px)',
-        'screen-lg': '(min-width: 992px) and (max-width: 1199px)',
+        'screen-lg': '(min-width: 992px) and (max-width: 1440px)',
         'screen-xl': '(min-width: 1441px)',
       };
       bm.observe([
-        '(min-width: 1200px)',
-        '(min-width: 992px) and (max-width: 1199px)',
+        '(min-width: 1441px)',
+        '(min-width: 992px) and (max-width: 1440px)',
         '(min-width: 768px) and (max-width: 991px)',
         '(min-width: 576px) and (max-width: 767px)',
         '(max-width: 575px)',
       ]).subscribe(() => {
         this.queryCls = Object.keys(query).find((key) => mediaMatcher.matchMedia(query[key]).matches);
-        if (this.queryCls.indexOf('screen-xl') > -1) {
+        if (this.queryCls?.indexOf('screen-xl') > -1) {
           this.pro.setCollapsed(false);
         } else {
           this.pro.setCollapsed(true);
