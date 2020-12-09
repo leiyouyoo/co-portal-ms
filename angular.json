@@ -32,9 +32,14 @@
             "aot": false,
             "vendorChunk": false,
             "optimization": false,
-            "assets": ["src/favicon.ico", "src/platform.config.js", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/platform.config.js",
+              "src/assets",
+              "src/wv-resources/lib"
+            ],
             "styles": ["src/styles.less","node_modules/cropperjs/dist/cropper.min.css"],
-            "scripts": ["node_modules/ajv/dist/ajv.bundle.js"]
+            "scripts": ["node_modules/ajv/dist/ajv.bundle.js", "src/wv-resources/lib/webviewer.min.js"]
           },
           "configurations": {
             "production": {
