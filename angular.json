@@ -35,11 +35,10 @@
             "assets": [
               "src/favicon.ico",
               "src/platform.config.js",
-              "src/assets",
-              "src/wv-resources/lib"
+              "src/assets"
             ],
             "styles": ["src/styles.less","node_modules/cropperjs/dist/cropper.min.css"],
-            "scripts": ["node_modules/ajv/dist/ajv.bundle.js", "src/wv-resources/lib/webviewer.min.js"]
+            "scripts": ["node_modules/ajv/dist/ajv.bundle.js", "src/assets/wv-resources/lib/webviewer.min.js"]
           },
           "configurations": {
             "production": {
