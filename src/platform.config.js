@@ -1,4 +1,10 @@
 (function () {
+  // var protocol = 'http';
+  // var serverHost = 'dev-api.cityocean.com';
+  // var apiPort = '20001';
+  // var signalRPort = '20002';
+  // var serverUrlPrefix = protocol + '://' + serverHost;
+  // var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
   var protocol = 'http';
   var serverHost = 'test-api.cityocean.com';
   var apiPort = '20001';
