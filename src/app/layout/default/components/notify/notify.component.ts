@@ -9,17 +9,31 @@ import * as signalR from '@aspnet/signalr';
 import { NzNotificationService } from 'ng-zorro-antd';
 import { TranslateService } from '@ngx-translate/core';
 import { ACLService } from '@co/acl';
+import { MessageNotificationServices } from '../../../../service/mdc/message/messageNotification.services';
+
+// enum BusinessType {
+//   Quote = 0,
+//   Booking = 1,
+//   Shipment = 2,
+//   Order = 3,
+//   Product = 4,
+//   Billing = 5,
+//   Customer = 6,
+//   RatesQuote = 7,
+//   RatesBaseItem = 8,
+// }
 
 enum BusinessType {
-  Quote = 0,
-  Booking = 1,
-  Shipment = 2,
-  Order = 3,
-  Product = 4,
-  Billing = 5,
-  Customer = 6,
-  RatesQuote = 7,
-  RatesBaseItem = 8,
+  Quote = 'Quote',
+  Booking = 'Booking',
+  Shipment = 'Shipment',
+  Order = 'Order',
+  Product = 'Product',
+  Billing = 'Billing',
+  Customer = 'Customer',
+  RatesQuote = 'RatesQuote',
+  RatesTruck = 'RatesTruck',
+  RatesBaseItem = 'RatesBaseItem',
 }
 
 /**
@@ -41,12 +55,15 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
 
   ds: any;
   data: any;
+  messageList = [];
+  uniqueId = -Math.abs(new Date().getTime());
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     public notification: NzNotificationService,
     private transalte: TranslateService,
     private aCLService: ACLService,
     private platformNotificationService: PlatformNotificationService,
+    private messageNotificationServices: MessageNotificationServices,
     injector: Injector,
   ) {
     super(injector);
@@ -61,12 +78,15 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
     }
 
     if (encryptedAuthToken) {
-      const signlarUrl = CoConfigManager.getValue('signalRUrl');
+      // const signlarUrl = CoConfigManager.getValue('signalRUrl');
+      const signlarUrl = CoConfigManager.getValue('testUrl');
       let connection = new signalR.HubConnectionBuilder()
-        .withUrl(signlarUrl + '/signalr?enc_auth_token=' + encodeURIComponent(encryptedAuthToken), 1)
+        // .withUrl(signlarUrl + '/signalr?enc_auth_token=' + encodeURIComponent(encryptedAuthToken), 1)
+        .withUrl(signlarUrl + '/notificationhub?equipment_type=1&enc_auth_token=' + encodeURIComponent(encryptedAuthToken), 1)
         .build();
 
       connection.on('getNotification', (data) => {
+        debugger;
         this.notification
           .template(this.template!, {
             nzClass: 'notify',
@@ -89,17 +109,30 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
   }
 
   initData() {
-    this.platformNotificationService
-      .getUserNotifications({
-        skipCount: this.skipCount * this.maxResultCount,
-        maxResultCount: this.maxResultCount,
+    this.messageNotificationServices
+      .getAllPagedAsync({
+        SkipCount: this.skipCount * this.maxResultCount,
+        MaxResultCount: this.maxResultCount,
       })
       .subscribe((res) => {
-        this.unreadCount = res.unreadCount;
-        this.ds = new NotificationDataSource(this.platformNotificationService, res.totalCount);
+        this.unreadCount = res.noReadCount;
+        this.messageList = res.items;
+        // this.ds = new NotificationDataSource(this.platformNotificationService, res.totalCount);
         this.changeDetectorRef.detectChanges();
       });
   }
+  // initData() {
+  //   this.platformNotificationService
+  //     .getUserNotifications({
+  //       skipCount: this.skipCount * this.maxResultCount,
+  //       maxResultCount: this.maxResultCount,
+  //     })
+  //     .subscribe((res) => {
+  //       this.unreadCount = res.unreadCount;
+  //       this.ds = new NotificationDataSource(this.platformNotificationService, res.totalCount);
+  //       this.changeDetectorRef.detectChanges();
+  //     });
+  // }
 
   clickMe(): void {
     this.visible = false;
@@ -113,18 +146,23 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
   }
 
   setAsAllRead() {
-    this.platformNotificationService.setAllNotificationsAsRead({}).subscribe(() => {
+    this.messageNotificationServices.setAllIsReadAsync({}).subscribe(() => {
       this.ds = null;
       this.changeDetectorRef.detectChanges();
       this.initData();
     });
+    // this.platformNotificationService.setAllNotificationsAsRead({}).subscribe(() => {
+    //   this.ds = null;
+    //   this.changeDetectorRef.detectChanges();
+    //   this.initData();
+    // });
   }
 
   setNotificationAsRead(item) {
-    item.state = 1;
-    this.platformNotificationService
-      .setNotificationAsRead({
-        id: item.id,
+    item.isRead = true;
+    this.messageNotificationServices
+      .setIsReadAsync({
+        Id: item.id,
       })
       .subscribe(
         () => {
@@ -134,42 +172,99 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
           item.loading = false;
         },
       );
+    // item.state = 1;
+    // this.platformNotificationService
+    //   .setNotificationAsRead({
+    //     id: item.id,
+    //   })
+    //   .subscribe(
+    //     () => {
+    //       this.changeDetectorRef.detectChanges();
+    //     },
+    //     (err) => {
+    //       item.loading = false;
+    //     },
+    //   );
   }
 
   navigate(item) {
+    debugger;
+    //处理通知类型数据
+    const messageSubscriptionStr = item.messageSubscriptionStr.split('.');
+    const messageType = messageSubscriptionStr[0];
     this.setNotificationAsRead(item);
-    switch (item.notification.data.properties.businessType) {
+    switch (messageType) {
       case BusinessType.Quote:
-        this.$navigate(['/crm/quotes/quotesDetail/', item.notification.data.properties.id], {
+        this.$navigate(['/crm/quotes/quotesDetail/', item.businessId], {
           queryParams: {
-            _title: `${item.notification.data.message}`,
+            _title: `${item.dataLocalizationText}`,
           },
         });
         break;
       case BusinessType.Booking:
-        this.$navigate(['/crm/bookings/bookingDetail/', item.notification.data.properties.id], {
+        this.$navigate(['/crm/bookings/bookingDetail/', item.businessId], {
           queryParams: {
-            _title: `${item.notification.data.message}`,
+            _title: `${item.dataLocalizationText}`,
           },
         });
         break;
       case BusinessType.Customer:
-        this.$navigate(['/crm/customers/customerdetails/', item.notification.data.properties.id], {
+        this.$navigate(['/crm/customers/customerdetails/', item.businessId], {
           queryParams: {
-            _title: `${item.notification.data.message}`,
+            _title: `${item.dataLocalizationText}`,
           },
         });
         break;
       case BusinessType.RatesQuote:
-        if (!this.aCLService.can(['j:商务员'])) return;
-        this.$navigate(['/frm/enquiries/'], {
-          queryParams: {
-            _title: `${item.notification.data.message}`,
-            id: item.notification.data.properties.id,
-            type: item.notification.data.properties.RateType,
-            message: 'quote',
-          },
-        });
+        if (item.extraData.RateType == 1) {
+          if (!this.aCLService.can(['j:商务员'])) {
+            this.$navigate(['/crm/inquiries/oceanlist'], {
+              queryParams: {
+                _title: `${item.dataLocalizationText}`,
+                id: item.businessId,
+                type: BusinessType.RatesQuote,
+              },
+            });
+          } else {
+            this.$navigate(['/frm/enquiries'], {
+              queryParams: {
+                _title: `${item.dataLocalizationText}`,
+                id: item.businessId,
+              },
+            });
+          }
+        } else if (item.extraData.RateType == 3) {
+          if (!this.aCLService.can(['j:商务员'])) {
+            this.$navigate(['/crm/inquiries/tracklist'], {
+              queryParams: {
+                _title: `${item.dataLocalizationText}`,
+                id: item.businessId,
+              },
+            });
+          } else {
+            this.$navigate(['/frm/enquiries/'], {
+              queryParams: {
+                _title: `${item.dataLocalizationText}`,
+                id: item.businessId,
+                message: 'quote',
+              },
+            });
+          }
+        }
+        break;
+
+      case BusinessType.RatesBaseItem:
+        if (!this.aCLService.can(['j:商务员'])) {
+          this.$navigate(['/crm/inquiries/oceanlist'], {
+            queryParams: {
+              _title: `${item.dataLocalizationText}`,
+              id: item.businessId,
+              type: BusinessType.RatesBaseItem,
+            },
+          });
+        }
+        break;
+      case BusinessType.RatesTruck:
         break;
       default:
     }
