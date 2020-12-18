@@ -78,7 +78,8 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
     }
 
     if (encryptedAuthToken) {
-      const signlarUrl = CoConfigManager.getValue('signalRUrl');
+      // const signlarUrl = CoConfigManager.getValue('signalRUrl');
+      const signlarUrl = CoConfigManager.getValue('testUrl');
       let connection = new signalR.HubConnectionBuilder()
         // .withUrl(signlarUrl + '/signalr?enc_auth_token=' + encodeURIComponent(encryptedAuthToken), 1)
         .withUrl(signlarUrl + '/notificationhub?equipment_type=1&enc_auth_token=' + encodeURIComponent(encryptedAuthToken))
@@ -218,10 +219,9 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
         if (item.extraData.RateType == 1) {
           //海运通知
           if (!this.aCLService.can(['j:商务员'])) {
-            this.$navigate(['/crm/inquiries/oceanlist'], {
+            this.$navigate(['/crm/inquiries/oceanlist/' + item.businessId], {
               queryParams: {
                 _title: `${item.dataLocalizationText}`,
-                id: item.businessId,
                 type: BusinessType.RatesQuote,
               },
             });
@@ -236,10 +236,9 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
         } else if (item.extraData.RateType == 3) {
           //拖车通知
           if (!this.aCLService.can(['j:商务员'])) {
-            this.$navigate(['/crm/inquiries/tracklist'], {
+            this.$navigate(['/crm/inquiries/tracklist/' + item.businessId], {
               queryParams: {
                 _title: `${item.dataLocalizationText}`,
-                id: item.businessId,
               },
             });
           } else {
