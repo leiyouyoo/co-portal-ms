@@ -82,11 +82,10 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
       const signlarUrl = CoConfigManager.getValue('testUrl');
       let connection = new signalR.HubConnectionBuilder()
         // .withUrl(signlarUrl + '/signalr?enc_auth_token=' + encodeURIComponent(encryptedAuthToken), 1)
-        .withUrl(signlarUrl + '/notificationhub?equipment_type=1&enc_auth_token=' + encodeURIComponent(encryptedAuthToken), 1)
+        .withUrl(signlarUrl + '/notificationhub?equipment_type=1&enc_auth_token=' + encodeURIComponent(encryptedAuthToken))
         .build();
 
       connection.on('getNotification', (data) => {
-        debugger;
         this.notification
           .template(this.template!, {
             nzClass: 'notify',
@@ -99,9 +98,10 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
       });
 
       connection.start().then(() => {
-        connection.invoke('register').then(function () {
-          console.log('通知连接成功');
-        });
+        console.log('通知连接成功');
+        // connection.invoke('register').then(function () {
+        //   console.log('通知连接成功');
+        // });
       });
 
       this.initData();
