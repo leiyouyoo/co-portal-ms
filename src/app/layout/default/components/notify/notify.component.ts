@@ -217,6 +217,7 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
         break;
       case BusinessType.RatesQuote:
         if (item.extraData.RateType == 1) {
+          //海运通知
           if (!this.aCLService.can(['j:商务员'])) {
             this.$navigate(['/crm/inquiries/oceanlist'], {
               queryParams: {
@@ -234,6 +235,7 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
             });
           }
         } else if (item.extraData.RateType == 3) {
+          //拖车通知
           if (!this.aCLService.can(['j:商务员'])) {
             this.$navigate(['/crm/inquiries/tracklist'], {
               queryParams: {
@@ -255,13 +257,19 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
 
       case BusinessType.RatesBaseItem:
         if (!this.aCLService.can(['j:商务员'])) {
-          this.$navigate(['/crm/inquiries/oceanlist'], {
+          this.$navigate(['/frm/oceans/edit/' + item.businessId], {
             queryParams: {
               _title: `${item.dataLocalizationText}`,
-              id: item.businessId,
               type: BusinessType.RatesBaseItem,
             },
           });
+          // this.$navigate(['/crm/inquiries/oceanlist'], {
+          //   queryParams: {
+          //     _title: `${item.dataLocalizationText}`,
+          //     id: item.businessId,
+          //     type: BusinessType.RatesBaseItem,
+          //   },
+          // });
         }
         break;
       case BusinessType.RatesTruck:
