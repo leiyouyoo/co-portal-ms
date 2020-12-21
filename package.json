@@ -108,6 +108,7 @@
         "cropperjs": "^1.5.7",
         "dom-to-image": "^2.6.0",
         "element-closest": "^3.0.2",
+        "guid-typescript": "^1.0.9",
         "hotkeys-js": "^3.8.1",
         "html2canvas": "^1.0.0-rc.7",
         "js-base64": "^2.5.2",
