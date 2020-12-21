@@ -11,10 +11,15 @@
   var signalRPort = '20002';
   var serverUrlPrefix = protocol + '://' + serverHost;
   var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
-  // var protocol = 'https';
-  // var serverHost = 'uat-api.cityocean.com';
-  // var apiPort = '10001';
-  // var signalRPort = '10002';
+
+
+  var testUrl="http://192.168.1.6:30007";
+  // var protocol = 'http';
+  // var serverHost = 'test-api.cityocean.com';
+  // var apiPort = '20001';
+  // var signalRPort = '20002';
+  // var serverUrlPrefix = protocol + '://' + serverHost;
+  // var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
 
   window.CO_PLATFORM = {
     name: 'co.portal',
@@ -22,6 +27,7 @@
     debug: true,
     serverUrl: apiUrlPrefix,
     signalRUrl: serverUrlPrefix + ':' + signalRPort,
+    testUrl:testUrl,
     storeUrl: apiUrlPrefix,
     loginUrl: '/passport/login',
     uploadUrl: apiUrlPrefix + '/Storage/File/Upload',
