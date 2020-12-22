@@ -1,13 +1,13 @@
 (function () {
-  // var protocol = 'http';
-  // var serverHost = 'dev-api.cityocean.com';
-  // var apiPort = '20001';
-  // var signalRPort = '20002';
-
   var protocol = 'http';
   var serverHost = 'dev-api.cityocean.com';
   var apiPort = '20001';
   var signalRPort = '20002';
+
+  // var protocol = 'http';
+  // var serverHost = 'test-api.cityocean.com';
+  // var apiPort = '20001';
+  // var signalRPort = '20002';
 
   // var protocol = 'https';
   // var serverHost = 'uat-api.cityocean.com';
