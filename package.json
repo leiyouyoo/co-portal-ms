@@ -135,6 +135,7 @@
         "tim-js-sdk": "^2.7.3",
         "tslib": "^1.10.0",
         "zone.js": "~0.10.2"
+        
     },
     "devDependencies": {
         "@angular-builders/custom-webpack": "^9.2.0",
