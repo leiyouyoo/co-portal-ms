@@ -831,6 +831,106 @@
           }
         }
       }
+    },
+    "csp": {
+      "root": "apps/csp",
+      "sourceRoot": "apps/csp",
+      "projectType": "application",
+      "prefix": "csp",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "customWebpackConfig": {
+              "path": "./apps/csp/extra-webpack.config.js",
+              "mergeStrategies": {
+                "module.rules": "prepend"
+              },
+              "replaceDuplicatePlugins": true
+            },
+            "outputPath": "dist/apps/csp",
+            "index": "apps/csp/index.html",
+            "main": "apps/csp/main.ts",
+            "tsConfig": "apps/csp/tsconfig.json",
+            "assets": ["apps/csp/assets"],
+            "styles": ["apps/csp/styles.less"],
+            "scripts": [],
+            "aot": false,
+            "extractCss": true,
+            "namedChunks": true,
+            "vendorChunk": false
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/csp/environments/environment.ts",
+                  "with": "apps/csp/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": true,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "20mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "csp:build",
+            "port": 3004,
+            "vendorChunk": false
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "csp:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "csp:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/csp/test.ts",
+            "polyfills": "apps/csp/polyfills.ts",
+            "tsConfig": "apps/csp/tsconfig.spec.json",
+            "karmaConfig": "apps/csp/karma.conf.js",
+            "styles": ["apps/csp/styles.less"],
+            "scripts": [],
+            "assets": ["apps/csp/assets"]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/csp/tsconfig.app.json", "apps/csp/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
     }
   },
   "defaultProject": "portal",

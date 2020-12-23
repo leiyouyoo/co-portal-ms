@@ -126,6 +126,18 @@
         scripts: ['main.js'],
         styles: ['styles.css'],
       },
+      {
+        name: 'csp',
+        hostParent: '#app-host-container',
+        hostClass: 'csp-layout',
+        routerPathPrefix: '/csp',
+        selector: 'csp-root',
+        resourcePathPrefix: '/apps/csp/',
+        manifest: '/apps/csp/manifest.json',
+        preload: true,
+        scripts: ['main.js'],
+        styles: ['styles.css'],
+      },
     ],
   };
 })();
