@@ -32,12 +32,8 @@
             "aot": false,
             "vendorChunk": false,
             "optimization": false,
-            "assets": [
-              "src/favicon.ico",
-              "src/platform.config.js",
-              "src/assets"
-            ],
-            "styles": ["src/styles.less","node_modules/cropperjs/dist/cropper.min.css"],
+            "assets": ["src/favicon.ico", "src/platform.config.js", "src/assets"],
+            "styles": ["src/styles.less", "node_modules/cropperjs/dist/cropper.min.css"],
             "scripts": ["node_modules/ajv/dist/ajv.bundle.js", "src/assets/wv-resources/lib/webviewer.min.js"]
           },
           "configurations": {
@@ -731,6 +727,106 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": ["apps/wf/tsconfig.app.json", "apps/wf/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "pub": {
+      "root": "apps/pub",
+      "sourceRoot": "apps/pub",
+      "projectType": "application",
+      "prefix": "pub",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "customWebpackConfig": {
+              "path": "./apps/pub/extra-webpack.config.js",
+              "mergeStrategies": {
+                "module.rules": "prepend"
+              },
+              "replaceDuplicatePlugins": true
+            },
+            "outputPath": "dist/apps/pub",
+            "index": "apps/pub/index.html",
+            "main": "apps/pub/main.ts",
+            "tsConfig": "apps/pub/tsconfig.json",
+            "assets": ["apps/pub/assets"],
+            "styles": ["apps/pub/styles.less"],
+            "scripts": [],
+            "aot": false,
+            "extractCss": true,
+            "namedChunks": true,
+            "vendorChunk": false
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/pub/environments/environment.ts",
+                  "with": "apps/pub/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": true,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "20mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "pub:build",
+            "port": 3007,
+            "vendorChunk": false
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "pub:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "pub:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/pub/test.ts",
+            "polyfills": "apps/pub/polyfills.ts",
+            "tsConfig": "apps/pub/tsconfig.spec.json",
+            "karmaConfig": "apps/pub/karma.conf.js",
+            "styles": ["apps/pub/styles.less"],
+            "scripts": [],
+            "assets": ["apps/pub/assets"]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/pub/tsconfig.app.json", "apps/pub/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
           }
         }

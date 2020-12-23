@@ -6,7 +6,7 @@
   // var serverUrlPrefix = protocol + '://' + serverHost;
   // var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
   var protocol = 'http';
-  var serverHost = 'test-api.cityocean.com';
+  var serverHost = 'dev-api.cityocean.com';
   var apiPort = '20001';
   var signalRPort = '20002';
   var serverUrlPrefix = protocol + '://' + serverHost;
@@ -110,6 +110,18 @@
         selector: 'wf-root',
         resourcePathPrefix: '/apps/wf/',
         manifest: '/apps/wf/manifest.json',
+        preload: true,
+        scripts: ['main.js'],
+        styles: ['styles.css'],
+      },
+      {
+        name: 'pub',
+        hostParent: '#app-host-container',
+        hostClass: 'pub-layout',
+        routerPathPrefix: '/pub',
+        selector: 'pub-root',
+        resourcePathPrefix: '/apps/pub/',
+        manifest: '/apps/pub/manifest.json',
         preload: true,
         scripts: ['main.js'],
         styles: ['styles.css'],
