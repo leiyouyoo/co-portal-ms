@@ -3,18 +3,18 @@
 
   // 按钮
   &-btn {
-    display      : block;
-    width        : 24px;
-    height       : 24px;
-    color        : @grey-6;
-    line-height  : 24px;
-    text-align   : center;
+    display: block;
+    width: 24px;
+    height: 24px;
+    color: @grey-6;
+    line-height: 24px;
+    text-align: center;
     border-radius: 50%;
-    cursor       : pointer;
+    cursor: pointer;
 
     &:hover {
       background: @antd-dd-hover-background;
-      border    : 1px solid @border-color-split;
+      border: 1px solid @border-color-split;
     }
   }
 }
@@ -24,5 +24,14 @@
 .selectIptNoPadding {
   input {
     padding-left: 0px !important;
+  }
+}
+
+.ant-radio-group {
+  padding: 0 !important;
+
+  .ant-radio-button-wrapper-checked {
+    color: @primary-color !important;
+    background: #d1e9ff !important;
   }
 }
