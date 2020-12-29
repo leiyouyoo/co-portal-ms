@@ -15,8 +15,8 @@
 </button>
 
 <ng-template #contentTemplate>
-  <nz-card nzBordered="false" nzSize="small" class="ant-card__body-nopadding" style="width: 350px; margin-bottom: 0 !important;">
-    <div>
+  <nz-card nzBordered="false" nzSize="small" class="ant-card__body-nopadding" style="width: 350px; margin-bottom: 0 !important">
+    <div *ngIf="messageList?.length > 0; else noData">
       <cdk-virtual-scroll-viewport itemSize="55" class="notifications">
         <nz-list>
           <nz-list-item *cdkVirtualFor="let item of messageList">
@@ -51,7 +51,7 @@
             <ng-template #userName>
               <div class="item-time">
                 <span class="item-time-user">{{ item.sendOneName || ('System notification' | translate) }}</span>
-                <span style="color: #00000045; font-size: 12px;">{{ item.creationTime | date: 'HH:mm,MMM dd yyyy':'':'en-US' }}</span>
+                <span style="color: #00000045; font-size: 12px">{{ item.creationTime | date: 'HH:mm,MMM dd yyyy':'':'en-US' }}</span>
               </div>
             </ng-template>
           </nz-list-item>
@@ -104,6 +104,9 @@
         </nz-list> -->
       </cdk-virtual-scroll-viewport>
     </div>
+    <ng-template #noData>
+      <nz-result [nzTitle]="'No news' | translate" [nzSubTitle]="'You have not received the message' | translate"> </nz-result>
+    </ng-template>
   </nz-card>
 </ng-template>
 
@@ -111,7 +114,7 @@
   <div class="notifications_title">
     <span>{{ 'Notifications' | translate }}</span>
 
-    <button nz-button (click)="setAsAllRead()">
+    <button nz-button (click)="setAsAllRead()" *ngIf="messageList?.length > 0">
       {{ 'Make all read' | translate }}
     </button>
   </div>
@@ -125,10 +128,10 @@
   <div class="notify-right">
     <div class="item-time">
       <span class="item-time-user">{{ data.dataLocalizationText || ('System notification' | translate) }}</span>
-      <span style="color: #00000045; font-size: 12px;">{{ data.creationTime | date: 'HH:mm,MMM dd yyyy':'':'en-US' }}</span>
+      <span style="color: #00000045; font-size: 12px">{{ data.creationTime | date: 'HH:mm,MMM dd yyyy':'':'en-US' }}</span>
     </div>
     <div>{{ data.dataLocalizationText }}</div>
-    <div style="text-align: right;">
+    <div style="text-align: right">
       <button nz-button nzSize="small" *ngIf="!data.isRead" (click)="setNotificationAsRead(data); notification.remove()">
         {{ 'Set as read' | translate }}
       </button>
