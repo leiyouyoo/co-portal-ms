@@ -1,8 +1,8 @@
 (function () {
   var protocol = 'http';
-  var serverHost = 'dev-api.cityocean.com';
-  var apiPort = '20001';
-  var signalRPort = '20002';
+  var serverHost = 'api.dev.com';
+  var apiPortapiPort = '';
+  var signalRPort = '';
 
   // var protocol = 'http';
   // var serverHost = 'test-api.cityocean.com';
@@ -14,8 +14,7 @@
   // var apiPort = '10001';
   // var signalRPort = '10002';
   var serverUrlPrefix = protocol + '://' + serverHost;
-  var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
-
+  var apiUrlPrefix = serverUrlPrefix;
 
   window.CO_PLATFORM = {
     name: 'co.portal',
@@ -34,7 +33,7 @@
     mapbox: {},
     im: {
       ImImageUrl: apiUrlPrefix,
-      ImEnable: true,
+      ImEnable: false,
     },
     apps: [
       {
