@@ -78,11 +78,17 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
     }
 
     if (encryptedAuthToken) {
-      const signlarUrl = CoConfigManager.getValue('signalRUrl');
+      const signlarUrl = CoConfigManager.getValue('notifyUrl');
       // const signlarUrl = CoConfigManager.getValue('testUrl');
       let connection = new signalR.HubConnectionBuilder()
         // .withUrl(signlarUrl + '/signalr?enc_auth_token=' + encodeURIComponent(encryptedAuthToken), 1)
-        .withUrl(signlarUrl + '/notificationhub?equipment_type=1&enc_auth_token=' + encodeURIComponent(encryptedAuthToken))
+        .withUrl(
+          signlarUrl +
+            '/notificationhub?equipment_type=1&language=' +
+            this.$i18n._default +
+            '&enc_auth_token=' +
+            encodeURIComponent(encryptedAuthToken),
+        )
         .build();
 
       connection.on('getNotification', (data) => {
