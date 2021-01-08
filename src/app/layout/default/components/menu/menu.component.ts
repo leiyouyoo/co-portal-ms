@@ -38,7 +38,6 @@ export class DefaultLayoutMenuComponent implements OnInit, OnDestroy {
       this.genMenus(res);
     });
 
-    debugger;
     this.currentMenu = this.getMenu(window.location.hash.replace('#', ''));
     this.router.events.pipe(filter((evt: any) => evt instanceof NavigationEnd)).subscribe((evt: any) => {
       this.currentMenu = this.getMenu(this.router.url);

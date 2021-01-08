@@ -1,0 +1,151 @@
+<!--
+<div
+  class="alain-default__nav-item"
+  nz-dropdown
+  [nzDropdownMenu]="taskMenu"
+  nzTrigger="click"
+  nzPlacement="bottomRight"
+  (nzVisibleChange)="visibleChange($event)"
+>
+  <nz-badge [nzCount]="unreadNotificationCount" nzShowDot>
+    &lt;!&ndash; <img src="assets/icon/natification_new.svg" height="24px" /> &ndash;&gt;
+    <span class="iconfont icon-tongzhi1"></span>
+  </nz-badge>
+</div>
+
+<nz-dropdown-menu #taskMenu="nzDropdownMenu">
+  <div nz-menu class="wd-lg notifications-menu">
+    <div *ngIf="loading" class="mx-lg p-lg">
+      <nz-spin></nz-spin>
+    </div>
+    <nz-card
+      *ngIf="!loading"
+      [nzTitle]="'Notifications' | translate"
+      nzBordered="false"
+      [nzExtra]="extra"
+      nzSize="small"
+      class="ant-card__body-nopadding"
+      style="width: 350px;"
+    >
+      <ng-template #extra>
+        <button
+          *ngIf="unreadNotificationCount > 0"
+          nz-button
+          nzSize="small"
+          nzType="link"
+          style="background: #FFFFFF;
+          border: 1px solid rgba(0,0,0,0.15);
+          border-radius: 2px;
+          border-radius: 2px;
+          color: rgba(0,0,0,0.65);"
+          (click)="setAllNotificationsAsRead()"
+        >
+          {{ 'Set all as read' | translate }}
+        </button>
+        &lt;!&ndash; <button nz-button nzSize="small" nzType="success" (click)="openNotificationSettingsModal()">
+          <i nz-icon nzType="setting" nzTheme="outline"></i>
+        </button> &ndash;&gt;
+      </ng-template>
+
+      <div nz-row *ngIf="objectKeys(notifications).length === 0">
+        <div nz-col nzOffset="1" [nzSpan]="23">
+          <img src="assets\images\no-notifications.png" style="width: 100%; padding: 50px;" />
+          <p style="text-align: center;">{{ "You don't have any general notifications yet" | translate }}.</p>
+        </div>
+      </div>
+
+      <div
+        class="notifications"
+        *ngIf="objectKeys(notifications).length > 0"
+        appScroll
+        (scrollChange)="onScrollChange($event)"
+      >
+        <div *ngFor="let key of objectKeys(notifications)">
+          <div class="notifications-title">
+            <span class="line"></span>
+            <span class="text" *ngIf="key > '1'">{{ key }} weeks ago</span>
+            <span class="text" *ngIf="key == '1'">{{ key }} week ago</span>
+            <span class="text" *ngIf="key == '0'">{{ 'In a week' | translate }}</span>
+            <span class="line"></span>
+          </div>
+          <div
+            *ngFor="let item of notifications[key]"
+            nz-row
+            [nzType]="'flex'"
+            [nzJustify]="'center'"
+            [nzAlign]="'top'"
+            (click)="select(item)"
+            nz-menu-item
+            [ngClass]="{ 'notification-read': item.read, 'notification-unread': !item.read }"
+            style="display: flex; align-items: center;"
+            class="py-sm "
+          >
+            &lt;!&ndash; bg-grey-lighter-h point &ndash;&gt;
+            &lt;!&ndash; class="time-icon iconfont icon-notification" &ndash;&gt;
+            <div nz-col [nzSpan]="4" *ngIf="item.businessType == businessType.Quote">
+              <img src="assets/images/baojia@3x.png" style="width: 36px; height: 36px;" class="bottom-item-icon" />
+            </div>
+
+            <div nz-col [nzSpan]="4" *ngIf="item.businessType == businessType.Booking">
+              <img src="assets/images/dingdan@3x.png" style="width: 36px; height: 36px;" />
+            </div>
+
+            <div nz-col [nzSpan]="4" *ngIf="item.businessType == businessType.Shipment">
+              <img src="assets/images/yundan@3x.png" style="width: 36px; height: 36px;" />
+            </div>
+
+            <div nz-col [nzSpan]="4" *ngIf="item.businessType == businessType.Billing">
+              <img src="assets/images/zhangdan@3x.png" style="width: 36px; height: 36px;" />
+            </div>
+
+            <div nz-col [nzSpan]="4" *ngIf="item.businessType == businessType.Customer">
+              &lt;!&ndash; <img src="assets/images/zhangdan@3x.png" style="width: 36px; height: 36px;" /> &ndash;&gt;
+              <span class="iconfont icon-documentsnew"></span>
+            </div>
+
+            <div nz-col [nzSpan]="20">
+              <div class="item-time">
+                <span [ngClass]="{ datetime_read: item.read }">
+                  {{ item.datetime | date: 'HH:mm,MMM dd yyyy':'':'en-US' }} ETC
+                </span>
+
+                <span *ngIf="!item.read" class="set-read">
+                  <a
+                    href="javascript:;"
+                    (click)="setNotificationAsRead(item); $event.preventDefault(); $event.stopPropagation()"
+                    >{{ 'Set as read' | translate }}</a
+                  >
+                </span>
+                <span *ngIf="item.read" class="set-readed">
+                  <a href="javascript:;">{{ 'Have read' | translate }}</a>
+                </span>
+              </div>
+              <p
+                [ngClass]="{ description_read: item.read }"
+                class="mb0"
+                [title]="item.description"
+                style="overflow: hidden;
+              text-overflow:ellipsis;
+              white-space: nowrap;"
+              >
+                {{ item.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div style="width:100%;text-align: center;">
+          <nz-spin nzSimple *ngIf="notHasNextPage"></nz-spin>
+          <p *ngIf="!notHasNextPage" style="color:#1890ff">{{ 'No Data' | translate }}...</p>
+        </div>
+      </div>
+
+      &lt;!&ndash; <div nz-row>
+        <div nz-col [nzSpan]="24" class="pt-md border-top-1 text-center text-grey point">
+          <button nz-button nzType="link" (click)="toNotificationsPage()">{{ 'See all notifications' | translate }}</button>
+        </div>
+      </div> &ndash;&gt;
+    </nz-card>
+  </div>
+</nz-dropdown-menu>
+-->

@@ -1,7 +1,8 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, Inject } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { _HttpClient, CoAuthService } from '@co/common';
+import { CO_SESSIONSERVICE_TOKEN, ISessionService } from '@co/core';
 import { StartupService } from '@core';
 
 import { NzNotificationService, NzMessageService, NzModalService } from 'ng-zorro-antd';
@@ -35,6 +36,7 @@ export class loginMainComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private startupService: StartupService,
     private getUserSigService: GetUserSigService,
+    @Inject(CO_SESSIONSERVICE_TOKEN) private sessionService: ISessionService
   ) {}
 
   ngOnInit(): void {
@@ -176,7 +178,12 @@ export class loginMainComponent implements OnInit {
         }
 
         this.getUserSigService.imLogin();
-        location.href = '#/dashboard';
+        const appData = this.sessionService.data;
+        if (appData?.session.user.isExternal) {
+          location.href = '#/csp/dashboard';
+        } else {
+          location.href = '#/dashboard';
+        }
       },
       (err) => {
         this.notification.error('Error', err || 'Get User Configuration Failed.');
