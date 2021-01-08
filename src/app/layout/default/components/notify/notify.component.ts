@@ -50,7 +50,7 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
   visible = false;
   public count: number;
   skipCount = 0;
-  maxResultCount = 10;
+  maxResultCount = 500;
   unreadCount: number;
 
   ds: any;
