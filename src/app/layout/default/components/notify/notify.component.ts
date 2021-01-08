@@ -50,7 +50,7 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
   visible = false;
   public count: number;
   skipCount = 0;
-  maxResultCount = 10;
+  maxResultCount = 500;
   unreadCount: number;
 
   ds: any;
@@ -78,11 +78,17 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
     }
 
     if (encryptedAuthToken) {
-      const signlarUrl = CoConfigManager.getValue('signalRUrl');
+      const signlarUrl = CoConfigManager.getValue('notifyUrl');
       // const signlarUrl = CoConfigManager.getValue('testUrl');
       let connection = new signalR.HubConnectionBuilder()
         // .withUrl(signlarUrl + '/signalr?enc_auth_token=' + encodeURIComponent(encryptedAuthToken), 1)
-        .withUrl(signlarUrl + '/notificationhub?equipment_type=1&enc_auth_token=' + encodeURIComponent(encryptedAuthToken))
+        .withUrl(
+          signlarUrl +
+            '/notificationhub?equipment_type=1&language=' +
+            this.$i18n._default +
+            '&enc_auth_token=' +
+            encodeURIComponent(encryptedAuthToken),
+        )
         .build();
 
       connection.on('getNotification', (data) => {
@@ -117,7 +123,7 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
       .subscribe((res) => {
         this.unreadCount = res.noReadCount;
         this.messageList = res.items;
-        // this.ds = new NotificationDataSource(this.platformNotificationService, res.totalCount);
+        this.ds = new NotificationDataSource(this.platformNotificationService, res.totalCount);
         this.changeDetectorRef.detectChanges();
       });
   }
