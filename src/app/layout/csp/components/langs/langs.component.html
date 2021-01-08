@@ -1,0 +1,27 @@
+<div nz-dropdown [nzDropdownMenu]="langMenu" [nzPlacement]="placement" style="margin-right: 24px;">
+  <ng-container *ngIf="showLangText">
+    <img src="assets/icon/luanger_new.svg" height="24px" />
+    {{ currentLang | translate }}
+    <i nz-icon nzType="down"></i>
+  </ng-container>
+  <!-- <img *ngIf="!showLangText" src="assets/icon/luanger_new.svg" height="24px" /> -->
+  <i nz-icon nzIconfont="icon-yingwen" style="font-size: 14px!important;color: rgba(255,255,255,.45);"
+     *ngIf="!showLangText && i18n.currentLang == 'en-US'"></i>
+  <i nz-icon nzIconfont="icon-zhongwen" style="font-size: 14px!important;color: rgba(255,255,255,.45);"
+     *ngIf="!showLangText && i18n.currentLang == 'zh-CN'"></i>
+</div>
+<nz-dropdown-menu #langMenu="nzDropdownMenu">
+  <div nz-menu class="width-sm">
+    <li
+      nz-menu-item
+      *ngFor="let item of langs"
+      [nzSelected]="item.code === currentLang"
+      (click)="change(item.code)"
+      class="width-sm-lang"
+    >
+      <span [ngClass]="{ primary_color: item.code === currentLang }"></span>
+      <!-- <span role="img" [attr.aria-label]="item.text" class="pr-xs">{{ item.abbr }}</span> -->
+      {{ item.text }}
+    </li>
+  </div>
+</nz-dropdown-menu>

@@ -41,4 +41,10 @@ PROXY_CONFIG['/apps/pub'] = {
   secure: false,
   changeOrigin: false,
 };
+
+PROXY_CONFIG['/apps/csp'] = {
+  target: 'http://localhost:3008',
+  secure: false,
+  changeOrigin: false,
+};
 module.exports = PROXY_CONFIG;

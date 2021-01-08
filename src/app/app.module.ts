@@ -8,6 +8,7 @@ import { registerLocaleData } from '@angular/common';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { IS_CSP } from '@shared';
 import { NZ_DATE_LOCALE, NZ_I18N, zh_CN as zorroLang } from 'ng-zorro-antd/i18n';
 import { zhCN as dateLang } from 'date-fns/locale';
 
@@ -123,6 +124,7 @@ const APPINIT_PROVIDES = [
         disabled: true,
       },
     },
+    { provide: IS_CSP, useValue: false },
   ],
   bootstrap: [AppComponent],
 })
