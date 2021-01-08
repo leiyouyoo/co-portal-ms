@@ -1,0 +1,72 @@
+<div #target class="feedback-fab">
+  <div>
+    <i nz-icon nzType="highlight" nzTheme="outline"></i>
+    <div style="transform: translateY(-.33em);">{{'Feed back'|translate}}</div>
+  </div>
+</div>
+<nz-spin [nzSpinning]="loading" class="feedback-modal" [class.show]="isOpen">
+  <div class="feedback-modal-header">
+    <div>{{'User Feedback'|translate}}</div>
+    <button (click)="close()" aria-label="Close" class="feedback-modal-close">
+      <i nz-icon nzType="close"></i>
+    </button>
+  </div>
+  <div class="feedback-modal-body">
+    <nz-radio-group
+      [nzButtonStyle]="'solid'"
+      [(ngModel)]="form.feedbackTypeId"
+      class="nz-radio-group-button"
+    >
+      <label nz-radio-button [nzValue]="type.id" *ngFor="let type of feedbackTypes">{{type.text}}</label>
+    </nz-radio-group>
+    <div *ngFor="let pic of pics;index as i" style="margin-top: 14px;position: relative;display: inline-flex;width: 100%;" [hidden]="loading">
+      <img [src]="pic[pic.length - 1]">
+      <button (click)="fullscreen(pic)" nz-button nzSize="small" nzType="primary" class="feedback-modal-fullscreen">
+        <i nz-icon nzType="expand" nzTheme="outline"></i>
+        {{'Fullscreen'|translate}}
+      </button>
+      <div class="feedback-modal-sign" (click)="delete(pic)">
+        {{'Delete'|translate}}
+      </div>
+    </div>
+    <nz-form-item style="margin-top: 12px;">
+      <nz-form-label nzSpan="24" nzNoColon>{{'Description'|translate}}</nz-form-label>
+      <nz-form-control>
+        <textarea rows="4" nz-input [placeholder]="'Please input'|translate" [(ngModel)]="form.contents"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <div class="feedback-modal-footer">
+    <button nz-button nzType="default" (click)="newCapture()" [hidden]="pics.length>=9">{{ 'New Screenshot' | translate }}</button>
+    <button nz-button nzType="primary" (click)="submit()">{{ 'Submit' | translate }}</button>
+  </div>
+</nz-spin>
+
+<div class="feedback-capture" [class.show]="showCaptureBox">
+  <button (click)="closeFullscreen()" aria-label="Close" class="feedback-modal-close feedback-capture-close">
+    <i nz-icon nzType="close"></i>
+  </button>
+  <div class="capture_box" #capture_box>
+    <div class="feedback-capture-toolbar">
+      <i nz-icon nzType="border" nzTheme="outline" (click)="startDraw('drawingSquare')"></i>
+      <i nz-icon (click)="startDraw('drawingEllipse')">
+        <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="info-circle" aria-hidden="true">
+          <path
+            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path>
+        </svg>
+      </i>
+      <i nz-icon nzType="rollback" nzTheme="outline" (click)="undo()"></i>
+      <i nz-icon nzType="check" nzTheme="outline" (click)="editDone()"></i>
+    </div>
+  </div>
+</div>
+
+<ngx-moveable
+  [target]="target"
+  [draggable]="true"
+  [origin]="false"
+  [throttleDrag]="0"
+  (dragStart)="onDragStart($event)"
+  (drag)="onDrag($event)"
+  (dragEnd)="onDragEnd($event)"
+></ngx-moveable>

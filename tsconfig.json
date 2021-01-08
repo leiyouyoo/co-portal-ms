@@ -20,6 +20,7 @@
   },
   "files": [
     "src/main.ts",
+    "src/main-csp.ts",
     "src/polyfills.ts"
   ],
   "include": [

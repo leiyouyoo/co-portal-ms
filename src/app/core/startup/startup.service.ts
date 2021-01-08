@@ -1,20 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { TranslateService } from '@ngx-translate/core';
-import { NzIconService } from 'ng-zorro-antd/icon';
-
-import _ from 'lodash';
-import { CO_I18N_TOKEN, CoConfigManager, ArrayService, CO_SESSIONSERVICE_TOKEN, ISessionService } from '@co/core';
-import { MenuService, CoSessionService, CoAuthService } from '@co/common';
 
 import { ACLService, ACLType } from '@co/acl';
+import { CoAuthService, MenuService, SettingsService } from '@co/common';
+import { ArrayService, CO_I18N_TOKEN, CO_SESSIONSERVICE_TOKEN, CoConfigManager, ISessionService } from '@co/core';
+import { GetUserSigService } from '@co/im';
+import { TranslateService } from '@ngx-translate/core';
+import { IS_CSP } from '@shared';
+
+import _ from 'lodash';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzIconService } from 'ng-zorro-antd/icon';
+import { catchError } from 'rxjs/operators';
 import { ICONS } from '../../../style-icons';
 import { ICONS_AUTO } from '../../../style-icons-auto';
 import { I18NService } from '../i18n/i18n.service';
-import { GetUserSigService } from '@co/im';
-import { SettingsService } from '@co/common';
 
 /**
  * 用于应用启动时
@@ -34,6 +34,7 @@ export class StartupService {
     @Inject(CO_SESSIONSERVICE_TOKEN) private sessionService: ISessionService,
     private getUserSigService: GetUserSigService,
     private settingsService: SettingsService,
+    @Inject(IS_CSP) private isCSP: boolean,
   ) {
     iconSrv.addIcon(...ICONS_AUTO, ...ICONS);
     this.loginService.fbLibrary();
@@ -60,8 +61,12 @@ export class StartupService {
     this.settingsService.setLayout('lang', lang);
 
     return new Promise((resolve) => {
+      let url = CoConfigManager.getValue('serverUrl') + '/platform/Session/GetCurrentUserConfiguration'
+      if (!this.isCSP) {
+        url = url + '?client=ICP_Web';
+      }
       this.httpClient
-        .get(CoConfigManager.getValue('serverUrl') + '/platform/Session/GetCurrentUserConfiguration?client=ICP_Web', {
+        .get(url, {
           headers: { '.AspNetCore.Culture': langMap[lang], 'Accept-Language': langMap[lang] },
         })
         .pipe(

@@ -1,0 +1,31 @@
+{
+  "shipment": {
+    "mode": "Mode",
+    "list_no_data": "No data",
+    "list_anonymous_input_placeholder": "Please input shipment NO."
+  },
+  "order": {},
+  "rates": {
+    "TT": "TT"
+  },
+  "booking": {
+    "Name": "Name",
+    "Yes": "Yes",
+    "No": "No"
+  },
+  "Schedules-Rates": "Schedules",
+  "Name": "Name",
+  "labelorder": "order",
+  "labelshipment": "shipment",
+  "labelquote": "quote",
+  "labelbilling": "billing",
+  "labelbooking": "booking",
+  "EVAT":"E-Value Added Tax Invoice",
+  "PaperVAT":"Paper Value Added Tax Invoice",
+  "SpecialVAT":"Value Added Tax  Special Invoice",
+  "Invoice.Verified": "Verified",
+  "Invoice.Issued": "Issued",
+  "bill" : {
+
+  }
+}

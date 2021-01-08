@@ -1,0 +1,13 @@
+<nz-layout class="layout">
+  <nz-layout>
+    <nz-header>
+      <app-header></app-header>
+    </nz-header>
+    <nz-content>
+      <router-outlet></router-outlet>
+      <div id="app-host-container" class="app-layout"></div>
+    </nz-content>
+  </nz-layout>
+<!--  <app-im-template [fromType]="'csp'" data-html2canvas-ignore="true"></app-im-template>-->
+  <csp-feedback data-html2canvas-ignore="true"></csp-feedback>
+</nz-layout>

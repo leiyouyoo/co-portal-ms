@@ -28,6 +28,26 @@ const routes: Routes = [
       },
     ],
   },
+  // {
+  //   path: 'csp',
+  //   component: MainLayoutComponent,
+  //   children: [
+  //     {
+  //       path: '',
+  //       component: EmptyComponent,
+  //       children: [
+  //         {
+  //           path: '**',
+  //           component: EmptyComponent,
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       path: 'exception',
+  //       loadChildren: () => import('./exception/exception.module').then((m) => m.ExceptionModule),
+  //     },
+  //   ],
+  // },
 
   {
     path: 'passport',
@@ -52,16 +72,18 @@ const routes: Routes = [
 
 const apps: any[] = CoConfigManager.getSection('apps');
 apps?.forEach((a) => {
-  routes[0].children.push({
-    path: a.name,
-    component: EmptyComponent,
-    children: [
-      {
-        path: '**',
-        component: EmptyComponent,
-      },
-    ],
-  });
+  if (a.name !== 'csp') {
+    routes[0].children.push({
+      path: a.name,
+      component: EmptyComponent,
+      children: [
+        {
+          path: '**',
+          component: EmptyComponent,
+        },
+      ],
+    });
+  }
 });
 
 /**

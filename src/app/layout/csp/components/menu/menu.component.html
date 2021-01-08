@@ -1,0 +1,90 @@
+<ul nzTheme="dark" class="menu">
+  <li *ngFor="let item of menu; let i = index">
+    <!-- if not empty -->
+    <ng-container *ngIf="item._url; else emptyUrl">
+      <!-- if internal -->
+      <a
+        class="menu-name"
+        *ngIf="!item._isExternalUrl"
+        nz-dropdown
+        [nzDropdownMenu]="item.items.length ? menu : null"
+        routerLinkActive="active"
+        [routerLink]="item._url"
+      >
+        {{ item.displayName }} <i nz-icon nzType="down" *ngIf="item.items.length" style="font-size: 12px;"></i>
+      </a>
+      <!-- if external -->
+      <a class="menu-name" *ngIf="item._isExternalUrl" [href]="item._url">
+        {{ item.displayName }} <i nz-icon nzType="down" *ngIf="item.items.length" style="font-size: 12px;"></i>
+      </a>
+    </ng-container>
+    <!-- 空路由不跳转 -->
+    <ng-template #emptyUrl>
+      <a
+        class="menu-name"
+        nz-dropdown
+        [ngClass]="{ active: getChildRouteIsActive(item.items), sunMenuTile: item.items.length }"
+        [nzDropdownMenu]="item.items.length ? menu : null"
+      >
+        {{ item.displayName }} <i nz-icon nzType="down" *ngIf="item.items.length" style="font-size: 12px;"></i>
+      </a>
+    </ng-template>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul *ngIf="item.items.length" nz-menu nzSelectable class="dropdown-ul">
+        <li nz-menu-item *ngFor="let childRoute of item.items">
+          <!-- if internal -->
+          <a
+            *ngIf="!childRoute._isExternalUrl"
+            routerLinkActive="active"
+            [routerLink]="childRoute._url"
+            class="menu-name child-menu-a"
+            >{{ childRoute.displayName }}</a
+          >
+          <!-- if external -->
+          <a *ngIf="childRoute._isExternalUrl" [href]="childRoute._url" class="menu-name child-menu-a">{{
+            childRoute.displayName
+          }}</a>
+        </li>
+      </ul>
+    </nz-dropdown-menu>
+  </li>
+</ul>
+
+<button class="drawer-menu-button" nz-button nzType="primary" (click)="drawerVisible = true" style="margin-left: 21px;">
+  <i nz-icon nzType="menu" nzTheme="outline"></i>
+</button>
+<nz-drawer
+  [nzClosable]="false"
+  [nzVisible]="drawerVisible"
+  nzPlacement="left"
+  (nzOnClose)="drawerVisible = false"
+  class="menu-drawer"
+  [nzBodyStyle]="{ height: '100%', background: '#0a1f43' }"
+>
+  <ul nz-menu nzMode="inline" nzTheme="dark" class="drawer-menu bg-menu">
+    <ng-container *ngFor="let item of menu; let i = index">
+      <li nz-menu-item nzMatchRouter *ngIf="item?.items?.length === 0; else childRouteTmpl">
+        <!-- if internal -->
+        <a *ngIf="!item._isExternalUrl" [routerLink]="item._url" (click)="drawerVisible = false">{{
+          item.displayName
+        }}</a>
+        <!-- if external -->
+        <a *ngIf="item._isExternalUrl" [href]="item._url">{{ item.displayName }}</a>
+      </li>
+      <ng-template #childRouteTmpl>
+        <li class="bg-menu" nz-submenu [nzTitle]="item.displayName" nzMenuClassName="bg-main">
+          <ul class="bg-menu">
+            <li nz-menu-item nzMatchRouter *ngFor="let childRoute of item.items">
+              <!-- if internal -->
+              <a *ngIf="!item._isExternalUrl" [routerLink]="childRoute._url" (click)="drawerVisible = false">{{
+                'childRoute.displayName'
+              }}</a>
+              <!-- if external -->
+              <a *ngIf="item._isExternalUrl" [href]="childRoute._url">{{ childRoute.displayName }}</a>
+            </li>
+          </ul>
+        </li>
+      </ng-template>
+    </ng-container>
+  </ul>
+</nz-drawer>
