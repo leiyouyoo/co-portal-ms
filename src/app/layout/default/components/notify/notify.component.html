@@ -16,10 +16,10 @@
 
 <ng-template #contentTemplate>
   <nz-card nzBordered="false" nzSize="small" class="ant-card__body-nopadding" style="width: 350px; margin-bottom: 0 !important">
-    <div *ngIf="messageList?.length > 0; else noData">
+    <div *ngIf="ds?.length > 0; else noData">
       <cdk-virtual-scroll-viewport itemSize="55" class="notifications">
         <nz-list>
-          <nz-list-item *cdkVirtualFor="let item of messageList">
+          <nz-list-item *cdkVirtualFor="let item of ds">
             <nz-skeleton *ngIf="!item" [nzAvatar]="true" [nzParagraph]="{ rows: 1 }"></nz-skeleton>
             <nz-list-item-meta *ngIf="item" [nzAvatar]="userHeader" [nzDescription]="userName" (click)="navigate(item)">
               <nz-list-item-meta-title>
@@ -56,6 +56,7 @@
             </ng-template>
           </nz-list-item>
         </nz-list>
+
         <!-- <nz-list>
           <nz-list-item *cdkVirtualFor="let item of ds">
             <nz-skeleton *ngIf="!item" [nzAvatar]="true" [nzParagraph]="{ rows: 1 }"></nz-skeleton>

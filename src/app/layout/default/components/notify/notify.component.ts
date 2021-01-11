@@ -78,7 +78,7 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
     }
 
     if (encryptedAuthToken) {
-      const signlarUrl = CoConfigManager.getValue('notifyUrl');
+      const signlarUrl = CoConfigManager.getValue('signalRUrl');
       // const signlarUrl = CoConfigManager.getValue('testUrl');
       let connection = new signalR.HubConnectionBuilder()
         // .withUrl(signlarUrl + '/signalr?enc_auth_token=' + encodeURIComponent(encryptedAuthToken), 1)
@@ -123,7 +123,8 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
       .subscribe((res) => {
         this.unreadCount = res.noReadCount;
         this.messageList = res.items;
-        // this.ds = new NotificationDataSource(this.platformNotificationService, res.totalCount);
+        this.ds = new NotificationDataSource(this.messageNotificationServices, res.totalCount);
+        console.log(this.ds, 999);
         this.changeDetectorRef.detectChanges();
       });
   }
@@ -291,7 +292,7 @@ class NotificationDataSource extends DataSource<any> {
   private dataStream = new BehaviorSubject<any[]>(this.cachedData);
   private subscription = new Subscription();
 
-  constructor(private platformNotificationService: PlatformNotificationService, private count: any) {
+  constructor(private messageNotificationServices: MessageNotificationServices, private count: any) {
     super();
   }
 
@@ -322,10 +323,10 @@ class NotificationDataSource extends DataSource<any> {
     }
     this.fetchedPages.add(page);
 
-    this.platformNotificationService
-      .getUserNotifications({
-        skipCount: page * this.pageSize,
-        maxResultCount: this.pageSize,
+    this.messageNotificationServices
+      .getAllPagedAsync({
+        SkipCount: page * this.pageSize,
+        MaxResultCount: this.pageSize,
       })
       .subscribe((res) => {
         this.cachedData.splice(page * this.pageSize, this.pageSize, ...res.items);

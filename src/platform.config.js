@@ -25,7 +25,7 @@
     environment: 'dev',
     debug: true,
     serverUrl: apiUrlPrefix,
-    signalRUrl: serverUrlPrefix,
+    signalRUrl: notifyUrl,
     notifyUrl:notifyUrl,
     storeUrl: apiUrlPrefix,
     loginUrl: '/passport/login',

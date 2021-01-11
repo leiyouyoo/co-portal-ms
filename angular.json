@@ -157,7 +157,7 @@
             "index": "src/index-csp.html",
             "main": "src/main-csp.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.json",
+            "tsConfig": "tsconfig-csp.json",
             "aot": false,
             "vendorChunk": false,
             "optimization": false,
