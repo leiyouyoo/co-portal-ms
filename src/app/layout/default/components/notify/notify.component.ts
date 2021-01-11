@@ -173,6 +173,7 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
       .subscribe(
         () => {
           this.changeDetectorRef.detectChanges();
+          this.initData();
         },
         (err) => {
           item.loading = false;
@@ -194,7 +195,6 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
   }
 
   navigate(item) {
-    debugger;
     //处理通知类型数据
     const messageSubscriptionStr = item.messageSubscriptionStr.split('.');
     const messageType = messageSubscriptionStr[0];
