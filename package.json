@@ -67,7 +67,7 @@
         "sonar:pub": "cd ./apps/pub/ && sonar-scanner -Dproject.settings=sonar.properties",
         "analyze:pub": "node --max_old_space_size=5120 ./node_modules/@angular/cli/bin/ng build pub --prod --stats-json",
         "start:csp": "concurrently \"npm run serve:portal-csp\" \"npm run serve:csp\"",
-        "serve:csp": "ng run csp:serve --deploy-url=/apps/csp/ --port 3007",
+        "serve:csp": "ng run csp:serve --deploy-url=/apps/csp/ --port 3008",
         "serve:csp:dev": "ng run csp-dev:serve --deploy-url=/apps/csp/",
         "build:csp:dev": "node --max_old_space_size=5120 ./node_modules/@angular/cli/bin/ng build  csp --deploy-url=/apps/csp/",
         "build:csp:prod": "node --max_old_space_size=5120 ./node_modules/@angular/cli/bin/ng build csp --prod --deploy-url=/apps/csp/",
