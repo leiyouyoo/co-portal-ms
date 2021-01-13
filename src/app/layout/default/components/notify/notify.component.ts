@@ -197,7 +197,6 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
   }
 
   navigate(item) {
-    debugger;
     //处理通知类型数据
     const messageSubscriptionStr = item.messageSubscriptionStr.split('.');
     const messageType = messageSubscriptionStr[0];
