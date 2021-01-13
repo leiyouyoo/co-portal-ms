@@ -173,6 +173,7 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
       })
       .subscribe(
         () => {
+          this.ds = null;
           this.changeDetectorRef.detectChanges();
           this.initData();
         },
