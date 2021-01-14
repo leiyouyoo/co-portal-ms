@@ -9,7 +9,7 @@
     },
     "homepage": "https://icp.cityocean.com",
     "scripts": {
-        "start": "concurrently \"npm run serve:portal\" \"npm run serve:fam\" \"npm run serve:wf\"",
+        "start": "concurrently \"npm run serve:portal\" \"npm run serve:fam\" \"npm run serve:wf\" \"npm run serve:pub\"",
         "serve:portal": "ng run portal:serve --port 3000",
         "serve:portal-csp": "ng run portal-csp:serve --port 3000",
         "build:portal:dev": "node --max_old_space_size=5120 ./node_modules/@angular/cli/bin/ng run portal:build",

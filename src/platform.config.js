@@ -31,7 +31,7 @@
     loginUrl: '/passport/login',
     uploadUrl: apiUrlPrefix + '/Storage/File/Upload',
     downloadUrl: apiUrlPrefix + '/Storage/File/GetDownLoadFile',
-    iconSrv: '//at.alicdn.com/t/font_1909561_i4ruamxnh9j.js',
+    iconSrv: '//at.alicdn.com/t/font_1909561_heq4gvn4y5w.js',
     excelDownloadUrl: apiUrlPrefix + '/Storage/Excel/DownloadExcel',
     appCityoceanUrl: 'https://test-app.cityocean.com',
     googleApiUrl: 'https://test-api.cityocean.com:10001',
