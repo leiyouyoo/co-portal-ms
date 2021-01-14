@@ -28,27 +28,6 @@ const routes: Routes = [
       },
     ],
   },
-  // {
-  //   path: 'csp',
-  //   component: MainLayoutComponent,
-  //   children: [
-  //     {
-  //       path: '',
-  //       component: EmptyComponent,
-  //       children: [
-  //         {
-  //           path: '**',
-  //           component: EmptyComponent,
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       path: 'exception',
-  //       loadChildren: () => import('./exception/exception.module').then((m) => m.ExceptionModule),
-  //     },
-  //   ],
-  // },
-
   {
     path: 'passport',
     component: LayoutPassportComponent,
