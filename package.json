@@ -132,6 +132,7 @@
         "masonry-layout": "^4.2.2",
         "ng-zorro-antd": "~9.3.0",
         "ng2-pdf-viewer": "^6.3.2",
+        "@teamhive/pdf-viewer": "^4.0.6",
         "ngx-clipboard": "^13.0.1",
         "ngx-image-gallery": "^2.0.4",
         "ngx-moveable": "^0.14.4",
