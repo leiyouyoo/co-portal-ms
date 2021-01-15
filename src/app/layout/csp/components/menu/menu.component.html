@@ -14,7 +14,8 @@
         {{ item.displayName }} <i nz-icon nzType="down" *ngIf="item.items.length" style="font-size: 12px;"></i>
       </a>
       <!-- if external -->
-      <a class="menu-name" *ngIf="item._isExternalUrl" [href]="item._url">
+      <a class="menu-name" [ngClass]="{ active: getRouteIsActive(item) }" *ngIf="item._isExternalUrl"
+         (click)="navigate(item._url)">
         {{ item.displayName }} <i nz-icon nzType="down" *ngIf="item.items.length" style="font-size: 12px;"></i>
       </a>
     </ng-container>
@@ -32,18 +33,10 @@
     <nz-dropdown-menu #menu="nzDropdownMenu">
       <ul *ngIf="item.items.length" nz-menu nzSelectable class="dropdown-ul">
         <li nz-menu-item *ngFor="let childRoute of item.items">
-          <!-- if internal -->
-          <a
-            *ngIf="!childRoute._isExternalUrl"
-            routerLinkActive="active"
-            [routerLink]="childRoute._url"
-            class="menu-name child-menu-a"
-            >{{ childRoute.displayName }}</a
-          >
-          <!-- if external -->
-          <a *ngIf="childRoute._isExternalUrl" [href]="childRoute._url" class="menu-name child-menu-a">{{
+          <a *ngIf="childRoute._isExternalUrl" [ngClass]="{ active: getRouteIsActive(childRoute) }"
+             (click)="navigate(childRoute._url)" class="menu-name child-menu-a">{{
             childRoute.displayName
-          }}</a>
+            }}</a>
         </li>
       </ul>
     </nz-dropdown-menu>
@@ -67,9 +60,9 @@
         <!-- if internal -->
         <a *ngIf="!item._isExternalUrl" [routerLink]="item._url" (click)="drawerVisible = false">{{
           item.displayName
-        }}</a>
+          }}</a>
         <!-- if external -->
-        <a *ngIf="item._isExternalUrl" [href]="item._url">{{ item.displayName }}</a>
+        <a *ngIf="item._isExternalUrl" (click)="navigate(item._url)">{{ item.displayName }}</a>
       </li>
       <ng-template #childRouteTmpl>
         <li class="bg-menu" nz-submenu [nzTitle]="item.displayName" nzMenuClassName="bg-main">
@@ -78,9 +71,9 @@
               <!-- if internal -->
               <a *ngIf="!item._isExternalUrl" [routerLink]="childRoute._url" (click)="drawerVisible = false">{{
                 'childRoute.displayName'
-              }}</a>
+                }}</a>
               <!-- if external -->
-              <a *ngIf="item._isExternalUrl" [href]="childRoute._url">{{ childRoute.displayName }}</a>
+              <a *ngIf="item._isExternalUrl" (click)="navigate(childRoute._url)">{{ childRoute.displayName }}</a>
             </li>
           </ul>
         </li>
