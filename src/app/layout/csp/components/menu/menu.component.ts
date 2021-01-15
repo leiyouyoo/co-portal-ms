@@ -21,6 +21,7 @@ const urlFactory = (items: Menu[]) => {
 })
 export class MenuComponent extends CoPageBase {
   cachedMenu: Menu[];
+
   get menu(): Menu[] {
     try {
       const appData = this.sessionService.data;
@@ -60,7 +61,15 @@ export class MenuComponent extends CoPageBase {
       return e._url === urlMatcher;
     });
   }
+  getRouteIsActive(item): boolean {
+    const urlMatcher = `${location.hash}`.replace('#', '');
+    return item._url === urlMatcher;
+  }
+  navigate(url) {
+    this.$navigate([url]);
+  }
 }
+
 interface Menu {
   name: string;
   displayName: string;
