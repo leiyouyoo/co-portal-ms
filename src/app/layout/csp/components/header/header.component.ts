@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Injector, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ACLService } from '@co/acl';
 import { DA_SERVICE_TOKEN, ITokenService } from '@co/auth';
 import { Planet, ReuseTabService } from '@co/cms';
-import { CO_SESSIONSERVICE_TOKEN, CoConfigManager, ISessionService } from '@co/core';
+import { CO_SESSIONSERVICE_TOKEN, CoConfigManager, ISessionService, CoPageBase } from '@co/core';
 import { logOut } from '@co/im';
 import { HeaderInputSearchService } from './header-input-search.service';
 
@@ -14,7 +14,7 @@ declare const FB: any; // Facebook API
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.less'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent extends CoPageBase {
   @ViewChild('headerInput', { static: true }) headerInput;
   showSearch = false;
   position: any = 'null';
@@ -35,7 +35,9 @@ export class HeaderComponent implements OnInit {
     @Inject(CO_SESSIONSERVICE_TOKEN) private sessionService: ISessionService,
     private planet: Planet,
     private reuseTabService: ReuseTabService,
+    injector: Injector,
   ) {
+    super(injector);
   }
 
   ngOnInit() {
@@ -55,7 +57,7 @@ export class HeaderComponent implements OnInit {
     this.reuseTabService.clear(true);
     this.planet.clear();
     try {
-      FB.logout(function(response) {
+      FB.logout(function (response) {
         // Person is now logged out
       });
     } catch (e) {
@@ -79,5 +81,9 @@ export class HeaderComponent implements OnInit {
   getPosotionUserDetail(userid: any) {
     const url = this.serverUrl + '/SSO/User/GetUserDetail';
     return this.httpClient.get(url, { params: { userid } });
+  }
+
+  linkBaseInfo() {
+    this.$navigate(['csp/account/baseInfo'], { queryParams: {} });
   }
 }

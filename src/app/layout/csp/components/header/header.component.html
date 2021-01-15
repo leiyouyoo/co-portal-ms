@@ -1,21 +1,25 @@
 <div class="csp-header">
   <div class="csp-header-main">
-    <div style="display: flex; align-items: center; ">
-      <i nz-icon nzIconfont="icon-TU" style="color: #1890ff;font-size: 30px;margin-right: 5px;"></i>
-      <i nz-icon nzIconfont="icon-ZI" style="color: #fff;font-size: 120px;"></i>
+    <div style="display: flex; align-items: center;">
+      <i nz-icon nzIconfont="icon-TU" style="margin-right: 5px; color: #1890ff; font-size: 30px;"></i>
+      <i nz-icon nzIconfont="icon-ZI" style="color: #fff; font-size: 120px;"></i>
     </div>
 
     <co-menu></co-menu>
   </div>
 
-  <div class="csp-header-main" style="flex: 1;justify-content: flex-end;align-items: center;height: 100%;">
-
+  <div class="csp-header-main" style="flex: 1; align-items: center; justify-content: flex-end; height: 100%;">
     <ng-template [ngIf]="true">
-      <i nz-icon nzIconfont="icon-sousuo" style="color: hsla(0,0%,100%,.45);font-size: 14px;margin-right: 16px;"
-         (click)="onHeaderInputClick($event)" *ngIf="!showSearch"></i>
+      <i
+        nz-icon
+        nzIconfont="icon-sousuo"
+        style="margin-right: 16px; color: hsla(0, 0%, 100%, 0.45); font-size: 14px;"
+        (click)="onHeaderInputClick($event)"
+        *ngIf="!showSearch"
+      ></i>
     </ng-template>
 
-<!--    <header-notifications class="header-avater"></header-notifications>-->
+    <!--    <header-notifications class="header-avater"></header-notifications>-->
 
     <csp-langs></csp-langs>
 
@@ -36,21 +40,14 @@
             </div>
             <div style="margin-left:10px;color:#999">{{ user?.emailAddress }}</div>
           </div> -->
-          <div style="color:#999;margin-left: 5px;">
+          <div style="margin-left: 5px; color: #999;">
             <i nz-icon nzType="caret-down" nzTheme="outline"></i>
           </div>
         </div>
 
         <nz-dropdown-menu #userMenu="nzDropdownMenu">
           <div nz-menu class="csp-header-menu">
-            <div
-              nz-menu-item
-              class="menu-item"
-              style="background: rgba(0,0,0,0.05);
-            border-radius: 2px;
-            min-height: 50px;
-            margin: 8px;"
-            >
+            <div nz-menu-item class="menu-item" style="min-height: 50px; margin: 8px; background: rgba(0, 0, 0, 0.05); border-radius: 2px;">
               <a routerLink="/account/baseInfo">
                 <div class="flex">
                   <span>
@@ -58,30 +55,28 @@
                   >
                   <span class="tag-zy" [title]="position" *ngIf="position">{{ position ? position : null }}</span>
                 </div>
-                <div style="color: rgba(0,0,0,0.65);">{{ user?.emailAddress }}</div>
+                <div style="color: rgba(0, 0, 0, 0.65);">{{ user?.emailAddress }}</div>
               </a>
             </div>
             <div nz-menu-item class="menu-item">
-              <a routerLink="/account/baseInfo" style="color: rgba(0,0,0,0.65);">
-
+              <a (click)="linkBaseInfo()" style="color: rgba(0, 0, 0, 0.65);">
                 <i nz-icon nzIconfont="icon-jibenshezhi"></i> {{ 'Basic settings' | translate }}
               </a>
             </div>
 
             <div nz-menu-item class="menu-item">
-              <a routerLink="/settings" style="color: rgba(0,0,0,0.65);">
-                <i nz-icon nzIconfont="icon-jibenshezhi"></i> {{ 'Notifications' | translate
-                }}{{ 'settings' | translate }}
+              <a routerLink="/settings" style="color: rgba(0, 0, 0, 0.65);">
+                <i nz-icon nzIconfont="icon-jibenshezhi"></i> {{ 'Notifications' | translate }}{{ 'settings' | translate }}
               </a>
             </div>
             <div nz-menu-item class="menu-item">
-              <a routerLink="/account/safeSetting" style="color: rgba(0,0,0,0.65);">
+              <a routerLink="/account/safeSetting" style="color: rgba(0, 0, 0, 0.65);">
                 <i nz-icon nzIconfont="icon-anquanshezhi"></i> {{ 'Security Settings' | translate }}
               </a>
             </div>
-            <div nz-menu-item class="menu-item" (click)="logout()" style="border-top:1px solid rgba(0,0,0,0.06);">
+            <div nz-menu-item class="menu-item" (click)="logout()" style="border-top: 1px solid rgba(0, 0, 0, 0.06);">
               <i nz-icon nzIconfont="icon-zhuxiao"></i>
-              <span style="color: rgba(0,0,0,0.65);">{{ 'Sign Out' | translate }}</span>
+              <span style="color: rgba(0, 0, 0, 0.65);">{{ 'Sign Out' | translate }}</span>
             </div>
           </div>
         </nz-dropdown-menu>
