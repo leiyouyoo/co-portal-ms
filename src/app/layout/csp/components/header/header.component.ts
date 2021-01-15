@@ -82,8 +82,4 @@ export class HeaderComponent extends CoPageBase {
     const url = this.serverUrl + '/SSO/User/GetUserDetail';
     return this.httpClient.get(url, { params: { userid } });
   }
-
-  linkBaseInfo() {
-    this.$navigate(['csp/account/baseInfo'], { queryParams: {} });
-  }
 }
