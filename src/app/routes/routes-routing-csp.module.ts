@@ -7,6 +7,7 @@ import { MainLayoutComponent } from '../layout/csp/main-layout.component';
 
 import { LayoutPassportComponent } from '../layout/passport/passport.component';
 import { CallbackComponent } from './callback/callback.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserLockComponent } from './passport/lock/lock.component';
 import { LoginComponent } from './passport/login.component';
 
@@ -15,6 +16,17 @@ const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
+      { path: '', redirectTo: 'csp', pathMatch: 'full' },
+      {
+        path: 'csp',
+        component: EmptyComponent,
+        children: [
+          {
+            path: '**',
+            component: EmptyComponent,
+          },
+        ],
+      },
       {
         path: 'exception',
         loadChildren: () => import('./exception/exception.module').then((m) => m.ExceptionModule),
@@ -42,17 +54,6 @@ const routes: Routes = [
   { path: 'callback/:type', component: CallbackComponent },
   { path: '**', component: EmptyComponent },
 ];
-
-routes[0].children.push({
-  path: 'csp',
-  component: EmptyComponent,
-  children: [
-    {
-      path: '**',
-      component: EmptyComponent,
-    },
-  ],
-});
 
 /**
  * 门户路由模块
