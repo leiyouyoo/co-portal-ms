@@ -1,44 +1,29 @@
 (function () {
   var protocol = 'http';
-  var serverHost = 'api.dev.com';
+  var serverHost = 'api.test.com';
   var apiPort = '20002';
-  var signalRHost = 'signalr.dev.com';
+  var signalRHost = 'signalr.dev.om';
   var serverUrlPrefix = protocol + '://' + serverHost;
-  var notifyUrl=protocol + '://' + signalRHost;
   var apiUrlPrefix = serverUrlPrefix;
-
-  // var protocol = 'http';
-  // var serverHost = 'test-api.cityocean.com';
-  // var apiPort = '20001';
-  // var signalRPort = '20002';
-
-  // var protocol = 'https';
-  // var serverHost = 'uat-api.cityocean.com';
-  // var apiPort = '10001';
-  // var signalRPort = '10002';
-  // var serverUrlPrefix = protocol + '://' + serverHost;
-  // var apiUrlPrefix = serverUrlPrefix + ':' + apiPort;
-
 
   window.CO_PLATFORM = {
     name: 'co.portal',
     environment: 'dev',
     debug: true,
     serverUrl: apiUrlPrefix,
-    signalRUrl: notifyUrl,
-    notifyUrl:notifyUrl,
+    signalRUrl: signalRHost,
     storeUrl: apiUrlPrefix,
     loginUrl: '/passport/login',
     uploadUrl: apiUrlPrefix + '/Storage/File/Upload',
     downloadUrl: apiUrlPrefix + '/Storage/File/GetDownLoadFile',
     iconSrv: '//at.alicdn.com/t/font_1909561_heq4gvn4y5w.js',
     excelDownloadUrl: apiUrlPrefix + '/Storage/Excel/DownloadExcel',
-    appCityoceanUrl: 'https://test-app.cityocean.com',
-    googleApiUrl: 'https://test-api.cityocean.com:10001',
+    appCityoceanUrl: 'https://app.cityocean.com',
+    googleApiUrl: 'https://icp.cityocean.com:20001',
     mapbox: {},
     im: {
       ImImageUrl: apiUrlPrefix,
-      ImEnable: false,
+      ImEnable: true,
     },
     apps: [
       {
@@ -61,7 +46,7 @@
         selector: 'crm-root',
         resourcePathPrefix: '/apps/crm/',
         manifest: '/apps/crm/manifest.json',
-        preload: true,
+        preload: false,
         scripts: ['main.js'],
         styles: ['styles.css'],
       },
