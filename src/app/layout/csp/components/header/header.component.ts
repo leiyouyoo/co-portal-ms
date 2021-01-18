@@ -3,10 +3,9 @@ import { Component, Inject, Injector, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ACLService } from '@co/acl';
 import { DA_SERVICE_TOKEN, ITokenService } from '@co/auth';
-import { Planet, ReuseTabService } from '@co/cms';
+import { GlobalEventDispatcher, Planet, ReuseTabService } from '@co/cms';
 import { CO_SESSIONSERVICE_TOKEN, CoConfigManager, ISessionService, CoPageBase } from '@co/core';
 import { logOut } from '@co/im';
-import { HeaderInputSearchService } from './header-input-search.service';
 
 declare const FB: any; // Facebook API
 @Component({
@@ -28,8 +27,8 @@ export class HeaderComponent extends CoPageBase {
 
   constructor(
     private router: Router,
-    private headerInputSearchService: HeaderInputSearchService,
     private httpClient: HttpClient,
+    private globalEventDispatcher: GlobalEventDispatcher,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
     public aclService: ACLService,
     @Inject(CO_SESSIONSERVICE_TOKEN) private sessionService: ISessionService,
@@ -48,7 +47,7 @@ export class HeaderComponent extends CoPageBase {
   }
 
   onHeaderInputClick(e: MouseEvent) {
-    this.headerInputSearchService.open();
+    this.globalEventDispatcher.dispatch('open-csp-global-search');
   }
 
   logout() {
@@ -57,7 +56,7 @@ export class HeaderComponent extends CoPageBase {
     this.reuseTabService.clear(true);
     this.planet.clear();
     try {
-      FB.logout(function (response) {
+      FB.logout(function(response) {
         // Person is now logged out
       });
     } catch (e) {
