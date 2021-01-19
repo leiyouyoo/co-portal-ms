@@ -123,6 +123,7 @@
         "co-cli": "^1.0.5",
         "cos-js-sdk-v5": "^0.5.27",
         "cropperjs": "^1.5.7",
+        "date-fns": "^2.16.1",
         "dom-to-image": "^2.6.0",
         "element-closest": "^3.0.2",
         "guid-typescript": "^1.0.9",

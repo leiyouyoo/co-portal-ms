@@ -1025,7 +1025,7 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "csp:build",
-            "port": 3004,
+            "port": 3008,
             "vendorChunk": false
           },
           "configurations": {
