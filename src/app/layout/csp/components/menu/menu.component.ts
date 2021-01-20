@@ -57,14 +57,14 @@ export class MenuComponent extends CoPageBase {
 
   getChildRouteIsActive(item): boolean {
     const urlMatcher = `${location.hash}`.replace('#', '');
-    return item.some((e) => {
-      return e._url === urlMatcher;
-    });
+    return item.some((e) => urlMatcher.includes(e._url));
   }
+
   getRouteIsActive(item): boolean {
     const urlMatcher = `${location.hash}`.replace('#', '');
-    return item._url === urlMatcher;
+    return urlMatcher.includes(item._url);
   }
+
   navigate(url) {
     this.$navigate([url]);
   }
