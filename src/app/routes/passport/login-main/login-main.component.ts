@@ -6,7 +6,7 @@ import { CO_SESSIONSERVICE_TOKEN, ISessionService } from '@co/core';
 import { StartupService } from '@core';
 
 import { NzNotificationService, NzMessageService, NzModalService } from 'ng-zorro-antd';
-import { logOut, GetUserSigService } from '@co/im';
+import { logOut } from '@co/im';
 import { LangsComponent } from 'src/app/layout/default/components/lang/langs.component';
 @Component({
   selector: 'user-login-main',
@@ -35,8 +35,7 @@ export class loginMainComponent implements OnInit {
     private message: NzMessageService,
     private activatedRoute: ActivatedRoute,
     private startupService: StartupService,
-    private getUserSigService: GetUserSigService,
-    @Inject(CO_SESSIONSERVICE_TOKEN) private sessionService: ISessionService
+    @Inject(CO_SESSIONSERVICE_TOKEN) private sessionService: ISessionService,
   ) {}
 
   ngOnInit(): void {
@@ -176,8 +175,6 @@ export class loginMainComponent implements OnInit {
             console.error(ex);
           }
         }
-
-        this.getUserSigService.imLogin();
         const appData = this.sessionService.data;
         if (appData?.session.user.isExternal) {
           location.href = '#/csp/dashboard';

@@ -9,7 +9,6 @@ import { CoConfigManager, CO_SESSIONSERVICE_TOKEN, ISessionService } from '@co/c
 import { TitleService } from '@co/common';
 
 import { setupVersion } from './app.version';
-import { GetUserSigService } from '@co/im';
 
 /**
  * 应用入口组件
@@ -27,7 +26,6 @@ export class AppComponent implements OnInit {
     private router: Router,
     private titleSrv: TitleService,
     private modalSrv: NzModalService,
-    private getUserSigService: GetUserSigService,
     @Inject(CO_SESSIONSERVICE_TOKEN) private sessionService: ISessionService,
   ) {
     renderer.setAttribute(el.nativeElement, 'ng-zorro-version', VERSION_ZORRO.full);
@@ -38,14 +36,6 @@ export class AppComponent implements OnInit {
       this.titleSrv.setTitle('City Ocean');
       this.modalSrv.closeAll();
     });
-
-    try {
-      const im = CoConfigManager.getValue('im');
-      console.log(im);
-      im.ImEnable && this.getUserSigService.imLogin();
-    } catch (e) {
-      console.error(e);
-    }
 
     setupVersion(this.sessionService?.platform);
   }
