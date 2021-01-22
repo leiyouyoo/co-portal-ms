@@ -15,7 +15,7 @@
       ],
       "@layout": [
         "src/app/layout/default/index"
-      ],
+      ]
     }
   },
   "files": [

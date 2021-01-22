@@ -10,6 +10,8 @@ import { CallbackComponent } from './callback/callback.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserLockComponent } from './passport/lock/lock.component';
 import { LoginComponent } from './passport/login.component';
+import { ActivateComponent } from './passport/activate/activate.component';
+import { ResetPasswordComponent } from './passport/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -50,6 +52,8 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'account/reset-password', component: ResetPasswordComponent },
+  { path: 'account/activate', component: ActivateComponent },
   // 单页不包裹Layout
   { path: 'callback/:type', component: CallbackComponent },
   { path: '**', component: EmptyComponent },
