@@ -120,7 +120,7 @@
         "axios": "^0.19.2",
         "ckeditor4": "^4.14.1",
         "ckeditor4-angular": "^1.2.2",
-        "co-cli": "^1.0.5",
+        "co-cli": "^1.0.7",
         "cos-js-sdk-v5": "^0.5.27",
         "cropperjs": "^1.5.7",
         "dom-to-image": "^2.6.0",
