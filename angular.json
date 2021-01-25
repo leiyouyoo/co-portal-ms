@@ -180,7 +180,10 @@
             },
             "baseHref": "/",
             "outputPath": "dist/portal-csp",
-            "index": "src/index-csp.html",
+            "index": {
+              "input": "src/index-csp.html",
+              "output": "index.html"
+            },
             "main": "src/main-csp.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig-csp.json",
