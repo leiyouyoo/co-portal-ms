@@ -71,7 +71,7 @@ export class HeaderComponent extends CoPageBase {
   }
 
   getUserHead() {
-    this.getPosotionUserDetail(this.user.id).subscribe((res: any) => {
+    this.getPosotionUserDetail(this.user?.id).subscribe((res: any) => {
       this.userInfo = res ? res : {};
       this.position = res && res.position ? res.position : '';
     });
