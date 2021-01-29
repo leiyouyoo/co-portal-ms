@@ -1,6 +1,6 @@
 (function () {
   var protocol = 'http';
-  var serverHost = 'api.test.com';
+  var serverHost = 'api.dev.com';
   var apiPort = '20002';
   var signalRHost = 'signalr.dev.om';
   var serverUrlPrefix = protocol + '://' + serverHost;
