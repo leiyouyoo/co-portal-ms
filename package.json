@@ -101,7 +101,7 @@
         "@angular/router": "~9.1.11",
         "@antv/data-set": "^0.11.4",
         "@aspnet/signalr": "^1.1.4",
-        "@co/acl": "^1.0.91",
+        "@co/acl": "^1.0.92",
         "@co/auth": "^1.0.92",
         "@co/cache": "^1.0.92",
         "@co/cbc": "^1.0.92",
