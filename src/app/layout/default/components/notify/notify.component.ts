@@ -10,6 +10,7 @@ import { NzNotificationService } from 'ng-zorro-antd';
 import { TranslateService } from '@ngx-translate/core';
 import { ACLService } from '@co/acl';
 import { MessageNotificationServices } from '../../../../service/mdc/message/messageNotification.services';
+import { finalize } from 'rxjs/operators';
 
 // enum BusinessType {
 //   Quote = 0,
@@ -52,7 +53,7 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
   skipCount = 0;
   maxResultCount = 500;
   unreadCount: number;
-
+  loading = false;
   ds: any;
   data: any;
   messageList = [];
@@ -115,11 +116,15 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
   }
 
   initData() {
+    this.loading = true;
+    this.changeDetectorRef.detectChanges();
+    debugger;
     this.messageNotificationServices
       .getAllPagedAsync({
         SkipCount: this.skipCount * this.maxResultCount,
         MaxResultCount: this.maxResultCount,
       })
+      .pipe(finalize(() => (this.loading = false)))
       .subscribe((res) => {
         this.unreadCount = res.noReadCount;
         this.messageList = res.items;
@@ -153,10 +158,10 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
   }
 
   setAsAllRead() {
+    this.loading = true;
     this.messageNotificationServices.setAllIsReadAsync({}).subscribe(() => {
-      this.ds = null;
+      this.messageList.forEach((e) => (e.isRead = true));
       this.changeDetectorRef.detectChanges();
-      this.initData();
     });
     // this.platformNotificationService.setAllNotificationsAsRead({}).subscribe(() => {
     //   this.ds = null;
