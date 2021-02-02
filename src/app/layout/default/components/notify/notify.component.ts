@@ -159,10 +159,15 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
 
   setAsAllRead() {
     this.loading = true;
-    this.messageNotificationServices.setAllIsReadAsync({}).subscribe(() => {
-      this.messageList.forEach((e) => (e.isRead = true));
-      this.changeDetectorRef.detectChanges();
-    });
+    this.messageNotificationServices.setAllIsReadAsync({}).subscribe(
+      () => {
+        this.ds = null;
+        this.initData();
+      },
+      (err) => {
+        this.loading = false;
+      },
+    );
     // this.platformNotificationService.setAllNotificationsAsRead({}).subscribe(() => {
     //   this.ds = null;
     //   this.changeDetectorRef.detectChanges();
@@ -176,16 +181,9 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
       .setIsReadAsync({
         Id: item.id,
       })
-      .subscribe(
-        () => {
-          this.ds = null;
-          this.changeDetectorRef.detectChanges();
-          this.initData();
-        },
-        (err) => {
-          item.loading = false;
-        },
-      );
+      .subscribe(() => {
+        this.changeDetectorRef.detectChanges();
+      });
     // item.state = 1;
     // this.platformNotificationService
     //   .setNotificationAsRead({
