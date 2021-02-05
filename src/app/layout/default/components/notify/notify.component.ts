@@ -125,13 +125,18 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
         MaxResultCount: this.maxResultCount,
       })
       .pipe(finalize(() => (this.loading = false)))
-      .subscribe((res) => {
-        this.unreadCount = res.noReadCount;
-        this.messageList = res.items;
-        this.ds = new NotificationDataSource(this.messageNotificationServices, res.totalCount);
-        console.log(this.ds, 999);
-        this.changeDetectorRef.detectChanges();
-      });
+      .subscribe(
+        (res) => {
+          this.loading = false;
+          this.unreadCount = res.noReadCount;
+          this.messageList = res.items;
+          this.ds = new NotificationDataSource(this.messageNotificationServices, res.totalCount);
+          this.changeDetectorRef.detectChanges();
+        },
+        (err) => {
+          this.loading = false;
+        },
+      );
   }
   // initData() {
   //   this.platformNotificationService
