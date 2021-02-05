@@ -118,7 +118,7 @@ export class DefaultLayoutWidgetNotifyComponent extends CoPageBase {
   initData() {
     this.loading = true;
     this.changeDetectorRef.detectChanges();
-    debugger;
+
     this.messageNotificationServices
       .getAllPagedAsync({
         SkipCount: this.skipCount * this.maxResultCount,
