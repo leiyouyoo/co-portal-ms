@@ -24,10 +24,10 @@
           class="user-avatar"
         ></nz-avatar>
         <div class="user-desc">
-          <h3>
+          <h3 [title]="user?.name || user?.surname">
             {{ user?.name }}<span *ngIf="!!user?.surname">({{ user?.surname }})</span> <i nz-icon nztype="down"></i>
           </h3>
-          <p>
+          <p [title]="user?.emailAddress">
             {{ user?.emailAddress }}
           </p>
         </div>
