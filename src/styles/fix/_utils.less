@@ -192,3 +192,70 @@
     border-radius: 12px;
   }
 }
+// popover样式
+#tooltip {
+  background: #fff;
+  box-shadow: 0 -3px 7px 2px #00000050;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  display: none;
+}
+#tooltip[data-show],
+[aria-describedby='tooltip'] {
+  z-index: 100;
+  display: block !important;
+
+  #arrow{
+    position: absolute;
+    z-index: -1;
+  }
+  #arrow::before {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 8px solid #fff;
+    z-index: -1;
+  }
+  #arrow::before {
+    content: '';
+  }
+
+  &[data-popper-placement^='top'] > #arrow {
+    bottom: 0;
+    &::before{
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 8px solid transparent;
+    }
+  }
+
+  &[data-popper-placement^='bottom'] > #arrow {
+    top: -16px;
+    &::before{
+      border-right: 8px solid transparent;
+      border-top: 8px solid transparent;
+      border-left: 8px solid transparent;
+    }
+  }
+
+  &[data-popper-placement^='left'] > #arrow {
+    left: -16px;
+    &::before{
+      top: -6px;
+      border-bottom: 8px solid transparent;
+      border-top: 8px solid transparent;
+      border-left: 8px solid transparent;
+    }
+  }
+
+  &[data-popper-placement^='right'] > #arrow {
+    left: -16px;
+    &::before{
+      top: -6px;
+      border-bottom: 8px solid transparent;
+      border-top: 8px solid transparent;
+      border-left: 8px solid transparent;
+    }
+  }
+}
