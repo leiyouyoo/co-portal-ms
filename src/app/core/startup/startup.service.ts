@@ -155,6 +155,8 @@ export class StartupService {
       jobs,
       organizationUnits,
     };
+
+    window.localStorage.setItem('co_acls',JSON.stringify(acls));
     this.aclService.set(acls);
   }
 
