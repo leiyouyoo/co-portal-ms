@@ -68,7 +68,10 @@
   "Latest quote": "最新报价",
   "Booking status": "订舱状态",
   "S/O No.": "S/O号",
-  "": "",
-  "": "",
+  "Cargo Ready Date": "货好日期",
+  "Booking Information": "订舱信息",
+  "Shipment Information": "运单信息",
+  "Arrived": "到达",
+  "Departed": "离开",
   "": ""
 }
