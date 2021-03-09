@@ -20,6 +20,8 @@ export class ThirdLoginComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.getQueryString()['code'], "code");
 
+    debugger
+
     // 微信登录
     if (this.getQueryString()['loginType'] == 'wechat' && this.getQueryString()['code']) {
       this.thirdLogin('WechatWeb', this.getQueryString()['code']);
