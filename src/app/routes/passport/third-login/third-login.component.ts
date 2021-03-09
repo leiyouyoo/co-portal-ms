@@ -24,8 +24,10 @@ export class ThirdLoginComponent implements OnInit {
 
     // 微信登录
     if (this.getQueryString()['loginType'] == 'wechat' && this.getQueryString()['code']) {
+      console.log(1)
       this.thirdLogin('WechatWeb', this.getQueryString()['code']);
     } else if (this.getQueryString()['loginType'] == 'workwechat' && this.getQueryString()['code']) {
+      console.log(2)
       this.thirdLogin('WorkWechat', this.getQueryString()['code']);
     }
   }
@@ -40,18 +42,19 @@ export class ThirdLoginComponent implements OnInit {
       .thirdLogin(parame)
       .then((res: any) => {
         debugger
+        console.log(res, "res");
         if (res.access_token) {
           this.doRedirect({ isRedirectByQueryParam: true });
         }
       })
       .catch((e: any) => {
         console.log(e, "error")
-        debugger
-        this.router.navigate(['/passport/login'], {
-          queryParams: {
-            errorText: e?.error_description || e?.error?.error_description,
-          },
-        });
+
+        // this.router.navigate(['/passport/login'], {
+        //   queryParams: {
+        //     errorText: e?.error_description || e?.error?.error_description,
+        //   },
+        // });
       });
   }
 
