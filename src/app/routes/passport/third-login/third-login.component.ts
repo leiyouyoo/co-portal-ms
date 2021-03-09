@@ -37,12 +37,14 @@ export class ThirdLoginComponent implements OnInit {
     this.loginService
       .thirdLogin(parame)
       .then((res: any) => {
+        debugger
         if (res.access_token) {
           this.doRedirect({ isRedirectByQueryParam: true });
         }
       })
       .catch((e: any) => {
         console.log(e, "error")
+        debugger
         this.router.navigate(['/passport/login'], {
           queryParams: {
             errorText: e?.error_description || e?.error?.error_description,
