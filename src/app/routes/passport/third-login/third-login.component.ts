@@ -15,10 +15,10 @@ export class ThirdLoginComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public httpService: _HttpClient,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    console.log(this.getQueryString()['code']);
+    console.log(this.getQueryString()['code'], "code");
 
     // 微信登录
     if (this.getQueryString()['loginType'] == 'wechat' && this.getQueryString()['code']) {
