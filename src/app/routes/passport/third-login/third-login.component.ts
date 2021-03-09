@@ -42,14 +42,14 @@ export class ThirdLoginComponent implements OnInit {
         }
       })
       .catch((e: any) => {
-        console.log(e)
+        // console.log(e)
         console.log(e.error.error_description)
         return;
-        this.router.navigate(['/passport/login'], {
-          queryParams: {
-            errorText: e.error.error_description,
-          },
-        });
+        // this.router.navigate(['/passport/login'], {
+        //   queryParams: {
+        //     errorText: e.error.error_description,
+        //   },
+        // });
       });
   }
 
