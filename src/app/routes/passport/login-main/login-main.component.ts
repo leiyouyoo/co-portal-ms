@@ -84,7 +84,7 @@ export class loginMainComponent implements OnInit {
         }
       })
       .catch((e: any) => {
-        this.message.error(e.error.error_description);
+        this.message.error(e?.error?.error_description || e?.error_description);
       });
   }
 
