@@ -19,9 +19,6 @@ export class ThirdLoginComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.getQueryString()['code'], "code");
-
-    debugger
-
     // 微信登录
     if (this.getQueryString()['loginType'] == 'wechat' && this.getQueryString()['code']) {
       console.log(1)
@@ -41,7 +38,6 @@ export class ThirdLoginComponent implements OnInit {
     this.loginService
       .thirdLogin(parame)
       .then((res: any) => {
-        debugger
         console.log(res, "res");
         if (res.access_token) {
           this.doRedirect({ isRedirectByQueryParam: true });
@@ -49,12 +45,11 @@ export class ThirdLoginComponent implements OnInit {
       })
       .catch((e: any) => {
         console.log(e, "error")
-
-        // this.router.navigate(['/passport/login'], {
-        //   queryParams: {
-        //     errorText: e?.error_description || e?.error?.error_description,
-        //   },
-        // });
+        this.router.navigate(['/passport/login'], {
+          queryParams: {
+            errorText: e?.error_description || e?.error?.error_description,
+          },
+        });
       });
   }
 
