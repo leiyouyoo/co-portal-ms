@@ -39,12 +39,15 @@ export class loginMainComponent implements OnInit {
     private startupService: StartupService,
     @Inject(CO_SESSIONSERVICE_TOKEN) private sessionService: ISessionService,
   ) {
-    this.errorText = this.activatedRoute.snapshot.queryParams?.errorText;
-    this.code = this.activatedRoute.snapshot.queryParams?.code;
-    this.loginType = this.activatedRoute.snapshot.queryParams?.loginType;
+
   }
 
   ngOnInit(): void {
+
+    this.errorText = this.activatedRoute.snapshot.queryParams?.errorText;
+    this.code = this.activatedRoute.snapshot.queryParams?.code;
+    this.loginType = this.activatedRoute.snapshot.queryParams?.loginType;
+
     this.validateForm = this.fb.group({
       // tenantId: [null, [Validators.required]],
       userName: [null, [Validators.required]],
@@ -53,12 +56,16 @@ export class loginMainComponent implements OnInit {
     });
     this.savedUser = this.loginService.getSavedUser() || {};
 
+    console.log(this.loginType, "loginType")
+    console.log(this.code, "code")
+    console.log(this.loginType, "loginType")
     // 微信登录
     if (this.loginType = 'wechat' && this.code) {
       this.thirdLogin('WechatWeb', this.code);
     } else if (this.loginType = 'workwechat' && this.code) {
       this.thirdLogin('WorkWechat', this.getQueryString()['code']);
     } else if (this.errorText) {
+      console.log(this.errorText, "errorText")
       let msg = this.errorText.replace(/["]/g, ' ');
       this.message.error(msg.replace(/[%20,%22]/g, ' '));
     }
