@@ -27,6 +27,13 @@ const routes: Routes = [
         path: 'exception',
         loadChildren: () => import('./exception/exception.module').then((m) => m.ExceptionModule),
       },
+
+
+      {
+        path: 'myaccount',
+        loadChildren: () => import('./myAccount/myAccount.module').then((m) => m.MyAccountModule)
+      }
+
     ],
   },
   {
