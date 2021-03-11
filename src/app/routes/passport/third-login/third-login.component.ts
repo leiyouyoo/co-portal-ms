@@ -49,7 +49,7 @@ export class ThirdLoginComponent implements OnInit {
       .then((res: any) => {
         console.log(res, "res");
         if (res.access_token) {
-          this.doRedirect({ isRedirectByQueryParam: true });
+          this.doRedirect({ isRedirectByQueryParam: true, isLoginIm: true });
         }
       })
       .catch((e: any) => {
