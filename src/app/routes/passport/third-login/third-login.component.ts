@@ -2,9 +2,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoAuthService, _HttpClient } from '@co/common';
-import { CoConfigManager } from '@co/core';
+import { CoConfigManager, CO_SESSIONSERVICE_TOKEN, ISessionService } from '@co/core';
 import { IS_CSP } from '@shared';
 import { StartupService } from 'src/app/core/startup/startup.service';
+import { logOut } from '@co/im';
 
 @Component({
   selector: 'portal-app-third-login',
@@ -21,6 +22,7 @@ export class ThirdLoginComponent implements OnInit {
     private router: Router,
     private startupService: StartupService,
     @Inject(IS_CSP) private isCSP: boolean,
+    @Inject(CO_SESSIONSERVICE_TOKEN) private sessionService: ISessionService,
   ) { }
 
   ngOnInit(): void {
@@ -78,38 +80,38 @@ export class ThirdLoginComponent implements OnInit {
     };
     this.loginService.thirdLogin(parame).then((res: any) => {
       if (res.access_token) {
-        this.doRedirect({ isRedirectByQueryParam: true });
+        this.doRedirect({ isRedirectByQueryParam: true, isLoginIm: true });
       }
     });
   }
 
-  doRedirect(option: { isRedirectByQueryParam?: boolean } = {}) {
+  doRedirect(option: { isRedirectByQueryParam?: boolean; isLoginIm?: boolean } = {}) {
     if (option.isRedirectByQueryParam && this.activatedRoute.snapshot.queryParams.redirectUrl) {
       return (location.href = this.activatedRoute.snapshot.queryParams.redirectUrl);
     }
 
-    this.startupService.load()
-
-    // let url = CoConfigManager.getValue('serverUrl') + '/platform/Session/GetCurrentUserConfiguration';
-    // if (!this.isCSP) {
-    //   url = url + '?client=ICP_Web';
-    // }
-
-
-    // this.httpService.get(url).subscribe(
-    //   (data: any) => {
-    //     try {
-    //       data.nav.menus.MainMenu.items.sort(this.sortItem);
-    //     } catch (e) {
-    //       console.error('菜单排序报错');
-    //     }
-    //     location.href = data.nav.menus.MainMenu.items[0].url;
-    //   },
-    //   (err) => {
-    //     this.notification.error('Error', err || 'Get User Configuration Failed.');
-    //   },
-    // );
+    this.startupService.load().then(
+      (data: any) => {
+        if (option.isLoginIm) {
+          try {
+            logOut();
+          } catch (ex) {
+            console.error(ex);
+          }
+        }
+        const appData = this.sessionService.data;
+        if (appData?.session.user.isExternal) {
+          location.href = '#/csp/dashboard';
+        } else {
+          location.href = '#/dashboard';
+        }
+      },
+      (err) => {
+        this.notification.error('Error', err || 'Get User Configuration Failed.');
+      },
+    );
   }
+
 
   sortItem(a, b) {
     return a.order - b.order;
