@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoAuthService, _HttpClient } from '@co/common';
 import { CoConfigManager } from '@co/core';
 import { IS_CSP } from '@shared';
+import { StartupService } from 'src/app/core/startup/startup.service';
+
 @Component({
   selector: 'portal-app-third-login',
   templateUrl: './third-login.component.html',
@@ -17,6 +19,7 @@ export class ThirdLoginComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public httpService: _HttpClient,
     private router: Router,
+    private startupService: StartupService,
     @Inject(IS_CSP) private isCSP: boolean,
   ) { }
 
@@ -85,24 +88,27 @@ export class ThirdLoginComponent implements OnInit {
       return (location.href = this.activatedRoute.snapshot.queryParams.redirectUrl);
     }
 
-    let url = CoConfigManager.getValue('serverUrl') + '/platform/Session/GetCurrentUserConfiguration';
-    if (!this.isCSP) {
-      url = url + '?client=ICP_Web';
-    }
+    this.startupService.load()
 
-    this.httpService.get(url).subscribe(
-      (data: any) => {
-        try {
-          data.nav.menus.MainMenu.items.sort(this.sortItem);
-        } catch (e) {
-          console.error('菜单排序报错');
-        }
-        location.href = data.nav.menus.MainMenu.items[0].url;
-      },
-      (err) => {
-        this.notification.error('Error', err || 'Get User Configuration Failed.');
-      },
-    );
+    // let url = CoConfigManager.getValue('serverUrl') + '/platform/Session/GetCurrentUserConfiguration';
+    // if (!this.isCSP) {
+    //   url = url + '?client=ICP_Web';
+    // }
+
+
+    // this.httpService.get(url).subscribe(
+    //   (data: any) => {
+    //     try {
+    //       data.nav.menus.MainMenu.items.sort(this.sortItem);
+    //     } catch (e) {
+    //       console.error('菜单排序报错');
+    //     }
+    //     location.href = data.nav.menus.MainMenu.items[0].url;
+    //   },
+    //   (err) => {
+    //     this.notification.error('Error', err || 'Get User Configuration Failed.');
+    //   },
+    // );
   }
 
   sortItem(a, b) {
