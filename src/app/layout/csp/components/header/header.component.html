@@ -10,13 +10,8 @@
 
   <div class="csp-header-main" style="flex: 1; align-items: center; justify-content: flex-end; height: 100%;">
     <ng-template [ngIf]="true">
-      <i
-        nz-icon
-        nzIconfont="icon-sousuo"
-        style="margin-right: 16px; color: hsla(0, 0%, 100%, 0.45); font-size: 14px;"
-        (click)="onHeaderInputClick($event)"
-        *ngIf="!showSearch"
-      ></i>
+      <i nz-icon nzIconfont="icon-sousuo" style="margin-right: 16px; color: hsla(0, 0%, 100%, 0.45); font-size: 14px;"
+        (click)="onHeaderInputClick($event)" *ngIf="!showSearch"></i>
     </ng-template>
 
     <!--    <header-notifications class="header-avater"></header-notifications>-->
@@ -26,14 +21,11 @@
     <ng-template [ngIf]="true">
       <div class="csp-user-header">
         <div class="alain-default__nav-item" nz-dropdown nzPlacement="bottomRight" [nzDropdownMenu]="userMenu">
-          <nz-avatar
-            style="width: 30px; height: 30px;"
-            [nzSrc]="
+          <nz-avatar style="width: 30px; height: 30px;" [nzSrc]="
               userInfo.profilePictureId
                 ? serverUrl + '/Storage/File/GetDownLoadFile?fileId=' + userInfo.profilePictureId + '&Handler=image'
                 : '/assets/images/avatar.png'
-            "
-          ></nz-avatar>
+            "></nz-avatar>
           <!-- <div>
             <div style="margin-left:10px">
               <strong>{{ user?.name }}</strong>
@@ -47,12 +39,12 @@
 
         <nz-dropdown-menu #userMenu="nzDropdownMenu">
           <div nz-menu class="csp-header-menu">
-            <div nz-menu-item class="menu-item" style="min-height: 50px; margin: 8px; background: rgba(0, 0, 0, 0.05); border-radius: 2px;">
+            <div nz-menu-item class="menu-item"
+              style="min-height: 50px; margin: 8px; background: rgba(0, 0, 0, 0.05); border-radius: 2px;">
               <a routerLink="/csp/account/baseInfo">
                 <div class="flex">
                   <span>
-                    <strong>{{ user?.name }}</strong></span
-                  >
+                    <strong>{{ user?.name }}</strong></span>
                   <span class="tag-zy" [title]="position" *ngIf="position">{{ position ? position : null }}</span>
                 </div>
                 <div style="color: rgba(0, 0, 0, 0.65);">{{ user?.emailAddress }}</div>
@@ -66,7 +58,8 @@
 
             <div nz-menu-item class="menu-item">
               <a routerLink="/csp/settings" style="color: rgba(0, 0, 0, 0.65);">
-                <i nz-icon nzIconfont="icon-jibenshezhi"></i> {{ 'Notifications' | translate }}{{ 'settings' | translate }}
+                <i nz-icon nzIconfont="icon-jibenshezhi"></i> {{ 'Notifications' | translate }}{{ 'settings' | translate
+                }}
               </a>
             </div>
             <div nz-menu-item class="menu-item">

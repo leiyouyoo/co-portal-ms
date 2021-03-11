@@ -25,7 +25,9 @@ export class loginMainComponent implements OnInit {
   formCheck: boolean = false;
   passMayError: boolean = false;
   accMayError: boolean = false;
-
+  errorText: any = null;  // 第三方登录错误返回信息
+  code: any = null;   // 第三方登录code
+  loginType: any = null;  // 第三方登录类型
   constructor(
     private fb: FormBuilder,
     public loginService: CoAuthService,
@@ -36,9 +38,16 @@ export class loginMainComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private startupService: StartupService,
     @Inject(CO_SESSIONSERVICE_TOKEN) private sessionService: ISessionService,
-  ) {}
+  ) {
+
+  }
 
   ngOnInit(): void {
+
+    this.errorText = this.activatedRoute.snapshot.queryParams?.errorText;
+    this.code = this.activatedRoute.snapshot.queryParams?.code;
+    this.loginType = this.activatedRoute.snapshot.queryParams?.loginType;
+
     this.validateForm = this.fb.group({
       // tenantId: [null, [Validators.required]],
       userName: [null, [Validators.required]],
@@ -47,13 +56,17 @@ export class loginMainComponent implements OnInit {
     });
     this.savedUser = this.loginService.getSavedUser() || {};
 
+    console.log(this.loginType, "loginType")
+    console.log(this.code, "code")
+    console.log(this.loginType, "loginType")
     // 微信登录
-    if (this.getQueryString()['loginType'] == 'wechat' && this.getQueryString()['code']) {
-      this.thirdLogin('WechatWeb', this.getQueryString()['code']);
-    } else if (this.getQueryString()['loginType'] == 'workwechat' && this.getQueryString()['code']) {
+    if (this.loginType = 'wechat' && this.code) {
+      this.thirdLogin('WechatWeb', this.code);
+    } else if (this.loginType = 'workwechat' && this.code) {
       this.thirdLogin('WorkWechat', this.getQueryString()['code']);
-    } else if (this.getQueryString()['errorText']) {
-      let msg = this.getQueryString()['errorText'].replace(/["]/g, ' ');
+    } else if (this.errorText) {
+      console.log(this.errorText, "errorText")
+      let msg = this.errorText.replace(/["]/g, ' ');
       this.message.error(msg.replace(/[%20,%22]/g, ' '));
     }
   }
@@ -78,7 +91,7 @@ export class loginMainComponent implements OnInit {
         }
       })
       .catch((e: any) => {
-        this.message.error(e.error.error_description);
+        this.message.error(e?.error?.error_description || e?.error_description);
       });
   }
 

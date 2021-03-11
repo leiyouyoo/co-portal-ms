@@ -95,7 +95,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
     @Inject(DOCUMENT) private doc: any,
     private planet: Planet,
-    private reuseTabService: ReuseTabService,
+    private reuseTabService: ReuseTabService
   ) {
     if (sessionService.user != null) {
       // 设置微服务选项
@@ -152,30 +152,30 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       }
     });
 
-      // media
-      const query = {
-        'screen-xs': '(max-width: 575px)',
-        'screen-sm': '(min-width: 576px) and (max-width: 767px)',
-        'screen-md': '(min-width: 768px) and (max-width: 991px)',
-        'screen-lg': '(min-width: 992px) and (max-width: 1440px)',
-        'screen-xl': '(min-width: 1441px)',
-      };
-      bm.observe([
-        '(min-width: 1441px)',
-        '(min-width: 992px) and (max-width: 1440px)',
-        '(min-width: 768px) and (max-width: 991px)',
-        '(min-width: 576px) and (max-width: 767px)',
-        '(max-width: 575px)',
-      ]).subscribe(() => {
-        this.queryCls = Object.keys(query).find((key) => mediaMatcher.matchMedia(query[key]).matches);
-        if (this.queryCls?.indexOf('screen-xl') > -1) {
-          this.pro.setCollapsed(false);
-        } else {
-          this.pro.setCollapsed(true);
-        }
-        // this.setClass();
-        this.cdr.markForCheck();
-      });
+    // media
+    const query = {
+      'screen-xs': '(max-width: 575px)',
+      'screen-sm': '(min-width: 576px) and (max-width: 767px)',
+      'screen-md': '(min-width: 768px) and (max-width: 991px)',
+      'screen-lg': '(min-width: 992px) and (max-width: 1440px)',
+      'screen-xl': '(min-width: 1441px)',
+    };
+    bm.observe([
+      '(min-width: 1441px)',
+      '(min-width: 992px) and (max-width: 1440px)',
+      '(min-width: 768px) and (max-width: 991px)',
+      '(min-width: 576px) and (max-width: 767px)',
+      '(max-width: 575px)',
+    ]).subscribe(() => {
+      this.queryCls = Object.keys(query).find((key) => mediaMatcher.matchMedia(query[key]).matches);
+      if (this.queryCls?.indexOf('screen-xl') > -1) {
+        this.pro.setCollapsed(false);
+      } else {
+        this.pro.setCollapsed(true);
+      }
+      // this.setClass();
+      this.cdr.markForCheck();
+    });
   }
 
   ngOnInit() {
@@ -221,8 +221,16 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   }
 
   private getUserHead() {
-    // this.httpClient.get('SSO/User/GetUserDetail', this.user.id).subscribe((res: any) => {
-    //   this.userInfo = res ? res : {};
+    this.httpClient.get('SSO/User/GetUserDetail', this.user.id).subscribe((res: any) => {
+      this.userInfo = res ? res : {};
+    });
+  }
+
+  goMyAccount() {
+    // this.$navigate([`fcm/myaccount/baseInfo`], {
+    //   queryParams: {
+    //     _title: `${this.$L('baseinfo')}`
+    //   },
     // });
   }
 

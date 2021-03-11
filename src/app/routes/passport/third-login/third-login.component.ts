@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoAuthService, _HttpClient } from '@co/common';
+import { CoConfigManager } from '@co/core';
+import { IS_CSP } from '@shared';
+import { StartupService } from 'src/app/core/startup/startup.service';
+
 @Component({
   selector: 'portal-app-third-login',
   templateUrl: './third-login.component.html',
@@ -15,15 +19,19 @@ export class ThirdLoginComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public httpService: _HttpClient,
     private router: Router,
-  ) {}
+    private startupService: StartupService,
+    @Inject(IS_CSP) private isCSP: boolean,
+  ) { }
 
   ngOnInit(): void {
-    console.log(this.getQueryString()['code']);
 
+    console.log(this.getQueryString()['code'], "code");
     // 微信登录
     if (this.getQueryString()['loginType'] == 'wechat' && this.getQueryString()['code']) {
+      console.log(1)
       this.thirdLogin('WechatWeb', this.getQueryString()['code']);
     } else if (this.getQueryString()['loginType'] == 'workwechat' && this.getQueryString()['code']) {
+      console.log(2)
       this.thirdLogin('WorkWechat', this.getQueryString()['code']);
     }
   }
@@ -37,14 +45,16 @@ export class ThirdLoginComponent implements OnInit {
     this.loginService
       .thirdLogin(parame)
       .then((res: any) => {
+        console.log(res, "res");
         if (res.access_token) {
           this.doRedirect({ isRedirectByQueryParam: true });
         }
       })
       .catch((e: any) => {
+        console.log(e, "error")
         this.router.navigate(['/passport/login'], {
           queryParams: {
-            errorText: e.error.error_description,
+            errorText: e?.error_description || e?.error?.error_description,
           },
         });
       });
@@ -78,19 +88,27 @@ export class ThirdLoginComponent implements OnInit {
       return (location.href = this.activatedRoute.snapshot.queryParams.redirectUrl);
     }
 
-    this.httpService.get(`/platform/Session/GetCurrentUserConfiguration`).subscribe(
-      (data: any) => {
-        try {
-          data.nav.menus.MainMenu.items.sort(this.sortItem);
-        } catch (e) {
-          console.error('菜单排序报错');
-        }
-        location.href = data.nav.menus.MainMenu.items[0].url;
-      },
-      (err) => {
-        this.notification.error('Error', err || 'Get User Configuration Failed.');
-      },
-    );
+    this.startupService.load()
+
+    // let url = CoConfigManager.getValue('serverUrl') + '/platform/Session/GetCurrentUserConfiguration';
+    // if (!this.isCSP) {
+    //   url = url + '?client=ICP_Web';
+    // }
+
+
+    // this.httpService.get(url).subscribe(
+    //   (data: any) => {
+    //     try {
+    //       data.nav.menus.MainMenu.items.sort(this.sortItem);
+    //     } catch (e) {
+    //       console.error('菜单排序报错');
+    //     }
+    //     location.href = data.nav.menus.MainMenu.items[0].url;
+    //   },
+    //   (err) => {
+    //     this.notification.error('Error', err || 'Get User Configuration Failed.');
+    //   },
+    // );
   }
 
   sortItem(a, b) {
