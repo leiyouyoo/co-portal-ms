@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoAuthService, _HttpClient } from '@co/common';
+import { CoConfigManager } from '@co/core';
+import { IS_CSP } from '@shared';
 @Component({
   selector: 'portal-app-third-login',
   templateUrl: './third-login.component.html',
@@ -15,9 +17,11 @@ export class ThirdLoginComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public httpService: _HttpClient,
     private router: Router,
+    @Inject(IS_CSP) private isCSP: boolean,
   ) { }
 
   ngOnInit(): void {
+
     console.log(this.getQueryString()['code'], "code");
     // 微信登录
     if (this.getQueryString()['loginType'] == 'wechat' && this.getQueryString()['code']) {
@@ -81,7 +85,12 @@ export class ThirdLoginComponent implements OnInit {
       return (location.href = this.activatedRoute.snapshot.queryParams.redirectUrl);
     }
 
-    this.httpService.get(`/platform/Session/GetCurrentUserConfiguration`).subscribe(
+    let url = CoConfigManager.getValue('serverUrl') + '/platform/Session/GetCurrentUserConfiguration';
+    if (!this.isCSP) {
+      url = url + '?client=ICP_Web';
+    }
+
+    this.httpService.get(url).subscribe(
       (data: any) => {
         try {
           data.nav.menus.MainMenu.items.sort(this.sortItem);
