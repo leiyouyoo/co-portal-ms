@@ -61,7 +61,7 @@
             </div>
             <div class="item">
                 <span class="tit">{{ 'English name' | translate }}:</span>
-                <span class="info">{{ userInfo.name ? userInfo.name : '--' }}</span>
+                <span class="info">{{ userInfo.name ? (userInfo.name + userInfo.surname) : '--' }}</span>
             </div>
             <div class="item">
                 <span class="tit">{{ 'Sex' | translate }}:</span>
