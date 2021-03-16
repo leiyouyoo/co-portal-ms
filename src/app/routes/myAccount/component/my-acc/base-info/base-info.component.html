@@ -87,13 +87,17 @@
             </div>
         </div>
         <div class="line">
-            <div class="item">
+            <div class="item" style="width:100%;">
                 <span class="tit">{{ 'Company' | translate }}:</span>
-                <span class="info">{{ userInfo?.companyName ? userInfo?.companyName : '--' }}</span>
+                <span class="info" style="width: 95%;">{{ userInfo?.companyName ? userInfo?.companyName : '--' }}</span>
             </div>
-            <div class="item">
+
+        </div>
+        <div class="line">
+            <div class="item" style="width: 100%;">
                 <span class="tit">{{ 'Address' | translate }}:</span>
-                <span class="info">{{ userInfo?.companyAddress ? userInfo?.companyAddress : '--' }}</span>
+                <span class="info" style="width: 95%;">{{ userInfo?.companyAddress ? userInfo?.companyAddress : '--'
+                    }}</span>
             </div>
         </div>
     </div>
