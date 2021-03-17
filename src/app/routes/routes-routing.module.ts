@@ -10,6 +10,7 @@ import { UserLockComponent } from './passport/lock/lock.component';
 import { EmptyComponent } from '@co/cms';
 import { CoConfigManager } from '@co/core';
 import { LoginComponent } from './passport/login.component';
+import { ThirdLoginComponent } from './passport/third-login/third-login.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,13 @@ const routes: Routes = [
         path: 'exception',
         loadChildren: () => import('./exception/exception.module').then((m) => m.ExceptionModule),
       },
+
+
+      {
+        path: 'myaccount',
+        loadChildren: () => import('./myAccount/myAccount.module').then((m) => m.MyAccountModule)
+      }
+
     ],
   },
   {
@@ -36,6 +44,11 @@ const routes: Routes = [
         path: 'login',
         component: LoginComponent,
         data: { title: '登录', titleI18n: 'app.login.login' },
+      },
+      {
+        path: 'login/thirdLogin',
+        component: ThirdLoginComponent,
+        data: { title: '', titleI18n: '' }
       },
       {
         path: 'lock',
@@ -77,4 +90,4 @@ apps?.forEach((a) => {
   ],
   exports: [RouterModule],
 })
-export class RouteRoutingModule {}
+export class RouteRoutingModule { }

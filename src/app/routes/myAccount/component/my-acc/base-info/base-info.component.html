@@ -1,0 +1,146 @@
+<lib-image-cropper (emitFile)="onEmitFile($event)" [showCropper]="showCropper" [file]="imageFile"></lib-image-cropper>
+
+<!-- <section class="base-info-content">
+    <div class="left-box">
+        <img class="head" (click)="editHead()"
+            [src]="userInfo.profilePictureId ?  imgUrl + '/Storage/File/GetDownLoadFile?fileId=' + userInfo.profilePictureId + '&Handler=image' : '/assets/images/avatar.png'">
+        <p style="display: flex;justify-content: center;" (click)="edit()">
+    
+            修改信息
+        </p>
+    </div>
+    <div class="right-box">
+        <div class="left">
+            <p>{{ 'Chinese name' | translate }}:</p>
+            <p>{{ 'English name' | translate }}:</p>
+            <p>{{ 'Account' | translate }}:</p>
+            <p>{{ 'Job Capacity' | translate }}:</p>
+            <p>{{ 'Email' | translate }}:</p>
+            <p>{{ 'Telephone' | translate }}:</p>
+            <p>{{ 'The Company' | translate }}:</p>
+        </div>
+        <div class="right">
+            <p>
+                <span *ngIf="!editInfo">{{ userInfo.cName ? userInfo.cName : '--' }}</span>
+                <input *ngIf="editInfo" nz-input [(ngModel)]="userInfo.cName" style="height: 22px;" />
+            </p>
+            <p>
+                <span>{{ userInfo.name ? userInfo.name : null }}</span>
+                <span>{{ userInfo.surname ? userInfo.surname : null }}</span>
+            </p>
+            <p>{{ userInfo.userName ? userInfo.userName : '--' }}</p>
+            <p>{{ userInfo.position ? userInfo.position : '--' }}</p>
+            <p>{{ userInfo.email ? userInfo.email : '--' }}</p>
+            <p>{{ userInfo.phoneNumber ? userInfo.phoneNumber : '--' }}</p>
+            <p>
+                <span *ngIf="!editInfo">{{ userInfo.fullOrganizationUnit ? userInfo.fullOrganizationUnit : '--'
+                    }}</span>
+                <input *ngIf="editInfo" nz-input [(ngModel)]="userInfo.fullOrganizationUnit" style="height: 22px;" />
+            </p>
+        </div>
+    </div>
+</section> -->
+
+
+
+<section class="content">
+    <!-- <button nz-button nzType="primary" (click)="edit()">{{ 'Submit' | translate }}</button> -->
+
+    <div class="info-box">
+        <div class="line">
+            <div class="item">
+                <span class="tit">{{ 'Head image' | translate }}:</span>
+                <span class="info">
+                    <img class="head" (click)="editHead()"
+                        [src]="userInfo.profilePictureId ?  imgUrl + '/Storage/File/GetDownLoadFile?fileId=' + userInfo.profilePictureId + '&Handler=image' : '/assets/images/avatar.png'">
+                </span>
+            </div>
+            <div class="item">
+                <span class="tit">{{ 'Chinese name' | translate }}:</span>
+                <span class="info">{{ userInfo.cName ? userInfo.cName : '--' }}</span>
+            </div>
+            <div class="item">
+                <span class="tit">{{ 'English name' | translate }}:</span>
+                <span class="info">{{ userInfo.name ? (userInfo.name + userInfo.surname) : '--' }}</span>
+            </div>
+            <div class="item">
+                <span class="tit">{{ 'Sex' | translate }}:</span>
+                <span class="info">{{ userInfo?.sex!=null ? (userInfo?.sex ? '男' : '女') : '--' }}</span>
+            </div>
+        </div>
+        <div class="line">
+            <div class="item">
+                <span class="tit">{{ 'phone' | translate }}:</span>
+                <span class="info">{{ userInfo.phoneNumber ? userInfo.phoneNumber : '--' }}</span>
+            </div>
+            <div class="item">
+                <span class="tit">{{ 'Landline' | translate }}:</span>
+                <span class="info">{{ userInfo?.tel ? userInfo?.tel : '--' }}</span>
+            </div>
+            <div class="item">
+                <span class="tit">{{ 'Email' | translate }}:</span>
+                <span class="info">{{ userInfo?.emailAddress ? userInfo?.emailAddress : '--' }}</span>
+            </div>
+            <div class="item">
+                <span class="tit">{{ 'Position' | translate }}:</span>
+                <span class="info">{{ userInfo?.position ? userInfo?.position : '--' }}</span>
+            </div>
+        </div>
+        <div class="line">
+            <div class="item" style="width:100%;">
+                <span class="tit">{{ 'Company' | translate }}:</span>
+                <span class="info" style="width: 95%;">{{ userInfo?.companyName ? userInfo?.companyName : '--' }}</span>
+            </div>
+
+        </div>
+        <div class="line">
+            <div class="item" style="width: 100%;">
+                <span class="tit">{{ 'Address' | translate }}:</span>
+                <span class="info" style="width: 95%;">{{ userInfo?.companyAddress ? userInfo?.companyAddress : '--'
+                    }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="txt-set">{{ 'Security Settings' | translate }}</div>
+
+    <div class="set-box">
+        <div class="item">
+            <span>{{ 'Login Password' | translate }}：************</span>
+            <svg class="icon editIcon" (click)="editPass()" aria-hidden="true"
+                style="width:12px;height:12px;margin-left:8px;">
+                <use xlink:href="#icon-ed"></use>
+            </svg>
+        </div>
+        <div class="item">
+            <div class="third-box">
+                <div class="icon-box">
+                    <i class="iconfont icon-weixin" nz-icon [nzIconfont]="'icon-weixin'"
+                        style="display: block; width: 20px;  color: #50b674; font-size: 20px; margin-right: 6px;"></i>
+                    <span>{{ 'WeChat' | translate }}</span>
+                </div>
+                <div class="btn-bind" *ngIf="Externalnames.length == 0 || Externalnames?.indexOf('WechatWeb') == -1"
+                    (click)="bindWechatClick()">{{ 'Bind' | translate }}</div>
+                <div class="btn-bind" *ngIf="Externalnames.length > 0 && Externalnames.indexOf('WechatWeb') > -1"
+                    (click)="unbound('WechatWeb')">{{ 'unbundling' | translate }}</div>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="third-box">
+                <div class="icon-box">
+                    <img src="assets/images/qiyeweixin.png" style="display: block;width:20px;margin-right: 6px;" />
+                    <span>{{ 'Enterprise WeChat' | translate }}</span>
+                </div>
+                <div class="btn-bind" (click)="bindQYWechat()"
+                    *ngIf="Externalnames.length == 0 || Externalnames?.indexOf('WorkWechat') == -1">{{ 'Bind' |
+                    translate }}</div>
+                <div class="btn-bind" (click)="unbound('WorkWechat')"
+                    *ngIf="Externalnames.length > 0 && Externalnames.indexOf('WorkWechat') > -1">{{ 'unbundling' |
+                    translate }}</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-edit-password></app-edit-password>

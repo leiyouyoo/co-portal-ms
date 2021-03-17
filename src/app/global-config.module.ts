@@ -20,6 +20,7 @@ const coConfig: CoConfig = {
     work_wechat_id: 'wwfa5cf6ff34bcf1d2',
     work_agent_id: 1000048,
     facebook_appid: '288368845636560',
+    ignores: [/sso\/connect\/token/, /sso\/account/,/SSO\/Account/,/assets\//, /passport\//, /login\//],
   },
   common: {
     httpClient: {

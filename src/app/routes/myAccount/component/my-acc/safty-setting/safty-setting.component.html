@@ -1,0 +1,81 @@
+<section class="saf-setting-content">
+  <div class="item">
+    <div class="left">
+      <i class="iconfont icon-changePassword"></i>
+      <div>
+        <p>{{ 'Login Password' | translate }}</p>
+        <p>********</p>
+      </div>
+    </div>
+    <div class="right-btn" (click)="changePass()">
+      {{ 'Change the password' | translate }}
+    </div>
+  </div>
+  <div class="item">
+    <div class="left">
+      <i class="iconfont icon-weixin" nz-icon [nzIconfont]="'icon-weixin'"
+        style="display: block; width: 40px; margin-right: 31px; padding-bottom: 22px; color: #50b674; font-size: 40px;"></i>
+      <div>
+        <p>{{ 'WeChat' | translate }}</p>
+        <p class="no-bind" *ngIf="Externalnames.length == 0 || Externalnames?.indexOf('WechatWeb') == -1">{{ 'No Bind' |
+          translate }}</p>
+        <span class="had-bind" *ngIf="Externalnames.length > 0 && Externalnames.indexOf('WechatWeb') > -1">{{
+          'Already bound' | translate
+          }}</span>
+      </div>
+    </div>
+    <div class="right-btn" *ngIf="Externalnames.length == 0 || Externalnames?.indexOf('WechatWeb') == -1"
+      (click)="bindWechatClick()">
+      {{ 'Bind' | translate }}
+    </div>
+    <div class="right-btn" *ngIf="Externalnames.length > 0 && Externalnames.indexOf('WechatWeb') > -1"
+      (click)="unbound('WechatWeb')">
+      {{ 'Unbound' | translate }}
+    </div>
+  </div>
+  <!-- <div class="item">
+    <div class="left">
+      <i
+        class="iconfont icon-facebook icon-blue"
+        style="display: block; width: 40px; margin-right: 31px; padding-bottom: 22px; color: #50b674; font-size: 40px;"
+      ></i>
+      <div>
+        <p>{{ 'Facebook' | translate }}</p>
+        <p class="no-bind" *ngIf="Externalnames.length == 0 || Externalnames?.indexOf('FaceBook') == -1">{{ 'No Bind' | translate }}</p>
+        <span class="had-bind" *ngIf="Externalnames.length > 0 && Externalnames.indexOf('FaceBook') > -1">{{
+          'Already bound' | translate
+        }}</span>
+      </div>
+    </div>
+    <div class="right-btn" *ngIf="Externalnames.length == 0 || Externalnames?.indexOf('FaceBook') == -1" (click)="bindFaceBookClick()">
+      {{ 'Bind' | translate }}
+    </div>
+    <div class="right-btn" *ngIf="Externalnames.length > 0 && Externalnames.indexOf('FaceBook') > -1" (click)="unbound('FaceBook')">
+      {{ 'Unbound' | translate }}
+    </div>
+  </div> -->
+  <div class="item">
+    <div class="left">
+      <!-- <i class="iconfont icon-changePassword"></i> -->
+      <img src="assets/images/qiyeweixin.png" class="icon-qywx" />
+      <div>
+        <p>{{ 'Enterprise WeChat' | translate }}</p>
+        <p class="no-bind" *ngIf="Externalnames.length == 0 || Externalnames?.indexOf('WorkWechat') == -1">{{ 'No Bind'
+          | translate }}</p>
+        <span class="had-bind" *ngIf="Externalnames.length > 0 && Externalnames.indexOf('WorkWechat') > -1">{{
+          'Already bound' | translate
+          }}</span>
+      </div>
+    </div>
+    <div class="right-btn" *ngIf="Externalnames.length == 0 || Externalnames?.indexOf('WorkWechat') == -1"
+      (click)="bindQYWechat()">
+      {{ 'Bind' | translate }}
+    </div>
+    <div class="right-btn" *ngIf="Externalnames.length > 0 && Externalnames.indexOf('WorkWechat') > -1"
+      (click)="unbound('WorkWechat')">
+      {{ 'Unbound' | translate }}
+    </div>
+  </div>
+</section>
+
+<app-edit-password></app-edit-password>

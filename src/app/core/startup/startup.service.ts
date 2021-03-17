@@ -61,7 +61,11 @@ export class StartupService {
     this.settingsService.setLayout('lang', lang);
 
     return new Promise((resolve) => {
-      let url = CoConfigManager.getValue('serverUrl') + '/platform/Session/GetCurrentUserConfiguration'
+      if (window.location.href.includes('account/activate')) {
+        resolve(null);
+        return
+      }
+      let url = CoConfigManager.getValue('serverUrl') + '/platform/Session/GetCurrentUserConfiguration';
       if (!this.isCSP) {
         url = url + '?client=ICP_Web';
       }
@@ -85,7 +89,8 @@ export class StartupService {
             try {
               const im = CoConfigManager.getValue('im');
               im.ImEnable && this.getUserSigService.imLogin();
-            } catch {}
+            } catch {
+            }
 
             //设置权限数据
             this.setupAclData(appData);
@@ -123,7 +128,8 @@ export class StartupService {
               },
             ]);
           },
-          () => {},
+          () => {
+          },
           () => {
             this.httpClient.get(`assets/i18n/${lang}.json?hash=` + new Date().getTime()).subscribe(
               (langData) => {
@@ -132,7 +138,8 @@ export class StartupService {
                 this.translate.use(lang);
                 this.translate.setDefaultLang(lang);
               },
-              () => {},
+              () => {
+              },
               () => {
                 resolve(null);
               },
@@ -156,7 +163,7 @@ export class StartupService {
       organizationUnits,
     };
 
-    window.localStorage.setItem('co_acls',JSON.stringify(acls));
+    window.localStorage.setItem('co_acls', JSON.stringify(acls));
     this.aclService.set(acls);
   }
 
