@@ -221,9 +221,14 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   }
 
   private getUserHead() {
-    // this.httpClient.get('SSO/User/GetUserDetail', this.user.id).subscribe((res: any) => {
-    //   this.userInfo = res ? res : {};
-    // });
+    try {
+      this.httpClient.get('SSO/User/GetUserDetail', this.user?.id).subscribe((res: any) => {
+        this.userInfo = res ? res : {};
+      });
+    } catch (error) {
+      console.log(error, "getHeadError")
+    }
+
   }
 
   goMyAccount() {
