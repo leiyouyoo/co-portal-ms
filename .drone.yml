@@ -1,0 +1,113 @@
+---
+kind: pipeline
+name: dev
+type: kubernetes
+steps:
+  - name: restore-cache
+    image: drillster/drone-volume-cache
+    volumes:
+      - name: cache
+        path: /cache
+    settings:
+      restore: true
+      mount:
+        - ./node_modules
+  - name: code-analysis
+    image: aosapps/drone-sonar-plugin
+    commands:
+      - echo 'begin scan'
+      - sonar-scanner -Dsonar.projectBaseDir=. -Dproject.settings=./sonar-project.properties
+    settings:
+      sonar_host: http://sonar.cityocean.com/
+      sonar_token:
+        from_secret: sonar
+  - name: build-package
+    image: node:latest
+    commands:
+      - npm install --legacy-peer-deps --registry=http://npm.dev.com 
+      - npm run build:portal:dev  
+  - name: ftp_upload
+    image: cschlosser/drone-ftps
+    environment:
+      FTP_USERNAME: co
+      FTP_PASSWORD:
+        from_secret: ftppsd
+      PLUGIN_HOSTNAME: 192.168.4.42:21
+      PLUGIN_SECURE: false
+      PLUGIN_VERIFY: false
+      PLUGIN_DEST_DIR: /
+      PLUGIN_SRC_DIR: /dist
+      #PLUGIN_EXCLUDE: ^\.git/$
+#   - name: copyto-oss
+#     image: trylife/aliyun-ossutil
+#     secrets: [ oss_endpoint,access_key_id,access_key_secret]
+#     environment:
+#       OSS_ENDPOINT:
+#         from_secret: oss_endpoint
+#       ACCESS_KEY_ID:
+#         from_secret: access_key_id
+#       ACCESS_KEY_SECRET:
+#         from_secret: access_key_secret
+#     commands:
+#       #- ossutil config  -L CH -e http://$${OSS_ENDPOINT} -i $${ACCESS_KEY_ID} -k $${ACCESS_KEY_SECRET}
+#       #- ossutil cp -rf ./dist/portal oss://dist/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/portal
+#       - /home/ossutil/mc config host add minio http://$${OSS_ENDPOINT} $${ACCESS_KEY_ID} $${ACCESS_KEY_SECRET}
+#       - /home/ossutil/mc ls minio
+#       - /home/ossutil/mc cp -r ./dist/ minio/dist/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/
+#     volumes:
+#       - name: mc
+#         path: /home/ossutil
+  - name: build-image
+    image: docker:dind
+    commands:
+      #- cp all from oss
+      - docker login reg.cityocean.com -u $DOCKER_USER -p $DOCKER_PASS
+      - docker build -t reg.cityocean.com/library/portal:${DRONE_TAG=latest} .
+      - docker push reg.cityocean.com/library/portal:${DRONE_TAG=latest}
+      - docker rmi reg.cityocean.com/library/portal:${DRONE_TAG=latest}
+    environment:
+      SERVICE_ACCOUNT: drone
+      DOCKER_USER:
+        from_secret: docker_user
+      DOCKER_PASS:
+        from_secret: docker_pass
+    volumes:
+      - name: docker
+        path: /var/run
+      - name: mc
+        path: /home/ossutil
+    privileged: true
+  - name: deploy
+    image: dtzar/helm-kubectl
+    serviceAccountName: drone
+    commands:
+      - helm upgrade --install portal ./helm --namespace dev --set image.repository=reg.cityocean.com/library/portal,image.tag=${DRONE_TAG=latest}
+    volumes:
+      - name: kube
+        path: /root/.kube
+  - name: rebuild-cache
+    image: drillster/drone-volume-cache
+    volumes:
+      - name: cache
+        path: /cache
+    settings:
+      rebuild: true
+      mount:
+        - ./node_modules
+volumes:
+  - name: cache
+    host: 
+      path: /home/cache
+  - name: docker
+    host:
+      path: /var/run
+  - name: kube
+    host:
+      path: /root/.kube
+  - name: mc
+    host:
+      path: /home/tools/minio
+trigger:
+  event:
+  - tag
+
