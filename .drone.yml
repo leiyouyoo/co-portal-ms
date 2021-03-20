@@ -38,25 +38,25 @@ steps:
       PLUGIN_DEST_DIR: /
       PLUGIN_SRC_DIR: /dist
       #PLUGIN_EXCLUDE: ^\.git/$
-#   - name: copyto-oss
-#     image: trylife/aliyun-ossutil
-#     secrets: [ oss_endpoint,access_key_id,access_key_secret]
-#     environment:
-#       OSS_ENDPOINT:
-#         from_secret: oss_endpoint
-#       ACCESS_KEY_ID:
-#         from_secret: access_key_id
-#       ACCESS_KEY_SECRET:
-#         from_secret: access_key_secret
-#     commands:
-#       #- ossutil config  -L CH -e http://$${OSS_ENDPOINT} -i $${ACCESS_KEY_ID} -k $${ACCESS_KEY_SECRET}
-#       #- ossutil cp -rf ./dist/portal oss://dist/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/portal
-#       - /home/ossutil/mc config host add minio http://$${OSS_ENDPOINT} $${ACCESS_KEY_ID} $${ACCESS_KEY_SECRET}
-#       - /home/ossutil/mc ls minio
-#       - /home/ossutil/mc cp -r ./dist/ minio/dist/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/
-#     volumes:
-#       - name: mc
-#         path: /home/ossutil
+  - name: copyto-oss
+    image: trylife/aliyun-ossutil
+    secrets: [ oss_endpoint,access_key_id,access_key_secret]
+    environment:
+      OSS_ENDPOINT:
+        from_secret: oss_endpoint
+      ACCESS_KEY_ID:
+        from_secret: access_key_id
+      ACCESS_KEY_SECRET:
+        from_secret: access_key_secret
+    commands:
+      #- ossutil config  -L CH -e http://$${OSS_ENDPOINT} -i $${ACCESS_KEY_ID} -k $${ACCESS_KEY_SECRET}
+      #- ossutil cp -rf ./dist/portal oss://dist/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/portal
+      - /home/ossutil/mc config host add minio http://$${OSS_ENDPOINT} $${ACCESS_KEY_ID} $${ACCESS_KEY_SECRET}
+      - /home/ossutil/mc ls minio
+      - /home/ossutil/mc cp -r ./dist/ minio/dist/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/
+    volumes:
+      - name: mc
+        path: /home/ossutil
   - name: build-image
     image: docker:dind
     commands:
