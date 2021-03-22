@@ -53,9 +53,8 @@ steps:
       PLUGIN_SRC_DIR: /dist/portal
       #PLUGIN_EXCLUDE: ^\.git/$
     when:
-      branch:
-        - master
-          - release-*
+      ref:
+        - refs/heads/release-*
   - name: rebuild-cache
     image: drillster/drone-volume-cache
     volumes:
