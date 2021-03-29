@@ -15,10 +15,10 @@ exit /b 0
 FOR /F "tokens=* USEBACKQ" %%F IN (`git remote get-url origin`) DO (
 SET dir_suffix=%%F
 )
-set "dir_suffix=%dir_suffix:*tfs/=%"
+set "dir_suffix=%dir_suffix:*_git/=%"
 ::ECHO %dir_suffix%
-git remote set-url origin http://tfs.dev.com/tfs/%dir_suffix%
-echo Set repo http://tfs.dev.com/tfs/%dir_suffix%
+git remote set-url origin https://gitlab.cityocean.com/frontend/%dir_suffix%.git
+echo Set repo origin https://gitlab.cityocean.com/frontend/%dir_suffix%.git
 EXIT /B 0
 
 :end
