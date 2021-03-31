@@ -15,26 +15,11 @@ steps:
       - git remote add origin ${DRONE_GIT_HTTP_URL}
       - git fetch origin +refs/tags/${DRONE_TAG}
       - git checkout -qf FETCH_HEAD
-  - name: restore-cache
-    image: drillster/drone-volume-cache
-    volumes:
-      - name: cache
-        path: /cache
-    settings:
-      restore: true
-      mount:
-        - ./node_modules
-  # - name: code-analysis
-  #   image: aosapps/drone-sonar-plugin
-  #   commands:
-  #     - echo 'begin scan'
-  #     - sonar-scanner -Dsonar.projectBaseDir=. -Dproject.settings=./sonar-project.properties
-  #   settings:
-  #     sonar_host: http://sonar.cityocean.com/
-  #     sonar_token:
-  #       from_secret: sonar
   - name: build-package
     image: node:latest
+    volumes:
+      - name: cache
+        path: /drone/src/node_modules
     commands:
       - npm install --legacy-peer-deps --registry=http://npm.dev.com
       - npm run build:portal:prod
@@ -132,15 +117,6 @@ steps:
     when:
       ref:
         - refs/tags/*-release-csp
-  - name: rebuild-cache
-    image: drillster/drone-volume-cache
-    volumes:
-      - name: cache
-        path: /cache
-    settings:
-      rebuild: true
-      mount:
-        - ./node_modules
   - name: notify-deploy-dev
     image: reg.cityocean.com/library/webhook
     settings:
@@ -183,7 +159,7 @@ steps:
 volumes:
   - name: cache
     host:
-      path: /home/cache
+      path: /data/cache/frontend/node_modules
 trigger:
   event:
     - tag
