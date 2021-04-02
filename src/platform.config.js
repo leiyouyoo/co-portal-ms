@@ -2,7 +2,7 @@
   var protocol = 'http';
   var serverHost = 'api.test.com';
   var apiPort = '20002';
-  var signalRHost = 'signalr.dev.om';
+  var signalRHost = 'signalr.dev.com';
   var serverUrlPrefix = protocol + '://' + serverHost;
   var apiUrlPrefix = serverUrlPrefix;
 
@@ -16,7 +16,7 @@
     loginUrl: '/passport/login',
     uploadUrl: apiUrlPrefix + '/Storage/File/Upload',
     downloadUrl: apiUrlPrefix + '/Storage/File/GetDownLoadFile',
-    iconSrv: '//at.alicdn.com/t/font_1909561_t06skaeu10n.js',
+    iconSrv: '//at.alicdn.com/t/font_1909561_2u5jupfvkti.js',
     excelDownloadUrl: apiUrlPrefix + '/Storage/Excel/DownloadExcel',
     appCityoceanUrl: 'https://app.cityocean.com',
     googleApiUrl: 'https://icp.cityocean.com:20001',
